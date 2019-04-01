@@ -74,5 +74,47 @@ namespace ParserTests
 			auto regex = std::wregex(classRegex);
 			Assert::IsTrue(std::regex_match(test, regex));
 		}
+
+		TEST_METHOD(emptyClassWithBase)
+		{
+			auto test = L"class Test : public Tex {   }  ;";
+			auto regex = std::wregex(classRegex);
+			Assert::IsTrue(std::regex_match(test, regex));
+		}
+
+		TEST_METHOD(emptyClassWithBase1)
+		{
+			auto test = L"class Test : public Tex, private KL {   }  ;";
+			auto regex = std::wregex(classRegex);
+			Assert::IsTrue(std::regex_match(test, regex));
+		}
+
+		TEST_METHOD(emptyClassWithBase2)
+		{
+			auto test = L"class Test : Tex {   }  ;";
+			auto regex = std::wregex(classRegex);
+			Assert::IsTrue(std::regex_match(test, regex));
+		}
+
+		TEST_METHOD(emptyClassWithBase3)
+		{
+			auto test = L"class Test : protected Tex {   }  ;";
+			auto regex = std::wregex(classRegex);
+			Assert::IsTrue(std::regex_match(test, regex));
+		}
+
+		TEST_METHOD(emptyClassWithBase4)
+		{
+			auto test = L"class Test : public Tex   , private KL {   }  ;";
+			auto regex = std::wregex(classRegex);
+			Assert::IsTrue(std::regex_match(test, regex));
+		}
+
+		TEST_METHOD(emptyClassWithBase5)
+		{
+			auto test = L"class Test : public Tex,private KL {   }  ;";
+			auto regex = std::wregex(classRegex);
+			Assert::IsTrue(std::regex_match(test, regex));
+		}
 	};
 }
