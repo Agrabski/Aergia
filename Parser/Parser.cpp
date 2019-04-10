@@ -4,6 +4,11 @@
 
 using namespace Aergia::Parser;
 
+void Aergia::Parser::Parser::getBases(InParserClassDescriptor & e, std::wstring const & iterator)
+{
+
+}
+
 std::vector<InParserClassDescriptor> Parser::parseClasses(std::wstring const& text)
 {
 	std::vector<InParserClassDescriptor> result;

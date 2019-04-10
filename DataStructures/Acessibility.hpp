@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 namespace Aergia
 {
@@ -6,7 +7,8 @@ namespace Aergia
 	{
 		enum class Accessibility
 		{
-			None, Public, Priate, Protected
+			None, Public, Private, Protected
 		};
+		Accessibility fromWstring(std::wstring const&str);
 	}
 }

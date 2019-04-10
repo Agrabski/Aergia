@@ -157,6 +157,7 @@
     <ClInclude Include="TypeInfo.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Acessibility.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
