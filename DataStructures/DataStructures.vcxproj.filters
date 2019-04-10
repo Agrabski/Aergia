@@ -33,10 +33,16 @@
     <ClInclude Include="AergiaString.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Collection.hpp">
+    <ClInclude Include="Function.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Function.hpp">
+    <ClInclude Include="IContext.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NullContext.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -48,6 +54,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Acessibility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NullContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

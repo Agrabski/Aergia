@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <exception>
 #include "Acessibility.hpp"
 
 using namespace Aergia::DataStructures;
@@ -12,5 +13,5 @@ Accessibility fromWstring(std::wstring const & str)
 		return Accessibility::Private;
 	if (str == L"protected")
 		return Accessibility::Protected;
-	throw std::runtime_error("unexpected accessibility specifier");
+	throw std::exception("unexpected accessibility specifier");
 }

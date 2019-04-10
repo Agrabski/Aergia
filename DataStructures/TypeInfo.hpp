@@ -1,7 +1,7 @@
 #pragma once
-#include "Collection.hpp"
 #include "Property.hpp"
 #include "AergiaString.hpp"
+#include "IContext.hpp"
 
 namespace Aergia
 {
@@ -10,11 +10,11 @@ namespace Aergia
 		class TypeInfo;
 		using TypePointer = TypeInfo*;
 		class Property;
-		class TypeInfo
+		class TypeInfo : public IContext
 		{
-			Collection<Property> _properties;
+			std::vector<Property> _properties;
 			AergiaString _name;
-			Collection<TypePointer> _bases;
+			std::vector<TypePointer> _bases;
 		};
 	}
 }

@@ -10,5 +10,6 @@ namespace Aergia::Parser
 	struct InParserClassDescriptor
 	{
 		std::vector<std::pair<Accessibility, std::wstring>> bases;
+		std::vector < std::pair<Accessibility, std::pair<std::wstring, std::wstring>>> _fields;
 	};
 }
