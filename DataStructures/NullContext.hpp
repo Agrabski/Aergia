@@ -4,14 +4,16 @@
 namespace Aergia::DataStructures
 {
 	class IContext;
-	class NullContext : public IContext
+	class Null : public IContext, public IObject
 	{
 		// Inherited via IContext
-		std::wstring toString() override;
-		IContext* changeContext(std::wstring const& memberName) noexcept override;
-		std::vector<IContext*> getCollection(std::wstring const& memberName) noexcept override;
-		void appendVariable(std::wstring name, IContext* link) noexcept override;
+		virtual IObject* getMember(std::wstring) noexcept;
+		virtual std::wstring toString();
+		virtual std::wstring toString() const noexcept;
+		IObject* getObject(std::wstring const& memberName) noexcept override;
+		void appendVariable(std::wstring name, IObject* link) noexcept override;
+		std::optional<std::vector<IObject*>> asCollection() const noexcept override;
 	public:
-		virtual ~NullContext() = default;
+		virtual ~Null() = default;
 	};
 }

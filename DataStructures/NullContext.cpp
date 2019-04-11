@@ -3,21 +3,32 @@
 
 using namespace Aergia::DataStructures;
 
-std::wstring NullContext::toString()
-{
-	return L"Null";
-}
-
-IContext* Aergia::DataStructures::NullContext::changeContext(std::wstring const& memberName) noexcept
+IObject* Aergia::DataStructures::Null::getMember(std::wstring) noexcept
 {
 	return this;
 }
 
-std::vector<IContext*> Aergia::DataStructures::NullContext::getCollection(std::wstring const& memberName) noexcept
+std::wstring Aergia::DataStructures::Null::toString()
 {
-	return std::vector<IContext*>();
+	return toString();
 }
 
-void Aergia::DataStructures::NullContext::appendVariable(std::wstring name, IContext* link) noexcept
+std::wstring Aergia::DataStructures::Null::toString() const noexcept
+{
+	return L"Null";
+}
+
+IObject* Aergia::DataStructures::Null::getObject(std::wstring const& memberName) noexcept
+{
+	return this;
+}
+
+std::optional<std::vector<IObject*>> Aergia::DataStructures::Null::asCollection() const noexcept
+{
+	return std::optional<std::vector<IObject*>>();
+}
+
+void Aergia::DataStructures::Null::appendVariable(std::wstring name, IObject* link) noexcept
 {
 }
+

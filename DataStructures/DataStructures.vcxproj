@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Acessibility.hpp" />
     <ClInclude Include="AergiaString.hpp" />
+    <ClInclude Include="IObject.hpp" />
     <ClInclude Include="LocalContext.hpp" />
     <ClInclude Include="Function.hpp" />
     <ClInclude Include="IContext.hpp" />

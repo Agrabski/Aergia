@@ -3,6 +3,7 @@
 #include <ostream>
 #include "Parser.hpp"
 #include "../DataStructures/IContext.hpp"
+#include "../DataStructures/IObject.hpp"
 
 namespace Aergia::Parser
 {
@@ -12,22 +13,27 @@ namespace Aergia::Parser
 	};
 	
 	using DataStructures::IContext;
+	using DataStructures::IObject;
+
 
 	class MacroInliner
 	{
 		struct IOContext
 		{
-			std::wistream& _input;
-			std::wostream& _output;
+			std::wstring const& _input;
+			std::wstring& _output;
 			std::wostream& _errorStream;
 			InliningPolicy const& _policy;
-			IOContext(std::wistream& input, std::wostream& output, std::wostream& errorStream, InliningPolicy const& policy);
+			IOContext(std::wstring const& input, std::wstring& output, std::wostream& errorStream, InliningPolicy const& policy) noexcept :
+				_input(input), _output(output), _errorStream(errorStream), _policy(policy) {}
 		};
 
-		void processLoop(IOContext& context,std::wstring_view loopContent, IContext* currentContext, std::vector<IContext*> const& collection, std::wstring variableName);
+		void processLoop(IOContext& context,std::wstring_view loopContent, IContext* currentContext, std::vector<IObject*> const& collection, std::wstring variableName);
 		void processMacros(IOContext& context, IContext* currentContext);
+		void processAnonym(IOContext& context, IContext* currentContext, std::wstring const& contents);
+		IObject* resolveCallChain(IContext* context, std::wstring const& chain, std::wostream& errorStream);
 	public:
 		MacroInliner(std::vector<InParserClassDescriptor>const& descriptors);
-		void processText(std::wistream& input, std::wostream& output, std::wostream& errorStream, InliningPolicy const& policy);
+		void processText(std::wstring& input, std::wstring& output, std::wostream& errorStream, InliningPolicy const& policy);
 	};
 }

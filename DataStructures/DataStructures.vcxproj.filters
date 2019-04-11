@@ -45,15 +45,15 @@
     <ClInclude Include="LocalContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Property.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Acessibility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NullContext.cpp">
@@ -63,6 +63,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Acessibility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,6 +6,6 @@ using namespace Aergia::DataStructures;
 
 IContext* const Aergia::DataStructures::IContext::nullContext() noexcept
 {
-	static NullContext nContext = NullContext();
+	static Null nContext = Null();
 	return &nContext;
 }
