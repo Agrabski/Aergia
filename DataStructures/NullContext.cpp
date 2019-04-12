@@ -13,9 +13,9 @@ std::wstring Aergia::DataStructures::Null::toString()
 	return toString();
 }
 
-std::wstring Aergia::DataStructures::Null::toString() const noexcept
+std::wstring const& Aergia::DataStructures::Null::toString() const noexcept
 {
-	return L"Null";
+	return _name;
 }
 
 IObject* Aergia::DataStructures::Null::getObject(std::wstring const& memberName) noexcept

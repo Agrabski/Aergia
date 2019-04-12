@@ -4,17 +4,18 @@
 #include "Parser.hpp"
 #include "../DataStructures/IContext.hpp"
 #include "../DataStructures/IObject.hpp"
+#include "../DataStructures/DefaultContext.hpp"
 
 namespace Aergia::Parser
 {
 	struct InliningPolicy 
 	{
-		std::wstring const& warnEmptyCollection() const;
+		std::wstring const& warnEmptyCollection() const { return L""; }
 	};
 	
 	using DataStructures::IContext;
 	using DataStructures::IObject;
-
+	using DataStructures::DefaultContext;
 
 	class MacroInliner
 	{
@@ -28,9 +29,11 @@ namespace Aergia::Parser
 				_input(input), _output(output), _errorStream(errorStream), _policy(policy) {}
 		};
 
+		DefaultContext _defaultContext;
+		
 		void processLoop(IOContext& context,std::wstring_view loopContent, IContext* currentContext, std::vector<IObject*> const& collection, std::wstring variableName);
 		void processMacros(IOContext& context, IContext* currentContext);
-		void processAnonym(IOContext& context, IContext* currentContext, std::wstring const& contents);
+		void processAnonym(IOContext& context, IContext* currentContext, std::wstring const& contents) { throw std::exception(); }
 		IObject* resolveCallChain(IContext* context, std::wstring const& chain, std::wostream& errorStream);
 	public:
 		MacroInliner(std::vector<InParserClassDescriptor>const& descriptors);

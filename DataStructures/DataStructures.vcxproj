@@ -165,6 +165,9 @@
   <ItemGroup>
     <ClInclude Include="Acessibility.hpp" />
     <ClInclude Include="AergiaString.hpp" />
+    <ClInclude Include="Base.hpp" />
+    <ClInclude Include="CollectionProxy.hpp" />
+    <ClInclude Include="DefaultContext.hpp" />
     <ClInclude Include="IObject.hpp" />
     <ClInclude Include="LocalContext.hpp" />
     <ClInclude Include="Function.hpp" />
@@ -177,7 +180,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Acessibility.cpp" />
+    <ClCompile Include="Base.cpp" />
+    <ClCompile Include="DefaultContext.cpp" />
     <ClCompile Include="IContext.cpp" />
+    <ClCompile Include="IObject.cpp" />
     <ClCompile Include="LocalContext.cpp" />
     <ClCompile Include="NullContext.cpp" />
     <ClCompile Include="Property.cpp" />
@@ -187,6 +193,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TypeInfo.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

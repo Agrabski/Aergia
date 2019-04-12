@@ -31,6 +31,7 @@ std::vector<InParserClassDescriptor> Parser::parseClasses(std::wstring const& te
 	for (auto match = std::wsregex_iterator(text.begin(), text.end(), regex); match != std::wsregex_iterator(); match++)
 	{
 		InParserClassDescriptor tmp;
+		tmp._name = (*match)[1];
 		getBases(tmp, match->str());
 		result.push_back(tmp);
 	}

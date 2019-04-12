@@ -4,6 +4,10 @@
 
 using namespace Aergia::DataStructures;
 
+Aergia::DataStructures::LocalContext::LocalContext(IContext* parentContext) : _parentContext(parentContext)
+{
+}
+
 std::wstring LocalContext::toString() noexcept
 {
 	// TODO: add warning

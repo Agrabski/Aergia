@@ -48,6 +48,15 @@
     <ClInclude Include="IObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DefaultContext.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollectionProxy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Base.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -66,6 +75,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Acessibility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Base.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

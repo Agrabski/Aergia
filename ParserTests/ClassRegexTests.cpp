@@ -4,6 +4,7 @@
 #include "../Parser/ForeachHeader.hpp"
 #include "../Parser/AnonymousDescriptor.hpp"
 #include "../Parser/Parser.hpp"
+#include "../Parser/MacroInliner.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -166,6 +167,14 @@ namespace ParserTests
 			Assert::IsTrue(result[0].bases.size() == 2);
 			Assert::IsTrue(result[0].bases[0].first == Accessibility::Public);
 			Assert::IsTrue(result[0].bases[1].first == Accessibility::Private);
+		}
+
+		TEST_METHOD(t)
+		{
+			auto test = L"class Test : public Tex   , \r\n KL {   }  ;";
+			auto parser = Parser();
+			auto result = parser.parseClasses(test);
+			auto inliner = Aergia::Parser::MacroInliner(result);
 		}
 	};
 

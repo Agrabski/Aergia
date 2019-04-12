@@ -6,7 +6,6 @@
 #include "Keywords.hpp"
 #include "ForeachHeader.hpp"
 #include "AnonymousDescriptor.hpp"
-#include <boost/tokenizer.hpp>
 
 void Aergia::Parser::MacroInliner::processLoop(IOContext& context, std::wstring_view loopContent, IContext* currentContext, std::vector<IObject*> const& collection, std::wstring variableName)
 {
@@ -38,13 +37,13 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 		bool charProcessed = false;
 		if (!charProcessed && loops.size() > loopIndex)
 		{
-			if (i == loops[loopIndex]._positionInInputString)
+			if (i == loops.at(loopIndex)._positionInInputString)
 			{
-				auto loop = loops[loopIndex];
+				auto loop = loops.at(loopIndex);
 
 				i += loop._textLength;
 
-				auto const object = resolveCallChain(currentContext, loop._collectionCallChain,context._errorStream);
+				auto const* const object = resolveCallChain(currentContext, loop._collectionCallChain, context._errorStream);
 
 				if (object == nullptr)
 				{
@@ -53,14 +52,14 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 				else
 				{
 					auto collection = object->asCollection();
-					if(collection)
+					if (collection)
 						processLoop(context, loop._foreachBody, currentContext, *collection, loop._variableName);
 					else
 					{
 						// TODO: warn
 					}
 				}
-				
+
 				loopIndex++;
 				charProcessed = true;
 			}
@@ -68,10 +67,10 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 
 		if (!charProcessed && anonyms.size() > anonymsIndex)
 		{
-			if(i == anonyms[anonymsIndex]._positionInInputString)
+			if (i == anonyms.at(anonymsIndex)._positionInInputString)
 			{
-				processAnonym(context, currentContext, anonyms[anonymsIndex]._conent);
-				i += anonyms[anonymsIndex]._textLength;
+				processAnonym(context, currentContext, anonyms.at(anonymsIndex)._conent);
+				i += anonyms.at(anonymsIndex)._textLength;
 				anonymsIndex++;
 				charProcessed = true;
 			}
@@ -84,14 +83,55 @@ Aergia::Parser::IObject* Aergia::Parser::MacroInliner::resolveCallChain(IContext
 {
 	throw std::exception();
 
-	typedef boost::char_separator<wchar_t> separator;
-	boost::tokenizer<separator, std::wstring::const_iterator, std::wstring> tokens(chain, separator(L".$"));
-	if (tokens.begin() != tokens.end())
+
+}
+
+Aergia::Parser::MacroInliner::MacroInliner(std::vector<InParserClassDescriptor> const& descriptors)
+{
+	std::vector<std::unique_ptr<Aergia::DataStructures::TypeInfo>> types;
+
+	for (auto const& descriptor : descriptors)
 	{
-		//auto collection = context->getObject(*tokens.begin());
-		//for (auto token = tokens.begin()++; token != tokens.end(); token++)
-		//{
-		//}
-		// TODO: warn
+		auto tmp = std::find_if(types.begin(), types.end(), [&](auto & e) {return e->toString() == descriptor._name; });
+		if (tmp == types.end())
+		{
+			types.push_back(std::make_unique<DataStructures::TypeInfo>());
+			tmp = --types.end();
+			(*tmp)->_name = descriptor._name;
+
+		}
+		auto type = tmp->get();
+		for (auto base : descriptor.bases)
+		{
+			auto pointer = std::find_if(types.begin(), types.end(), [&](auto & e) {return e->toString() == base.second; });
+			if (pointer == types.end())
+			{
+				types.push_back(std::make_unique<DataStructures::TypeInfo>());
+				pointer = --types.end();
+				pointer->get()->_name = base.second;
+			}
+			type->_bases.push_back(std::make_unique<DataStructures::Base>(pointer->get(), base.first));
+		}
+
+		for (auto field : descriptor._fields)
+		{
+			auto pointer = std::find_if(types.begin(), types.end(), [&](auto & e) {return e->toString() == field.second.first; });
+			if (pointer == types.end())
+			{
+				types.push_back(std::make_unique<DataStructures::TypeInfo>());
+				pointer = --types.end();
+				pointer->get()->_name = field.second.first;
+			}
+			type->_properties.push_back(std::make_unique<DataStructures::Property>(field.second.second, pointer->get(), field.first));
+
+		}
 	}
+	for (auto& type : types)
+		_defaultContext.appendType(std::move(type));
+}
+
+void Aergia::Parser::MacroInliner::processText(std::wstring & input, std::wstring & output, std::wostream & errorStream, InliningPolicy const& policy)
+{
+	IOContext context = IOContext(input, output, errorStream, policy);
+	processMacros(context, &_defaultContext);
 }
