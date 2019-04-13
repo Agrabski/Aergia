@@ -37,9 +37,15 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 	size_t loopIndex = 0;
 	size_t anonymsIndex = 0;
 	size_t callIndex = 0;
+	size_t line = 0;
 	for (size_t i = 0ULL; i < context._input.size(); ++i)
 	{
 		bool charProcessed = false;
+		if (context._input[i] == '\n')
+		{
+			line++;
+			charProcessed = true;
+		}
 		if (!charProcessed && loops.size() > loopIndex)
 		{
 			if (i == loops.at(loopIndex)._positionInInputString)
@@ -52,7 +58,7 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 
 				if (object == nullptr)
 				{
-					// TODO: warn
+					context._errorStream << context._policy.warnCallChainFailed(loop._collectionCallChain, line);
 				}
 				else
 				{
@@ -61,7 +67,7 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 						processLoop(context, loop._foreachBody, currentContext, *collection, loop._variableName);
 					else
 					{
-						// TODO: warn
+						context._errorStream << context._policy.warnNotEvaluatedToCollection(loop._collectionCallChain, line);
 					}
 				}
 
@@ -74,7 +80,7 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 		{
 			if (i == anonyms.at(anonymsIndex)._positionInInputString)
 			{
-				processAnonym(context, currentContext, anonyms.at(anonymsIndex)._conent);
+				processAnonym(context, currentContext, anonyms.at(anonymsIndex)._conent, line);
 				i += anonyms.at(anonymsIndex)._textLength - 1;
 				anonymsIndex++;
 				charProcessed = true;
@@ -85,7 +91,7 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 		{
 			if (i == calls.at(callIndex)._positionInInputString)
 			{
-				auto const * const object = resolveCallChain(currentContext, calls.at(callIndex)._conent,context._errorStream);
+				auto const* const object = resolveCallChain(currentContext, calls.at(callIndex)._conent, context._errorStream);
 				context._output += object->toString();
 				i += calls.at(callIndex)._textLength - 1;
 				callIndex++;
@@ -99,6 +105,11 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 
 }
 
+void Aergia::Parser::MacroInliner::processAnonym(IOContext& context, IContext* currentContext, std::wstring const& contents, size_t lineNumber)
+{
+	context._output += L"__anonymous_" + std::to_wstring(lineNumber) + L"__";
+}
+
 Aergia::Parser::IObject* Aergia::Parser::MacroInliner::resolveCallChain(IContext* context, std::wstring const& chain, std::wostream& errorStream)
 {
 	std::vector<std::wstring> results;
@@ -109,11 +120,11 @@ Aergia::Parser::IObject* Aergia::Parser::MacroInliner::resolveCallChain(IContext
 	for (auto result : results)
 	{
 		std::wsmatch match;
-		if (std::regex_match(result,match, functionRecogniser))
+		if (std::regex_match(result, match, functionRecogniser))
 		{
 			object = _functionLibrary.resolveFunction(context, match[1], match[2]);
 			if (object == nullptr)
-				throw CallChainResolutionException(result);
+				return nullptr;
 		}
 		else
 		{
@@ -171,7 +182,7 @@ Aergia::Parser::MacroInliner::MacroInliner(std::vector<InParserClassDescriptor> 
 		_defaultContext.appendType(std::move(type));
 }
 
-void Aergia::Parser::MacroInliner::processText(std::wstring const & input, std::wstring & output, std::wostream & errorStream, InliningPolicy const& policy)
+void Aergia::Parser::MacroInliner::processText(std::wstring const& input, std::wstring& output, std::wostream& errorStream, InliningPolicy const& policy)
 {
 	IOContext context = IOContext(input, output, errorStream, policy);
 	processMacros(context, &_defaultContext);

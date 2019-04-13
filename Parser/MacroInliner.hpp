@@ -16,12 +16,14 @@ namespace Aergia::Parser
 		CallChainResolutionException(std::wstring call) : message(call), std::runtime_error("substitution failed") {}
 		std::wstring what() { return message; }
 	};
-	struct InliningPolicy 
+	struct InliningPolicy
 	{
 		std::wstring const& warnEmptyCollection() const { return L""; }
 		std::wstring endLine() const { return std::wstring(L"\r\n"); }
+		std::wstring warnNotEvaluatedToCollection(std::wstring const& callChain, size_t line) const { return L"Call chain did not evaluate to a collection. Call chain:#" + callChain + L"# line number: " + std::to_wstring(line) + endLine(); }
+		std::wstring warnCallChainFailed(std::wstring const& callChain, size_t line) const { return L"Call chain returned null. Call chain:#" + callChain + L"# line number: " + std::to_wstring(line) + endLine(); }
 	};
-	
+
 	using DataStructures::IContext;
 	using DataStructures::IObject;
 	using DataStructures::DefaultContext;
@@ -40,10 +42,10 @@ namespace Aergia::Parser
 
 		DefaultContext _defaultContext;
 		FunctionLibrary _functionLibrary;
-		
+
 		void processLoop(IOContext& context, std::wstring loopContent, IContext* currentContext, std::vector<IObject*> const& collection, std::wstring variableName);
 		void processMacros(IOContext& context, IContext* currentContext);
-		void processAnonym(IOContext& context, IContext* currentContext, std::wstring const& contents) { throw std::exception(); }
+		void processAnonym(IOContext& context, IContext* currentContext, std::wstring const& contents, size_t lineNumber);
 		IObject* resolveCallChain(IContext* context, std::wstring const& chain, std::wostream& errorStream);
 	public:
 		MacroInliner(std::vector<InParserClassDescriptor>const& descriptors);

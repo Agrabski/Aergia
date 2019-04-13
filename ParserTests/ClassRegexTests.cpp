@@ -228,5 +228,17 @@ namespace ParserTests
 			inliner.processText(test, out, error, Aergia::Parser::InliningPolicy());
 			Assert::IsTrue(L"class Test : public Tex   , \r\n KL {   }  ;Tex\r\nKL\r\n" == out);
 		}
+
+		TEST_METHOD(insertForeachcomplex)
+		{
+			auto test = L"class A\r\n{};\r\n\r\nclass B : public A\r\n{\r\n\r\n};\r\n\r\nclass C : public A, protected B\r\n{\r\n\r\n};\r\n\r\nclass D : public A, protected B, C\r\n{\r\n\r\n};\r\n\r\nint main()\r\n{\r\n$foreach($base in $typeof(D).bases)\r\n${\r\n    std::cout<<\"$base.type$$\"<<\"$base.accessibility$$\";\r\n$}\r\n$foreach($base in $typeof(D).bases)\r\n$base.costam$$\r\n\r\n$foreach($base in $typeof(D).bases.ers)\r\n$base.accessibility$$\r\n}";
+			auto parser = Parser();
+			auto result = parser.parseClasses(test);
+			auto inliner = Aergia::Parser::MacroInliner(result);
+			std::wstring out;
+			std::wostringstream error;
+			inliner.processText(test, out, error, Aergia::Parser::InliningPolicy());
+			Assert::IsTrue(L"class A\r\n{};\r\n\r\nclass B : public A\r\n{\r\n\r\n};\r\n\r\nclass C : public A, protected B\r\n{\r\n\r\n};\r\n\r\nclass D : public A, protected B, C\r\n{\r\n\r\n};\r\n\r\nint main()\r\n{\r\nstd::cout<<\"A\"<<\"public\";\r\n\r\nstd::cout<<\"B\"<<\"protected\";\r\n\r\nstd::cout<<\"C\"<<\"private\";\r\n\r\n\r\nnull\r\nnull\r\nnull\r\n\r\n\r\n\r\n}" == out);
+		}
 	};
 }
