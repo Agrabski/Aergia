@@ -20,9 +20,9 @@ IObject* Aergia::DataStructures::Base::getMember(std::wstring e) noexcept
 	}
 	catch(std::exception const&)
 	{
-		return Null::get();
+		// todo:warn
 	}
-	return nullptr;
+	return Null::get();
 }
 
 std::wstring const& Aergia::DataStructures::Base::toString() const noexcept

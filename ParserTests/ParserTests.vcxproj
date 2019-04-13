@@ -23,7 +23,7 @@
     <ProjectGuid>{11CBDB8E-E097-4B2A-BBC7-BEFD5A9DECD0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ParserTests</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -185,7 +185,19 @@
       <Project>{12a92134-adb5-4db9-abc1-061cc736bcf1}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\boost.1.69.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.69.0.0\build\boost.targets')" />
+    <Import Project="..\packages\boost_regex-vc141.1.69.0.0\build\boost_regex-vc141.targets" Condition="Exists('..\packages\boost_regex-vc141.1.69.0.0\build\boost_regex-vc141.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\boost.1.69.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.69.0.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_regex-vc141.1.69.0.0\build\boost_regex-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_regex-vc141.1.69.0.0\build\boost_regex-vc141.targets'))" />
+  </Target>
 </Project>

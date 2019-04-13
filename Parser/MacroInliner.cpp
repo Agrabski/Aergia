@@ -32,8 +32,8 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 	auto anonyms = AnonymousDescriptor::getAnonymousDescriptors(context._input);
 	auto calls = CallChainDescriptor::getCallChainDescriptors(context._input);
 
-	std::sort(loops.begin(), loops.end(), [](ForeachDescriptor const& a, ForeachDescriptor const& b) {return a._positionInInputString > b._positionInInputString; });
-	std::sort(anonyms.begin(), anonyms.end(), [](AnonymousDescriptor const& a, AnonymousDescriptor const& b) {return a._positionInInputString > b._positionInInputString; });
+	std::sort(loops.begin(), loops.end(), [](ForeachDescriptor const& a, ForeachDescriptor const& b) {return a._positionInInputString < b._positionInInputString; });
+	std::sort(anonyms.begin(), anonyms.end(), [](AnonymousDescriptor const& a, AnonymousDescriptor const& b) {return a._positionInInputString < b._positionInInputString; });
 	size_t loopIndex = 0;
 	size_t anonymsIndex = 0;
 	size_t callIndex = 0;
