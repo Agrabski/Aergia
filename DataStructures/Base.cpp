@@ -3,8 +3,9 @@
 
 using namespace Aergia::DataStructures;
 
-Aergia::DataStructures::Base::Base(TypeInfo* type, Accessibility accessibility) : _type(type), _accessibility(accessibility)
+Aergia::DataStructures::Base::Base(TypeInfo* type, Accessibility accessibility) : _type(type)
 {
+	*_accessibility = accessibility;
 }
 
 IObject* Aergia::DataStructures::Base::getMember(std::wstring e) noexcept
@@ -14,6 +15,8 @@ IObject* Aergia::DataStructures::Base::getMember(std::wstring e) noexcept
 	{
 		if (e == L"type")
 			return _type;
+		if (e == L"accessibility")
+			return &_accessibility;
 	}
 	catch(std::exception const&)
 	{

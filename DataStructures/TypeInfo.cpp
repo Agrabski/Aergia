@@ -9,6 +9,8 @@ Aergia::DataStructures::IObject* Aergia::DataStructures::TypeInfo::getMember(std
 			return &_properties;
 		if (e == L"bases")
 			return &_bases;
+		if (e == L"name")
+			return &_name;
 	}
 	catch (std::exception const&)
 	{
@@ -19,7 +21,7 @@ Aergia::DataStructures::IObject* Aergia::DataStructures::TypeInfo::getMember(std
 
 std::wstring const& Aergia::DataStructures::TypeInfo::toString() const noexcept
 {
-	return _name;
+	return *_name;
 }
 
 std::optional<std::vector<Aergia::DataStructures::IObject*>> Aergia::DataStructures::TypeInfo::asCollection() const noexcept

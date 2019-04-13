@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <map>
 #include "Acessibility.hpp"
 
 Aergia::DataStructures::Accessibility Aergia::DataStructures::fromWstring(std::wstring const& str)
@@ -14,4 +15,17 @@ Aergia::DataStructures::Accessibility Aergia::DataStructures::fromWstring(std::w
 	if (copy == L"protected")
 		return Accessibility::Protected;
 	throw std::exception("unexpected accessibility specifier");
+}
+
+std::wstring const& Aergia::DataStructures::toWstring(Accessibility a)
+{
+	static std::map<Accessibility, std::wstring> _map =
+	{
+		{Accessibility::None, L""},
+		{Accessibility::Public, L"public"},
+		{Accessibility::Private, L"private"},
+		{Accessibility::Protected, L"protected"},
+	};
+	
+	return _map[a];
 }

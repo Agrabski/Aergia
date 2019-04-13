@@ -4,6 +4,7 @@
 #include "IContext.hpp"
 #include "CollectionProxy.hpp"
 #include "Base.hpp"
+#include "PrimitiveWrapper.hpp"
 
 namespace Aergia
 {
@@ -19,7 +20,7 @@ namespace Aergia
 		class TypeInfo : public IObject
 		{
 			CollectionProxy<Property> _properties;
-			std::wstring _name;
+			PrimitiveWrapper<std::wstring> _name;
 			CollectionProxy<Base> _bases;
 			friend class Parser::MacroInliner;
 		public:

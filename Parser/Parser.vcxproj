@@ -164,7 +164,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnonymousDescriptor.hpp" />
+    <ClInclude Include="CallChainDescriptor.hpp" />
     <ClInclude Include="ForeachHeader.hpp" />
+    <ClInclude Include="FunctionLibrary.hpp" />
     <ClInclude Include="InParserClassDescriptor.hpp" />
     <ClInclude Include="Keywords.hpp" />
     <ClInclude Include="MacroInliner.hpp" />
@@ -175,7 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnonymousDescriptor.cpp" />
+    <ClCompile Include="CallChainDescriptor.cpp" />
     <ClCompile Include="ForeachHeader.cpp" />
+    <ClCompile Include="FunctionLibrary.cpp" />
     <ClCompile Include="Keywords.cpp" />
     <ClCompile Include="MacroInliner.cpp" />
     <ClCompile Include="Parser.cpp" />

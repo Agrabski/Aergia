@@ -5,12 +5,21 @@
 #include "../DataStructures/IContext.hpp"
 #include "../DataStructures/IObject.hpp"
 #include "../DataStructures/DefaultContext.hpp"
+#include "FunctionLibrary.hpp"
 
 namespace Aergia::Parser
 {
+	class CallChainResolutionException : public std::runtime_error
+	{
+		std::wstring message;
+	public:
+		CallChainResolutionException(std::wstring call) : message(call), std::runtime_error("substitution failed") {}
+		std::wstring what() { return message; }
+	};
 	struct InliningPolicy 
 	{
 		std::wstring const& warnEmptyCollection() const { return L""; }
+		std::wstring endLine() const { return std::wstring(L"\r\n"); }
 	};
 	
 	using DataStructures::IContext;
@@ -30,13 +39,14 @@ namespace Aergia::Parser
 		};
 
 		DefaultContext _defaultContext;
+		FunctionLibrary _functionLibrary;
 		
-		void processLoop(IOContext& context,std::wstring_view loopContent, IContext* currentContext, std::vector<IObject*> const& collection, std::wstring variableName);
+		void processLoop(IOContext& context, std::wstring loopContent, IContext* currentContext, std::vector<IObject*> const& collection, std::wstring variableName);
 		void processMacros(IOContext& context, IContext* currentContext);
 		void processAnonym(IOContext& context, IContext* currentContext, std::wstring const& contents) { throw std::exception(); }
 		IObject* resolveCallChain(IContext* context, std::wstring const& chain, std::wostream& errorStream);
 	public:
 		MacroInliner(std::vector<InParserClassDescriptor>const& descriptors);
-		void processText(std::wstring& input, std::wstring& output, std::wostream& errorStream, InliningPolicy const& policy);
+		void processText(std::wstring const& input, std::wstring& output, std::wostream& errorStream, InliningPolicy const& policy);
 	};
 }

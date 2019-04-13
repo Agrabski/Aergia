@@ -168,14 +168,6 @@ namespace ParserTests
 			Assert::IsTrue(result[0].bases[0].first == Accessibility::Public);
 			Assert::IsTrue(result[0].bases[1].first == Accessibility::Private);
 		}
-
-		TEST_METHOD(t)
-		{
-			auto test = L"class Test : public Tex   , \r\n KL {   }  ;";
-			auto parser = Parser();
-			auto result = parser.parseClasses(test);
-			auto inliner = Aergia::Parser::MacroInliner(result);
-		}
 	};
 
 	TEST_CLASS(MacroRecognisionTests)
@@ -195,6 +187,46 @@ namespace ParserTests
 			auto tmp = AnonymousDescriptor::getAnonymousDescriptors(test);
 			Assert::IsTrue(tmp.size() == 1);
 
+		}
+
+		TEST_METHOD(insertTypeName)
+		{
+			auto test = L"class Test : public Tex   , \r\n KL {   }  ;$typeof(Test)$$";
+			auto parser = Parser();
+			auto result = parser.parseClasses(test);
+			auto inliner = Aergia::Parser::MacroInliner(result);
+			std::wstring out;
+			std::wostringstream error;
+			inliner.processText(test, out, error, Aergia::Parser::InliningPolicy());
+		}
+
+	};
+
+	TEST_CLASS(MacroSubstitutionTests)
+	{
+	public:
+		TEST_METHOD(insertTypeName)
+		{
+			auto test = L"class Test : public Tex   , \r\n KL {   }  ;$typeof(Test)$$";
+			auto parser = Parser();
+			auto result = parser.parseClasses(test);
+			auto inliner = Aergia::Parser::MacroInliner(result);
+			std::wstring out;
+			std::wostringstream error;
+			inliner.processText(test, out, error, Aergia::Parser::InliningPolicy());
+			Assert::IsTrue(std::wstring(L"class Test : public Tex   , \r\n KL {   }  ;Test") == out);
+		}
+
+		TEST_METHOD(insertForeachName)
+		{
+			auto test = L"class Test : public Tex   , \r\n KL {   }  ;$foreach($base in $typeof(Test).bases) $base$$";
+			auto parser = Parser();
+			auto result = parser.parseClasses(test);
+			auto inliner = Aergia::Parser::MacroInliner(result);
+			std::wstring out;
+			std::wostringstream error;
+			inliner.processText(test, out, error, Aergia::Parser::InliningPolicy());
+			Assert::IsTrue(L"class Test : public Tex   , \r\n KL {   }  ;Tex\r\nKL\r\n" == out);
 		}
 	};
 }

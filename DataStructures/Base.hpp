@@ -2,6 +2,7 @@
 #include "IObject.hpp"
 #include "TypeInfo.hpp"
 #include "Acessibility.hpp"
+#include "PrimitiveWrapper.hpp"
 
 namespace Aergia::DataStructures
 {
@@ -9,7 +10,7 @@ namespace Aergia::DataStructures
 	class Base : public IObject
 	{
 		TypeInfo* _type;
-		Accessibility _accessibility;
+		PrimitiveWrapper<Accessibility> _accessibility;
 	public:
 		Base(TypeInfo* type, Accessibility accessibility);
 		virtual IObject* getMember(std::wstring) noexcept;

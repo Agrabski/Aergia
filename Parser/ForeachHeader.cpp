@@ -15,8 +15,9 @@ std::vector<ForeachDescriptor> Aergia::Parser::ForeachDescriptor::getForeachDesc
 		result.emplace_back();
 		result.back()._variableName = (*match)[1].str();
 		result.back()._collectionCallChain = (*match)[2].str();
-		result.back()._foreachBody = (*match)[3].str();
+		result.back()._foreachBody = match->size() == 5 ? (*match)[4].str() : (*match)[3].str();
 		result.back()._positionInInputString = match->position();
+		result.back()._textLength = (*match)[0].str().length();
 	}
 	return result;
 }

@@ -14,5 +14,6 @@ namespace Aergia
 		};
 
 		Accessibility fromWstring(std::wstring const& str);
+		std::wstring const& toWstring(Accessibility a);
 	}
 }
