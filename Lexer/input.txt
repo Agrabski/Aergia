@@ -3,6 +3,6 @@ int main()
 {
     $foreach($test in $typeof(testssss).bases)
     ${
-        std::cout<<@test.name@;
+        std::cout<<L@test.name@;
     $}
 }

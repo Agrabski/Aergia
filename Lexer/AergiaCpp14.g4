@@ -30,7 +30,7 @@ translationunit
    ;
 /*Expressions*/
 
-fragment Encodingprefix
+Encodingprefix
    : 'u8'
    | 'u'
    | 'U'
@@ -47,7 +47,7 @@ aergiaexpression
    ;
 
 aergiastring
-   : Encodingprefix?'@' callchain '@';
+   : Encodingprefix? '@' callchain '@';
 
 foreach
    :'$foreach('foreachheader')' foreachbody
