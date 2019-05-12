@@ -42,10 +42,7 @@ void Aergia::Parser::MacroInliner::processMacros(IOContext& context, IContext* c
 	{
 		bool charProcessed = false;
 		if (context._input[i] == '\n')
-		{
 			line++;
-			charProcessed = true;
-		}
 		if (!charProcessed && loops.size() > loopIndex)
 		{
 			if (i == loops.at(loopIndex)._positionInInputString)

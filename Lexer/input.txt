@@ -1,0 +1,8 @@
+
+int main()
+{
+    $foreach($test in $typeof(testssss).bases)
+    ${
+        std::cout<<@test.name@;
+    $}
+}
