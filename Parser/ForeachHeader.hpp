@@ -11,6 +11,7 @@ namespace Aergia::Parser
 		std::wstring _collectionCallChain;
 		std::wstring _foreachBody;
 		static std::vector<ForeachDescriptor> getForeachDescriptors(std::wstring const& text);
+		unsigned _lineCount;
 	};
 
 }

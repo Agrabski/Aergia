@@ -43,8 +43,8 @@ namespace Aergia::Parser
 		DefaultContext _defaultContext;
 		FunctionLibrary _functionLibrary;
 
-		void processLoop(IOContext& context, std::wstring loopContent, IContext* currentContext, std::vector<IObject*> const& collection, std::wstring variableName);
-		void processMacros(IOContext& context, IContext* currentContext);
+		void processLoop(IOContext& context, std::wstring loopContent, IContext* currentContext, std::vector<IObject*> const& collection, std::wstring variableName, int& line);
+		void processMacros(IOContext& context, IContext* currentContext, int& line);
 		void processAnonym(IOContext& context, IContext* currentContext, std::wstring const& contents, size_t lineNumber);
 		IObject* resolveCallChain(IContext* context, std::wstring const& chain, std::wostream& errorStream);
 	public:
