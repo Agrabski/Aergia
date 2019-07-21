@@ -1,8 +1,10 @@
-
-int main()
+namespace xsss
 {
-    $foreach($test in $typeof(testssss).bases)
-    ${
-        std::cout<<L@test.name@;
-    $}
+    namespace dddd
+    {
+        int main()
+        {
+            auto n = 34;
+        }
+    }
 }

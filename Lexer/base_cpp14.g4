@@ -1,3 +1,24 @@
+Skip to content
+Why GitHub? 
+Enterprise
+Explore 
+Marketplace
+Pricing 
+Search
+
+Sign in
+Sign up
+210 3,960 1,655 antlr/grammars-v4
+ Code  Issues 203  Pull requests 3  Projects 0  Wiki  Security  Insights
+Join GitHub today
+GitHub is home to over 36 million developers working together to host and review code, manage projects, and build software together.
+
+grammars-v4/cpp/CPP14.g4
+@hristo-vrigazov hristo-vrigazov Update grammar
+48c5895 on Mar 6
+@Camiloasc1 @teverett @shravanrn @parrt @adamtornhill @ylemoigne @mshockwave @hristo-vrigazov @oxisto @boot-print @kelthuzadx
+1940 lines (1551 sloc)  29.3 KB
+    
 /*******************************************************************************
  * The MIT License (MIT)
  *
@@ -21,7 +42,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-grammar AergiaCpp14;
+grammar CPP14;
 /*Basic concepts*/
 
 
@@ -30,51 +51,6 @@ translationunit
    ;
 /*Expressions*/
 
-Encodingprefix
-   : 'u8'
-   | 'u'
-   | 'U'
-   | 'L'
-   ;
-
-aergiaexpressionbegin : '$' ;
-aergiaexpressionend : '$$';
-aergiaBlock : '${'statementseq'$}';
-
-aergiaexpression
-   : foreach
-   | aergiaexpressionbegin callchain aergiaexpressionend
-   | aergiaexpressionbegin anonymousExpression aergiaexpressionend
-   ;
-
-anonymousExpression
-   : 'anonymous' '('anoynmousBody')';
-
-anoynmousBody
-   : initializerclause;
-
-aergiastring
-   : Encodingprefix? '@' callchain '@';
-
-foreach
-   :'$foreach('foreachheader')' foreachbody
-   ;
-
-foreachheader
-   : aergiaexpressionbegin Identifier 'in' aergiaexpressionbegin callchain
-   ;
-
-foreachbody
-   : aergiaexpression
-   | aergiaBlock
-   ;
-
-callchain
-   : Identifier'.'callchain
-   | Identifier'('Identifier').'callchain
-   | Identifier'('Identifier')' 
-   | Identifier
-   ;
 
 primaryexpression
    : literal
@@ -270,8 +246,7 @@ castexpression
    ;
 
 pmexpression
-   : primaryexpression 
-   
+   : castexpression
    | pmexpression '.*' castexpression
    | pmexpression '->*' castexpression
    ;
@@ -346,9 +321,8 @@ conditionalexpression
    ;
 
 assignmentexpression
-   : pmexpression
-   | castexpression
-   | logicalorexpression assignmentoperator pmexpression
+   : conditionalexpression
+   | logicalorexpression assignmentoperator initializerclause
    | throwexpression
    ;
 
@@ -385,7 +359,6 @@ statement
    | attributespecifierseq? iterationstatement
    | attributespecifierseq? jumpstatement
    | declarationstatement
-   | aergiaexpression
    | attributespecifierseq? tryblock
    ;
 
@@ -493,7 +466,7 @@ simpledeclaration
    ;
 
 static_assertdeclaration
-   : Static_assert '(' constantexpression ',' (Stringliteral | aergiastring) ')' ';'
+   : Static_assert '(' constantexpression ',' Stringliteral ')' ';'
    ;
 
 emptydeclaration
@@ -772,12 +745,12 @@ initdeclarator
 
 declarator
    : ptrdeclarator
-   | noptrdeclarator
    | noptrdeclarator parametersandqualifiers trailingreturntype
    ;
 
 ptrdeclarator
-   : ptroperator ptrdeclarator
+   : noptrdeclarator
+   | ptroperator ptrdeclarator
    ;
 
 noptrdeclarator
@@ -895,7 +868,6 @@ braceorequalinitializer
 initializerclause
    : assignmentexpression
    | bracedinitlist
-   | literal
    ;
 
 initializerlist
@@ -1057,8 +1029,8 @@ operatorfunctionid
    ;
 
 literaloperatorid
-   : Operator (Stringliteral | aergiastring) Identifier
-   | Operator (Userdefinedstringliteral | aergiastring)
+   : Operator Stringliteral Identifier
+   | Operator Userdefinedstringliteral
    ;
 /*Templates*/
 
@@ -1778,7 +1750,6 @@ literal
    | booleanliteral
    | pointerliteral
    | userdefinedliteral
-   | aergiastring
    ;
 
 Integerliteral
@@ -1852,13 +1823,11 @@ fragment Cchar
    | Escapesequence
    | Universalcharactername
    ;
-
 fragment Escapesequence
    : Simpleescapesequence
    | Octalescapesequence
    | Hexadecimalescapesequence
    ;
-
 fragment Simpleescapesequence
    : '\\\''
    | '\\"'
@@ -1915,71 +1884,74 @@ Stringliteral
    | Encodingprefix? 'R' Rawstring
    ;
 
-
+fragment Encodingprefix
+   : 'u8'
+   | 'u'
+   | 'U'
+   | 'L'
+   ;
 
 fragment Schar
    : ~ ["\\\r\n]
    | Escapesequence
    | Universalcharactername
    ;
-
 fragment Rawstring
    : '"' .*? '(' .*? ')' .*? '"'
    ;
-
 booleanliteral
    : False
    | True
    ;
-
 pointerliteral
    : Nullptr
    ;
-
 userdefinedliteral
    : Userdefinedintegerliteral
    | Userdefinedfloatingliteral
    | Userdefinedstringliteral
    | Userdefinedcharacterliteral
-   | aergiastring
    ;
-
 Userdefinedintegerliteral
    : Decimalliteral Udsuffix
    | Octalliteral Udsuffix
    | Hexadecimalliteral Udsuffix
    | Binaryliteral Udsuffix
    ;
-
 Userdefinedfloatingliteral
    : Fractionalconstant Exponentpart? Udsuffix
    | Digitsequence Exponentpart Udsuffix
    ;
-
 Userdefinedstringliteral
    : Stringliteral Udsuffix
    ;
-
 Userdefinedcharacterliteral
    : Characterliteral Udsuffix
    ;
-
 fragment Udsuffix
    : Identifier
    ;
-
 Whitespace
    : [ \t]+ -> skip
    ;
-
 Newline
    : ('\r' '\n'? | '\n') -> skip
    ;
-
 BlockComment
    : '/*' .*? '*/' -> skip
    ;
-
 LineComment
    : '//' ~ [\r\n]* -> skip
    ;
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

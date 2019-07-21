@@ -17,6 +17,39 @@ public:
   virtual void enterTranslationunit(AergiaCpp14Parser::TranslationunitContext *ctx) = 0;
   virtual void exitTranslationunit(AergiaCpp14Parser::TranslationunitContext *ctx) = 0;
 
+  virtual void enterAergiaexpressionbegin(AergiaCpp14Parser::AergiaexpressionbeginContext *ctx) = 0;
+  virtual void exitAergiaexpressionbegin(AergiaCpp14Parser::AergiaexpressionbeginContext *ctx) = 0;
+
+  virtual void enterAergiaexpressionend(AergiaCpp14Parser::AergiaexpressionendContext *ctx) = 0;
+  virtual void exitAergiaexpressionend(AergiaCpp14Parser::AergiaexpressionendContext *ctx) = 0;
+
+  virtual void enterAergiaBlock(AergiaCpp14Parser::AergiaBlockContext *ctx) = 0;
+  virtual void exitAergiaBlock(AergiaCpp14Parser::AergiaBlockContext *ctx) = 0;
+
+  virtual void enterAergiaexpression(AergiaCpp14Parser::AergiaexpressionContext *ctx) = 0;
+  virtual void exitAergiaexpression(AergiaCpp14Parser::AergiaexpressionContext *ctx) = 0;
+
+  virtual void enterAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext *ctx) = 0;
+  virtual void exitAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext *ctx) = 0;
+
+  virtual void enterAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext *ctx) = 0;
+  virtual void exitAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext *ctx) = 0;
+
+  virtual void enterAergiastring(AergiaCpp14Parser::AergiastringContext *ctx) = 0;
+  virtual void exitAergiastring(AergiaCpp14Parser::AergiastringContext *ctx) = 0;
+
+  virtual void enterForeach(AergiaCpp14Parser::ForeachContext *ctx) = 0;
+  virtual void exitForeach(AergiaCpp14Parser::ForeachContext *ctx) = 0;
+
+  virtual void enterForeachheader(AergiaCpp14Parser::ForeachheaderContext *ctx) = 0;
+  virtual void exitForeachheader(AergiaCpp14Parser::ForeachheaderContext *ctx) = 0;
+
+  virtual void enterForeachbody(AergiaCpp14Parser::ForeachbodyContext *ctx) = 0;
+  virtual void exitForeachbody(AergiaCpp14Parser::ForeachbodyContext *ctx) = 0;
+
+  virtual void enterCallchain(AergiaCpp14Parser::CallchainContext *ctx) = 0;
+  virtual void exitCallchain(AergiaCpp14Parser::CallchainContext *ctx) = 0;
+
   virtual void enterPrimaryexpression(AergiaCpp14Parser::PrimaryexpressionContext *ctx) = 0;
   virtual void exitPrimaryexpression(AergiaCpp14Parser::PrimaryexpressionContext *ctx) = 0;
 

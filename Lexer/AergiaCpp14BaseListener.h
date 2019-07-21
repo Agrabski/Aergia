@@ -19,6 +19,39 @@ public:
   virtual void enterTranslationunit(AergiaCpp14Parser::TranslationunitContext * /*ctx*/) override { }
   virtual void exitTranslationunit(AergiaCpp14Parser::TranslationunitContext * /*ctx*/) override { }
 
+  virtual void enterAergiaexpressionbegin(AergiaCpp14Parser::AergiaexpressionbeginContext * /*ctx*/) override { }
+  virtual void exitAergiaexpressionbegin(AergiaCpp14Parser::AergiaexpressionbeginContext * /*ctx*/) override { }
+
+  virtual void enterAergiaexpressionend(AergiaCpp14Parser::AergiaexpressionendContext * /*ctx*/) override { }
+  virtual void exitAergiaexpressionend(AergiaCpp14Parser::AergiaexpressionendContext * /*ctx*/) override { }
+
+  virtual void enterAergiaBlock(AergiaCpp14Parser::AergiaBlockContext * /*ctx*/) override { }
+  virtual void exitAergiaBlock(AergiaCpp14Parser::AergiaBlockContext * /*ctx*/) override { }
+
+  virtual void enterAergiaexpression(AergiaCpp14Parser::AergiaexpressionContext * /*ctx*/) override { }
+  virtual void exitAergiaexpression(AergiaCpp14Parser::AergiaexpressionContext * /*ctx*/) override { }
+
+  virtual void enterAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext * /*ctx*/) override { }
+  virtual void exitAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext * /*ctx*/) override { }
+
+  virtual void enterAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext * /*ctx*/) override { }
+  virtual void exitAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext * /*ctx*/) override { }
+
+  virtual void enterAergiastring(AergiaCpp14Parser::AergiastringContext * /*ctx*/) override { }
+  virtual void exitAergiastring(AergiaCpp14Parser::AergiastringContext * /*ctx*/) override { }
+
+  virtual void enterForeach(AergiaCpp14Parser::ForeachContext * /*ctx*/) override { }
+  virtual void exitForeach(AergiaCpp14Parser::ForeachContext * /*ctx*/) override { }
+
+  virtual void enterForeachheader(AergiaCpp14Parser::ForeachheaderContext * /*ctx*/) override { }
+  virtual void exitForeachheader(AergiaCpp14Parser::ForeachheaderContext * /*ctx*/) override { }
+
+  virtual void enterForeachbody(AergiaCpp14Parser::ForeachbodyContext * /*ctx*/) override { }
+  virtual void exitForeachbody(AergiaCpp14Parser::ForeachbodyContext * /*ctx*/) override { }
+
+  virtual void enterCallchain(AergiaCpp14Parser::CallchainContext * /*ctx*/) override { }
+  virtual void exitCallchain(AergiaCpp14Parser::CallchainContext * /*ctx*/) override { }
+
   virtual void enterPrimaryexpression(AergiaCpp14Parser::PrimaryexpressionContext * /*ctx*/) override { }
   virtual void exitPrimaryexpression(AergiaCpp14Parser::PrimaryexpressionContext * /*ctx*/) override { }
 
