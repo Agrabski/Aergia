@@ -3,18 +3,22 @@
 #include <string_view>
 #include <stdexcept>
 #include <fstream>
+#include "Configuraton.hpp"
+#include "PrettyPrinter.hpp"
 
-namespace Aergia
+namespace Aergia::IO
 {
 	class IOManager
 	{
 		std::ifstream _inputStream;
 		std::ofstream _outputstream;
 	public:
-		IOManager( std::vector<char const*>args ) throw(std::runtime_error);
+		IOManager( std::vector<char const*>args );
 		std::istream& getInputFile();
 		std::ostream& getOutputFile();
 		void startProcessing() const;
 		void endProcessing() const;
+		Configuration getConfiguration() const;
+		PrettyPrinterConfiguration getPrinterConfiguration() const;
 	};
 }

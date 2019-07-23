@@ -156,6 +156,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnonymousVisitor.hpp" />
+    <ClInclude Include="BaseVisitor.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnonymousVisitor.cpp" />

@@ -895,7 +895,6 @@ braceorequalinitializer
 initializerclause
    : assignmentexpression
    | bracedinitlist
-   | literal
    ;
 
 initializerlist
@@ -1969,11 +1968,11 @@ fragment Udsuffix
    ;
 
 Whitespace
-   : [ \t]+ -> skip
+   : [ \t]+ -> channel(HIDDEN)
    ;
 
 Newline
-   : ('\r' '\n'? | '\n') -> skip
+   : ('\r' '\n'? | '\n') -> channel(HIDDEN)
    ;
 
 BlockComment

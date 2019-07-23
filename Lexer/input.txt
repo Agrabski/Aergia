@@ -1,10 +1,4 @@
-namespace xsss
+int main(int t)
 {
-    namespace dddd
-    {
-        int main()
-        {
-            auto n = 34;
-        }
-    }
+    auto n = 34;
 }

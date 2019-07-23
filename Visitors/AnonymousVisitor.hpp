@@ -1,13 +1,13 @@
 #pragma once
 #include "..//Lexer/AergiaCpp14BaseListener.h"
+#include "BaseVisitor.hpp"
 #include <TokenStreamRewriter.h>
 
 namespace Aergia::Visitors
 {
 	using antlr4::Token;
-	class AnonymousVisitor : public AergiaCpp14BaseListener
+	class AnonymousVisitor : public BaseVisitor
 	{
-		AergiaCpp14Parser* _parser;
 		struct AnonymousRewriteData
 		{
 			AnonymousRewriteData( Token* before, Token* follow, std::string const& body, std::string const& name ) :
@@ -24,6 +24,5 @@ namespace Aergia::Visitors
 	public:
 		void enterAnonymousExpression( AergiaCpp14Parser::AnonymousExpressionContext* context ) override;
 		void setupRewriter( antlr4::TokenStreamRewriter& const rewriter )const;
-		AnonymousVisitor( AergiaCpp14Parser* parser ) noexcept : _parser( parser ) {}
 	};
 }

@@ -155,9 +155,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Configuraton.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IOManager.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PrettyPrinter.hpp" />
+    <ClInclude Include="PrettyPrinterConfiguration.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IOManager.cpp" />
@@ -167,6 +170,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PrettyPrinter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lexer\Lexer.vcxproj">
+      <Project>{e723eb38-47f6-47c7-b3e1-9a9c79c00a90}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

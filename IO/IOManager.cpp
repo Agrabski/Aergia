@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-Aergia::IOManager::IOManager( std::vector<char const*> args ) throw(std::runtime_error)
+Aergia::IO::IOManager::IOManager( std::vector<char const*> args )
 {
 	if (args.size() < 3)
 	{
@@ -24,12 +24,22 @@ Aergia::IOManager::IOManager( std::vector<char const*> args ) throw(std::runtime
 	std::cout << "both files successfully loaded" << std::endl;
 }
 
-std::istream& Aergia::IOManager::getInputFile()
+std::istream& Aergia::IO::IOManager::getInputFile()
 {
 	return _inputStream;
 }
 
-std::ostream& Aergia::IOManager::getOutputFile()
+std::ostream& Aergia::IO::IOManager::getOutputFile()
 {
 	return _outputstream;
+}
+
+Aergia::IO::Configuration Aergia::IO::IOManager::getConfiguration() const
+{
+	return Configuration();
+}
+
+Aergia::IO::PrettyPrinterConfiguration Aergia::IO::IOManager::getPrinterConfiguration() const
+{
+	return PrettyPrinterConfiguration();
 }
