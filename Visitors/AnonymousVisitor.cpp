@@ -6,7 +6,7 @@ std::string Aergia::Visitors::AnonymousVisitor::getVariableName( size_t lineNumb
 {
 	using namespace std::literals;
 
-	return "__anonymous__"s + std::to_string( lineNumber);
+	return "__anonymous__"s + std::to_string( lineNumber );
 }
 
 std::string Aergia::Visitors::AnonymousVisitor::formatAssigment( std::string const& variableName, std::string const& value )
@@ -15,20 +15,18 @@ std::string Aergia::Visitors::AnonymousVisitor::formatAssigment( std::string con
 	return "auto "s + variableName + " = "s + value + ';';
 }
 
-void Aergia::Visitors::AnonymousVisitor::enterAnonymousExpression( AergiaCpp14Parser::AnonymousExpressionContext* context )
+antlrcpp::Any Aergia::Visitors::AnonymousVisitor::visitAnonymousExpression( AergiaCpp14Parser::AnonymousExpressionContext* context )
 {
 	using Utilities::TokenFinder;
 	auto content = context->anoynmousBody()->getText();
 	auto before = TokenFinder::findTokenBefore( (antlr4::ParserRuleContext*) context->parent );
 	auto follow = TokenFinder::findFollow( (antlr4::ParserRuleContext*)context->parent );
 
-	_rewrites.push_back( AnonymousRewriteData( before, follow, content, getVariableName( context->start->getLine() ) ) );
+	_rewrites.push_back( { before, follow, formatAssigment( content, getVariableName( context->start->getLine() ) ) } );
+	return 0;
 }
 
-void Aergia::Visitors::AnonymousVisitor::setupRewriter( antlr4::TokenStreamRewriter& rewriter ) const
+std::vector<Aergia::Visitors::Rewrite>const & Aergia::Visitors::AnonymousVisitor::getRewrites() const
 {
-	for (auto const& rewrite : _rewrites)
-	{
-		rewriter.replace( rewrite._before, rewrite._after, formatAssigment( rewrite._variableName, rewrite._body ) );
-	}
+	return _rewrites;
 }

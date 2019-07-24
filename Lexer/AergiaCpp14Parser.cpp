@@ -3,6 +3,7 @@
 
 
 #include "AergiaCpp14Listener.h"
+#include "AergiaCpp14Visitor.h"
 
 #include "AergiaCpp14Parser.h"
 
@@ -60,6 +61,14 @@ void AergiaCpp14Parser::TranslationunitContext::exitRule( tree::ParseTreeListene
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTranslationunit( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TranslationunitContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTranslationunit( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TranslationunitContext* AergiaCpp14Parser::translationunit() {
@@ -166,6 +175,14 @@ void AergiaCpp14Parser::AergiaexpressionbeginContext::exitRule( tree::ParseTreeL
 		parserListener->exitAergiaexpressionbegin( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AergiaexpressionbeginContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAergiaexpressionbegin( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AergiaexpressionbeginContext* AergiaCpp14Parser::aergiaexpressionbegin() {
 	AergiaexpressionbeginContext* _localctx = _tracker.createInstance<AergiaexpressionbeginContext>( _ctx, getState() );
 	enterRule( _localctx, 2, AergiaCpp14Parser::RuleAergiaexpressionbegin );
@@ -209,6 +226,14 @@ void AergiaCpp14Parser::AergiaexpressionendContext::exitRule( tree::ParseTreeLis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAergiaexpressionend( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AergiaexpressionendContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAergiaexpressionend( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AergiaexpressionendContext* AergiaCpp14Parser::aergiaexpressionend() {
@@ -258,6 +283,14 @@ void AergiaCpp14Parser::AergiaBlockContext::exitRule( tree::ParseTreeListener* l
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAergiaBlock( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AergiaBlockContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAergiaBlock( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AergiaBlockContext* AergiaCpp14Parser::aergiaBlock() {
@@ -327,6 +360,14 @@ void AergiaCpp14Parser::AergiaexpressionContext::exitRule( tree::ParseTreeListen
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAergiaexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AergiaexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAergiaexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AergiaexpressionContext* AergiaCpp14Parser::aergiaexpression() {
@@ -416,6 +457,14 @@ void AergiaCpp14Parser::AnonymousExpressionContext::exitRule( tree::ParseTreeLis
 		parserListener->exitAnonymousExpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AnonymousExpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAnonymousExpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AnonymousExpressionContext* AergiaCpp14Parser::anonymousExpression() {
 	AnonymousExpressionContext* _localctx = _tracker.createInstance<AnonymousExpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 10, AergiaCpp14Parser::RuleAnonymousExpression );
@@ -471,6 +520,14 @@ void AergiaCpp14Parser::AnoynmousBodyContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitAnoynmousBody( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AnoynmousBodyContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAnoynmousBody( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AnoynmousBodyContext* AergiaCpp14Parser::anoynmousBody() {
 	AnoynmousBodyContext* _localctx = _tracker.createInstance<AnoynmousBodyContext>( _ctx, getState() );
 	enterRule( _localctx, 12, AergiaCpp14Parser::RuleAnoynmousBody );
@@ -522,6 +579,14 @@ void AergiaCpp14Parser::AergiastringContext::exitRule( tree::ParseTreeListener* 
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAergiastring( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AergiastringContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAergiastring( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AergiastringContext* AergiaCpp14Parser::aergiastring() {
@@ -594,6 +659,14 @@ void AergiaCpp14Parser::ForeachContext::exitRule( tree::ParseTreeListener* liste
 		parserListener->exitForeach( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ForeachContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitForeach( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ForeachContext* AergiaCpp14Parser::foreach() {
 	ForeachContext* _localctx = _tracker.createInstance<ForeachContext>( _ctx, getState() );
 	enterRule( _localctx, 16, AergiaCpp14Parser::RuleForeach );
@@ -661,6 +734,14 @@ void AergiaCpp14Parser::ForeachheaderContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitForeachheader( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ForeachheaderContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitForeachheader( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ForeachheaderContext* AergiaCpp14Parser::foreachheader() {
 	ForeachheaderContext* _localctx = _tracker.createInstance<ForeachheaderContext>( _ctx, getState() );
 	enterRule( _localctx, 18, AergiaCpp14Parser::RuleForeachheader );
@@ -720,6 +801,14 @@ void AergiaCpp14Parser::ForeachbodyContext::exitRule( tree::ParseTreeListener* l
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitForeachbody( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ForeachbodyContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitForeachbody( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ForeachbodyContext* AergiaCpp14Parser::foreachbody() {
@@ -807,6 +896,14 @@ void AergiaCpp14Parser::CallchainContext::exitRule( tree::ParseTreeListener* lis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitCallchain( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::CallchainContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCallchain( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::CallchainContext* AergiaCpp14Parser::callchain() {
@@ -929,6 +1026,14 @@ void AergiaCpp14Parser::PrimaryexpressionContext::exitRule( tree::ParseTreeListe
 		parserListener->exitPrimaryexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::PrimaryexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPrimaryexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::PrimaryexpressionContext* AergiaCpp14Parser::primaryexpression() {
 	PrimaryexpressionContext* _localctx = _tracker.createInstance<PrimaryexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 24, AergiaCpp14Parser::RulePrimaryexpression );
@@ -1040,6 +1145,14 @@ void AergiaCpp14Parser::IdexpressionContext::exitRule( tree::ParseTreeListener* 
 		parserListener->exitIdexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::IdexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitIdexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::IdexpressionContext* AergiaCpp14Parser::idexpression() {
 	IdexpressionContext* _localctx = _tracker.createInstance<IdexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 26, AergiaCpp14Parser::RuleIdexpression );
@@ -1130,6 +1243,14 @@ void AergiaCpp14Parser::UnqualifiedidContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitUnqualifiedid( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::UnqualifiedidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitUnqualifiedid( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::UnqualifiedidContext* AergiaCpp14Parser::unqualifiedid() {
@@ -1243,6 +1364,14 @@ void AergiaCpp14Parser::QualifiedidContext::exitRule( tree::ParseTreeListener* l
 		parserListener->exitQualifiedid( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::QualifiedidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitQualifiedid( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::QualifiedidContext* AergiaCpp14Parser::qualifiedid() {
 	QualifiedidContext* _localctx = _tracker.createInstance<QualifiedidContext>( _ctx, getState() );
 	enterRule( _localctx, 30, AergiaCpp14Parser::RuleQualifiedid );
@@ -1329,6 +1458,14 @@ void AergiaCpp14Parser::NestednamespecifierContext::exitRule( tree::ParseTreeLis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNestednamespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NestednamespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNestednamespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -1483,6 +1620,14 @@ void AergiaCpp14Parser::LambdaexpressionContext::exitRule( tree::ParseTreeListen
 		parserListener->exitLambdaexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::LambdaexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLambdaexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::LambdaexpressionContext* AergiaCpp14Parser::lambdaexpression() {
 	LambdaexpressionContext* _localctx = _tracker.createInstance<LambdaexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 34, AergiaCpp14Parser::RuleLambdaexpression );
@@ -1549,6 +1694,14 @@ void AergiaCpp14Parser::LambdaintroducerContext::exitRule( tree::ParseTreeListen
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitLambdaintroducer( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::LambdaintroducerContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLambdaintroducer( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::LambdaintroducerContext* AergiaCpp14Parser::lambdaintroducer() {
@@ -1620,6 +1773,14 @@ void AergiaCpp14Parser::LambdacaptureContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitLambdacapture( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::LambdacaptureContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLambdacapture( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::LambdacaptureContext* AergiaCpp14Parser::lambdacapture() {
@@ -1701,6 +1862,14 @@ void AergiaCpp14Parser::CapturedefaultContext::exitRule( tree::ParseTreeListener
 		parserListener->exitCapturedefault( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::CapturedefaultContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCapturedefault( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::CapturedefaultContext* AergiaCpp14Parser::capturedefault() {
 	CapturedefaultContext* _localctx = _tracker.createInstance<CapturedefaultContext>( _ctx, getState() );
 	enterRule( _localctx, 40, AergiaCpp14Parser::RuleCapturedefault );
@@ -1770,6 +1939,14 @@ void AergiaCpp14Parser::CapturelistContext::exitRule( tree::ParseTreeListener* l
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitCapturelist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::CapturelistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCapturelist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -1881,6 +2058,14 @@ void AergiaCpp14Parser::CaptureContext::exitRule( tree::ParseTreeListener* liste
 		parserListener->exitCapture( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::CaptureContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCapture( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::CaptureContext* AergiaCpp14Parser::capture() {
 	CaptureContext* _localctx = _tracker.createInstance<CaptureContext>( _ctx, getState() );
 	enterRule( _localctx, 44, AergiaCpp14Parser::RuleCapture );
@@ -1951,6 +2136,14 @@ void AergiaCpp14Parser::SimplecaptureContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitSimplecapture( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::SimplecaptureContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitSimplecapture( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::SimplecaptureContext* AergiaCpp14Parser::simplecapture() {
@@ -2034,6 +2227,14 @@ void AergiaCpp14Parser::InitcaptureContext::exitRule( tree::ParseTreeListener* l
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitInitcapture( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::InitcaptureContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitInitcapture( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::InitcaptureContext* AergiaCpp14Parser::initcapture() {
@@ -2130,6 +2331,14 @@ void AergiaCpp14Parser::LambdadeclaratorContext::exitRule( tree::ParseTreeListen
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitLambdadeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::LambdadeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLambdadeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::LambdadeclaratorContext* AergiaCpp14Parser::lambdadeclarator() {
@@ -2318,6 +2527,14 @@ void AergiaCpp14Parser::PostfixexpressionContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitPostfixexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::PostfixexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPostfixexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -2866,6 +3083,14 @@ void AergiaCpp14Parser::TypeidofexprContext::exitRule( tree::ParseTreeListener* 
 		parserListener->exitTypeidofexpr( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::TypeidofexprContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTypeidofexpr( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::TypeidofexprContext* AergiaCpp14Parser::typeidofexpr() {
 	TypeidofexprContext* _localctx = _tracker.createInstance<TypeidofexprContext>( _ctx, getState() );
 	enterRule( _localctx, 54, AergiaCpp14Parser::RuleTypeidofexpr );
@@ -2915,6 +3140,14 @@ void AergiaCpp14Parser::TypeidofthetypeidContext::exitRule( tree::ParseTreeListe
 		parserListener->exitTypeidofthetypeid( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::TypeidofthetypeidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTypeidofthetypeid( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::TypeidofthetypeidContext* AergiaCpp14Parser::typeidofthetypeid() {
 	TypeidofthetypeidContext* _localctx = _tracker.createInstance<TypeidofthetypeidContext>( _ctx, getState() );
 	enterRule( _localctx, 56, AergiaCpp14Parser::RuleTypeidofthetypeid );
@@ -2962,6 +3195,14 @@ void AergiaCpp14Parser::ExpressionlistContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitExpressionlist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ExpressionlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExpressionlist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ExpressionlistContext* AergiaCpp14Parser::expressionlist() {
@@ -3039,6 +3280,14 @@ void AergiaCpp14Parser::PseudodestructornameContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitPseudodestructorname( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::PseudodestructornameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPseudodestructorname( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::PseudodestructornameContext* AergiaCpp14Parser::pseudodestructorname() {
@@ -3221,6 +3470,14 @@ void AergiaCpp14Parser::UnaryexpressionContext::exitRule( tree::ParseTreeListene
 		parserListener->exitUnaryexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::UnaryexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitUnaryexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::UnaryexpressionContext* AergiaCpp14Parser::unaryexpression() {
 	UnaryexpressionContext* _localctx = _tracker.createInstance<UnaryexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 62, AergiaCpp14Parser::RuleUnaryexpression );
@@ -3396,6 +3653,14 @@ void AergiaCpp14Parser::UnaryoperatorContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitUnaryoperator( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::UnaryoperatorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitUnaryoperator( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::UnaryoperatorContext* AergiaCpp14Parser::unaryoperator() {
 	UnaryoperatorContext* _localctx = _tracker.createInstance<UnaryoperatorContext>( _ctx, getState() );
 	enterRule( _localctx, 64, AergiaCpp14Parser::RuleUnaryoperator );
@@ -3487,6 +3752,14 @@ void AergiaCpp14Parser::NewexpressionContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNewexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NewexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNewexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NewexpressionContext* AergiaCpp14Parser::newexpression() {
@@ -3627,6 +3900,14 @@ void AergiaCpp14Parser::NewplacementContext::exitRule( tree::ParseTreeListener* 
 		parserListener->exitNewplacement( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::NewplacementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNewplacement( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::NewplacementContext* AergiaCpp14Parser::newplacement() {
 	NewplacementContext* _localctx = _tracker.createInstance<NewplacementContext>( _ctx, getState() );
 	enterRule( _localctx, 68, AergiaCpp14Parser::RuleNewplacement );
@@ -3682,6 +3963,14 @@ void AergiaCpp14Parser::NewtypeidContext::exitRule( tree::ParseTreeListener* lis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNewtypeid( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NewtypeidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNewtypeid( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NewtypeidContext* AergiaCpp14Parser::newtypeid() {
@@ -3750,6 +4039,14 @@ void AergiaCpp14Parser::NewdeclaratorContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNewdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NewdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNewdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NewdeclaratorContext* AergiaCpp14Parser::newdeclarator() {
@@ -3852,6 +4149,14 @@ void AergiaCpp14Parser::NoptrnewdeclaratorContext::exitRule( tree::ParseTreeList
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNoptrnewdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NoptrnewdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNoptrnewdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -3975,6 +4280,14 @@ void AergiaCpp14Parser::NewinitializerContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNewinitializer( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NewinitializerContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNewinitializer( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NewinitializerContext* AergiaCpp14Parser::newinitializer() {
@@ -4127,6 +4440,14 @@ void AergiaCpp14Parser::DeleteexpressionContext::exitRule( tree::ParseTreeListen
 		parserListener->exitDeleteexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::DeleteexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDeleteexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::DeleteexpressionContext* AergiaCpp14Parser::deleteexpression() {
 	DeleteexpressionContext* _localctx = _tracker.createInstance<DeleteexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 78, AergiaCpp14Parser::RuleDeleteexpression );
@@ -4228,6 +4549,14 @@ void AergiaCpp14Parser::NoexceptexpressionContext::exitRule( tree::ParseTreeList
 		parserListener->exitNoexceptexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::NoexceptexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNoexceptexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::NoexceptexpressionContext* AergiaCpp14Parser::noexceptexpression() {
 	NoexceptexpressionContext* _localctx = _tracker.createInstance<NoexceptexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 80, AergiaCpp14Parser::RuleNoexceptexpression );
@@ -4297,6 +4626,14 @@ void AergiaCpp14Parser::CastexpressionContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitCastexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::CastexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCastexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::CastexpressionContext* AergiaCpp14Parser::castexpression() {
@@ -4383,6 +4720,14 @@ void AergiaCpp14Parser::PmexpressionContext::exitRule( tree::ParseTreeListener* 
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitPmexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::PmexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPmexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -4503,6 +4848,14 @@ void AergiaCpp14Parser::MultiplicativeexpressionContext::exitRule( tree::ParseTr
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitMultiplicativeexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::MultiplicativeexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitMultiplicativeexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -4635,6 +4988,14 @@ void AergiaCpp14Parser::AdditiveexpressionContext::exitRule( tree::ParseTreeList
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::AdditiveexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAdditiveexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::AdditiveexpressionContext* AergiaCpp14Parser::additiveexpression() {
 	return additiveexpression( 0 );
 }
@@ -4747,6 +5108,14 @@ void AergiaCpp14Parser::ShiftexpressionContext::exitRule( tree::ParseTreeListene
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::ShiftexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitShiftexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::ShiftexpressionContext* AergiaCpp14Parser::shiftexpression() {
 	return shiftexpression( 0 );
 }
@@ -4833,6 +5202,14 @@ void AergiaCpp14Parser::ShiftoperatorContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitShiftoperator( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ShiftoperatorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitShiftoperator( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ShiftoperatorContext* AergiaCpp14Parser::shiftoperator() {
 	ShiftoperatorContext* _localctx = _tracker.createInstance<ShiftoperatorContext>( _ctx, getState() );
 	enterRule( _localctx, 92, AergiaCpp14Parser::RuleShiftoperator );
@@ -4910,6 +5287,14 @@ void AergiaCpp14Parser::RelationalexpressionContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitRelationalexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::RelationalexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitRelationalexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -5055,6 +5440,14 @@ void AergiaCpp14Parser::EqualityexpressionContext::exitRule( tree::ParseTreeList
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::EqualityexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEqualityexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::EqualityexpressionContext* AergiaCpp14Parser::equalityexpression() {
 	return equalityexpression( 0 );
 }
@@ -5167,6 +5560,14 @@ void AergiaCpp14Parser::AndexpressionContext::exitRule( tree::ParseTreeListener*
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::AndexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAndexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::AndexpressionContext* AergiaCpp14Parser::andexpression() {
 	return andexpression( 0 );
 }
@@ -5255,6 +5656,14 @@ void AergiaCpp14Parser::ExclusiveorexpressionContext::exitRule( tree::ParseTreeL
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitExclusiveorexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ExclusiveorexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExclusiveorexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -5349,6 +5758,14 @@ void AergiaCpp14Parser::InclusiveorexpressionContext::exitRule( tree::ParseTreeL
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::InclusiveorexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitInclusiveorexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::InclusiveorexpressionContext* AergiaCpp14Parser::inclusiveorexpression() {
 	return inclusiveorexpression( 0 );
 }
@@ -5433,6 +5850,14 @@ void AergiaCpp14Parser::LogicalandexpressionContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitLogicalandexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::LogicalandexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLogicalandexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -5541,6 +5966,14 @@ void AergiaCpp14Parser::LogicalorexpressionContext::exitRule( tree::ParseTreeLis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitLogicalorexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::LogicalorexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLogicalorexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -5663,6 +6096,14 @@ void AergiaCpp14Parser::ConditionalexpressionContext::exitRule( tree::ParseTreeL
 		parserListener->exitConditionalexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ConditionalexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitConditionalexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ConditionalexpressionContext* AergiaCpp14Parser::conditionalexpression() {
 	ConditionalexpressionContext* _localctx = _tracker.createInstance<ConditionalexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 108, AergiaCpp14Parser::RuleConditionalexpression );
@@ -5749,6 +6190,14 @@ void AergiaCpp14Parser::AssignmentexpressionContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAssignmentexpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AssignmentexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAssignmentexpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AssignmentexpressionContext* AergiaCpp14Parser::assignmentexpression() {
@@ -5873,6 +6322,14 @@ void AergiaCpp14Parser::AssignmentoperatorContext::exitRule( tree::ParseTreeList
 		parserListener->exitAssignmentoperator( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AssignmentoperatorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAssignmentoperator( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AssignmentoperatorContext* AergiaCpp14Parser::assignmentoperator() {
 	AssignmentoperatorContext* _localctx = _tracker.createInstance<AssignmentoperatorContext>( _ctx, getState() );
 	enterRule( _localctx, 112, AergiaCpp14Parser::RuleAssignmentoperator );
@@ -5947,6 +6404,14 @@ void AergiaCpp14Parser::ExpressionContext::exitRule( tree::ParseTreeListener* li
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitExpression( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ExpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExpression( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -6032,6 +6497,14 @@ void AergiaCpp14Parser::ConstantexpressionContext::exitRule( tree::ParseTreeList
 		parserListener->exitConstantexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ConstantexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitConstantexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ConstantexpressionContext* AergiaCpp14Parser::constantexpression() {
 	ConstantexpressionContext* _localctx = _tracker.createInstance<ConstantexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 116, AergiaCpp14Parser::RuleConstantexpression );
@@ -6115,6 +6588,14 @@ void AergiaCpp14Parser::StatementContext::exitRule( tree::ParseTreeListener* lis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitStatement( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::StatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitStatement( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::StatementContext* AergiaCpp14Parser::statement() {
@@ -6306,6 +6787,14 @@ void AergiaCpp14Parser::LabeledstatementContext::exitRule( tree::ParseTreeListen
 		parserListener->exitLabeledstatement( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::LabeledstatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLabeledstatement( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::LabeledstatementContext* AergiaCpp14Parser::labeledstatement() {
 	LabeledstatementContext* _localctx = _tracker.createInstance<LabeledstatementContext>( _ctx, getState() );
 	enterRule( _localctx, 120, AergiaCpp14Parser::RuleLabeledstatement );
@@ -6418,6 +6907,14 @@ void AergiaCpp14Parser::ExpressionstatementContext::exitRule( tree::ParseTreeLis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitExpressionstatement( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ExpressionstatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExpressionstatement( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ExpressionstatementContext* AergiaCpp14Parser::expressionstatement() {
@@ -6540,6 +7037,14 @@ void AergiaCpp14Parser::CompoundstatementContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitCompoundstatement( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::CompoundstatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCompoundstatement( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::CompoundstatementContext* AergiaCpp14Parser::compoundstatement() {
@@ -6703,6 +7208,14 @@ void AergiaCpp14Parser::StatementseqContext::exitRule( tree::ParseTreeListener* 
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::StatementseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitStatementseq( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::StatementseqContext* AergiaCpp14Parser::statementseq() {
 	return statementseq( 0 );
 }
@@ -6809,6 +7322,14 @@ void AergiaCpp14Parser::SelectionstatementContext::exitRule( tree::ParseTreeList
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitSelectionstatement( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::SelectionstatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitSelectionstatement( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::SelectionstatementContext* AergiaCpp14Parser::selectionstatement() {
@@ -6932,6 +7453,14 @@ void AergiaCpp14Parser::ConditionContext::exitRule( tree::ParseTreeListener* lis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitCondition( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ConditionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCondition( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ConditionContext* AergiaCpp14Parser::condition() {
@@ -7078,6 +7607,14 @@ void AergiaCpp14Parser::IterationstatementContext::exitRule( tree::ParseTreeList
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitIterationstatement( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::IterationstatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitIterationstatement( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::IterationstatementContext* AergiaCpp14Parser::iterationstatement() {
@@ -7351,6 +7888,14 @@ void AergiaCpp14Parser::ForinitstatementContext::exitRule( tree::ParseTreeListen
 		parserListener->exitForinitstatement( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ForinitstatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitForinitstatement( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ForinitstatementContext* AergiaCpp14Parser::forinitstatement() {
 	ForinitstatementContext* _localctx = _tracker.createInstance<ForinitstatementContext>( _ctx, getState() );
 	enterRule( _localctx, 134, AergiaCpp14Parser::RuleForinitstatement );
@@ -7423,6 +7968,14 @@ void AergiaCpp14Parser::ForrangedeclarationContext::exitRule( tree::ParseTreeLis
 		parserListener->exitForrangedeclaration( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ForrangedeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitForrangedeclaration( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ForrangedeclarationContext* AergiaCpp14Parser::forrangedeclaration() {
 	ForrangedeclarationContext* _localctx = _tracker.createInstance<ForrangedeclarationContext>( _ctx, getState() );
 	enterRule( _localctx, 136, AergiaCpp14Parser::RuleForrangedeclaration );
@@ -7485,6 +8038,14 @@ void AergiaCpp14Parser::ForrangeinitializerContext::exitRule( tree::ParseTreeLis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitForrangeinitializer( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ForrangeinitializerContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitForrangeinitializer( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ForrangeinitializerContext* AergiaCpp14Parser::forrangeinitializer() {
@@ -7634,6 +8195,14 @@ void AergiaCpp14Parser::JumpstatementContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitJumpstatement( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::JumpstatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitJumpstatement( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::JumpstatementContext* AergiaCpp14Parser::jumpstatement() {
@@ -7800,6 +8369,14 @@ void AergiaCpp14Parser::DeclarationstatementContext::exitRule( tree::ParseTreeLi
 		parserListener->exitDeclarationstatement( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::DeclarationstatementContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDeclarationstatement( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::DeclarationstatementContext* AergiaCpp14Parser::declarationstatement() {
 	DeclarationstatementContext* _localctx = _tracker.createInstance<DeclarationstatementContext>( _ctx, getState() );
 	enterRule( _localctx, 142, AergiaCpp14Parser::RuleDeclarationstatement );
@@ -7851,6 +8428,14 @@ void AergiaCpp14Parser::DeclarationseqContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitDeclarationseq( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::DeclarationseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDeclarationseq( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -7964,6 +8549,14 @@ void AergiaCpp14Parser::DeclarationContext::exitRule( tree::ParseTreeListener* l
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitDeclaration( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::DeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDeclaration( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::DeclarationContext* AergiaCpp14Parser::declaration() {
@@ -8107,6 +8700,14 @@ void AergiaCpp14Parser::BlockdeclarationContext::exitRule( tree::ParseTreeListen
 		parserListener->exitBlockdeclaration( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::BlockdeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBlockdeclaration( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::BlockdeclarationContext* AergiaCpp14Parser::blockdeclaration() {
 	BlockdeclarationContext* _localctx = _tracker.createInstance<BlockdeclarationContext>( _ctx, getState() );
 	enterRule( _localctx, 148, AergiaCpp14Parser::RuleBlockdeclaration );
@@ -8233,6 +8834,14 @@ void AergiaCpp14Parser::AliasdeclarationContext::exitRule( tree::ParseTreeListen
 		parserListener->exitAliasdeclaration( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AliasdeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAliasdeclaration( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AliasdeclarationContext* AergiaCpp14Parser::aliasdeclaration() {
 	AliasdeclarationContext* _localctx = _tracker.createInstance<AliasdeclarationContext>( _ctx, getState() );
 	enterRule( _localctx, 150, AergiaCpp14Parser::RuleAliasdeclaration );
@@ -8309,6 +8918,14 @@ void AergiaCpp14Parser::SimpledeclarationContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitSimpledeclaration( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::SimpledeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitSimpledeclaration( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::SimpledeclarationContext* AergiaCpp14Parser::simpledeclaration() {
@@ -8493,6 +9110,14 @@ void AergiaCpp14Parser::Static_assertdeclarationContext::exitRule( tree::ParseTr
 		parserListener->exitStatic_assertdeclaration( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::Static_assertdeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitStatic_assertdeclaration( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::Static_assertdeclarationContext* AergiaCpp14Parser::static_assertdeclaration() {
 	Static_assertdeclarationContext* _localctx = _tracker.createInstance<Static_assertdeclarationContext>( _ctx, getState() );
 	enterRule( _localctx, 154, AergiaCpp14Parser::RuleStatic_assertdeclaration );
@@ -8571,6 +9196,14 @@ void AergiaCpp14Parser::EmptydeclarationContext::exitRule( tree::ParseTreeListen
 		parserListener->exitEmptydeclaration( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::EmptydeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEmptydeclaration( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::EmptydeclarationContext* AergiaCpp14Parser::emptydeclaration() {
 	EmptydeclarationContext* _localctx = _tracker.createInstance<EmptydeclarationContext>( _ctx, getState() );
 	enterRule( _localctx, 156, AergiaCpp14Parser::RuleEmptydeclaration );
@@ -8622,6 +9255,14 @@ void AergiaCpp14Parser::AttributedeclarationContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAttributedeclaration( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AttributedeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttributedeclaration( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AttributedeclarationContext* AergiaCpp14Parser::attributedeclaration() {
@@ -8693,6 +9334,14 @@ void AergiaCpp14Parser::DeclspecifierContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitDeclspecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::DeclspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDeclspecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::DeclspecifierContext* AergiaCpp14Parser::declspecifier() {
@@ -8826,6 +9475,14 @@ void AergiaCpp14Parser::DeclspecifierseqContext::exitRule( tree::ParseTreeListen
 		parserListener->exitDeclspecifierseq( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::DeclspecifierseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDeclspecifierseq( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::DeclspecifierseqContext* AergiaCpp14Parser::declspecifierseq() {
 	DeclspecifierseqContext* _localctx = _tracker.createInstance<DeclspecifierseqContext>( _ctx, getState() );
 	enterRule( _localctx, 162, AergiaCpp14Parser::RuleDeclspecifierseq );
@@ -8919,6 +9576,14 @@ void AergiaCpp14Parser::StorageclassspecifierContext::exitRule( tree::ParseTreeL
 		parserListener->exitStorageclassspecifier( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::StorageclassspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitStorageclassspecifier( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::StorageclassspecifierContext* AergiaCpp14Parser::storageclassspecifier() {
 	StorageclassspecifierContext* _localctx = _tracker.createInstance<StorageclassspecifierContext>( _ctx, getState() );
 	enterRule( _localctx, 164, AergiaCpp14Parser::RuleStorageclassspecifier );
@@ -8989,6 +9654,14 @@ void AergiaCpp14Parser::FunctionspecifierContext::exitRule( tree::ParseTreeListe
 		parserListener->exitFunctionspecifier( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::FunctionspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitFunctionspecifier( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::FunctionspecifierContext* AergiaCpp14Parser::functionspecifier() {
 	FunctionspecifierContext* _localctx = _tracker.createInstance<FunctionspecifierContext>( _ctx, getState() );
 	enterRule( _localctx, 166, AergiaCpp14Parser::RuleFunctionspecifier );
@@ -9049,6 +9722,14 @@ void AergiaCpp14Parser::TypedefnameContext::exitRule( tree::ParseTreeListener* l
 		parserListener->exitTypedefname( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::TypedefnameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTypedefname( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::TypedefnameContext* AergiaCpp14Parser::typedefname() {
 	TypedefnameContext* _localctx = _tracker.createInstance<TypedefnameContext>( _ctx, getState() );
 	enterRule( _localctx, 168, AergiaCpp14Parser::RuleTypedefname );
@@ -9104,6 +9785,14 @@ void AergiaCpp14Parser::TypespecifierContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTypespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TypespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTypespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TypespecifierContext* AergiaCpp14Parser::typespecifier() {
@@ -9187,6 +9876,14 @@ void AergiaCpp14Parser::TrailingtypespecifierContext::exitRule( tree::ParseTreeL
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTrailingtypespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TrailingtypespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTrailingtypespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TrailingtypespecifierContext* AergiaCpp14Parser::trailingtypespecifier() {
@@ -9297,6 +9994,14 @@ void AergiaCpp14Parser::TypespecifierseqContext::exitRule( tree::ParseTreeListen
 		parserListener->exitTypespecifierseq( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::TypespecifierseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTypespecifierseq( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::TypespecifierseqContext* AergiaCpp14Parser::typespecifierseq() {
 	TypespecifierseqContext* _localctx = _tracker.createInstance<TypespecifierseqContext>( _ctx, getState() );
 	enterRule( _localctx, 174, AergiaCpp14Parser::RuleTypespecifierseq );
@@ -9380,6 +10085,14 @@ void AergiaCpp14Parser::TrailingtypespecifierseqContext::exitRule( tree::ParseTr
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTrailingtypespecifierseq( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TrailingtypespecifierseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTrailingtypespecifierseq( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TrailingtypespecifierseqContext* AergiaCpp14Parser::trailingtypespecifierseq() {
@@ -9529,6 +10242,14 @@ void AergiaCpp14Parser::SimpletypespecifierContext::exitRule( tree::ParseTreeLis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitSimpletypespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::SimpletypespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitSimpletypespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::SimpletypespecifierContext* AergiaCpp14Parser::simpletypespecifier() {
@@ -9727,6 +10448,14 @@ void AergiaCpp14Parser::ThetypenameContext::exitRule( tree::ParseTreeListener* l
 		parserListener->exitThetypename( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ThetypenameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitThetypename( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ThetypenameContext* AergiaCpp14Parser::thetypename() {
 	ThetypenameContext* _localctx = _tracker.createInstance<ThetypenameContext>( _ctx, getState() );
 	enterRule( _localctx, 180, AergiaCpp14Parser::RuleThetypename );
@@ -9819,6 +10548,14 @@ void AergiaCpp14Parser::DecltypespecifierContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitDecltypespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::DecltypespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDecltypespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::DecltypespecifierContext* AergiaCpp14Parser::decltypespecifier() {
@@ -9919,6 +10656,14 @@ void AergiaCpp14Parser::ElaboratedtypespecifierContext::exitRule( tree::ParseTre
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitElaboratedtypespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ElaboratedtypespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitElaboratedtypespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ElaboratedtypespecifierContext* AergiaCpp14Parser::elaboratedtypespecifier() {
@@ -10048,6 +10793,14 @@ void AergiaCpp14Parser::EnumnameContext::exitRule( tree::ParseTreeListener* list
 		parserListener->exitEnumname( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::EnumnameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEnumname( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::EnumnameContext* AergiaCpp14Parser::enumname() {
 	EnumnameContext* _localctx = _tracker.createInstance<EnumnameContext>( _ctx, getState() );
 	enterRule( _localctx, 186, AergiaCpp14Parser::RuleEnumname );
@@ -10111,6 +10864,14 @@ void AergiaCpp14Parser::EnumspecifierContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitEnumspecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::EnumspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEnumspecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::EnumspecifierContext* AergiaCpp14Parser::enumspecifier() {
@@ -10212,6 +10973,14 @@ void AergiaCpp14Parser::EnumheadContext::exitRule( tree::ParseTreeListener* list
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitEnumhead( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::EnumheadContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEnumhead( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::EnumheadContext* AergiaCpp14Parser::enumhead() {
@@ -10339,6 +11108,14 @@ void AergiaCpp14Parser::OpaqueenumdeclarationContext::exitRule( tree::ParseTreeL
 		parserListener->exitOpaqueenumdeclaration( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::OpaqueenumdeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitOpaqueenumdeclaration( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::OpaqueenumdeclarationContext* AergiaCpp14Parser::opaqueenumdeclaration() {
 	OpaqueenumdeclarationContext* _localctx = _tracker.createInstance<OpaqueenumdeclarationContext>( _ctx, getState() );
 	enterRule( _localctx, 192, AergiaCpp14Parser::RuleOpaqueenumdeclaration );
@@ -10415,6 +11192,14 @@ void AergiaCpp14Parser::EnumkeyContext::exitRule( tree::ParseTreeListener* liste
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitEnumkey( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::EnumkeyContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEnumkey( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::EnumkeyContext* AergiaCpp14Parser::enumkey() {
@@ -10496,6 +11281,14 @@ void AergiaCpp14Parser::EnumbaseContext::exitRule( tree::ParseTreeListener* list
 		parserListener->exitEnumbase( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::EnumbaseContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEnumbase( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::EnumbaseContext* AergiaCpp14Parser::enumbase() {
 	EnumbaseContext* _localctx = _tracker.createInstance<EnumbaseContext>( _ctx, getState() );
 	enterRule( _localctx, 196, AergiaCpp14Parser::RuleEnumbase );
@@ -10553,6 +11346,14 @@ void AergiaCpp14Parser::EnumeratorlistContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitEnumeratorlist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::EnumeratorlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEnumeratorlist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -10646,6 +11447,14 @@ void AergiaCpp14Parser::EnumeratordefinitionContext::exitRule( tree::ParseTreeLi
 		parserListener->exitEnumeratordefinition( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::EnumeratordefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEnumeratordefinition( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::EnumeratordefinitionContext* AergiaCpp14Parser::enumeratordefinition() {
 	EnumeratordefinitionContext* _localctx = _tracker.createInstance<EnumeratordefinitionContext>( _ctx, getState() );
 	enterRule( _localctx, 200, AergiaCpp14Parser::RuleEnumeratordefinition );
@@ -10714,6 +11523,14 @@ void AergiaCpp14Parser::EnumeratorContext::exitRule( tree::ParseTreeListener* li
 		parserListener->exitEnumerator( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::EnumeratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitEnumerator( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::EnumeratorContext* AergiaCpp14Parser::enumerator() {
 	EnumeratorContext* _localctx = _tracker.createInstance<EnumeratorContext>( _ctx, getState() );
 	enterRule( _localctx, 202, AergiaCpp14Parser::RuleEnumerator );
@@ -10765,6 +11582,14 @@ void AergiaCpp14Parser::NamespacenameContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNamespacename( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NamespacenameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNamespacename( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NamespacenameContext* AergiaCpp14Parser::namespacename() {
@@ -10831,6 +11656,14 @@ void AergiaCpp14Parser::OriginalnamespacenameContext::exitRule( tree::ParseTreeL
 		parserListener->exitOriginalnamespacename( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::OriginalnamespacenameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitOriginalnamespacename( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::OriginalnamespacenameContext* AergiaCpp14Parser::originalnamespacename() {
 	OriginalnamespacenameContext* _localctx = _tracker.createInstance<OriginalnamespacenameContext>( _ctx, getState() );
 	enterRule( _localctx, 206, AergiaCpp14Parser::RuleOriginalnamespacename );
@@ -10882,6 +11715,14 @@ void AergiaCpp14Parser::NamespacedefinitionContext::exitRule( tree::ParseTreeLis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNamespacedefinition( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NamespacedefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNamespacedefinition( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NamespacedefinitionContext* AergiaCpp14Parser::namespacedefinition() {
@@ -10950,6 +11791,14 @@ void AergiaCpp14Parser::NamednamespacedefinitionContext::exitRule( tree::ParseTr
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNamednamespacedefinition( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NamednamespacedefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNamednamespacedefinition( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NamednamespacedefinitionContext* AergiaCpp14Parser::namednamespacedefinition() {
@@ -11034,6 +11883,14 @@ void AergiaCpp14Parser::OriginalnamespacedefinitionContext::exitRule( tree::Pars
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitOriginalnamespacedefinition( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::OriginalnamespacedefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitOriginalnamespacedefinition( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::OriginalnamespacedefinitionContext* AergiaCpp14Parser::originalnamespacedefinition() {
@@ -11122,6 +11979,14 @@ void AergiaCpp14Parser::ExtensionnamespacedefinitionContext::exitRule( tree::Par
 		parserListener->exitExtensionnamespacedefinition( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ExtensionnamespacedefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExtensionnamespacedefinition( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ExtensionnamespacedefinitionContext* AergiaCpp14Parser::extensionnamespacedefinition() {
 	ExtensionnamespacedefinitionContext* _localctx = _tracker.createInstance<ExtensionnamespacedefinitionContext>( _ctx, getState() );
 	enterRule( _localctx, 214, AergiaCpp14Parser::RuleExtensionnamespacedefinition );
@@ -11204,6 +12069,14 @@ void AergiaCpp14Parser::UnnamednamespacedefinitionContext::exitRule( tree::Parse
 		parserListener->exitUnnamednamespacedefinition( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::UnnamednamespacedefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitUnnamednamespacedefinition( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::UnnamednamespacedefinitionContext* AergiaCpp14Parser::unnamednamespacedefinition() {
 	UnnamednamespacedefinitionContext* _localctx = _tracker.createInstance<UnnamednamespacedefinitionContext>( _ctx, getState() );
 	enterRule( _localctx, 216, AergiaCpp14Parser::RuleUnnamednamespacedefinition );
@@ -11266,6 +12139,14 @@ void AergiaCpp14Parser::NamespacebodyContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNamespacebody( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NamespacebodyContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNamespacebody( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NamespacebodyContext* AergiaCpp14Parser::namespacebody() {
@@ -11374,6 +12255,14 @@ void AergiaCpp14Parser::NamespacealiasContext::exitRule( tree::ParseTreeListener
 		parserListener->exitNamespacealias( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::NamespacealiasContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNamespacealias( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::NamespacealiasContext* AergiaCpp14Parser::namespacealias() {
 	NamespacealiasContext* _localctx = _tracker.createInstance<NamespacealiasContext>( _ctx, getState() );
 	enterRule( _localctx, 220, AergiaCpp14Parser::RuleNamespacealias );
@@ -11439,6 +12328,14 @@ void AergiaCpp14Parser::NamespacealiasdefinitionContext::exitRule( tree::ParseTr
 		parserListener->exitNamespacealiasdefinition( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::NamespacealiasdefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNamespacealiasdefinition( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::NamespacealiasdefinitionContext* AergiaCpp14Parser::namespacealiasdefinition() {
 	NamespacealiasdefinitionContext* _localctx = _tracker.createInstance<NamespacealiasdefinitionContext>( _ctx, getState() );
 	enterRule( _localctx, 222, AergiaCpp14Parser::RuleNamespacealiasdefinition );
@@ -11498,6 +12395,14 @@ void AergiaCpp14Parser::QualifiednamespacespecifierContext::exitRule( tree::Pars
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitQualifiednamespacespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::QualifiednamespacespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitQualifiednamespacespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::QualifiednamespacespecifierContext* AergiaCpp14Parser::qualifiednamespacespecifier() {
@@ -11578,6 +12483,14 @@ void AergiaCpp14Parser::UsingdeclarationContext::exitRule( tree::ParseTreeListen
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitUsingdeclaration( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::UsingdeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitUsingdeclaration( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::UsingdeclarationContext* AergiaCpp14Parser::usingdeclaration() {
@@ -11685,6 +12598,14 @@ void AergiaCpp14Parser::UsingdirectiveContext::exitRule( tree::ParseTreeListener
 		parserListener->exitUsingdirective( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::UsingdirectiveContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitUsingdirective( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::UsingdirectiveContext* AergiaCpp14Parser::usingdirective() {
 	UsingdirectiveContext* _localctx = _tracker.createInstance<UsingdirectiveContext>( _ctx, getState() );
 	enterRule( _localctx, 228, AergiaCpp14Parser::RuleUsingdirective );
@@ -11776,6 +12697,14 @@ void AergiaCpp14Parser::AsmdefinitionContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitAsmdefinition( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AsmdefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAsmdefinition( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AsmdefinitionContext* AergiaCpp14Parser::asmdefinition() {
 	AsmdefinitionContext* _localctx = _tracker.createInstance<AsmdefinitionContext>( _ctx, getState() );
 	enterRule( _localctx, 230, AergiaCpp14Parser::RuleAsmdefinition );
@@ -11851,6 +12780,14 @@ void AergiaCpp14Parser::LinkagespecificationContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitLinkagespecification( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::LinkagespecificationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLinkagespecification( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::LinkagespecificationContext* AergiaCpp14Parser::linkagespecification() {
@@ -11991,6 +12928,14 @@ void AergiaCpp14Parser::AttributespecifierseqContext::exitRule( tree::ParseTreeL
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::AttributespecifierseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttributespecifierseq( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::AttributespecifierseqContext* AergiaCpp14Parser::attributespecifierseq() {
 	return attributespecifierseq( 0 );
 }
@@ -12091,6 +13036,14 @@ void AergiaCpp14Parser::AttributespecifierContext::exitRule( tree::ParseTreeList
 		parserListener->exitAttributespecifier( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AttributespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttributespecifier( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AttributespecifierContext* AergiaCpp14Parser::attributespecifier() {
 	AttributespecifierContext* _localctx = _tracker.createInstance<AttributespecifierContext>( _ctx, getState() );
 	enterRule( _localctx, 236, AergiaCpp14Parser::RuleAttributespecifier );
@@ -12183,6 +13136,14 @@ void AergiaCpp14Parser::AlignmentspecifierContext::exitRule( tree::ParseTreeList
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAlignmentspecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AlignmentspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAlignmentspecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AlignmentspecifierContext* AergiaCpp14Parser::alignmentspecifier() {
@@ -12288,6 +13249,14 @@ void AergiaCpp14Parser::AttributelistContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAttributelist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AttributelistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttributelist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -12434,6 +13403,14 @@ void AergiaCpp14Parser::AttributeContext::exitRule( tree::ParseTreeListener* lis
 		parserListener->exitAttribute( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AttributeContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttribute( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AttributeContext* AergiaCpp14Parser::attribute() {
 	AttributeContext* _localctx = _tracker.createInstance<AttributeContext>( _ctx, getState() );
 	enterRule( _localctx, 242, AergiaCpp14Parser::RuleAttribute );
@@ -12496,6 +13473,14 @@ void AergiaCpp14Parser::AttributetokenContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAttributetoken( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AttributetokenContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttributetoken( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AttributetokenContext* AergiaCpp14Parser::attributetoken() {
@@ -12570,6 +13555,14 @@ void AergiaCpp14Parser::AttributescopedtokenContext::exitRule( tree::ParseTreeLi
 		parserListener->exitAttributescopedtoken( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AttributescopedtokenContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttributescopedtoken( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AttributescopedtokenContext* AergiaCpp14Parser::attributescopedtoken() {
 	AttributescopedtokenContext* _localctx = _tracker.createInstance<AttributescopedtokenContext>( _ctx, getState() );
 	enterRule( _localctx, 246, AergiaCpp14Parser::RuleAttributescopedtoken );
@@ -12621,6 +13614,14 @@ void AergiaCpp14Parser::AttributenamespaceContext::exitRule( tree::ParseTreeList
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAttributenamespace( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AttributenamespaceContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttributenamespace( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AttributenamespaceContext* AergiaCpp14Parser::attributenamespace() {
@@ -12680,6 +13681,14 @@ void AergiaCpp14Parser::AttributeargumentclauseContext::exitRule( tree::ParseTre
 		parserListener->exitAttributeargumentclause( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AttributeargumentclauseContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAttributeargumentclause( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AttributeargumentclauseContext* AergiaCpp14Parser::attributeargumentclause() {
 	AttributeargumentclauseContext* _localctx = _tracker.createInstance<AttributeargumentclauseContext>( _ctx, getState() );
 	enterRule( _localctx, 250, AergiaCpp14Parser::RuleAttributeargumentclause );
@@ -12735,6 +13744,14 @@ void AergiaCpp14Parser::BalancedtokenseqContext::exitRule( tree::ParseTreeListen
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitBalancedtokenseq( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::BalancedtokenseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBalancedtokenseq( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -12851,6 +13868,14 @@ void AergiaCpp14Parser::BalancedtokenContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitBalancedtoken( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::BalancedtokenContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBalancedtoken( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::BalancedtokenContext* AergiaCpp14Parser::balancedtoken() {
 	BalancedtokenContext* _localctx = _tracker.createInstance<BalancedtokenContext>( _ctx, getState() );
 	enterRule( _localctx, 254, AergiaCpp14Parser::RuleBalancedtoken );
@@ -12945,6 +13970,14 @@ void AergiaCpp14Parser::InitdeclaratorlistContext::exitRule( tree::ParseTreeList
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::InitdeclaratorlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitInitdeclaratorlist( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::InitdeclaratorlistContext* AergiaCpp14Parser::initdeclaratorlist() {
 	return initdeclaratorlist( 0 );
 }
@@ -13031,6 +14064,14 @@ void AergiaCpp14Parser::InitdeclaratorContext::exitRule( tree::ParseTreeListener
 		parserListener->exitInitdeclarator( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::InitdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitInitdeclarator( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::InitdeclaratorContext* AergiaCpp14Parser::initdeclarator() {
 	InitdeclaratorContext* _localctx = _tracker.createInstance<InitdeclaratorContext>( _ctx, getState() );
 	enterRule( _localctx, 258, AergiaCpp14Parser::RuleInitdeclarator );
@@ -13101,6 +14142,14 @@ void AergiaCpp14Parser::DeclaratorContext::exitRule( tree::ParseTreeListener* li
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitDeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::DeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::DeclaratorContext* AergiaCpp14Parser::declarator() {
@@ -13180,6 +14229,14 @@ void AergiaCpp14Parser::PtrdeclaratorContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitPtrdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::PtrdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPtrdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::PtrdeclaratorContext* AergiaCpp14Parser::ptrdeclarator() {
@@ -13267,6 +14324,14 @@ void AergiaCpp14Parser::NoptrdeclaratorContext::exitRule( tree::ParseTreeListene
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNoptrdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NoptrdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNoptrdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -13471,6 +14536,14 @@ void AergiaCpp14Parser::ParametersandqualifiersContext::exitRule( tree::ParseTre
 		parserListener->exitParametersandqualifiers( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ParametersandqualifiersContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitParametersandqualifiers( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ParametersandqualifiersContext* AergiaCpp14Parser::parametersandqualifiers() {
 	ParametersandqualifiersContext* _localctx = _tracker.createInstance<ParametersandqualifiersContext>( _ctx, getState() );
 	enterRule( _localctx, 266, AergiaCpp14Parser::RuleParametersandqualifiers );
@@ -13576,6 +14649,14 @@ void AergiaCpp14Parser::TrailingreturntypeContext::exitRule( tree::ParseTreeList
 		parserListener->exitTrailingreturntype( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::TrailingreturntypeContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTrailingreturntype( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::TrailingreturntypeContext* AergiaCpp14Parser::trailingreturntype() {
 	TrailingreturntypeContext* _localctx = _tracker.createInstance<TrailingreturntypeContext>( _ctx, getState() );
 	enterRule( _localctx, 268, AergiaCpp14Parser::RuleTrailingreturntype );
@@ -13652,6 +14733,14 @@ void AergiaCpp14Parser::PtroperatorContext::exitRule( tree::ParseTreeListener* l
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitPtroperator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::PtroperatorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPtroperator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::PtroperatorContext* AergiaCpp14Parser::ptroperator() {
@@ -13808,6 +14897,14 @@ void AergiaCpp14Parser::CvqualifierseqContext::exitRule( tree::ParseTreeListener
 		parserListener->exitCvqualifierseq( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::CvqualifierseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCvqualifierseq( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::CvqualifierseqContext* AergiaCpp14Parser::cvqualifierseq() {
 	CvqualifierseqContext* _localctx = _tracker.createInstance<CvqualifierseqContext>( _ctx, getState() );
 	enterRule( _localctx, 272, AergiaCpp14Parser::RuleCvqualifierseq );
@@ -13872,6 +14969,14 @@ void AergiaCpp14Parser::CvqualifierContext::exitRule( tree::ParseTreeListener* l
 		parserListener->exitCvqualifier( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::CvqualifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCvqualifier( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::CvqualifierContext* AergiaCpp14Parser::cvqualifier() {
 	CvqualifierContext* _localctx = _tracker.createInstance<CvqualifierContext>( _ctx, getState() );
 	enterRule( _localctx, 274, AergiaCpp14Parser::RuleCvqualifier );
@@ -13929,6 +15034,14 @@ void AergiaCpp14Parser::RefqualifierContext::exitRule( tree::ParseTreeListener* 
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitRefqualifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::RefqualifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitRefqualifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::RefqualifierContext* AergiaCpp14Parser::refqualifier() {
@@ -13992,6 +15105,14 @@ void AergiaCpp14Parser::DeclaratoridContext::exitRule( tree::ParseTreeListener* 
 		parserListener->exitDeclaratorid( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::DeclaratoridContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDeclaratorid( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::DeclaratoridContext* AergiaCpp14Parser::declaratorid() {
 	DeclaratoridContext* _localctx = _tracker.createInstance<DeclaratoridContext>( _ctx, getState() );
 	enterRule( _localctx, 278, AergiaCpp14Parser::RuleDeclaratorid );
@@ -14052,6 +15173,14 @@ void AergiaCpp14Parser::ThetypeidContext::exitRule( tree::ParseTreeListener* lis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitThetypeid( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ThetypeidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitThetypeid( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ThetypeidContext* AergiaCpp14Parser::thetypeid() {
@@ -14128,6 +15257,14 @@ void AergiaCpp14Parser::AbstractdeclaratorContext::exitRule( tree::ParseTreeList
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAbstractdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AbstractdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAbstractdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AbstractdeclaratorContext* AergiaCpp14Parser::abstractdeclarator() {
@@ -14220,6 +15357,14 @@ void AergiaCpp14Parser::PtrabstractdeclaratorContext::exitRule( tree::ParseTreeL
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitPtrabstractdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::PtrabstractdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPtrabstractdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::PtrabstractdeclaratorContext* AergiaCpp14Parser::ptrabstractdeclarator() {
@@ -14335,6 +15480,14 @@ void AergiaCpp14Parser::NoptrabstractdeclaratorContext::exitRule( tree::ParseTre
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNoptrabstractdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NoptrabstractdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNoptrabstractdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -14553,6 +15706,14 @@ void AergiaCpp14Parser::AbstractpackdeclaratorContext::exitRule( tree::ParseTree
 		parserListener->exitAbstractpackdeclarator( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::AbstractpackdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAbstractpackdeclarator( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::AbstractpackdeclaratorContext* AergiaCpp14Parser::abstractpackdeclarator() {
 	AbstractpackdeclaratorContext* _localctx = _tracker.createInstance<AbstractpackdeclaratorContext>( _ctx, getState() );
 	enterRule( _localctx, 288, AergiaCpp14Parser::RuleAbstractpackdeclarator );
@@ -14648,6 +15809,14 @@ void AergiaCpp14Parser::NoptrabstractpackdeclaratorContext::exitRule( tree::Pars
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNoptrabstractpackdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NoptrabstractpackdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNoptrabstractpackdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -14800,6 +15969,14 @@ void AergiaCpp14Parser::ParameterdeclarationclauseContext::exitRule( tree::Parse
 		parserListener->exitParameterdeclarationclause( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ParameterdeclarationclauseContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitParameterdeclarationclause( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ParameterdeclarationclauseContext* AergiaCpp14Parser::parameterdeclarationclause() {
 	ParameterdeclarationclauseContext* _localctx = _tracker.createInstance<ParameterdeclarationclauseContext>( _ctx, getState() );
 	enterRule( _localctx, 292, AergiaCpp14Parser::RuleParameterdeclarationclause );
@@ -14929,6 +16106,14 @@ void AergiaCpp14Parser::ParameterdeclarationlistContext::exitRule( tree::ParseTr
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::ParameterdeclarationlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitParameterdeclarationlist( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::ParameterdeclarationlistContext* AergiaCpp14Parser::parameterdeclarationlist() {
 	return parameterdeclarationlist( 0 );
 }
@@ -15029,6 +16214,14 @@ void AergiaCpp14Parser::ParameterdeclarationContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitParameterdeclaration( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ParameterdeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitParameterdeclaration( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ParameterdeclarationContext* AergiaCpp14Parser::parameterdeclaration() {
@@ -15198,6 +16391,14 @@ void AergiaCpp14Parser::FunctiondefinitionContext::exitRule( tree::ParseTreeList
 		parserListener->exitFunctiondefinition( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::FunctiondefinitionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitFunctiondefinition( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::FunctiondefinitionContext* AergiaCpp14Parser::functiondefinition() {
 	FunctiondefinitionContext* _localctx = _tracker.createInstance<FunctiondefinitionContext>( _ctx, getState() );
 	enterRule( _localctx, 298, AergiaCpp14Parser::RuleFunctiondefinition );
@@ -15301,6 +16502,14 @@ void AergiaCpp14Parser::FunctionbodyContext::exitRule( tree::ParseTreeListener* 
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitFunctionbody( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::FunctionbodyContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitFunctionbody( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::FunctionbodyContext* AergiaCpp14Parser::functionbody() {
@@ -15410,6 +16619,14 @@ void AergiaCpp14Parser::InitializerContext::exitRule( tree::ParseTreeListener* l
 		parserListener->exitInitializer( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::InitializerContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitInitializer( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::InitializerContext* AergiaCpp14Parser::initializer() {
 	InitializerContext* _localctx = _tracker.createInstance<InitializerContext>( _ctx, getState() );
 	enterRule( _localctx, 302, AergiaCpp14Parser::RuleInitializer );
@@ -15489,6 +16706,14 @@ void AergiaCpp14Parser::BraceorequalinitializerContext::exitRule( tree::ParseTre
 		parserListener->exitBraceorequalinitializer( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::BraceorequalinitializerContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBraceorequalinitializer( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::BraceorequalinitializerContext* AergiaCpp14Parser::braceorequalinitializer() {
 	BraceorequalinitializerContext* _localctx = _tracker.createInstance<BraceorequalinitializerContext>( _ctx, getState() );
 	enterRule( _localctx, 304, AergiaCpp14Parser::RuleBraceorequalinitializer );
@@ -15559,6 +16784,14 @@ void AergiaCpp14Parser::InitializerclauseContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitInitializerclause( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::InitializerclauseContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitInitializerclause( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::InitializerclauseContext* AergiaCpp14Parser::initializerclause() {
@@ -15695,6 +16928,14 @@ void AergiaCpp14Parser::InitializerlistContext::exitRule( tree::ParseTreeListene
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::InitializerlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitInitializerlist( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::InitializerlistContext* AergiaCpp14Parser::initializerlist() {
 	return initializerlist( 0 );
 }
@@ -15811,6 +17052,14 @@ void AergiaCpp14Parser::BracedinitlistContext::exitRule( tree::ParseTreeListener
 		parserListener->exitBracedinitlist( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::BracedinitlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBracedinitlist( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::BracedinitlistContext* AergiaCpp14Parser::bracedinitlist() {
 	BracedinitlistContext* _localctx = _tracker.createInstance<BracedinitlistContext>( _ctx, getState() );
 	enterRule( _localctx, 310, AergiaCpp14Parser::RuleBracedinitlist );
@@ -15894,6 +17143,14 @@ void AergiaCpp14Parser::ClassnameContext::exitRule( tree::ParseTreeListener* lis
 		parserListener->exitClassname( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ClassnameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitClassname( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ClassnameContext* AergiaCpp14Parser::classname() {
 	ClassnameContext* _localctx = _tracker.createInstance<ClassnameContext>( _ctx, getState() );
 	enterRule( _localctx, 312, AergiaCpp14Parser::RuleClassname );
@@ -15968,6 +17225,14 @@ void AergiaCpp14Parser::ClassspecifierContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitClassspecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ClassspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitClassspecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ClassspecifierContext* AergiaCpp14Parser::classspecifier() {
@@ -16100,6 +17365,14 @@ void AergiaCpp14Parser::ClassheadContext::exitRule( tree::ParseTreeListener* lis
 		parserListener->exitClasshead( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ClassheadContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitClasshead( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ClassheadContext* AergiaCpp14Parser::classhead() {
 	ClassheadContext* _localctx = _tracker.createInstance<ClassheadContext>( _ctx, getState() );
 	enterRule( _localctx, 316, AergiaCpp14Parser::RuleClasshead );
@@ -16211,6 +17484,14 @@ void AergiaCpp14Parser::ClassheadnameContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitClassheadname( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ClassheadnameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitClassheadname( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ClassheadnameContext* AergiaCpp14Parser::classheadname() {
 	ClassheadnameContext* _localctx = _tracker.createInstance<ClassheadnameContext>( _ctx, getState() );
 	enterRule( _localctx, 318, AergiaCpp14Parser::RuleClassheadname );
@@ -16271,6 +17552,14 @@ void AergiaCpp14Parser::ClassvirtspecifierContext::exitRule( tree::ParseTreeList
 		parserListener->exitClassvirtspecifier( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ClassvirtspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitClassvirtspecifier( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ClassvirtspecifierContext* AergiaCpp14Parser::classvirtspecifier() {
 	ClassvirtspecifierContext* _localctx = _tracker.createInstance<ClassvirtspecifierContext>( _ctx, getState() );
 	enterRule( _localctx, 320, AergiaCpp14Parser::RuleClassvirtspecifier );
@@ -16326,6 +17615,14 @@ void AergiaCpp14Parser::ClasskeyContext::exitRule( tree::ParseTreeListener* list
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitClasskey( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ClasskeyContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitClasskey( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ClasskeyContext* AergiaCpp14Parser::classkey() {
@@ -16398,6 +17695,14 @@ void AergiaCpp14Parser::MemberspecificationContext::exitRule( tree::ParseTreeLis
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitMemberspecification( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::MemberspecificationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitMemberspecification( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::MemberspecificationContext* AergiaCpp14Parser::memberspecification() {
@@ -16675,6 +17980,14 @@ void AergiaCpp14Parser::MemberdeclarationContext::exitRule( tree::ParseTreeListe
 		parserListener->exitMemberdeclaration( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::MemberdeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitMemberdeclaration( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::MemberdeclarationContext* AergiaCpp14Parser::memberdeclaration() {
 	MemberdeclarationContext* _localctx = _tracker.createInstance<MemberdeclarationContext>( _ctx, getState() );
 	enterRule( _localctx, 326, AergiaCpp14Parser::RuleMemberdeclaration );
@@ -16827,6 +18140,14 @@ void AergiaCpp14Parser::MemberdeclaratorlistContext::exitRule( tree::ParseTreeLi
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::MemberdeclaratorlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitMemberdeclaratorlist( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::MemberdeclaratorlistContext* AergiaCpp14Parser::memberdeclaratorlist() {
 	return memberdeclaratorlist( 0 );
 }
@@ -16935,6 +18256,14 @@ void AergiaCpp14Parser::MemberdeclaratorContext::exitRule( tree::ParseTreeListen
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitMemberdeclarator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::MemberdeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitMemberdeclarator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::MemberdeclaratorContext* AergiaCpp14Parser::memberdeclarator() {
@@ -17065,6 +18394,14 @@ void AergiaCpp14Parser::VirtspecifierseqContext::exitRule( tree::ParseTreeListen
 }
 
 
+antlrcpp::Any AergiaCpp14Parser::VirtspecifierseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitVirtspecifierseq( this );
+	else
+		return visitor->visitChildren( this );
+}
+
+
 AergiaCpp14Parser::VirtspecifierseqContext* AergiaCpp14Parser::virtspecifierseq() {
 	return virtspecifierseq( 0 );
 }
@@ -17149,6 +18486,14 @@ void AergiaCpp14Parser::VirtspecifierContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitVirtspecifier( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::VirtspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitVirtspecifier( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::VirtspecifierContext* AergiaCpp14Parser::virtspecifier() {
 	VirtspecifierContext* _localctx = _tracker.createInstance<VirtspecifierContext>( _ctx, getState() );
 	enterRule( _localctx, 334, AergiaCpp14Parser::RuleVirtspecifier );
@@ -17212,6 +18557,14 @@ void AergiaCpp14Parser::PurespecifierContext::exitRule( tree::ParseTreeListener*
 		parserListener->exitPurespecifier( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::PurespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPurespecifier( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::PurespecifierContext* AergiaCpp14Parser::purespecifier() {
 	PurespecifierContext* _localctx = _tracker.createInstance<PurespecifierContext>( _ctx, getState() );
 	enterRule( _localctx, 336, AergiaCpp14Parser::RulePurespecifier );
@@ -17266,6 +18619,14 @@ void AergiaCpp14Parser::BaseclauseContext::exitRule( tree::ParseTreeListener* li
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitBaseclause( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::BaseclauseContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBaseclause( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::BaseclauseContext* AergiaCpp14Parser::baseclause() {
@@ -17329,6 +18690,14 @@ void AergiaCpp14Parser::BasespecifierlistContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitBasespecifierlist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::BasespecifierlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBasespecifierlist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -17446,6 +18815,14 @@ void AergiaCpp14Parser::BasespecifierContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitBasespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::BasespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBasespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::BasespecifierContext* AergiaCpp14Parser::basespecifier() {
@@ -17575,6 +18952,14 @@ void AergiaCpp14Parser::ClassordecltypeContext::exitRule( tree::ParseTreeListene
 		parserListener->exitClassordecltype( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ClassordecltypeContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitClassordecltype( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ClassordecltypeContext* AergiaCpp14Parser::classordecltype() {
 	ClassordecltypeContext* _localctx = _tracker.createInstance<ClassordecltypeContext>( _ctx, getState() );
 	enterRule( _localctx, 344, AergiaCpp14Parser::RuleClassordecltype );
@@ -17650,6 +19035,14 @@ void AergiaCpp14Parser::BasetypespecifierContext::exitRule( tree::ParseTreeListe
 		parserListener->exitBasetypespecifier( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::BasetypespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBasetypespecifier( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::BasetypespecifierContext* AergiaCpp14Parser::basetypespecifier() {
 	BasetypespecifierContext* _localctx = _tracker.createInstance<BasetypespecifierContext>( _ctx, getState() );
 	enterRule( _localctx, 346, AergiaCpp14Parser::RuleBasetypespecifier );
@@ -17705,6 +19098,14 @@ void AergiaCpp14Parser::AccessspecifierContext::exitRule( tree::ParseTreeListene
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitAccessspecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::AccessspecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitAccessspecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::AccessspecifierContext* AergiaCpp14Parser::accessspecifier() {
@@ -17771,6 +19172,14 @@ void AergiaCpp14Parser::ConversionfunctionidContext::exitRule( tree::ParseTreeLi
 		parserListener->exitConversionfunctionid( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ConversionfunctionidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitConversionfunctionid( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ConversionfunctionidContext* AergiaCpp14Parser::conversionfunctionid() {
 	ConversionfunctionidContext* _localctx = _tracker.createInstance<ConversionfunctionidContext>( _ctx, getState() );
 	enterRule( _localctx, 350, AergiaCpp14Parser::RuleConversionfunctionid );
@@ -17824,6 +19233,14 @@ void AergiaCpp14Parser::ConversiontypeidContext::exitRule( tree::ParseTreeListen
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitConversiontypeid( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ConversiontypeidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitConversiontypeid( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ConversiontypeidContext* AergiaCpp14Parser::conversiontypeid() {
@@ -17890,6 +19307,14 @@ void AergiaCpp14Parser::ConversiondeclaratorContext::exitRule( tree::ParseTreeLi
 		parserListener->exitConversiondeclarator( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ConversiondeclaratorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitConversiondeclarator( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ConversiondeclaratorContext* AergiaCpp14Parser::conversiondeclarator() {
 	ConversiondeclaratorContext* _localctx = _tracker.createInstance<ConversiondeclaratorContext>( _ctx, getState() );
 	enterRule( _localctx, 354, AergiaCpp14Parser::RuleConversiondeclarator );
@@ -17954,6 +19379,14 @@ void AergiaCpp14Parser::CtorinitializerContext::exitRule( tree::ParseTreeListene
 		parserListener->exitCtorinitializer( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::CtorinitializerContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitCtorinitializer( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::CtorinitializerContext* AergiaCpp14Parser::ctorinitializer() {
 	CtorinitializerContext* _localctx = _tracker.createInstance<CtorinitializerContext>( _ctx, getState() );
 	enterRule( _localctx, 356, AergiaCpp14Parser::RuleCtorinitializer );
@@ -18015,6 +19448,14 @@ void AergiaCpp14Parser::MeminitializerlistContext::exitRule( tree::ParseTreeList
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitMeminitializerlist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::MeminitializerlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitMeminitializerlist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::MeminitializerlistContext* AergiaCpp14Parser::meminitializerlist() {
@@ -18116,6 +19557,14 @@ void AergiaCpp14Parser::MeminitializerContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitMeminitializer( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::MeminitializerContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitMeminitializer( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::MeminitializerContext* AergiaCpp14Parser::meminitializer() {
@@ -18258,6 +19707,14 @@ void AergiaCpp14Parser::MeminitializeridContext::exitRule( tree::ParseTreeListen
 		parserListener->exitMeminitializerid( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::MeminitializeridContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitMeminitializerid( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::MeminitializeridContext* AergiaCpp14Parser::meminitializerid() {
 	MeminitializeridContext* _localctx = _tracker.createInstance<MeminitializeridContext>( _ctx, getState() );
 	enterRule( _localctx, 362, AergiaCpp14Parser::RuleMeminitializerid );
@@ -18326,6 +19783,14 @@ void AergiaCpp14Parser::OperatorfunctionidContext::exitRule( tree::ParseTreeList
 		parserListener->exitOperatorfunctionid( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::OperatorfunctionidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitOperatorfunctionid( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::OperatorfunctionidContext* AergiaCpp14Parser::operatorfunctionid() {
 	OperatorfunctionidContext* _localctx = _tracker.createInstance<OperatorfunctionidContext>( _ctx, getState() );
 	enterRule( _localctx, 364, AergiaCpp14Parser::RuleOperatorfunctionid );
@@ -18391,6 +19856,14 @@ void AergiaCpp14Parser::LiteraloperatoridContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitLiteraloperatorid( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::LiteraloperatoridContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLiteraloperatorid( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::LiteraloperatoridContext* AergiaCpp14Parser::literaloperatorid() {
@@ -18513,6 +19986,14 @@ void AergiaCpp14Parser::TemplatedeclarationContext::exitRule( tree::ParseTreeLis
 		parserListener->exitTemplatedeclaration( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::TemplatedeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTemplatedeclaration( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::TemplatedeclarationContext* AergiaCpp14Parser::templatedeclaration() {
 	TemplatedeclarationContext* _localctx = _tracker.createInstance<TemplatedeclarationContext>( _ctx, getState() );
 	enterRule( _localctx, 368, AergiaCpp14Parser::RuleTemplatedeclaration );
@@ -18576,6 +20057,14 @@ void AergiaCpp14Parser::TemplateparameterlistContext::exitRule( tree::ParseTreeL
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTemplateparameterlist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TemplateparameterlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTemplateparameterlist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -18663,6 +20152,14 @@ void AergiaCpp14Parser::TemplateparameterContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTemplateparameter( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TemplateparameterContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTemplateparameter( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TemplateparameterContext* AergiaCpp14Parser::templateparameter() {
@@ -18767,6 +20264,14 @@ void AergiaCpp14Parser::TypeparameterContext::exitRule( tree::ParseTreeListener*
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTypeparameter( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TypeparameterContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTypeparameter( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TypeparameterContext* AergiaCpp14Parser::typeparameter() {
@@ -18992,6 +20497,14 @@ void AergiaCpp14Parser::SimpletemplateidContext::exitRule( tree::ParseTreeListen
 		parserListener->exitSimpletemplateid( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::SimpletemplateidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitSimpletemplateid( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::SimpletemplateidContext* AergiaCpp14Parser::simpletemplateid() {
 	SimpletemplateidContext* _localctx = _tracker.createInstance<SimpletemplateidContext>( _ctx, getState() );
 	enterRule( _localctx, 376, AergiaCpp14Parser::RuleSimpletemplateid );
@@ -19114,6 +20627,14 @@ void AergiaCpp14Parser::TemplateidContext::exitRule( tree::ParseTreeListener* li
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTemplateid( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TemplateidContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTemplateid( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TemplateidContext* AergiaCpp14Parser::templateid() {
@@ -19296,6 +20817,14 @@ void AergiaCpp14Parser::TemplatenameContext::exitRule( tree::ParseTreeListener* 
 		parserListener->exitTemplatename( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::TemplatenameContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTemplatename( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::TemplatenameContext* AergiaCpp14Parser::templatename() {
 	TemplatenameContext* _localctx = _tracker.createInstance<TemplatenameContext>( _ctx, getState() );
 	enterRule( _localctx, 380, AergiaCpp14Parser::RuleTemplatename );
@@ -19355,6 +20884,14 @@ void AergiaCpp14Parser::TemplateargumentlistContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTemplateargumentlist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TemplateargumentlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTemplateargumentlist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -19470,6 +21007,14 @@ void AergiaCpp14Parser::TemplateargumentContext::exitRule( tree::ParseTreeListen
 		parserListener->exitTemplateargument( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::TemplateargumentContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTemplateargument( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::TemplateargumentContext* AergiaCpp14Parser::templateargument() {
 	TemplateargumentContext* _localctx = _tracker.createInstance<TemplateargumentContext>( _ctx, getState() );
 	enterRule( _localctx, 384, AergiaCpp14Parser::RuleTemplateargument );
@@ -19555,6 +21100,14 @@ void AergiaCpp14Parser::TypenamespecifierContext::exitRule( tree::ParseTreeListe
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTypenamespecifier( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TypenamespecifierContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTypenamespecifier( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TypenamespecifierContext* AergiaCpp14Parser::typenamespecifier() {
@@ -19646,6 +21199,14 @@ void AergiaCpp14Parser::ExplicitinstantiationContext::exitRule( tree::ParseTreeL
 		parserListener->exitExplicitinstantiation( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ExplicitinstantiationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExplicitinstantiation( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ExplicitinstantiationContext* AergiaCpp14Parser::explicitinstantiation() {
 	ExplicitinstantiationContext* _localctx = _tracker.createInstance<ExplicitinstantiationContext>( _ctx, getState() );
 	enterRule( _localctx, 388, AergiaCpp14Parser::RuleExplicitinstantiation );
@@ -19718,6 +21279,14 @@ void AergiaCpp14Parser::ExplicitspecializationContext::exitRule( tree::ParseTree
 		parserListener->exitExplicitspecialization( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ExplicitspecializationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExplicitspecialization( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ExplicitspecializationContext* AergiaCpp14Parser::explicitspecialization() {
 	ExplicitspecializationContext* _localctx = _tracker.createInstance<ExplicitspecializationContext>( _ctx, getState() );
 	enterRule( _localctx, 390, AergiaCpp14Parser::RuleExplicitspecialization );
@@ -19779,6 +21348,14 @@ void AergiaCpp14Parser::TryblockContext::exitRule( tree::ParseTreeListener* list
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTryblock( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TryblockContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTryblock( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TryblockContext* AergiaCpp14Parser::tryblock() {
@@ -19846,6 +21423,14 @@ void AergiaCpp14Parser::FunctiontryblockContext::exitRule( tree::ParseTreeListen
 		parserListener->exitFunctiontryblock( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::FunctiontryblockContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitFunctiontryblock( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::FunctiontryblockContext* AergiaCpp14Parser::functiontryblock() {
 	FunctiontryblockContext* _localctx = _tracker.createInstance<FunctiontryblockContext>( _ctx, getState() );
 	enterRule( _localctx, 394, AergiaCpp14Parser::RuleFunctiontryblock );
@@ -19910,6 +21495,14 @@ void AergiaCpp14Parser::HandlerseqContext::exitRule( tree::ParseTreeListener* li
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitHandlerseq( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::HandlerseqContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitHandlerseq( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::HandlerseqContext* AergiaCpp14Parser::handlerseq() {
@@ -19988,6 +21581,14 @@ void AergiaCpp14Parser::HandlerContext::exitRule( tree::ParseTreeListener* liste
 		parserListener->exitHandler( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::HandlerContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitHandler( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::HandlerContext* AergiaCpp14Parser::handler() {
 	HandlerContext* _localctx = _tracker.createInstance<HandlerContext>( _ctx, getState() );
 	enterRule( _localctx, 398, AergiaCpp14Parser::RuleHandler );
@@ -20059,6 +21660,14 @@ void AergiaCpp14Parser::ExceptiondeclarationContext::exitRule( tree::ParseTreeLi
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitExceptiondeclaration( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ExceptiondeclarationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExceptiondeclaration( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ExceptiondeclarationContext* AergiaCpp14Parser::exceptiondeclaration() {
@@ -20172,6 +21781,14 @@ void AergiaCpp14Parser::ThrowexpressionContext::exitRule( tree::ParseTreeListene
 		parserListener->exitThrowexpression( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::ThrowexpressionContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitThrowexpression( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::ThrowexpressionContext* AergiaCpp14Parser::throwexpression() {
 	ThrowexpressionContext* _localctx = _tracker.createInstance<ThrowexpressionContext>( _ctx, getState() );
 	enterRule( _localctx, 402, AergiaCpp14Parser::RuleThrowexpression );
@@ -20234,6 +21851,14 @@ void AergiaCpp14Parser::ExceptionspecificationContext::exitRule( tree::ParseTree
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitExceptionspecification( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::ExceptionspecificationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitExceptionspecification( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::ExceptionspecificationContext* AergiaCpp14Parser::exceptionspecification() {
@@ -20312,6 +21937,14 @@ void AergiaCpp14Parser::DynamicexceptionspecificationContext::exitRule( tree::Pa
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitDynamicexceptionspecification( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::DynamicexceptionspecificationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitDynamicexceptionspecification( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::DynamicexceptionspecificationContext* AergiaCpp14Parser::dynamicexceptionspecification() {
@@ -20410,6 +22043,14 @@ void AergiaCpp14Parser::TypeidlistContext::exitRule( tree::ParseTreeListener* li
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTypeidlist( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TypeidlistContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTypeidlist( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 
@@ -20527,6 +22168,14 @@ void AergiaCpp14Parser::NoexceptspecificationContext::exitRule( tree::ParseTreeL
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitNoexceptspecification( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::NoexceptspecificationContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitNoexceptspecification( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::NoexceptspecificationContext* AergiaCpp14Parser::noexceptspecification() {
@@ -20749,6 +22398,14 @@ void AergiaCpp14Parser::TheoperatorContext::exitRule( tree::ParseTreeListener* l
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitTheoperator( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::TheoperatorContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitTheoperator( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::TheoperatorContext* AergiaCpp14Parser::theoperator() {
@@ -21156,6 +22813,14 @@ void AergiaCpp14Parser::LiteralContext::exitRule( tree::ParseTreeListener* liste
 		parserListener->exitLiteral( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::LiteralContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitLiteral( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::LiteralContext* AergiaCpp14Parser::literal() {
 	LiteralContext* _localctx = _tracker.createInstance<LiteralContext>( _ctx, getState() );
 	enterRule( _localctx, 414, AergiaCpp14Parser::RuleLiteral );
@@ -21266,6 +22931,14 @@ void AergiaCpp14Parser::BooleanliteralContext::exitRule( tree::ParseTreeListener
 		parserListener->exitBooleanliteral( this );
 }
 
+
+antlrcpp::Any AergiaCpp14Parser::BooleanliteralContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitBooleanliteral( this );
+	else
+		return visitor->visitChildren( this );
+}
+
 AergiaCpp14Parser::BooleanliteralContext* AergiaCpp14Parser::booleanliteral() {
 	BooleanliteralContext* _localctx = _tracker.createInstance<BooleanliteralContext>( _ctx, getState() );
 	enterRule( _localctx, 416, AergiaCpp14Parser::RuleBooleanliteral );
@@ -21323,6 +22996,14 @@ void AergiaCpp14Parser::PointerliteralContext::exitRule( tree::ParseTreeListener
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitPointerliteral( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::PointerliteralContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitPointerliteral( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::PointerliteralContext* AergiaCpp14Parser::pointerliteral() {
@@ -21388,6 +23069,14 @@ void AergiaCpp14Parser::UserdefinedliteralContext::exitRule( tree::ParseTreeList
 	auto parserListener = dynamic_cast<AergiaCpp14Listener*>(listener);
 	if (parserListener != nullptr)
 		parserListener->exitUserdefinedliteral( this );
+}
+
+
+antlrcpp::Any AergiaCpp14Parser::UserdefinedliteralContext::accept( tree::ParseTreeVisitor* visitor ) {
+	if (auto parserVisitor = dynamic_cast<AergiaCpp14Visitor*>(visitor))
+		return parserVisitor->visitUserdefinedliteral( this );
+	else
+		return visitor->visitChildren( this );
 }
 
 AergiaCpp14Parser::UserdefinedliteralContext* AergiaCpp14Parser::userdefinedliteral() {

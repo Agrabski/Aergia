@@ -1,4 +1,21 @@
+class Test : X
+{
+public:
+    int n;
+private:
+    float f;
+};
+
+namespace Test{
+}
+
+namespace Test{
+
+}
+
+
 int main(int t)
 {
-    auto n = 34;
+    $foreach($var in $t.bases)
+        $var$$
 }
