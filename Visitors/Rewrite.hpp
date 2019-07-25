@@ -1,6 +1,5 @@
 #pragma once
-#include <Token.h>
-
+#include "..//Lexer/Antlr_include.hpp"
 
 namespace Aergia::Visitors
 {

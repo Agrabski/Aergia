@@ -33,9 +33,24 @@
     <ClInclude Include="MethodContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Definitions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableContext.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MethodContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

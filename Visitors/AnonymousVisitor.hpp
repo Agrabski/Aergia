@@ -1,7 +1,6 @@
 #pragma once
-#include "..//Lexer/AergiaCpp14BaseListener.h"
+#include "..//Lexer/Antlr_include.hpp"
 #include "BaseVisitor.hpp"
-#include <TokenStreamRewriter.h>
 
 namespace Aergia::Visitors
 {

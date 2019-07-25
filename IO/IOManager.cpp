@@ -39,7 +39,3 @@ Aergia::IO::Configuration Aergia::IO::IOManager::getConfiguration() const
 	return Configuration();
 }
 
-Aergia::IO::PrettyPrinterConfiguration Aergia::IO::IOManager::getPrinterConfiguration() const
-{
-	return PrettyPrinterConfiguration();
-}

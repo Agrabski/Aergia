@@ -39,11 +39,11 @@
     <ClInclude Include="AergiaCpp14Visitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Antlr_include.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lexer1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

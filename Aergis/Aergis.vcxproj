@@ -94,7 +94,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>CppCoreCheckRules.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <ReferencePath>..\Antlr\lib\vs-2015\x64\Release DLL;$(ReferencePath)</ReferencePath>
     <LibraryPath>..\Antlr\lib\vs-2015\x64\Release DLL;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -174,7 +174,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <EnablePREfast>true</EnablePREfast>
+      <EnablePREfast>false</EnablePREfast>
       <AdditionalIncludeDirectories>..\Antlr\antlr4-runtime;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -211,6 +211,9 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataStructures\DataStructures.vcxproj">
+      <Project>{1b49fa52-d1c9-4066-af5c-5624155cc721}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\IO\IO.vcxproj">
       <Project>{8cd9696d-8bfe-4b49-8805-da17c8b6feed}</Project>
     </ProjectReference>

@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <stdexcept>
+#include "Definitions.hpp"
 #include "IContext.hpp"
 #include "ClassContext.hpp"
 #include "MethodContext.hpp"
@@ -10,70 +11,88 @@
 
 namespace Aergia::DataStructures
 {
-	template<bool IsGlobal>
-	class NamespaceContext : public IContext {};
-
-
-	template<>
-	class NamespaceContext<true> : public IContext
+	class NamespaceContext : public IContext
 	{
-		std::map<std::string, std::unique_ptr<IContext>> _members;
-
-	public:
-		NamespaceContext() :IContext( nullptr ) {}
-
-		std::string const& getName() const noexcept override
-		{
-			using namespace std::literals;
-			return "GLOBAL_NAMESPACE"s;
-		}
-
-		IContext* getMember( std::string const& name ) const override
-		{
-			if (_members.find( name ) != _members.end())
-				return _members.at( name ).get();
-			return nullptr;
-		}
-
-		bool appendMember( std::unique_ptr<IContext>&& newMember ) override
-		{
-			if (_members.find( newMember->getName() ) != _members.end())
-				throw std::runtime_error( "member already exists" );
-			_members[newMember->getName()] = std::move( newMember );
-			return true;
-		}
-
-	};
-
-	template<>
-	class NamespaceContext<false> : public IContext
-	{
-		std::map<std::string, std::unique_ptr<IContext>> _members;
+		std::vector<NamespaceContext> _namespaces;
+		std::vector<MethodContext> _functions;
+		std::vector<ClassContext> _classes;
+		std::vector<VariableContext> _globals;
 		std::string _name;
 
 	public:
-		NamespaceContext( std::string const& name, IContext const* const parent ) : _name( name ), IContext( parent ) {}
+		NamespaceContext( std::string const& name, IContext* const parent ) : _name( name ), IContext( parent ) {}
+		NamespaceContext() noexcept : _name( "DEFAULT_NAMESPACE" ), IContext( nullptr ) {}
 
 		std::string const& getName() const noexcept override
 		{
 			return _name;
 		}
 
-		IContext* getMember( std::string const& name ) const override
+		NamespaceContext* getNamespace( std::string const& name ) override
 		{
-			if (_members.find( name ) != _members.end())
-				return _members.at( name ).get();
+			for (auto& ns : _namespaces)
+				if (ns.getName() == name)
+					return &ns;
 			return nullptr;
 		}
 
-		bool appendMember( std::unique_ptr<IContext>&& newMember ) override
+		MethodContext* getMethod( std::string const& name ) override
 		{
-			if (_members.find( newMember->getName() ) == _members.end())
-				throw std::runtime_error( "member already exists" );
-			_members[newMember->getName()] = std::move( newMember );
+			for (auto& ns : _functions)
+				if (ns.getName() == name)
+					return &ns;
+			return nullptr;
+		}
+
+		ClassContext* getClass( std::string const& name ) override
+		{
+			for (auto& ns : _classes)
+				if (ns.getName() == name)
+					return &ns;
+			return nullptr;
+		}
+
+		VariableContext* getVariable( std::string const& name ) noexcept override
+		{
+			for (auto& ns : _globals)
+				if (ns.getName() == name)
+					return &ns;
+			return nullptr;
+
+		}
+
+		std::vector<IContext*>&& getMembers( std::string const& name ) override
+		{
+			std::vector<IContext*>result;
+			result.push_back( getNamespace( name ) );
+			result.push_back( getMethod( name ) );
+			result.push_back( getClass( name ) );
+			return std::move( result );
+		}
+
+		bool appendMember( NamespaceContext&& newMember ) override
+		{
+			_namespaces.push_back( newMember );
 			return true;
 		}
 
+		bool appendMember( MethodContext&& newMember ) override
+		{
+			_functions.push_back( newMember );
+			return true;
+		}
+
+		bool appendMember( ClassContext&& newMember ) override
+		{
+			_classes.push_back( newMember );
+			return true;
+		}
+
+		bool appendMember( VariableContext&& newMember ) override
+		{
+			_globals.push_back( newMember );
+			return true;
+		}
 	};
 
 }

@@ -656,16 +656,12 @@ namespacedefinition
 
 namednamespacedefinition
    : originalnamespacedefinition
-   | extensionnamespacedefinition
    ;
 
 originalnamespacedefinition
    : Inline? Namespace Identifier '{' namespacebody '}'
    ;
 
-extensionnamespacedefinition
-   : Inline? Namespace originalnamespacename '{' namespacebody '}'
-   ;
 
 unnamednamespacedefinition
    : Inline? Namespace '{' namespacebody '}'

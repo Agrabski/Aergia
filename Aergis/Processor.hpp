@@ -1,5 +1,5 @@
 #pragma once
-#include "..//Lexer/AergiaCpp14Parser.h"
+#include "..//Lexer/Antlr_include.hpp"
 #include "..//Visitors/BaseVisitor.hpp"
 #include "..//IO/Configuraton.hpp"
 #include "..//Visitors/CurrentContextVisitor.hpp"

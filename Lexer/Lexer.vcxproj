@@ -173,6 +173,7 @@
     <ClInclude Include="AergiaCpp14Listener.h" />
     <ClInclude Include="AergiaCpp14Parser.h" />
     <ClInclude Include="AergiaCpp14Visitor.h" />
+    <ClInclude Include="Antlr_include.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
@@ -183,7 +184,6 @@
     <ClCompile Include="AergiaCpp14Listener.cpp" />
     <ClCompile Include="AergiaCpp14Parser.cpp" />
     <ClCompile Include="AergiaCpp14Visitor.cpp" />
-    <ClCompile Include="Lexer1.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

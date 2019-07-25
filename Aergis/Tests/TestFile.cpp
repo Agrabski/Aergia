@@ -1,6 +1,8 @@
 
-
-int main()
+namespace XXX
 {
-	$anonymous(std::mutex())$$
+	int main()
+	{
+		$anonymous( std::mutex() )$$
+	}
 }

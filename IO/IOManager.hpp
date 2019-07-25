@@ -4,7 +4,6 @@
 #include <stdexcept>
 #include <fstream>
 #include "Configuraton.hpp"
-#include "PrettyPrinter.hpp"
 
 namespace Aergia::IO
 {
@@ -19,6 +18,5 @@ namespace Aergia::IO
 		void startProcessing() const;
 		void endProcessing() const;
 		Configuration getConfiguration() const;
-		PrettyPrinterConfiguration getPrinterConfiguration() const;
 	};
 }

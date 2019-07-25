@@ -8,11 +8,16 @@ Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor() : _currentConte
 void Aergia::Visitors::CurrentContextVisitor::enterNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* context )
 {
 	auto name = Utilities::NameExtractor::getName( context );
-	if (_currentContext->getMember( name ) == nullptr)
+	if (_currentContext->getNamespace( name ) == nullptr)
 	{
-		_currentContext->appendMember( std::make_unique<DataStructures::NamespaceContext<false>>( name, _currentContext ) );
+		_currentContext->appendMember( DataStructures::NamespaceContext( name, _currentContext ) );
 	}
-	_currentContext = _currentContext->getMember( name );
+	_currentContext = _currentContext->getNamespace( name );
+}
+
+void Aergia::Visitors::CurrentContextVisitor::exitNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* )
+{
+	_currentContext = _currentContext->parent();
 }
 
 void Aergia::Visitors::CurrentContextVisitor::enterEveryRule( antlr4::ParserRuleContext* node )

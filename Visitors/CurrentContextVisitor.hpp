@@ -1,6 +1,6 @@
 #pragma once
 #include <gsl.h>
-#include "..//Lexer/AergiaCpp14BaseListener.h"
+#include "..//Lexer/Antlr_include.hpp"
 #include "..//DataStructures/NamespaceContext.hpp"
 #include "ContextProvider.hpp"
 #include "BaseVisitor.hpp"
@@ -12,7 +12,7 @@ namespace Aergia::Visitors
 	{
 
 		std::vector<std::unique_ptr<BaseVisitor>> _visitors;
-		DataStructures::NamespaceContext<true> _rootContext;
+		DataStructures::NamespaceContext _rootContext;
 		gsl::not_null<DataStructures::IContext*> _currentContext;
 	public:
 		CurrentContextVisitor();
@@ -31,6 +31,8 @@ namespace Aergia::Visitors
 
 
 		void enterNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* /*ctx*/ ) override;
+		void exitNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* /*ctx*/ ) override;
+
 
 		void enterClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override { }
 		void exitClassspecifier( AergiaCpp14Parser::ClassspecifierContext* /*ctx*/ ) override { }
