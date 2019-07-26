@@ -10,7 +10,7 @@ namespace Aergia::DataStructures
 		ClassContext* _type;
 	public:
 
-		VariableContext( std::string name, ClassContext* type, IContext* parent );
+		VariableContext( std::string name, ClassContext* type, IContext* parent, MemberAccessibility accessibility );
 
 		ClassContext* getType();
 

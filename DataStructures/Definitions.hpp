@@ -5,5 +5,6 @@ namespace Aergia::DataStructures
 	class ClassContext;
 	class NamespaceContext;
 	class IContext;
+	class BaseClassContext;
 	class VariableContext;
 }

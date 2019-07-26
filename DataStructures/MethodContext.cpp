@@ -3,12 +3,12 @@
 
 using namespace Aergia::DataStructures;
 
-Aergia::DataStructures::MethodContext::MethodContext( std::string name, std::vector<VariableContext>&& variables, ClassContext* returnValue, IContext* parent ) :
-	_name( std::move( name ) ), _paramters( variables ), _returnValue( returnValue ), IContext( parent )
+Aergia::DataStructures::MethodContext::MethodContext( std::string name, std::vector<VariableContext>&& variables, ClassContext* returnValue, IContext* parent, MemberAccessibility accessibility ) :
+	_name( std::move( name ) ), _paramters( variables ), _returnValue( returnValue ), IContext( parent,accessibility )
 {
 }
 
-Aergia::DataStructures::MethodContext::MethodContext( std::string name, IContext* parent ) : _name( std::move( name ) ), IContext( parent )
+Aergia::DataStructures::MethodContext::MethodContext( std::string name, IContext* parent, MemberAccessibility accessibility ) : _name( std::move( name ) ), IContext( parent, accessibility )
 {
 }
 

@@ -3,8 +3,8 @@
 
 using namespace Aergia::DataStructures;
 
-Aergia::DataStructures::VariableContext::VariableContext( std::string name, ClassContext* type, IContext* parent ) :
-	_name( name ), _type( type ), IContext( parent )
+Aergia::DataStructures::VariableContext::VariableContext( std::string name, ClassContext* type, IContext* parent, MemberAccessibility accessibility ) :
+	_name( name ), _type( type ), IContext( parent, accessibility )
 {
 }
 

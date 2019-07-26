@@ -12,9 +12,9 @@ namespace Aergia::DataStructures
 
 	public:
 
-		MethodContext( std::string name, std::vector<VariableContext>&& variables, ClassContext* returnValue, IContext* parent );
+		MethodContext( std::string name, std::vector<VariableContext>&& variables, ClassContext* returnValue, IContext* parent, MemberAccessibility accessibility );
 
-		MethodContext( std::string name, IContext* parent );
+		MethodContext( std::string name, IContext* parent, MemberAccessibility accessibility );
 
 
 		std::string const& getName() const noexcept override;

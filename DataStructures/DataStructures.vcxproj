@@ -167,17 +167,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BaseClassContext.hpp" />
     <ClInclude Include="ClassContext.hpp" />
     <ClInclude Include="Definitions.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IContext.hpp" />
+    <ClInclude Include="MemberAccessibility.hpp" />
     <ClInclude Include="MethodContext.hpp" />
     <ClInclude Include="NamespaceContext.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="VariableContext.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseClassContext.cpp" />
     <ClCompile Include="ClassContext.cpp" />
+    <ClCompile Include="MemberAccessibility.cpp" />
     <ClCompile Include="MethodContext.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

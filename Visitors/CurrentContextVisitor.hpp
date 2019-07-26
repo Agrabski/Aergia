@@ -10,10 +10,17 @@ namespace Aergia::Visitors
 {
 	class CurrentContextVisitor : public AergiaCpp14BaseListener, public ContextProvider
 	{
+		struct ContextData
+		{
+			DataStructures::MemberAccessibility _currentAccessibility;
+			std::map<std::string, gsl::not_null<DataStructures::IContext*>> _variables;
+		};
 
 		std::vector<std::unique_ptr<BaseVisitor>> _visitors;
 		DataStructures::NamespaceContext _rootContext;
 		gsl::not_null<DataStructures::IContext*> _currentContext;
+		std::stack<ContextData> _contextStack;
+
 	public:
 		CurrentContextVisitor();
 
@@ -33,14 +40,16 @@ namespace Aergia::Visitors
 		void enterNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* /*ctx*/ ) override;
 		void exitNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* /*ctx*/ ) override;
 
+		void enterMemberspecification( AergiaCpp14Parser::MemberspecificationContext* context ) override;
+		void exitMemberspecification( AergiaCpp14Parser::MemberspecificationContext* context ) override;
 
-		void enterClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override { }
-		void exitClassspecifier( AergiaCpp14Parser::ClassspecifierContext* /*ctx*/ ) override { }
+		void enterMemberdeclaration( AergiaCpp14Parser::MemberdeclarationContext* context ) override;
+
+
+		void enterClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override;
+		void exitClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override;
 
 		void enterClasshead( AergiaCpp14Parser::ClassheadContext* /*ctx*/ ) override { }
-
-		void enterMemberspecification( AergiaCpp14Parser::MemberspecificationContext* /*ctx*/ ) override { }
-
 
 		void enterEveryRule( antlr4::ParserRuleContext* /*ctx*/ ) override;
 

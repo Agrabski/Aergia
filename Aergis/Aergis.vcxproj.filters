@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Tests\TestFile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Tests</Filter>
     </Text>
   </ItemGroup>
 </Project>

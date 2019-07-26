@@ -1,7 +1,7 @@
 class Test : X
 {
 public:
-    int n;
+    int n,c,d;
 private:
     float f;
 };

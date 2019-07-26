@@ -39,6 +39,12 @@
     <ClInclude Include="VariableContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MemberAccessibility.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseClassContext.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VariableContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MemberAccessibility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseClassContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

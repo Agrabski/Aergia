@@ -171,6 +171,7 @@
     <ClInclude Include="NameExtractor.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="TokenFinder.hpp" />
+    <ClInclude Include="TypeFinder.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NameExtractor.cpp" />
@@ -181,6 +182,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TokenFinder.cpp" />
+    <ClCompile Include="TypeFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lexer\Lexer.vcxproj">

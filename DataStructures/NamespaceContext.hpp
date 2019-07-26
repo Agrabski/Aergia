@@ -20,8 +20,8 @@ namespace Aergia::DataStructures
 		std::string _name;
 
 	public:
-		NamespaceContext( std::string const& name, IContext* const parent ) : _name( name ), IContext( parent ) {}
-		NamespaceContext() noexcept : _name( "DEFAULT_NAMESPACE" ), IContext( nullptr ) {}
+		NamespaceContext( std::string const& name, IContext* const parent ) : _name( std::move( name ) ), IContext( parent, MemberAccessibility::None ) {}
+		NamespaceContext() noexcept : _name( "DEFAULT_NAMESPACE" ), IContext( nullptr, MemberAccessibility::None ) {}
 
 		std::string const& getName() const noexcept override
 		{
