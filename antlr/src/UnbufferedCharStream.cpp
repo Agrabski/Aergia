@@ -132,7 +132,7 @@ void UnbufferedCharStream::release(ssize_t marker) {
   }
 }
 
-size_t UnbufferedCharStream::index() {
+size_t UnbufferedCharStream::index() const noexcept {
   return _currentCharIndex;
 }
 
@@ -165,7 +165,7 @@ void UnbufferedCharStream::seek(size_t index) {
   }
 }
 
-size_t UnbufferedCharStream::size() {
+size_t UnbufferedCharStream::size() const {
   throw UnsupportedOperationException("Unbuffered stream cannot know its size");
 }
 

@@ -168,7 +168,7 @@ namespace antlr4 {
     /// <seealso cref="IntStream initializing method"/> has occurred after this stream was
     /// constructed.
     /// </summary>
-    virtual size_t index() = 0;
+    virtual size_t index() const noexcept = 0;
 
     /// <summary>
     /// Set the input cursor to the position indicated by {@code index}. If the
@@ -205,7 +205,7 @@ namespace antlr4 {
     /// </summary>
     /// <exception cref="UnsupportedOperationException"> if the size of the stream is
     /// unknown. </exception>
-    virtual size_t size() = 0;
+    virtual size_t size() const = 0;
 
     /// <summary>
     /// Gets the name of the underlying symbol source. This method returns a

@@ -984,4 +984,8 @@
       <Filter>Source Files\tree\pattern</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="cpp.hint" />
+  </ItemGroup>
 </Project>

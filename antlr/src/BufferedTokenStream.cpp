@@ -23,7 +23,7 @@ TokenSource* BufferedTokenStream::getTokenSource() const {
   return _tokenSource;
 }
 
-size_t BufferedTokenStream::index() {
+size_t BufferedTokenStream::index() const noexcept {
   return _p;
 }
 
@@ -44,7 +44,7 @@ void BufferedTokenStream::seek(size_t index) {
   _p = adjustSeekIndex(index);
 }
 
-size_t BufferedTokenStream::size() {
+size_t BufferedTokenStream::size() const {
   return _tokens.size();
 }
 

@@ -15839,14 +15839,13 @@ AergiaCpp14Parser::NoptrabstractpackdeclaratorContext* AergiaCpp14Parser::noptra
 		unrollRecursionContexts( parentContext );
 		} );
 	try {
-		size_t alt;
 		enterOuterAlt( _localctx, 1 );
 		setState( 1900 );
 		match( AergiaCpp14Parser::Ellipsis );
 		_ctx->stop = _input->LT( -1 );
 		setState( 1915 );
 		_errHandler->sync( this );
-		alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict( _input, 212, _ctx );
+		size_t alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict( _input, 212, _ctx );
 		while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
 			if (alt == 1) {
 				if (!_parseListeners.empty())
@@ -16133,14 +16132,13 @@ AergiaCpp14Parser::ParameterdeclarationlistContext* AergiaCpp14Parser::parameter
 		unrollRecursionContexts( parentContext );
 		} );
 	try {
-		size_t alt;
 		enterOuterAlt( _localctx, 1 );
 		setState( 1931 );
 		parameterdeclaration();
 		_ctx->stop = _input->LT( -1 );
 		setState( 1938 );
 		_errHandler->sync( this );
-		alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict( _input, 216, _ctx );
+		size_t alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict( _input, 216, _ctx );
 		while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
 			if (alt == 1) {
 				if (!_parseListeners.empty())

@@ -185,7 +185,7 @@ void UnbufferedTokenStream::release(ssize_t marker)
   }
 }
 
-size_t UnbufferedTokenStream::index()
+size_t UnbufferedTokenStream::index()const noexcept
 {
   return _currentTokenIndex;
 }
@@ -221,7 +221,7 @@ void UnbufferedTokenStream::seek(size_t index)
   }
 }
 
-size_t UnbufferedTokenStream::size()
+size_t UnbufferedTokenStream::size() const
 {
   throw UnsupportedOperationException("Unbuffered stream cannot know its size");
 }

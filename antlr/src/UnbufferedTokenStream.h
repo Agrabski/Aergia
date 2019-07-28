@@ -40,9 +40,9 @@ namespace antlr4 {
     /// </summary>
     virtual ssize_t mark() override;
     virtual void release(ssize_t marker) override;
-    virtual size_t index() override;
+    virtual size_t index()const noexcept override;
     virtual void seek(size_t index) override;
-    virtual size_t size() override;
+    virtual size_t size() const override;
     virtual std::string getSourceName() const override;
 
   protected:

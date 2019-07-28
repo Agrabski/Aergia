@@ -68,7 +68,10 @@ void Aergia::Visitors::CurrentContextVisitor::exitClassspecifier( AergiaCpp14Par
 void Aergia::Visitors::CurrentContextVisitor::enterEveryRule( antlr4::ParserRuleContext* node )
 {
 	for (auto& child : _visitors)
-		node->accept( child.get() );
+	{
+		auto result = node->accept( child.get() );
+		assert( result.isNull() );
+	}
 }
 
 void Aergia::Visitors::CurrentContextVisitor::applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const

@@ -511,7 +511,7 @@ dfa::DFAState *LexerATNSimulator::addDFAEdge(dfa::DFAState *from, size_t t, ATNC
    * If that gets us to a previously created (but dangling) DFA
    * state, we can continue in pure DFA mode from there.
    */
-  bool suppressEdge = q->hasSemanticContext;
+  bool const suppressEdge = q->hasSemanticContext;
   q->hasSemanticContext = false;
 
   dfa::DFAState *to = addDFAState(q);

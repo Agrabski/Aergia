@@ -76,11 +76,11 @@ namespace atn {
     Ref<SemanticContext> semanticContext;
 
     ATNConfig(ATNState *state, size_t alt, Ref<PredictionContext> const& context);
-    ATNConfig(ATNState *state, size_t alt, Ref<PredictionContext> const& context, Ref<SemanticContext> const& semanticContext);
+    ATNConfig(ATNState *state, size_t alt, Ref<PredictionContext> const& context, Ref<SemanticContext> const& semanticContext) noexcept;
 
     ATNConfig(Ref<ATNConfig> const& c); // dup
     ATNConfig(Ref<ATNConfig> const& c, ATNState *state);
-    ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<SemanticContext> const& semanticContext);
+    ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<SemanticContext> const& semanticContext) noexcept;
     ATNConfig(Ref<ATNConfig> const& c, Ref<SemanticContext> const& semanticContext);
     ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<PredictionContext> const& context);
     ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<PredictionContext> const& context, Ref<SemanticContext> const& semanticContext);

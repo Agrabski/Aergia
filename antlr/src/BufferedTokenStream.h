@@ -29,14 +29,14 @@ namespace antlr4 {
     BufferedTokenStream& operator = (const BufferedTokenStream& other) = delete;
 
     virtual TokenSource* getTokenSource() const override;
-    virtual size_t index() override;
+    virtual size_t index() const noexcept override;
     virtual ssize_t mark() override;
 
     virtual void release(ssize_t marker) override;
     virtual void reset();
     virtual void seek(size_t index) override;
 
-    virtual size_t size() override;
+    virtual size_t size() const override;
     virtual void consume() override;
 
     virtual Token* get(size_t i) const override;
