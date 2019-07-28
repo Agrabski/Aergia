@@ -60,7 +60,7 @@ antlrcpp::Any Aergia::Utilities::NameExtractor::VariableNameExtractionVisitor::a
 	std::vector<std::string>result;
 	if (prevResult.isNotNull())
 	{
-		auto prev = prevResult.as<std::vector<std::string>>();
+		auto const prev = prevResult.as<std::vector<std::string>>();
 		for (auto const& x : prev)
 			result.push_back( x );
 	}
