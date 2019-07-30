@@ -80,7 +80,7 @@ void LexerActionExecutor::execute(Lexer *lexer, CharStream *input, size_t startI
   }
 }
 
-size_t LexerActionExecutor::hashCode() const {
+size_t LexerActionExecutor::hashCode()  const noexcept {
   return _hashCode;
 }
 
@@ -96,7 +96,7 @@ bool LexerActionExecutor::operator != (const LexerActionExecutor &obj) const {
   return !operator==(obj);
 }
 
-size_t LexerActionExecutor::generateHashCode() const {
+size_t LexerActionExecutor::generateHashCode() const noexcept {
   size_t hash = MurmurHash::initialize();
   for (auto lexerAction : _lexerActions) {
     hash = MurmurHash::update(hash, lexerAction);

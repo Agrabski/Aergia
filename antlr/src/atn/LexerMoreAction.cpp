@@ -20,25 +20,25 @@ const Ref<LexerMoreAction> LexerMoreAction::getInstance() {
 LexerMoreAction::LexerMoreAction() {
 }
 
-LexerActionType LexerMoreAction::getActionType() const {
+LexerActionType LexerMoreAction::getActionType() const  noexcept {
   return LexerActionType::MORE;
 }
 
-bool LexerMoreAction::isPositionDependent() const {
+bool LexerMoreAction::isPositionDependent() const noexcept {
   return false;
 }
 
-void LexerMoreAction::execute(Lexer *lexer) {
+void LexerMoreAction::execute(Lexer *lexer) noexcept {
   lexer->more();
 }
 
-size_t LexerMoreAction::hashCode() const {
+size_t LexerMoreAction::hashCode()  const noexcept {
   size_t hash = MurmurHash::initialize();
   hash = MurmurHash::update(hash, static_cast<size_t>(getActionType()));
   return MurmurHash::finish(hash, 1);
 }
 
-bool LexerMoreAction::operator == (const LexerAction &obj) const {
+bool LexerMoreAction::operator == (const LexerAction &obj) const noexcept {
   return &obj == this;
 }
 

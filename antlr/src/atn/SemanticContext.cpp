@@ -15,10 +15,11 @@ using namespace antlrcpp;
 
 //------------------ Predicate -----------------------------------------------------------------------------------------
 
-SemanticContext::Predicate::Predicate() : Predicate(INVALID_INDEX, INVALID_INDEX, false) {
+SemanticContext::Predicate::Predicate() noexcept : Predicate(INVALID_INDEX, INVALID_INDEX, false)
+{
 }
 
-SemanticContext::Predicate::Predicate(size_t ruleIndex, size_t predIndex, bool isCtxDependent)
+SemanticContext::Predicate::Predicate(size_t ruleIndex, size_t predIndex, bool isCtxDependent) noexcept
 : ruleIndex(ruleIndex), predIndex(predIndex), isCtxDependent(isCtxDependent) {
 }
 
@@ -39,7 +40,7 @@ size_t SemanticContext::Predicate::hashCode() const {
   return hashCode;
 }
 
-bool SemanticContext::Predicate::operator == (const SemanticContext &other) const {
+bool SemanticContext::Predicate::operator == (const SemanticContext &other) const noexcept {
   if (this == &other)
     return true;
 
@@ -56,10 +57,11 @@ std::string SemanticContext::Predicate::toString() const {
 
 //------------------ PrecedencePredicate -------------------------------------------------------------------------------
 
-SemanticContext::PrecedencePredicate::PrecedencePredicate() : precedence(0) {
+SemanticContext::PrecedencePredicate::PrecedencePredicate() noexcept : precedence(0)
+{
 }
 
-SemanticContext::PrecedencePredicate::PrecedencePredicate(int precedence) : precedence(precedence) {
+SemanticContext::PrecedencePredicate::PrecedencePredicate(int precedence) noexcept : precedence(precedence) {
 }
 
 bool SemanticContext::PrecedencePredicate::eval(Recognizer *parser, RuleContext *parserCallStack) {
@@ -76,17 +78,20 @@ Ref<SemanticContext> SemanticContext::PrecedencePredicate::evalPrecedence(Recogn
   }
 }
 
-int SemanticContext::PrecedencePredicate::compareTo(PrecedencePredicate *o) {
+int SemanticContext::PrecedencePredicate::compareTo(PrecedencePredicate *o)  noexcept 
+{
   return precedence - o->precedence;
 }
 
-size_t SemanticContext::PrecedencePredicate::hashCode() const {
+size_t SemanticContext::PrecedencePredicate::hashCode() const noexcept
+{
   size_t hashCode = 1;
   hashCode = 31 * hashCode + static_cast<size_t>(precedence);
   return hashCode;
 }
 
-bool SemanticContext::PrecedencePredicate::operator == (const SemanticContext &other) const {
+bool SemanticContext::PrecedencePredicate::operator == (const SemanticContext &other) const noexcept
+{
   if (this == &other)
     return true;
 
@@ -126,7 +131,7 @@ SemanticContext::AND::AND(Ref<SemanticContext> const& a, Ref<SemanticContext> co
 
   if (!precedencePredicates.empty()) {
     // interested in the transition with the lowest precedence
-    auto predicate = [](Ref<PrecedencePredicate> const& a, Ref<PrecedencePredicate> const& b) {
+    auto predicate = [](Ref<PrecedencePredicate> const& a, Ref<PrecedencePredicate> const& b) noexcept {
       return a->precedence < b->precedence;
     };
 
@@ -229,7 +234,7 @@ SemanticContext::OR::OR(Ref<SemanticContext> const& a, Ref<SemanticContext> cons
   std::vector<Ref<PrecedencePredicate>> precedencePredicates = filterPrecedencePredicates(operands);
   if (!precedencePredicates.empty()) {
     // interested in the transition with the highest precedence
-    auto predicate = [](Ref<PrecedencePredicate> const& a, Ref<PrecedencePredicate> const& b) {
+    auto predicate = [](Ref<PrecedencePredicate> const& a, Ref<PrecedencePredicate> const& b) noexcept {
       return a->precedence < b->precedence;
     };
     auto reduced = std::max_element(precedencePredicates.begin(), precedencePredicates.end(), predicate);

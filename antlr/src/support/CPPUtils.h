@@ -27,7 +27,7 @@ namespace antlrcpp {
     }
     ~FinalAction() { if (_enabled) _cleanUp(); }
 
-    void disable() { _enabled = false; }
+    void disable() noexcept { _enabled = false; }
   private:
     std::function<void ()> _cleanUp;
     bool _enabled {true};
@@ -37,12 +37,12 @@ namespace antlrcpp {
 
   // Convenience functions to avoid lengthy dynamic_cast() != nullptr checks in many places.
   template <typename T1, typename T2>
-  inline bool is(T2 *obj) { // For pointer types.
+  inline bool is(T2 *obj) noexcept { // For pointer types.
     return dynamic_cast<typename std::add_const<T1>::type>(obj) != nullptr;
   }
 
   template <typename T1, typename T2>
-  inline bool is(Ref<T2> const& obj) { // For shared pointers.
+  inline bool is(Ref<T2> const& obj) noexcept { // For shared pointers.
     return dynamic_cast<T1 *>(obj.get()) != nullptr;
   }
 

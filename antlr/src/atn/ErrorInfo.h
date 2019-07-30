@@ -36,7 +36,7 @@ namespace atn {
     /// prediction; otherwise, {@code false} if the syntax error was identified
     /// during SLL prediction </param>
     ErrorInfo(size_t decision, ATNConfigSet *configs, TokenStream *input, size_t startIndex, size_t stopIndex,
-              bool fullCtx);
+              bool fullCtx) noexcept;
   };
 
 } // namespace atn

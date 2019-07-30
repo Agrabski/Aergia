@@ -17,11 +17,11 @@ using namespace antlr4;
 DiagnosticErrorListener::DiagnosticErrorListener() : DiagnosticErrorListener(true) {
 }
 
-DiagnosticErrorListener::DiagnosticErrorListener(bool exactOnly_) : exactOnly(exactOnly_) {
+DiagnosticErrorListener::DiagnosticErrorListener(bool exactOnly_)  noexcept : exactOnly(exactOnly_) {
 }
 
 void DiagnosticErrorListener::reportAmbiguity(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex, size_t stopIndex,
-   bool exact, const antlrcpp::BitSet &ambigAlts, atn::ATNConfigSet *configs) {
+   bool exact, const antlrcpp::BitSet &ambigAlts, atn::ATNConfigSet *configs) noexcept {
   if (exactOnly && !exact) {
     return;
   }
@@ -36,7 +36,7 @@ void DiagnosticErrorListener::reportAmbiguity(Parser *recognizer, const dfa::DFA
 }
 
 void DiagnosticErrorListener::reportAttemptingFullContext(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex,
-  size_t stopIndex, const antlrcpp::BitSet &/*conflictingAlts*/, atn::ATNConfigSet * /*configs*/) {
+  size_t stopIndex, const antlrcpp::BitSet &/*conflictingAlts*/, atn::ATNConfigSet * /*configs*/) noexcept {
   std::string decision = getDecisionDescription(recognizer, dfa);
   std::string text = recognizer->getTokenStream()->getText(misc::Interval(startIndex, stopIndex));
   std::string message = "reportAttemptingFullContext d=" + decision + ", input='" + text + "'";
@@ -44,7 +44,8 @@ void DiagnosticErrorListener::reportAttemptingFullContext(Parser *recognizer, co
 }
 
 void DiagnosticErrorListener::reportContextSensitivity(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex,
-  size_t stopIndex, size_t /*prediction*/, atn::ATNConfigSet * /*configs*/) {
+  size_t stopIndex, size_t /*prediction*/, atn::ATNConfigSet * /*configs*/) noexcept
+{
   std::string decision = getDecisionDescription(recognizer, dfa);
   std::string text = recognizer->getTokenStream()->getText(misc::Interval(startIndex, stopIndex));
   std::string message = "reportContextSensitivity d=" + decision + ", input='" + text + "'";

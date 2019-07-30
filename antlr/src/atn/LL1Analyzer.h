@@ -21,7 +21,7 @@ namespace atn {
 
     const atn::ATN &_atn;
 
-    LL1Analyzer(const atn::ATN &atn);
+    LL1Analyzer(const atn::ATN &atn) noexcept;
     virtual ~LL1Analyzer();
 
     /// <summary>

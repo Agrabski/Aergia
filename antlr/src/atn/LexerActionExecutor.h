@@ -97,7 +97,7 @@ namespace atn {
     /// of the token. </param>
     virtual void execute(Lexer *lexer, CharStream *input, size_t startIndex);
 
-    virtual size_t hashCode() const;
+    virtual size_t hashCode() const noexcept;
     virtual bool operator == (const LexerActionExecutor &obj) const;
     virtual bool operator != (const LexerActionExecutor &obj) const;
 
@@ -108,7 +108,7 @@ namespace atn {
     /// of the performance-critical <seealso cref="LexerATNConfig#hashCode"/> operation.
     const size_t _hashCode;
 
-    size_t generateHashCode() const;
+    size_t generateHashCode() const noexcept;
   };
 
 } // namespace atn

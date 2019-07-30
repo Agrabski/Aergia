@@ -12,11 +12,11 @@ using namespace antlr4::atn;
 WildcardTransition::WildcardTransition(ATNState *target) : Transition(target) {
 }
 
-Transition::SerializationType WildcardTransition::getSerializationType() const {
+Transition::SerializationType WildcardTransition::getSerializationType() const noexcept {
   return WILDCARD;
 }
 
-bool WildcardTransition::matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const {
+bool WildcardTransition::matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const noexcept {
   return symbol >= minVocabSymbol && symbol <= maxVocabSymbol;
 }
 

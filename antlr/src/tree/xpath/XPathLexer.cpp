@@ -16,23 +16,23 @@ std::string XPathLexer::getGrammarFileName() const {
   return "XPathLexer.g4";
 }
 
-const std::vector<std::string>& XPathLexer::getRuleNames() const {
+const std::vector<std::string>& XPathLexer::getRuleNames() const noexcept {
   return _ruleNames;
 }
 
-const std::vector<std::string>& XPathLexer::getChannelNames() const {
+const std::vector<std::string>& XPathLexer::getChannelNames() const noexcept {
   return _channelNames;
 }
 
-const std::vector<std::string>& XPathLexer::getModeNames() const {
+const std::vector<std::string>& XPathLexer::getModeNames() const noexcept {
   return _modeNames;
 }
 
-const std::vector<std::string>& XPathLexer::getTokenNames() const {
+const std::vector<std::string>& XPathLexer::getTokenNames() const noexcept {
   return _tokenNames;
 }
 
-dfa::Vocabulary& XPathLexer::getVocabulary() const {
+dfa::Vocabulary& XPathLexer::getVocabulary() const noexcept {
   return _vocabulary;
 }
 
@@ -40,7 +40,7 @@ const std::vector<uint16_t> XPathLexer::getSerializedATN() const {
   return _serializedATN;
 }
 
-const atn::ATN& XPathLexer::getATN() const {
+const atn::ATN& XPathLexer::getATN() const noexcept {
   return _atn;
 }
 

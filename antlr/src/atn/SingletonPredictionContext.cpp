@@ -27,23 +27,23 @@ Ref<SingletonPredictionContext> SingletonPredictionContext::create(Ref<Predictio
   return std::make_shared<SingletonPredictionContext>(parent, returnState);
 }
 
-size_t SingletonPredictionContext::size() const {
+size_t SingletonPredictionContext::size() const noexcept {
   return 1;
 }
 
-Ref<PredictionContext> SingletonPredictionContext::getParent(size_t index) const {
+Ref<PredictionContext> SingletonPredictionContext::getParent(size_t index) const noexcept {
   assert(index == 0);
   ((void)(index)); // Make Release build happy.
   return parent;
 }
 
-size_t SingletonPredictionContext::getReturnState(size_t index) const {
+size_t SingletonPredictionContext::getReturnState(size_t index) const noexcept {
   assert(index == 0);
   ((void)(index)); // Make Release build happy.
   return returnState;
 }
 
-bool SingletonPredictionContext::operator == (const PredictionContext &o) const {
+bool SingletonPredictionContext::operator == (const PredictionContext &o) const noexcept {
   if (this == &o) {
     return true;
   }

@@ -32,7 +32,7 @@ ClassContext* Aergia::DataStructures::MethodContext::getClass( std::string const
 	return nullptr;
 }
 
-std::vector<IContext*>&& Aergia::DataStructures::MethodContext::getMembers( std::string const& name )
+std::vector<IContext*> Aergia::DataStructures::MethodContext::getMembers( std::string const& name )
 {
 	std::vector<IContext*> result;
 	for (auto& parameter : _paramters)

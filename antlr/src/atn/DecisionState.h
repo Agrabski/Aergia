@@ -16,14 +16,15 @@ namespace atn {
     bool nonGreedy;
 
   private:
-    void InitializeInstanceFields();
+    void InitializeInstanceFields() noexcept;
 
   public:
-    DecisionState() {
+    DecisionState() noexcept
+	{
       InitializeInstanceFields();
     }
 
-    virtual std::string toString() const override;
+    std::string toString() const override;
   };
 
 } // namespace atn

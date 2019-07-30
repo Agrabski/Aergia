@@ -14,19 +14,19 @@ EpsilonTransition::EpsilonTransition(ATNState *target, size_t outermostPrecedenc
   : Transition(target), _outermostPrecedenceReturn(outermostPrecedenceReturn) {
 }
 
-size_t EpsilonTransition::outermostPrecedenceReturn() {
+size_t EpsilonTransition::outermostPrecedenceReturn() noexcept {
   return _outermostPrecedenceReturn;
 }
 
-Transition::SerializationType EpsilonTransition::getSerializationType() const {
+Transition::SerializationType EpsilonTransition::getSerializationType() const noexcept {
   return EPSILON;
 }
 
-bool EpsilonTransition::isEpsilon() const {
+bool EpsilonTransition::isEpsilon() const noexcept {
   return true;
 }
 
-bool EpsilonTransition::matches(size_t /*symbol*/, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const {
+bool EpsilonTransition::matches(size_t /*symbol*/, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const noexcept {
   return false;
 }
 

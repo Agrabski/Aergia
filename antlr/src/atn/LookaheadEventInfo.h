@@ -35,7 +35,7 @@ namespace atn {
     /// prediction; otherwise, {@code false} if the current lookahead is part of
     /// an SLL prediction </param>
     LookaheadEventInfo(size_t decision, ATNConfigSet *configs, size_t predictedAlt, TokenStream *input, size_t startIndex,
-                       size_t stopIndex, bool fullCtx);
+                       size_t stopIndex, bool fullCtx) noexcept;
   };
 
 } // namespace atn

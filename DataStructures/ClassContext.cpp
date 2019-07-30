@@ -30,7 +30,7 @@ ClassContext* Aergia::DataStructures::ClassContext::getClass( std::string const&
 	return nullptr;
 }
 
-std::vector<IContext*>&& Aergia::DataStructures::ClassContext::getMembers( std::string const& name )
+std::vector<IContext*> Aergia::DataStructures::ClassContext::getMembers( std::string const& name )
 {
 	std::vector<IContext*> result;
 

@@ -42,7 +42,7 @@ namespace dfa {
      * {@code false}.
      * @see Parser#getPrecedence()
      */
-    bool isPrecedenceDfa() const;
+    bool isPrecedenceDfa() const noexcept;
 
     /**
      * Get the start state for a specific precedence value.

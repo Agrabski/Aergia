@@ -152,7 +152,8 @@ namespace antlrcpp {
   }
 #else
   template <typename T>
-  std::exception_ptr get_nested(const T &e) {
+  std::exception_ptr get_nested(const T &e) noexcept
+  {
     try {
       auto nested = dynamic_cast<const std::nested_exception&>(e);
       return nested.nested_ptr();

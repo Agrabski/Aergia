@@ -12,33 +12,37 @@ using namespace antlr4;
 using namespace antlr4::atn;
 using namespace antlr4::misc;
 
-LexerTypeAction::LexerTypeAction(int type) : _type(type) {
+LexerTypeAction::LexerTypeAction(int type) noexcept : _type(type) {
 }
 
-int LexerTypeAction::getType() const {
+int LexerTypeAction::getType() const noexcept 
+{
   return _type;
 }
 
-LexerActionType LexerTypeAction::getActionType() const {
+LexerActionType LexerTypeAction::getActionType() const noexcept
+{
   return LexerActionType::TYPE;
 }
 
-bool LexerTypeAction::isPositionDependent() const {
+bool LexerTypeAction::isPositionDependent() const noexcept 
+{
   return false;
 }
 
-void LexerTypeAction::execute(Lexer *lexer) {
+void LexerTypeAction::execute(Lexer *lexer) noexcept {
   lexer->setType(_type);
 }
 
-size_t LexerTypeAction::hashCode() const {
+size_t LexerTypeAction::hashCode() const noexcept {
   size_t hash = MurmurHash::initialize();
   hash = MurmurHash::update(hash, static_cast<size_t>(getActionType()));
   hash = MurmurHash::update(hash, _type);
   return MurmurHash::finish(hash, 2);
 }
 
-bool LexerTypeAction::operator == (const LexerAction &obj) const {
+bool LexerTypeAction::operator == (const LexerAction &obj) const noexcept
+{
   if (&obj == this) {
     return true;
   }

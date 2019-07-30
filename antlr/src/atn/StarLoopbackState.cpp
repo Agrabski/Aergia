@@ -14,6 +14,6 @@ StarLoopEntryState *StarLoopbackState::getLoopEntryState() {
   return dynamic_cast<StarLoopEntryState *>(transitions[0]->target);
 }
 
-size_t StarLoopbackState::getStateType() {
+size_t StarLoopbackState::getStateType() noexcept {
   return STAR_LOOP_BACK;
 }

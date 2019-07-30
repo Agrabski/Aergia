@@ -33,7 +33,7 @@ using namespace antlrcpp;
 
 std::map<std::vector<uint16_t>, atn::ATN> Parser::bypassAltsAtnCache;
 
-Parser::TraceListener::TraceListener(Parser *outerInstance_) : outerInstance(outerInstance_) {
+Parser::TraceListener::TraceListener(Parser *outerInstance_) noexcept : outerInstance(outerInstance_) {
 }
 
 Parser::TraceListener::~TraceListener() {
@@ -49,7 +49,7 @@ void Parser::TraceListener::visitTerminal(tree::TerminalNode *node) {
     << outerInstance->getRuleNames()[outerInstance->getContext()->getRuleIndex()] << std::endl;
 }
 
-void Parser::TraceListener::visitErrorNode(tree::ErrorNode * /*node*/) {
+void Parser::TraceListener::visitErrorNode(tree::ErrorNode * /*node*/) noexcept {
 }
 
 void Parser::TraceListener::exitEveryRule(ParserRuleContext *ctx) {
@@ -78,11 +78,6 @@ void Parser::TrimToSizeListener::exitEveryRule(ParserRuleContext * ctx) {
 Parser::Parser(TokenStream *input) {
   InitializeInstanceFields();
   setInputStream(input);
-}
-
-Parser::~Parser() {
-  _tracker.reset();
-  delete _tracer;
 }
 
 void Parser::reset() {
@@ -252,7 +247,7 @@ tree::pattern::ParseTreePattern Parser::compileParseTreePattern(const std::strin
   return m.compile(pattern, patternRuleIndex);
 }
 
-Ref<ANTLRErrorStrategy> Parser::getErrorHandler() {
+Ref<ANTLRErrorStrategy> Parser::getErrorHandler()  {
   return _errHandler;
 }
 
@@ -537,7 +532,7 @@ std::vector<std::string> Parser::getRuleInvocationStack(RuleContext *p) {
   RuleContext *run = p;
   while (run != nullptr) {
     // compute what follows who invoked us
-    size_t ruleIndex = run->getRuleIndex();
+    size_t const ruleIndex = run->getRuleIndex();
     if (ruleIndex == INVALID_INDEX ) {
       stack.push_back("n/a");
     } else {
@@ -611,18 +606,17 @@ void Parser::setProfile(bool profile) {
 void Parser::setTrace(bool trace) {
   if (!trace) {
     if (_tracer)
-      removeParseListener(_tracer);
-    delete _tracer;
+      removeParseListener(_tracer.get());
     _tracer = nullptr;
   } else {
     if (_tracer)
-      removeParseListener(_tracer); // Just in case this is triggered multiple times.
-    _tracer = new TraceListener(this);
-    addParseListener(_tracer);
+      removeParseListener(_tracer.get()); // Just in case this is triggered multiple times.
+    _tracer = std::make_unique< TraceListener>(this);
+    addParseListener(_tracer.get());
   }
 }
 
-bool Parser::isTrace() const {
+bool Parser::isTrace() const noexcept {
   return _tracer != nullptr;
 }
 

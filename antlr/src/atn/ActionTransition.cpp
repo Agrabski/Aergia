@@ -15,15 +15,18 @@ ActionTransition::ActionTransition(ATNState *target, size_t ruleIndex, size_t ac
   : Transition(target), ruleIndex(ruleIndex), actionIndex(actionIndex), isCtxDependent(isCtxDependent) {
 }
 
-Transition::SerializationType ActionTransition::getSerializationType() const {
+Transition::SerializationType ActionTransition::getSerializationType() const noexcept
+{
   return ACTION;
 }
 
-bool ActionTransition::isEpsilon() const {
+bool ActionTransition::isEpsilon() const noexcept
+{
   return true; // we are to be ignored by analysis 'cept for predicates
 }
 
-bool ActionTransition::matches(size_t /*symbol*/, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const {
+bool ActionTransition::matches(size_t /*symbol*/, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const noexcept
+{
   return false;
 }
 

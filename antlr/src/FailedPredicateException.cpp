@@ -38,11 +38,11 @@ FailedPredicateException::FailedPredicateException(Parser *recognizer, const std
   _predicate = predicate;
 }
 
-size_t FailedPredicateException::getRuleIndex() {
+size_t FailedPredicateException::getRuleIndex() noexcept {
   return _ruleIndex;
 }
 
-size_t FailedPredicateException::getPredIndex() {
+size_t FailedPredicateException::getPredIndex() noexcept {
   return _predicateIndex;
 }
 

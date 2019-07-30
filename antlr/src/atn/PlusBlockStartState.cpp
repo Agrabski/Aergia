@@ -7,6 +7,7 @@
 
 using namespace antlr4::atn;
 
-size_t PlusBlockStartState::getStateType() {
+size_t PlusBlockStartState::getStateType() noexcept
+{
   return PLUS_BLOCK_START;
 }

@@ -6,6 +6,7 @@
 #pragma once
 
 #include "support/BitSet.h"
+#include <gsl.h>
 
 namespace antlr4 {
 namespace atn {
@@ -185,7 +186,7 @@ namespace atn {
     /// <param name="configs"> the configuration set to test </param>
     /// <returns> {@code true} if any configuration in {@code configs} is in a
     /// <seealso cref="RuleStopState"/>, otherwise {@code false} </returns>
-    static bool hasConfigInRuleStopState(ATNConfigSet *configs);
+    static bool hasConfigInRuleStopState(ATNConfigSet *configs) noexcept;
 
     /// <summary>
     /// Checks if all configurations in {@code configs} are in a
@@ -197,7 +198,7 @@ namespace atn {
     /// <param name="configs"> the configuration set to test </param>
     /// <returns> {@code true} if all configurations in {@code configs} are in a
     /// <seealso cref="RuleStopState"/>, otherwise {@code false} </returns>
-    static bool allConfigsInRuleStopStates(ATNConfigSet *configs);
+    static bool allConfigsInRuleStopStates(ATNConfigSet *configs) noexcept;
 
     /**
      * Full LL prediction termination.
@@ -351,7 +352,7 @@ namespace atn {
     /// has
     /// <seealso cref="BitSet#cardinality cardinality"/> &gt; 1, otherwise {@code
     /// false} </returns>
-    static bool allSubsetsConflict(const std::vector<antlrcpp::BitSet> &altsets);
+    static bool allSubsetsConflict(const std::vector<antlrcpp::BitSet> &altsets) noexcept;
 
     /// <summary>
     /// Determines if any single alternative subset in {@code altsets} contains
@@ -362,7 +363,7 @@ namespace atn {
     /// cref="BitSet"/> with
     /// <seealso cref="BitSet#cardinality cardinality"/> 1, otherwise {@code false}
     /// </returns>
-    static bool hasNonConflictingAltSet(const std::vector<antlrcpp::BitSet> &altsets);
+    static bool hasNonConflictingAltSet(const std::vector<antlrcpp::BitSet> &altsets) noexcept;
 
     /// <summary>
     /// Determines if any single alternative subset in {@code altsets} contains
@@ -373,7 +374,7 @@ namespace atn {
     /// cref="BitSet"/> with
     /// <seealso cref="BitSet#cardinality cardinality"/> &gt; 1, otherwise {@code
     /// false} </returns>
-    static bool hasConflictingAltSet(const std::vector<antlrcpp::BitSet> &altsets);
+    static bool hasConflictingAltSet(const std::vector<antlrcpp::BitSet> &altsets) noexcept;
 
     /// <summary>
     /// Determines if every alternative subset in {@code altsets} is equivalent.
@@ -399,10 +400,10 @@ namespace atn {
     /// </summary>
     /// <param name="altsets"> a collection of alternative subsets </param>
     /// <returns> the set of represented alternatives in {@code altsets} </returns>
-    static antlrcpp::BitSet getAlts(const std::vector<antlrcpp::BitSet> &altsets);
+    static antlrcpp::BitSet getAlts(const std::vector<antlrcpp::BitSet> &altsets) noexcept;
 
     /** Get union of all alts from configs. @since 4.5.1 */
-    static antlrcpp::BitSet getAlts(ATNConfigSet *configs);
+    static antlrcpp::BitSet getAlts( gsl::not_null<ATNConfigSet*>configs);
 
     /// <summary>
     /// This function gets the conflicting alt subsets from a configuration set.

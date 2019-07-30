@@ -49,11 +49,11 @@ inline uint64_t rotl64 (uint64_t x, int8_t r)
 
 #endif // !defined(_MSC_VER)
 
-size_t MurmurHash::initialize() {
+size_t MurmurHash::initialize() noexcept {
   return initialize(DEFAULT_SEED);
 }
 
-size_t MurmurHash::initialize(size_t seed) {
+size_t MurmurHash::initialize(size_t seed) noexcept {
   return seed;
 }
 
@@ -104,7 +104,7 @@ size_t MurmurHash::finish(size_t hash, size_t entryCount) {
 
 #else
 
-size_t MurmurHash::update(size_t hash, size_t value) {
+size_t MurmurHash::update(size_t hash, size_t value) noexcept {
   static const size_t c1 = BIG_CONSTANT(0x87c37b91114253d5);
   static const size_t c2 = BIG_CONSTANT(0x4cf5ad432745937f);
 
@@ -121,7 +121,7 @@ size_t MurmurHash::update(size_t hash, size_t value) {
 }
 
 
-size_t MurmurHash::finish(size_t hash, size_t entryCount) {
+size_t MurmurHash::finish(size_t hash, size_t entryCount)noexcept {
   hash ^= entryCount * 8;
   hash ^= hash >> 33;
   hash *= 0xff51afd7ed558ccd;

@@ -14,7 +14,7 @@ DFASerializer::DFASerializer(const DFA *dfa, const std::vector<std::string>& tok
   : DFASerializer(dfa, Vocabulary::fromTokenNames(tokenNames)) {
 }
 
-DFASerializer::DFASerializer(const DFA *dfa, const Vocabulary &vocabulary) : _dfa(dfa), _vocabulary(vocabulary) {
+DFASerializer::DFASerializer(const DFA *dfa, const Vocabulary &vocabulary) noexcept : _dfa(dfa), _vocabulary(vocabulary) {
 }
 
 DFASerializer::~DFASerializer() {

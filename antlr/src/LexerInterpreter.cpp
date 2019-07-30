@@ -46,7 +46,7 @@ LexerInterpreter::~LexerInterpreter()
   delete _interpreter;
 }
 
-const atn::ATN& LexerInterpreter::getATN() const {
+const atn::ATN& LexerInterpreter::getATN() const noexcept {
   return _atn;
 }
 
@@ -54,22 +54,22 @@ std::string LexerInterpreter::getGrammarFileName() const {
   return _grammarFileName;
 }
 
-const std::vector<std::string>& LexerInterpreter::getTokenNames() const {
+const std::vector<std::string>& LexerInterpreter::getTokenNames() const noexcept {
   return _tokenNames;
 }
 
-const std::vector<std::string>& LexerInterpreter::getRuleNames() const {
+const std::vector<std::string>& LexerInterpreter::getRuleNames() const noexcept {
   return _ruleNames;
 }
 
-const std::vector<std::string>& LexerInterpreter::getChannelNames() const {
+const std::vector<std::string>& LexerInterpreter::getChannelNames() const noexcept {
   return _channelNames;
 }
 
-const std::vector<std::string>& LexerInterpreter::getModeNames() const {
+const std::vector<std::string>& LexerInterpreter::getModeNames() const noexcept {
   return _modeNames;
 }
 
-const dfa::Vocabulary& LexerInterpreter::getVocabulary() const {
+const dfa::Vocabulary& LexerInterpreter::getVocabulary()  const noexcept {
   return _vocabulary;
 }

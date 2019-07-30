@@ -25,23 +25,23 @@ namespace atn {
     /// <summary>
     /// Constructs a new {@code channel} action with the specified channel value. </summary>
     /// <param name="channel"> The channel value to pass to <seealso cref="Lexer#setChannel"/>. </param>
-    LexerChannelAction(int channel);
+    LexerChannelAction(int channel) noexcept;
 
     /// <summary>
     /// Gets the channel to use for the <seealso cref="Token"/> created by the lexer.
     /// </summary>
     /// <returns> The channel to use for the <seealso cref="Token"/> created by the lexer. </returns>
-    int getChannel() const;
+    int getChannel() const noexcept;
 
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns <seealso cref="LexerActionType#CHANNEL"/>. </returns>
-    virtual LexerActionType getActionType() const override;
+    LexerActionType getActionType() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns {@code false}. </returns>
-    virtual bool isPositionDependent() const override;
+    bool isPositionDependent() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc}
@@ -49,11 +49,11 @@ namespace atn {
     /// <para>This action is implemented by calling <seealso cref="Lexer#setChannel"/> with the
     /// value provided by <seealso cref="#getChannel"/>.</para>
     /// </summary>
-    virtual void execute(Lexer *lexer) override;
+    void execute(Lexer *lexer) noexcept override;
 
-    virtual size_t hashCode() const override;
-    virtual bool operator == (const LexerAction &obj) const override;
-    virtual std::string toString() const override;
+    size_t hashCode() const noexcept override;
+    bool operator == (const LexerAction &obj) const noexcept override;
+    std::string toString() const override;
 
   private:
     const int _channel;

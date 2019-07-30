@@ -13,7 +13,7 @@
 using namespace antlr4::dfa;
 using namespace antlr4::atn;
 
-DFAState::PredPrediction::PredPrediction(const Ref<SemanticContext> &pred, int alt) : pred(pred) {
+DFAState::PredPrediction::PredPrediction(const Ref<SemanticContext> &pred, int alt)noexcept : pred(pred) {
   InitializeInstanceFields();
   this->alt = alt;
 }
@@ -25,7 +25,7 @@ std::string DFAState::PredPrediction::toString() {
   return std::string("(") + pred->toString() + ", " + std::to_string(alt) + ")";
 }
 
-void DFAState::PredPrediction::InitializeInstanceFields() {
+void DFAState::PredPrediction::InitializeInstanceFields() noexcept {
   alt = 0;
 }
 
@@ -92,7 +92,7 @@ std::string DFAState::toString() {
   return ss.str();
 }
 
-void DFAState::InitializeInstanceFields() {
+void DFAState::InitializeInstanceFields() noexcept {
   stateNumber = -1;
   isAcceptState = false;
   prediction = 0;

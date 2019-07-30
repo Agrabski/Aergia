@@ -13,7 +13,8 @@ using namespace antlr4::atn;
 RangeTransition::RangeTransition(ATNState *target, size_t from, size_t to) : Transition(target), from(from), to(to) {
 }
 
-Transition::SerializationType RangeTransition::getSerializationType() const {
+Transition::SerializationType RangeTransition::getSerializationType() const  noexcept 
+{
   return RANGE;
 }
 
@@ -21,7 +22,8 @@ misc::IntervalSet RangeTransition::label() const {
   return misc::IntervalSet::of((int)from, (int)to);
 }
 
-bool RangeTransition::matches(size_t symbol, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const {
+bool RangeTransition::matches(size_t symbol, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const  noexcept 
+{
   return symbol >= from && symbol <= to;
 }
 

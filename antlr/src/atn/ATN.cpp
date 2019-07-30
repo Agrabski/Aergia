@@ -125,7 +125,8 @@ DecisionState *ATN::getDecisionState(size_t decision) const {
   return nullptr;
 }
 
-size_t ATN::getNumberOfDecisions() const {
+size_t ATN::getNumberOfDecisions() const noexcept 
+{
   return decisionToState.size();
 }
 

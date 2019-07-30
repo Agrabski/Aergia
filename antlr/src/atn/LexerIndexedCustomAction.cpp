@@ -13,23 +13,27 @@ using namespace antlr4;
 using namespace antlr4::atn;
 using namespace antlr4::misc;
 
-LexerIndexedCustomAction::LexerIndexedCustomAction(int offset, Ref<LexerAction> const& action)
+LexerIndexedCustomAction::LexerIndexedCustomAction(int offset, Ref<LexerAction> const& action) noexcept
   : _offset(offset), _action(action) {
 }
 
-int LexerIndexedCustomAction::getOffset() const {
+int LexerIndexedCustomAction::getOffset() const noexcept
+{
   return _offset;
 }
 
-Ref<LexerAction> LexerIndexedCustomAction::getAction() const {
+Ref<LexerAction> LexerIndexedCustomAction::getAction() const noexcept
+{
   return _action;
 }
 
-LexerActionType LexerIndexedCustomAction::getActionType() const {
+LexerActionType LexerIndexedCustomAction::getActionType() const
+{
   return _action->getActionType();
 }
 
-bool LexerIndexedCustomAction::isPositionDependent() const {
+bool LexerIndexedCustomAction::isPositionDependent() const noexcept
+{
   return true;
 }
 
@@ -38,7 +42,7 @@ void LexerIndexedCustomAction::execute(Lexer *lexer) {
   _action->execute(lexer);
 }
 
-size_t LexerIndexedCustomAction::hashCode() const {
+size_t LexerIndexedCustomAction::hashCode() const noexcept {
   size_t hash = MurmurHash::initialize();
   hash = MurmurHash::update(hash, _offset);
   hash = MurmurHash::update(hash, _action);

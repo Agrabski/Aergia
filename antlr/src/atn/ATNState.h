@@ -6,10 +6,11 @@
 #pragma once
 
 #include "misc/IntervalSet.h"
+#include <array>
 
 namespace antlr4 {
 namespace atn {
-
+	using namespace std::literals;
   /// <summary>
   /// The following images show the relation of states and
   /// <seealso cref="ATNState#transitions"/> for various grammar constructs.
@@ -100,20 +101,24 @@ namespace atn {
       LOOP_END = 12
     };
 
-    static const std::vector<std::string> serializationNames;
+    static inline const std::array<std::string,13> serializationNames = {
+  "INVALID"s, "BASIC"s, "RULE_START"s, "BLOCK_START"s,
+  "PLUS_BLOCK_START"s, "STAR_BLOCK_START"s, "TOKEN_START"s, "RULE_STOP"s,
+  "BLOCK_END"s, "STAR_LOOP_BACK"s, "STAR_LOOP_ENTRY"s, "PLUS_LOOP_BACK"s, "LOOP_END"s
+	};
 
     size_t stateNumber = INVALID_STATE_NUMBER;
     size_t ruleIndex = 0; // at runtime, we don't have Rule objects
     bool epsilonOnlyTransitions = false;
 
   public:
-    virtual size_t hashCode();
-    bool operator == (const ATNState &other);
+    virtual size_t hashCode() noexcept;
+    bool operator == (const ATNState &other) noexcept;
 
     /// Track the transitions emanating from this ATN state.
     std::vector<Transition*> transitions;
 
-    virtual bool isNonGreedyExitState();
+    virtual bool isNonGreedyExitState() noexcept;
     virtual std::string toString() const;
     virtual void addTransition(Transition *e);
     virtual void addTransition(size_t index, Transition *e);

@@ -14,6 +14,6 @@ InterpreterRuleContext::InterpreterRuleContext(ParserRuleContext *parent, size_t
   : ParserRuleContext(parent, invokingStateNumber), _ruleIndex(ruleIndex) {
 }
 
-size_t InterpreterRuleContext::getRuleIndex() const {
+size_t InterpreterRuleContext::getRuleIndex() const noexcept {
   return _ruleIndex;
 }

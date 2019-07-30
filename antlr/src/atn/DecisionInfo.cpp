@@ -10,7 +10,7 @@
 
 using namespace antlr4::atn;
 
-DecisionInfo::DecisionInfo(size_t decision) : decision(decision) {
+DecisionInfo::DecisionInfo(size_t decision) noexcept : decision(decision) {
 }
 
 std::string DecisionInfo::toString() const {

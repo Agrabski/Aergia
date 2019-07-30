@@ -17,15 +17,17 @@ RuleTransition::RuleTransition(RuleStartState *ruleStart, size_t ruleIndex, int 
   this->followState = followState;
 }
 
-Transition::SerializationType RuleTransition::getSerializationType() const {
+Transition::SerializationType RuleTransition::getSerializationType() const noexcept
+{
   return RULE;
 }
 
-bool RuleTransition::isEpsilon() const {
+bool RuleTransition::isEpsilon() const noexcept
+{
   return true;
 }
 
-bool RuleTransition::matches(size_t /*symbol*/, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const {
+bool RuleTransition::matches(size_t /*symbol*/, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const noexcept {
   return false;
 }
 

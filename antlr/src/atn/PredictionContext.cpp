@@ -13,6 +13,7 @@
 #include "support/CPPUtils.h"
 
 #include "atn/PredictionContext.h"
+#include <gsl.h>
 
 using namespace antlr4;
 using namespace antlr4::misc;
@@ -25,7 +26,7 @@ const Ref<PredictionContext> PredictionContext::EMPTY = std::make_shared<EmptyPr
 
 //----------------- PredictionContext ----------------------------------------------------------------------------------
 
-PredictionContext::PredictionContext( size_t cachedHashCode ) : id( globalNodeCount++ ), cachedHashCode( cachedHashCode ) {
+PredictionContext::PredictionContext( size_t cachedHashCode ) noexcept : id( globalNodeCount++ ), cachedHashCode( cachedHashCode ) {
 }
 
 PredictionContext::~PredictionContext() {
@@ -46,11 +47,12 @@ Ref<PredictionContext> PredictionContext::fromRuleContext( const ATN& atn, RuleC
 	Ref<PredictionContext> parent = PredictionContext::fromRuleContext( atn, dynamic_cast<RuleContext*>(outerContext->parent) );
 
 	ATNState* state = atn.states.at( outerContext->invokingState );
-	RuleTransition* transition = (RuleTransition*)state->transitions[0];
+	gsl::not_null<RuleTransition*> transition = (RuleTransition*)state->transitions.front();
 	return SingletonPredictionContext::create( parent, transition->followState->stateNumber );
 }
 
-bool PredictionContext::isEmpty() const {
+bool PredictionContext::isEmpty() const noexcept 
+{
 	return this == EMPTY.get();
 }
 
@@ -59,17 +61,18 @@ bool PredictionContext::hasEmptyPath() const {
 	return getReturnState( size() - 1 ) == EMPTY_RETURN_STATE;
 }
 
-size_t PredictionContext::hashCode() const {
+size_t PredictionContext::hashCode() const noexcept
+{
 	return cachedHashCode;
 }
 
-size_t PredictionContext::calculateEmptyHashCode() {
+size_t PredictionContext::calculateEmptyHashCode() noexcept {
 	size_t hash = MurmurHash::initialize( INITIAL_HASH );
 	hash = MurmurHash::finish( hash, 0 );
 	return hash;
 }
 
-size_t PredictionContext::calculateHashCode( Ref<PredictionContext> parent, size_t returnState ) {
+size_t PredictionContext::calculateHashCode( Ref<PredictionContext> parent, size_t returnState ) noexcept {
 	size_t hash = MurmurHash::initialize( INITIAL_HASH );
 	hash = MurmurHash::update( hash, parent );
 	hash = MurmurHash::update( hash, returnState );
@@ -78,7 +81,7 @@ size_t PredictionContext::calculateHashCode( Ref<PredictionContext> parent, size
 }
 
 size_t PredictionContext::calculateHashCode( const std::vector<Ref<PredictionContext>>& parents,
-	const std::vector<size_t>& returnStates ) {
+	const std::vector<size_t>& returnStates ) noexcept {
 	size_t hash = MurmurHash::initialize( INITIAL_HASH );
 
 	for (auto parent : parents) {
@@ -125,7 +128,7 @@ Ref<PredictionContext> PredictionContext::merge( const Ref<PredictionContext>& a
 	else {
 		left = std::dynamic_pointer_cast<ArrayPredictionContext>(a);
 	}
-	Ref<ArrayPredictionContext> right;
+	Ref<ArrayPredictionContext> right = nullptr;
 	if (is<SingletonPredictionContext>( b )) {
 		right = std::make_shared<ArrayPredictionContext>( std::dynamic_pointer_cast<SingletonPredictionContext>(b) );
 	}
@@ -157,10 +160,12 @@ Ref<PredictionContext> PredictionContext::mergeSingletons( const Ref<SingletonPr
 		return rootMerge;
 	}
 
-	Ref<PredictionContext> parentA = a->parent;
-	Ref<PredictionContext> parentB = b->parent;
-	if (a->returnState == b->returnState) { // a == b
-		Ref<PredictionContext> parent = merge( parentA, parentB, rootIsWildcard, mergeCache );
+	gsl::not_null<Ref<PredictionContext>> parentA = a->parent;
+	gsl::not_null<Ref<PredictionContext>> parentB = b->parent;
+	if (a->returnState == b->returnState) 
+	{
+		// a == b
+		gsl::not_null<Ref<PredictionContext>> parent = merge( parentA, parentB, rootIsWildcard, mergeCache );
 
 		// If parent is same as existing a or b parent or reduced to a parent, return it.
 		if (parent == parentA) { // ax + bx = ax, if a=b
@@ -184,7 +189,7 @@ Ref<PredictionContext> PredictionContext::mergeSingletons( const Ref<SingletonPr
 		// a != b payloads differ
 		// see if we can collapse parents due to $+x parents if local ctx
 		Ref<PredictionContext> singleParent;
-		if (a == b || (*parentA == *parentB)) { // ax + bx = [a,b]x
+		if (a == b || (*parentA.get() == *parentB.get())) { // ax + bx = [a,b]x
 			singleParent = parentA;
 		}
 		if (singleParent) { // parents are same, sort payloads and use same parent
@@ -394,7 +399,7 @@ std::string PredictionContext::toDOTString( const Ref<PredictionContext>& contex
 	ss << "digraph G {\n" << "rankdir=LR;\n";
 
 	std::vector<Ref<PredictionContext>> nodes = getAllContextNodes( context );
-	std::sort( nodes.begin(), nodes.end(), []( const Ref<PredictionContext>& o1, const Ref<PredictionContext>& o2 ) {
+	std::sort( nodes.begin(), nodes.end(), []( const Ref<PredictionContext>& o1, const Ref<PredictionContext>& o2 ) noexcept {
 		return o1->id - o2->id;
 		} );
 
@@ -651,7 +656,7 @@ Ref<PredictionContext> PredictionContextMergeCache::get( Ref<PredictionContext> 
 	return iterator2->second;
 }
 
-void PredictionContextMergeCache::clear() {
+void PredictionContextMergeCache::clear() noexcept {
 	_data.clear();
 }
 

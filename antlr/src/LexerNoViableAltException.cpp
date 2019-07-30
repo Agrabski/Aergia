@@ -21,8 +21,8 @@ size_t LexerNoViableAltException::getStartIndex() {
   return _startIndex;
 }
 
-atn::ATNConfigSet* LexerNoViableAltException::getDeadEndConfigs() {
-  return _deadEndConfigs;
+atn::ATNConfigSet* LexerNoViableAltException::getDeadEndConfigs() noexcept {
+  return _deadEndConfigs; 
 }
 
 std::string LexerNoViableAltException::toString() {

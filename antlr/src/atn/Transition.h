@@ -62,7 +62,7 @@ namespace atn {
      * consume an input symbol; otherwise, {@code false} if traversing this
      * transition consumes (matches) an input symbol.
      */
-    virtual bool isEpsilon() const;
+    virtual bool isEpsilon() const noexcept;
     virtual misc::IntervalSet label() const;
     virtual bool matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const = 0;
 

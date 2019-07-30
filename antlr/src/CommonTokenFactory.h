@@ -53,7 +53,7 @@ namespace antlr4 {
      *
      * @param copyText The value for {@link #copyText}.
      */
-    CommonTokenFactory(bool copyText);
+    CommonTokenFactory(bool copyText) noexcept;
 
     /**
      * Constructs a {@link CommonTokenFactory} with {@link #copyText} set to

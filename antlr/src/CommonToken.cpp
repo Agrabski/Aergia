@@ -22,7 +22,7 @@ using namespace antlrcpp;
 
 const std::pair<TokenSource*, CharStream*> CommonToken::EMPTY_SOURCE;
 
-CommonToken::CommonToken(size_t type) {
+CommonToken::CommonToken(size_t type) noexcept {
   InitializeInstanceFields();
   _type = type;
 }
@@ -67,11 +67,11 @@ CommonToken::CommonToken(Token *oldToken) {
   }
 }
 
-size_t CommonToken::getType() const {
+size_t CommonToken::getType() const noexcept {
   return _type;
 }
 
-void CommonToken::setLine(size_t line) {
+void CommonToken::setLine(size_t line) noexcept {
   _line = line;
 }
 
@@ -96,59 +96,59 @@ void CommonToken::setText(const std::string &text) {
   _text = text;
 }
 
-size_t CommonToken::getLine() const {
+size_t CommonToken::getLine() const noexcept {
   return _line;
 }
 
-size_t CommonToken::getCharPositionInLine() const {
+size_t CommonToken::getCharPositionInLine() const noexcept {
   return _charPositionInLine;
 }
 
-void CommonToken::setCharPositionInLine(size_t charPositionInLine) {
+void CommonToken::setCharPositionInLine(size_t charPositionInLine) noexcept {
   _charPositionInLine = charPositionInLine;
 }
 
-size_t CommonToken::getChannel() const {
+size_t CommonToken::getChannel() const noexcept {
   return _channel;
 }
 
-void CommonToken::setChannel(size_t channel) {
+void CommonToken::setChannel(size_t channel) noexcept {
   _channel = channel;
 }
 
-void CommonToken::setType(size_t type) {
+void CommonToken::setType(size_t type) noexcept {
   _type = type;
 }
 
-size_t CommonToken::getStartIndex() const {
+size_t CommonToken::getStartIndex() const noexcept {
   return _start;
 }
 
-void CommonToken::setStartIndex(size_t start) {
+void CommonToken::setStartIndex(size_t start) noexcept {
   _start = start;
 }
 
-size_t CommonToken::getStopIndex() const {
+size_t CommonToken::getStopIndex() const noexcept {
   return _stop;
 }
 
-void CommonToken::setStopIndex(size_t stop) {
+void CommonToken::setStopIndex(size_t stop) noexcept {
   _stop = stop;
 }
 
-size_t CommonToken::getTokenIndex() const {
+size_t CommonToken::getTokenIndex() const noexcept {
   return _index;
 }
 
-void CommonToken::setTokenIndex(size_t index) {
+void CommonToken::setTokenIndex(size_t index)  noexcept {
   _index = index;
 }
 
-antlr4::TokenSource *CommonToken::getTokenSource() const {
+antlr4::TokenSource *CommonToken::getTokenSource() const noexcept {
   return _source.first;
 }
 
-antlr4::CharStream *CommonToken::getInputStream() const {
+antlr4::CharStream *CommonToken::getInputStream() const noexcept {
   return _source.second;
 }
 
@@ -183,7 +183,7 @@ std::string CommonToken::toString(Recognizer *r) const {
   return ss.str();
 }
 
-void CommonToken::InitializeInstanceFields() {
+void CommonToken::InitializeInstanceFields() noexcept {
   _type = 0;
   _line = 0;
   _charPositionInLine = INVALID_INDEX;

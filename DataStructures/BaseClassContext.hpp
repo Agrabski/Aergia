@@ -23,7 +23,7 @@ namespace Aergia::DataStructures
 
 		VariableContext* getVariable( std::string const& name )override { return nullptr; }
 
-		std::vector<IContext*>&& getMembers( std::string const& name )override { return std::vector<IContext*>(); }
+		std::vector<IContext*> getMembers( std::string const& name )override { return std::vector<IContext*>(); }
 
 		bool appendMember( NamespaceContext&& newMember )override { return false; }
 

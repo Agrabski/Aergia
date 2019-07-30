@@ -7,6 +7,6 @@
 
 using namespace antlr4::atn;
 
-size_t LoopEndState::getStateType() {
+size_t LoopEndState::getStateType() noexcept {
   return LOOP_END;
 }

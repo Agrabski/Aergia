@@ -19,23 +19,23 @@ namespace atn {
     bool generateRuleBypassTransitions;
 
   public:
-    ATNDeserializationOptions();
-    ATNDeserializationOptions(ATNDeserializationOptions *options);
+    ATNDeserializationOptions() noexcept;
+    ATNDeserializationOptions(ATNDeserializationOptions *options) noexcept;
     ATNDeserializationOptions(ATNDeserializationOptions const&) = default;
     virtual ~ATNDeserializationOptions();
     ATNDeserializationOptions& operator=(ATNDeserializationOptions const&) = default;
 
-    static const ATNDeserializationOptions& getDefaultOptions();
+    static const ATNDeserializationOptions& getDefaultOptions() noexcept;
 
-    bool isReadOnly();
+    bool isReadOnly() noexcept;
 
-    void makeReadOnly();
+    void makeReadOnly() noexcept;
 
-    bool isVerifyATN();
+    bool isVerifyATN() noexcept;
 
     void setVerifyATN(bool verify);
 
-    bool isGenerateRuleBypassTransitions();
+    bool isGenerateRuleBypassTransitions() noexcept;
 
     void setGenerateRuleBypassTransitions(bool generate);
 
@@ -43,7 +43,7 @@ namespace atn {
     virtual void throwIfReadOnly();
 
   private:
-    void InitializeInstanceFields();
+    void InitializeInstanceFields() noexcept;
   };
 
 } // namespace atn

@@ -28,7 +28,7 @@ namespace Aergia::DataStructures
 			return _name;
 		}
 
-		NamespaceContext* getNamespace( std::string const& name ) override
+		NamespaceContext* getNamespace( std::string const& name ) noexcept override
 		{
 			for (auto& ns : _namespaces)
 				if (ns.getName() == name)
@@ -36,7 +36,7 @@ namespace Aergia::DataStructures
 			return nullptr;
 		}
 
-		MethodContext* getMethod( std::string const& name ) override
+		MethodContext* getMethod( std::string const& name ) noexcept override
 		{
 			for (auto& ns : _functions)
 				if (ns.getName() == name)
@@ -44,7 +44,7 @@ namespace Aergia::DataStructures
 			return nullptr;
 		}
 
-		ClassContext* getClass( std::string const& name ) override
+		ClassContext* getClass( std::string const& name ) noexcept override
 		{
 			for (auto& ns : _classes)
 				if (ns.getName() == name)
@@ -61,7 +61,7 @@ namespace Aergia::DataStructures
 
 		}
 
-		std::vector<IContext*>&& getMembers( std::string const& name ) override
+		std::vector<IContext*> getMembers( std::string const& name ) override
 		{
 			std::vector<IContext*>result;
 			result.push_back( getNamespace( name ) );

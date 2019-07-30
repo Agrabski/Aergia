@@ -80,7 +80,7 @@ namespace atn {
 
     virtual DecisionState *getDecisionState(size_t decision) const;
 
-    virtual size_t getNumberOfDecisions() const;
+    virtual size_t getNumberOfDecisions() const noexcept;
 
     /// <summary>
     /// Computes the set of input symbols which could follow ATN state number

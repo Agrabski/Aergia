@@ -12,21 +12,21 @@ namespace atn {
 
   class ANTLR4CPP_PUBLIC LexerATNConfig : public ATNConfig {
   public:
-    LexerATNConfig(ATNState *state, int alt, Ref<PredictionContext> const& context);
-    LexerATNConfig(ATNState *state, int alt, Ref<PredictionContext> const& context, Ref<LexerActionExecutor> const& lexerActionExecutor);
+    LexerATNConfig(ATNState *state, int alt, Ref<PredictionContext> const& context) noexcept;
+    LexerATNConfig(ATNState *state, int alt, Ref<PredictionContext> const& context, Ref<LexerActionExecutor> const& lexerActionExecutor) noexcept;
 
-    LexerATNConfig(Ref<LexerATNConfig> const& c, ATNState *state);
-    LexerATNConfig(Ref<LexerATNConfig> const& c, ATNState *state, Ref<LexerActionExecutor> const& lexerActionExecutor);
-    LexerATNConfig(Ref<LexerATNConfig> const& c, ATNState *state, Ref<PredictionContext> const& context);
+    LexerATNConfig(Ref<LexerATNConfig> const& c, ATNState *state) noexcept;
+    LexerATNConfig(Ref<LexerATNConfig> const& c, ATNState *state, Ref<LexerActionExecutor> const& lexerActionExecutor) noexcept;
+    LexerATNConfig(Ref<LexerATNConfig> const& c, ATNState *state, Ref<PredictionContext> const& context) noexcept;
 
     /**
      * Gets the {@link LexerActionExecutor} capable of executing the embedded
      * action(s) for the current configuration.
      */
-    Ref<LexerActionExecutor> getLexerActionExecutor() const;
-    bool hasPassedThroughNonGreedyDecision();
+    Ref<LexerActionExecutor> getLexerActionExecutor() const noexcept;
+    bool hasPassedThroughNonGreedyDecision() noexcept;
 
-    virtual size_t hashCode() const override;
+    size_t hashCode() const noexcept override;
 
     bool operator == (const LexerATNConfig& other) const;
 
@@ -37,7 +37,7 @@ namespace atn {
     const Ref<LexerActionExecutor> _lexerActionExecutor;
     const bool _passedThroughNonGreedyDecision;
 
-    static bool checkNonGreedyDecision(Ref<LexerATNConfig> const& source, ATNState *target);
+    static bool checkNonGreedyDecision(Ref<LexerATNConfig> const& source, ATNState *target) noexcept;
   };
 
 } // namespace atn

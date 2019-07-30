@@ -19,7 +19,7 @@ namespace atn {
     static const Ref<dfa::DFAState> ERROR;
     const ATN &atn;
 
-    ATNSimulator(const ATN &atn, PredictionContextCache &sharedContextCache);
+    ATNSimulator(const ATN &atn, PredictionContextCache &sharedContextCache) noexcept;
     virtual ~ATNSimulator();
 
     virtual void reset() = 0;
@@ -36,7 +36,7 @@ namespace atn {
      * @since 4.3
      */
     virtual void clearDFA();
-    virtual PredictionContextCache& getSharedContextCache();
+    virtual PredictionContextCache& getSharedContextCache() noexcept;
     virtual Ref<PredictionContext> getCachedContext(Ref<PredictionContext> const& context);
 
     /// @deprecated Use <seealso cref="ATNDeserializer#deserialize"/> instead.

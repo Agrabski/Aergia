@@ -17,9 +17,9 @@ namespace atn {
 
     PrecedencePredicateTransition(ATNState *target, int precedence);
 
-    virtual SerializationType getSerializationType() const override;
-    virtual bool isEpsilon() const override;
-    virtual bool matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const override;
+    SerializationType getSerializationType() const noexcept override;
+    bool isEpsilon() const noexcept override;
+    bool matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const noexcept override;
     Ref<SemanticContext::PrecedencePredicate> getPredicate() const;
     virtual std::string toString() const override;
 

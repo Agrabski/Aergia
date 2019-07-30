@@ -9,7 +9,7 @@
 
 using namespace antlr4::tree::pattern;
 
-RuleTagToken::RuleTagToken(const std::string &/*ruleName*/, int _bypassTokenType) : bypassTokenType(_bypassTokenType) {
+RuleTagToken::RuleTagToken(const std::string &/*ruleName*/, int _bypassTokenType) noexcept : bypassTokenType(_bypassTokenType) {
 }
 
 RuleTagToken::RuleTagToken(const std::string &ruleName, size_t bypassTokenType, const std::string &label)
@@ -28,7 +28,7 @@ std::string RuleTagToken::getLabel() const {
   return label;
 }
 
-size_t RuleTagToken::getChannel() const {
+size_t RuleTagToken::getChannel() const noexcept {
   return DEFAULT_CHANNEL;
 }
 
@@ -40,35 +40,35 @@ std::string RuleTagToken::getText() const {
   return std::string("<") + ruleName + std::string(">");
 }
 
-size_t RuleTagToken::getType() const {
+size_t RuleTagToken::getType() const  noexcept {
   return bypassTokenType;
 }
 
-size_t RuleTagToken::getLine() const {
+size_t RuleTagToken::getLine() const noexcept {
   return 0;
 }
 
-size_t RuleTagToken::getCharPositionInLine() const {
+size_t RuleTagToken::getCharPositionInLine() const noexcept {
   return INVALID_INDEX;
 }
 
-size_t RuleTagToken::getTokenIndex() const {
+size_t RuleTagToken::getTokenIndex() const noexcept {
   return INVALID_INDEX;
 }
 
-size_t RuleTagToken::getStartIndex() const {
+size_t RuleTagToken::getStartIndex() const noexcept {
   return INVALID_INDEX;
 }
 
-size_t RuleTagToken::getStopIndex() const {
+size_t RuleTagToken::getStopIndex() const noexcept {
   return INVALID_INDEX;
 }
 
-antlr4::TokenSource *RuleTagToken::getTokenSource() const {
+antlr4::TokenSource *RuleTagToken::getTokenSource() const noexcept {
   return nullptr;
 }
 
-antlr4::CharStream *RuleTagToken::getInputStream() const {
+antlr4::CharStream *RuleTagToken::getInputStream() const noexcept {
   return nullptr;
 }
 

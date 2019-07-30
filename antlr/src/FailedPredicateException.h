@@ -19,8 +19,8 @@ namespace antlr4 {
     FailedPredicateException(Parser *recognizer, const std::string &predicate);
     FailedPredicateException(Parser *recognizer, const std::string &predicate, const std::string &message);
 
-    virtual size_t getRuleIndex();
-    virtual size_t getPredIndex();
+    virtual size_t getRuleIndex() noexcept;
+    virtual size_t getPredIndex() noexcept;
     virtual std::string getPredicate();
 
   private:

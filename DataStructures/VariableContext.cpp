@@ -33,9 +33,9 @@ ClassContext* Aergia::DataStructures::VariableContext::getClass( std::string con
 	return nullptr;
 }
 
-std::vector<IContext*>&& Aergia::DataStructures::VariableContext::getMembers( std::string const& name )
+std::vector<IContext*> Aergia::DataStructures::VariableContext::getMembers( std::string const& name )
 {
-	return std::move( std::vector<IContext*>() );
+	return std::vector<IContext*>();
 }
 
 bool Aergia::DataStructures::VariableContext::appendMember( NamespaceContext&& newMember )

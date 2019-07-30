@@ -12,33 +12,36 @@ using namespace antlr4;
 using namespace antlr4::atn;
 using namespace antlr4::misc;
 
-const Ref<LexerSkipAction> LexerSkipAction::getInstance() {
+const Ref<LexerSkipAction> LexerSkipAction::getInstance() 
+{
   static Ref<LexerSkipAction> instance(new LexerSkipAction());
   return instance;
 }
 
-LexerSkipAction::LexerSkipAction() {
+LexerSkipAction::LexerSkipAction()noexcept {
 }
 
-LexerActionType LexerSkipAction::getActionType() const {
+LexerActionType LexerSkipAction::getActionType() const noexcept
+{
   return LexerActionType::SKIP;
 }
 
-bool LexerSkipAction::isPositionDependent() const {
+bool LexerSkipAction::isPositionDependent() const noexcept {
   return false;
 }
 
-void LexerSkipAction::execute(Lexer *lexer) {
+void LexerSkipAction::execute(Lexer *lexer) noexcept {
   lexer->skip();
 }
 
-size_t LexerSkipAction::hashCode() const {
+size_t LexerSkipAction::hashCode() const noexcept {
   size_t hash = MurmurHash::initialize();
   hash = MurmurHash::update(hash, static_cast<size_t>(getActionType()));
   return MurmurHash::finish(hash, 1);
 }
 
-bool LexerSkipAction::operator == (const LexerAction &obj) const {
+bool LexerSkipAction::operator == (const LexerAction &obj) const noexcept
+{
   return &obj == this;
 }
 

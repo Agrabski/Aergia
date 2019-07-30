@@ -31,7 +31,7 @@ namespace antlr4
 			ArrayPredictionContext( std::vector<Ref<PredictionContext>> const& parents_, std::vector<size_t> const& returnStates );
 			virtual ~ArrayPredictionContext();
 
-			bool isEmpty() const override;
+			bool isEmpty() const noexcept override;
 			size_t size() const noexcept override;
 			Ref<PredictionContext> getParent( size_t index ) const override;
 			size_t getReturnState( size_t index ) const override;

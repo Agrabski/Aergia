@@ -101,15 +101,15 @@ std::unique_ptr<Token> Lexer::nextToken() {
   }
 }
 
-void Lexer::skip() {
+void Lexer::skip() noexcept {
   type = SKIP;
 }
 
-void Lexer::more() {
+void Lexer::more() noexcept {
   type = MORE;
 }
 
-void Lexer::setMode(size_t m) {
+void Lexer::setMode(size_t m) noexcept {
   mode = m;
 }
 
@@ -136,7 +136,7 @@ size_t Lexer::popMode() {
 }
 
 
-Ref<TokenFactory<CommonToken>> Lexer::getTokenFactory() {
+Ref<TokenFactory<CommonToken>> Lexer::getTokenFactory() noexcept {
   return _factory;
 }
 
@@ -149,11 +149,11 @@ std::string Lexer::getSourceName() {
   return _input->getSourceName();
 }
 
-CharStream* Lexer::getInputStream() {
+CharStream* Lexer::getInputStream() noexcept {
   return _input;
 }
 
-void Lexer::emit(std::unique_ptr<Token> newToken) {
+void Lexer::emit(std::unique_ptr<Token> newToken) noexcept {
   token = std::move(newToken);
 }
 
@@ -186,7 +186,7 @@ void Lexer::setCharPositionInLine(size_t charPositionInLine) {
   getInterpreter<atn::LexerATNSimulator>()->setCharPositionInLine(charPositionInLine);
 }
 
-size_t Lexer::getCharIndex() {
+size_t Lexer::getCharIndex() noexcept {
   return _input->index();
 }
 
@@ -201,27 +201,27 @@ void Lexer::setText(const std::string &text) {
   _text = text;
 }
 
-std::unique_ptr<Token> Lexer::getToken() {
+std::unique_ptr<Token> Lexer::getToken()  noexcept {
   return std::move(token);
 }
 
-void Lexer::setToken(std::unique_ptr<Token> newToken) {
+void Lexer::setToken(std::unique_ptr<Token> newToken) noexcept {
   token = std::move(newToken);
 }
 
-void Lexer::setType(size_t ttype) {
+void Lexer::setType(size_t ttype) noexcept {
   type = ttype;
 }
 
-size_t Lexer::getType() {
+size_t Lexer::getType() noexcept {
   return type;
 }
 
-void Lexer::setChannel(size_t newChannel) {
+void Lexer::setChannel(size_t newChannel)noexcept {
   channel = newChannel;
 }
 
-size_t Lexer::getChannel() {
+size_t Lexer::getChannel()  noexcept {
   return channel;
 }
 
@@ -277,11 +277,11 @@ void Lexer::recover(RecognitionException * /*re*/) {
   _input->consume();
 }
 
-size_t Lexer::getNumberOfSyntaxErrors() {
+size_t Lexer::getNumberOfSyntaxErrors() noexcept {
   return _syntaxErrors;
 }
 
-void Lexer::InitializeInstanceFields() {
+void Lexer::InitializeInstanceFields() noexcept {
   _syntaxErrors = 0;
   token = nullptr;
   _factory = CommonTokenFactory::DEFAULT;

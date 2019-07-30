@@ -22,7 +22,7 @@ namespace Aergia::Visitors
 		std::stack<ContextData> _contextStack;
 
 	public:
-		CurrentContextVisitor();
+		CurrentContextVisitor() noexcept;
 
 		template<typename T, typename... Args>
 		void addVisitor( Args&& ... arguments )
@@ -54,6 +54,10 @@ namespace Aergia::Visitors
 		void enterEveryRule( antlr4::ParserRuleContext* /*ctx*/ ) override;
 
 		void applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const;
+
+
+		// Inherited via ContextProvider
+		virtual DataStructures::IContext* getByQualifiedName( std::string& const qualifiedName ) override;
 
 	};
 }

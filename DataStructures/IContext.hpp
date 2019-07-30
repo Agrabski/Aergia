@@ -48,7 +48,7 @@ namespace Aergia::DataStructures
 
 		virtual VariableContext* getVariable( std::string const& name ) = 0;
 
-		virtual std::vector<IContext*>&& getMembers( std::string const& name ) = 0;
+		virtual std::vector<IContext*> getMembers( std::string const& name ) = 0;
 
 		virtual bool appendMember( NamespaceContext&& newMember ) = 0;
 

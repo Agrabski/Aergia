@@ -57,5 +57,5 @@ Token* BailErrorStrategy::recoverInline(Parser *recognizer)  {
   }
 }
 
-void BailErrorStrategy::sync(Parser * /*recognizer*/) {
+void BailErrorStrategy::sync(Parser * /*recognizer*/) noexcept {
 }

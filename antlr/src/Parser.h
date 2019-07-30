@@ -20,13 +20,13 @@ namespace antlr4 {
 
     class TraceListener : public tree::ParseTreeListener {
     public:
-      TraceListener(Parser *outerInstance);
+      TraceListener(Parser *outerInstance) noexcept;
       virtual ~TraceListener();
 
-      virtual void enterEveryRule(ParserRuleContext *ctx) override;
-      virtual void visitTerminal(tree::TerminalNode *node) override;
-      virtual void visitErrorNode(tree::ErrorNode *node) override;
-      virtual void exitEveryRule(ParserRuleContext *ctx) override;
+      void enterEveryRule(ParserRuleContext *ctx)  override;
+      void visitTerminal(tree::TerminalNode *node)  override;
+      void visitErrorNode(tree::ErrorNode *node) noexcept override;
+      void exitEveryRule(ParserRuleContext *ctx) override;
 
     private:
       Parser *const outerInstance;
@@ -38,14 +38,13 @@ namespace antlr4 {
 
       virtual ~TrimToSizeListener();
 
-      virtual void enterEveryRule(ParserRuleContext *ctx) override;
-      virtual void visitTerminal(tree::TerminalNode *node) override;
-      virtual void visitErrorNode(tree::ErrorNode *node) override;
-      virtual void exitEveryRule(ParserRuleContext *ctx) override;
+      void enterEveryRule(ParserRuleContext *ctx) override;
+      void visitTerminal(tree::TerminalNode *node) override;
+      void visitErrorNode(tree::ErrorNode *node) override;
+      void exitEveryRule(ParserRuleContext *ctx) override;
     };
 
     Parser(TokenStream *input);
-    virtual ~Parser();
 
     /// reset the parser's state
     virtual void reset();
@@ -373,7 +372,7 @@ namespace antlr4 {
      *
      * @see #setTrace(boolean)
      */
-    bool isTrace() const;
+    bool isTrace() const noexcept;
 
     tree::ParseTreeTracker& getTreeTracker() { return _tracker; }
 
@@ -459,7 +458,7 @@ namespace antlr4 {
     /// later call to setTrace(false). The listener itself is
     /// implemented as a parser listener so this field is not directly used by
     /// other parser methods.
-    TraceListener *_tracer;
+    std::unique_ptr<TraceListener> _tracer;
 
     void InitializeInstanceFields();
   };

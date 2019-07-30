@@ -43,7 +43,7 @@
 using namespace antlrcpp;
 using namespace antlr4::atn;
 
-ATNSerializer::ATNSerializer(ATN *atn) { this->atn = atn; }
+ATNSerializer::ATNSerializer(ATN *atn) noexcept : atn(atn) { }
 
 ATNSerializer::ATNSerializer(ATN *atn, const std::vector<std::string> &tokenNames) {
   this->atn = atn;

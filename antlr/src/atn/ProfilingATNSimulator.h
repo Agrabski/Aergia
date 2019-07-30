@@ -18,7 +18,7 @@ namespace atn {
     virtual size_t adaptivePredict(TokenStream *input, size_t decision, ParserRuleContext *outerContext) override;
 
     virtual std::vector<DecisionInfo> getDecisionInfo() const;
-    virtual dfa::DFAState* getCurrentState() const;
+    virtual dfa::DFAState* getCurrentState() const noexcept;
 
   protected:
     std::vector<DecisionInfo> _decisions;

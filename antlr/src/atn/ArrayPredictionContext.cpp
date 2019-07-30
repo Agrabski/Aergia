@@ -24,9 +24,9 @@ ArrayPredictionContext::ArrayPredictionContext(std::vector<Ref<PredictionContext
 ArrayPredictionContext::~ArrayPredictionContext() {
 }
 
-bool ArrayPredictionContext::isEmpty() const {
+bool ArrayPredictionContext::isEmpty() const noexcept {
   // Since EMPTY_RETURN_STATE can only appear in the last position, we don't need to verify that size == 1.
-  return returnStates.front() == EMPTY_RETURN_STATE;
+  return *returnStates.begin() == EMPTY_RETURN_STATE;
 }
 
 size_t ArrayPredictionContext::size() const noexcept {

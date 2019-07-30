@@ -58,7 +58,7 @@ Vocabulary Vocabulary::fromTokenNames(const std::vector<std::string> &tokenNames
   return Vocabulary(literalNames, symbolicNames, tokenNames);
 }
 
-size_t Vocabulary::getMaxTokenType() const {
+size_t Vocabulary::getMaxTokenType() const  noexcept {
   return _maxTokenType;
 }
 

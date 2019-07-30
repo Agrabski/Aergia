@@ -31,25 +31,25 @@ DefaultErrorStrategy::DefaultErrorStrategy() {
 DefaultErrorStrategy::~DefaultErrorStrategy() {
 }
 
-void DefaultErrorStrategy::reset(Parser *recognizer) {
+void DefaultErrorStrategy::reset(Parser *recognizer) noexcept {
   _errorSymbols.clear();
   endErrorCondition(recognizer);
 }
 
-void DefaultErrorStrategy::beginErrorCondition(Parser * /*recognizer*/) {
+void DefaultErrorStrategy::beginErrorCondition(Parser * /*recognizer*/) noexcept {
   errorRecoveryMode = true;
 }
 
-bool DefaultErrorStrategy::inErrorRecoveryMode(Parser * /*recognizer*/) {
+bool DefaultErrorStrategy::inErrorRecoveryMode(Parser * /*recognizer*/) noexcept {
   return errorRecoveryMode;
 }
 
-void DefaultErrorStrategy::endErrorCondition(Parser * /*recognizer*/) {
+void DefaultErrorStrategy::endErrorCondition(Parser * /*recognizer*/) noexcept {
   errorRecoveryMode = false;
   lastErrorIndex = -1;
 }
 
-void DefaultErrorStrategy::reportMatch(Parser *recognizer) {
+void DefaultErrorStrategy::reportMatch(Parser *recognizer) noexcept {
   endErrorCondition(recognizer);
 }
 
@@ -327,7 +327,7 @@ void DefaultErrorStrategy::consumeUntil(Parser *recognizer, const misc::Interval
   }
 }
 
-void DefaultErrorStrategy::InitializeInstanceFields() {
+void DefaultErrorStrategy::InitializeInstanceFields() noexcept {
   errorRecoveryMode = false;
   lastErrorIndex = -1;
 }

@@ -34,25 +34,25 @@ namespace atn {
     /// <seealso cref="Recognizer#action"/>. </param>
     /// <param name="actionIndex"> The action index to use for calls to
     /// <seealso cref="Recognizer#action"/>. </param>
-    LexerCustomAction(size_t ruleIndex, size_t actionIndex);
+	LexerCustomAction( size_t ruleIndex, size_t actionIndex ) noexcept;
 
     /// <summary>
     /// Gets the rule index to use for calls to <seealso cref="Recognizer#action"/>.
     /// </summary>
     /// <returns> The rule index for the custom action. </returns>
-    size_t getRuleIndex() const;
+    size_t getRuleIndex() const noexcept;
 
     /// <summary>
     /// Gets the action index to use for calls to <seealso cref="Recognizer#action"/>.
     /// </summary>
     /// <returns> The action index for the custom action. </returns>
-    size_t getActionIndex() const;
+    size_t getActionIndex() const noexcept;
 
     /// <summary>
     /// {@inheritDoc}
     /// </summary>
     /// <returns> This method returns <seealso cref="LexerActionType#CUSTOM"/>. </returns>
-    virtual LexerActionType getActionType() const override;
+    virtual LexerActionType getActionType() const noexcept override;
 
     /// <summary>
     /// Gets whether the lexer action is position-dependent. Position-dependent
@@ -64,7 +64,7 @@ namespace atn {
     /// <seealso cref="Lexer#getText"/>.</para>
     /// </summary>
     /// <returns> This method returns {@code true}. </returns>
-    virtual bool isPositionDependent() const override;
+    virtual bool isPositionDependent() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc}
@@ -74,9 +74,9 @@ namespace atn {
     /// </summary>
     virtual void execute(Lexer *lexer) override;
 
-    virtual size_t hashCode() const override;
-    virtual bool operator == (const LexerAction &obj) const override;
-    virtual std::string toString() const override;
+    size_t hashCode() const noexcept override;
+    bool operator == (const LexerAction &obj) const noexcept override;
+    std::string toString() const override;
 
   private:
     const size_t _ruleIndex;

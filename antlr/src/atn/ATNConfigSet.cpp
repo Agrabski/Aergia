@@ -158,11 +158,13 @@ size_t ATNConfigSet::hashCode() {
   return _cachedHashCode;
 }
 
-size_t ATNConfigSet::size() {
+size_t ATNConfigSet::size() noexcept 
+{
   return configs.size();
 }
 
-bool ATNConfigSet::isEmpty() {
+bool ATNConfigSet::isEmpty() noexcept
+{
   return configs.empty();
 }
 
@@ -175,11 +177,12 @@ void ATNConfigSet::clear() {
   _configLookup.clear();
 }
 
-bool ATNConfigSet::isReadonly() {
+bool ATNConfigSet::isReadonly() noexcept
+{
   return _readonly;
 }
 
-void ATNConfigSet::setReadonly(bool readonly) {
+void ATNConfigSet::setReadonly(bool readonly) noexcept {
   _readonly = readonly;
   _configLookup.clear();
 }
@@ -218,7 +221,8 @@ size_t ATNConfigSet::getHash(ATNConfig *c) {
   return hashCode;
 }
 
-void ATNConfigSet::InitializeInstanceFields() {
+void ATNConfigSet::InitializeInstanceFields() noexcept
+{
   uniqueAlt = 0;
   hasSemanticContext = false;
   dipsIntoOuterContext = false;

@@ -7,6 +7,6 @@
 
 using namespace antlr4::atn;
 
-size_t TokensStartState::getStateType() {
+size_t TokensStartState::getStateType() noexcept {
   return TOKEN_START;
 }

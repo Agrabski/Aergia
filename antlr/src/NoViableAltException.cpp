@@ -25,10 +25,10 @@ NoViableAltException::~NoViableAltException() {
     delete _deadEndConfigs;
 }
 
-Token* NoViableAltException::getStartToken() const {
+Token* NoViableAltException::getStartToken() const noexcept {
   return _startToken;
 }
 
-atn::ATNConfigSet* NoViableAltException::getDeadEndConfigs() const {
+atn::ATNConfigSet* NoViableAltException::getDeadEndConfigs() const noexcept {
   return _deadEndConfigs;
 }

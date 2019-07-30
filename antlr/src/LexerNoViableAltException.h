@@ -16,7 +16,7 @@ namespace antlr4 {
                               atn::ATNConfigSet *deadEndConfigs);
 
     virtual size_t getStartIndex();
-    virtual atn::ATNConfigSet* getDeadEndConfigs();
+    virtual atn::ATNConfigSet* getDeadEndConfigs() noexcept;
     virtual std::string toString();
 
   private:

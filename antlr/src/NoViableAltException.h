@@ -22,8 +22,8 @@ namespace antlr4 {
       Token *offendingToken, atn::ATNConfigSet *deadEndConfigs, ParserRuleContext *ctx, bool deleteConfigs);
     ~NoViableAltException();
     
-    virtual Token* getStartToken() const;
-    virtual atn::ATNConfigSet* getDeadEndConfigs() const;
+    virtual Token* getStartToken() const noexcept;
+    virtual atn::ATNConfigSet* getDeadEndConfigs() const noexcept;
 
   private:
     /// Which configurations did we try at input.index() that couldn't match input.LT(1)?

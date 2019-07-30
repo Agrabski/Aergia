@@ -7,9 +7,10 @@
 
 using namespace antlr4::atn;
 
-BlockEndState::BlockEndState() : startState(nullptr) {
+BlockEndState::BlockEndState() noexcept : startState(nullptr) {
 }
 
-size_t BlockEndState::getStateType() {
+size_t BlockEndState::getStateType() noexcept
+{
   return BLOCK_END;
 }

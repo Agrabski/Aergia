@@ -2,8 +2,10 @@
 #include "..//AntlrUtilities/NameExtractor.hpp"
 #include "../AntlrUtilities/TypeFinder.hpp"
 #include "..//DataStructures/ClassContext.hpp"
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string_regex.hpp>
 
-Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor() : _currentContext( &_rootContext )
+Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor() noexcept : _currentContext( &_rootContext )
 {
 	_contextStack.push( { DataStructures::None } );
 }
@@ -79,4 +81,11 @@ void Aergia::Visitors::CurrentContextVisitor::applyRewrites( antlr4::TokenStream
 	for (auto& visitor : _visitors)
 		for (auto& rewrite : visitor->getRewrites())
 			rewriter.replace( rewrite._from, rewrite._to, rewrite._replaceBy );
+}
+
+Aergia::DataStructures::IContext* Aergia::Visitors::CurrentContextVisitor::getByQualifiedName( std::string& const qualifiedName )
+{
+	std::vector<std::string> result;
+	boost::split( result, qualifiedName, boost::regex( "::" ) );
+
 }

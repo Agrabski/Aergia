@@ -63,7 +63,7 @@ namespace atn {
     const bool fullCtx;
 
     DecisionEventInfo(size_t decision, ATNConfigSet *configs, TokenStream *input, size_t startIndex,
-                      size_t stopIndex, bool fullCtx);
+                      size_t stopIndex, bool fullCtx) noexcept;
   };
 
 } // namespace atn

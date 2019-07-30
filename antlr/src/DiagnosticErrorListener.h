@@ -50,16 +50,16 @@ namespace antlr4 {
     /// </summary>
     /// <param name="exactOnly"> {@code true} to report only exact ambiguities, otherwise
     /// {@code false} to report all ambiguities. </param>
-    DiagnosticErrorListener(bool exactOnly);
+    DiagnosticErrorListener(bool exactOnly) noexcept;
 
-    virtual void reportAmbiguity(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex, size_t stopIndex, bool exact,
-      const antlrcpp::BitSet &ambigAlts, atn::ATNConfigSet *configs) override;
+    void reportAmbiguity(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex, size_t stopIndex, bool exact,
+      const antlrcpp::BitSet &ambigAlts, atn::ATNConfigSet *configs) noexcept override;
 
-    virtual void reportAttemptingFullContext(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex, size_t stopIndex,
-      const antlrcpp::BitSet &conflictingAlts, atn::ATNConfigSet *configs) override;
+    void reportAttemptingFullContext(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex, size_t stopIndex,
+      const antlrcpp::BitSet &conflictingAlts, atn::ATNConfigSet *configs) noexcept override;
 
-    virtual void reportContextSensitivity(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex, size_t stopIndex,
-      size_t prediction, atn::ATNConfigSet *configs) override;
+    void reportContextSensitivity(Parser *recognizer, const dfa::DFA &dfa, size_t startIndex, size_t stopIndex,
+      size_t prediction, atn::ATNConfigSet *configs) noexcept override;
 
   protected:
     virtual std::string getDecisionDescription(Parser *recognizer, const dfa::DFA &dfa);

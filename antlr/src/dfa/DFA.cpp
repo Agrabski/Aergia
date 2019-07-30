@@ -56,7 +56,7 @@ DFA::~DFA() {
     delete s0;
 }
 
-bool DFA::isPrecedenceDfa() const {
+bool DFA::isPrecedenceDfa() const noexcept {
   return _precedenceDfa;
 }
 

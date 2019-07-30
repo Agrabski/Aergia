@@ -15,7 +15,7 @@ namespace atn {
   public:
     ATNState *loopBackState = nullptr;
 
-    virtual size_t getStateType() override;
+    virtual size_t getStateType() noexcept override;
   };
 
 } // namespace atn

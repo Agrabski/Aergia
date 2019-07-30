@@ -42,13 +42,13 @@ namespace dfa {
       Ref<atn::SemanticContext> pred; // never null; at least SemanticContext.NONE
       int alt;
 
-      PredPrediction(const Ref<atn::SemanticContext> &pred, int alt);
+      PredPrediction(const Ref<atn::SemanticContext> &pred, int alt)noexcept;
       virtual ~PredPrediction();
 
       virtual std::string toString();
 
     private:
-      void InitializeInstanceFields();
+      void InitializeInstanceFields() noexcept;
     };
 
     int stateNumber;
@@ -137,7 +137,7 @@ namespace dfa {
     };
 
   private:
-    void InitializeInstanceFields();
+    void InitializeInstanceFields() noexcept;
   };
 
 } // namespace atn

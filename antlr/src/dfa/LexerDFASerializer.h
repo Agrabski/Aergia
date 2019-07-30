@@ -12,7 +12,7 @@ namespace dfa {
 
   class ANTLR4CPP_PUBLIC LexerDFASerializer : public DFASerializer {
   public:
-    LexerDFASerializer(DFA *dfa);
+    LexerDFASerializer(DFA *dfa)noexcept;
     virtual ~LexerDFASerializer();
 
   protected:

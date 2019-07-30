@@ -14,7 +14,7 @@ namespace dfa {
   class ANTLR4CPP_PUBLIC DFASerializer {
   public:
     DFASerializer(const DFA *dfa, const std::vector<std::string>& tnames);
-    DFASerializer(const DFA *dfa, const Vocabulary &vocabulary);
+    DFASerializer(const DFA *dfa, const Vocabulary &vocabulary) noexcept;
     virtual ~DFASerializer();
 
     virtual std::string toString() const;

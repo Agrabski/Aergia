@@ -63,7 +63,7 @@ namespace atn {
     const size_t cachedHashCode;
 
   protected:
-    PredictionContext(size_t cachedHashCode);
+    PredictionContext(size_t cachedHashCode) noexcept;
     ~PredictionContext();
 
   public:
@@ -78,15 +78,15 @@ namespace atn {
     virtual bool operator == (const PredictionContext &o) const = 0;
 
     /// This means only the EMPTY (wildcard? not sure) context is in set.
-    virtual bool isEmpty() const;
+    virtual bool isEmpty() const noexcept;
     virtual bool hasEmptyPath() const;
-    virtual size_t hashCode() const;
+    virtual size_t hashCode() const noexcept;
 
   protected:
-    static size_t calculateEmptyHashCode();
-    static size_t calculateHashCode(Ref<PredictionContext> parent, size_t returnState);
+    static size_t calculateEmptyHashCode() noexcept;
+	static size_t calculateHashCode( Ref<PredictionContext> parent, size_t returnState ) noexcept;
     static size_t calculateHashCode(const std::vector<Ref<PredictionContext>> &parents,
-                                    const std::vector<size_t> &returnStates);
+                                    const std::vector<size_t> &returnStates) noexcept;
 
   public:
     // dispatch
@@ -218,7 +218,7 @@ namespace atn {
   };
 
   struct PredictionContextHasher {
-    size_t operator () (const Ref<PredictionContext> &k) const {
+    size_t operator ()  (const Ref<PredictionContext> &k) const noexcept {
       return k->hashCode();
     }
   };
@@ -238,7 +238,7 @@ namespace atn {
                                Ref<PredictionContext> const& value);
     Ref<PredictionContext> get(Ref<PredictionContext> const& key1, Ref<PredictionContext> const& key2);
 
-    void clear();
+    void clear() noexcept;
     std::string toString() const;
     size_t count() const;
 

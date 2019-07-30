@@ -75,30 +75,30 @@ namespace atn {
     /// Can be shared between multiple ATNConfig instances.
     Ref<SemanticContext> semanticContext;
 
-    ATNConfig(ATNState *state, size_t alt, Ref<PredictionContext> const& context);
+    ATNConfig(ATNState *state, size_t alt, Ref<PredictionContext> const& context) noexcept;
     ATNConfig(ATNState *state, size_t alt, Ref<PredictionContext> const& context, Ref<SemanticContext> const& semanticContext) noexcept;
 
-    ATNConfig(Ref<ATNConfig> const& c); // dup
-    ATNConfig(Ref<ATNConfig> const& c, ATNState *state);
+    ATNConfig(Ref<ATNConfig> const& c) noexcept; // dup
+    ATNConfig(Ref<ATNConfig> const& c, ATNState *state) noexcept;
     ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<SemanticContext> const& semanticContext) noexcept;
-    ATNConfig(Ref<ATNConfig> const& c, Ref<SemanticContext> const& semanticContext);
-    ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<PredictionContext> const& context);
-    ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<PredictionContext> const& context, Ref<SemanticContext> const& semanticContext);
+    ATNConfig(Ref<ATNConfig> const& c, Ref<SemanticContext> const& semanticContext) noexcept;
+    ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<PredictionContext> const& context) noexcept;
+    ATNConfig(Ref<ATNConfig> const& c, ATNState *state, Ref<PredictionContext> const& context, Ref<SemanticContext> const& semanticContext) noexcept;
 
     ATNConfig(ATNConfig const&) = default;
     virtual ~ATNConfig();
     ATNConfig& operator=(ATNConfig const&) = default;
 
-    virtual size_t hashCode() const;
+    virtual size_t hashCode() const noexcept;
 
     /**
      * This method gets the value of the {@link #reachesIntoOuterContext} field
      * as it existed prior to the introduction of the
      * {@link #isPrecedenceFilterSuppressed} method.
      */
-    size_t getOuterContextDepth() const ;
-    bool isPrecedenceFilterSuppressed() const;
-    void setPrecedenceFilterSuppressed(bool value);
+    size_t getOuterContextDepth() const noexcept ;
+    bool isPrecedenceFilterSuppressed() const noexcept;
+    void setPrecedenceFilterSuppressed(bool value) noexcept;
 
     /// An ATN configuration is equal to another if both have
     /// the same state, they predict the same alternative, and

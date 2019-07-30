@@ -11,19 +11,23 @@ PrecedencePredicateTransition::PrecedencePredicateTransition(ATNState *target, i
   : AbstractPredicateTransition(target), precedence(precedence) {
 }
 
-Transition::SerializationType PrecedencePredicateTransition::getSerializationType() const {
+Transition::SerializationType PrecedencePredicateTransition::getSerializationType() const noexcept
+{
   return PRECEDENCE;
 }
 
-bool PrecedencePredicateTransition::isEpsilon() const {
+bool PrecedencePredicateTransition::isEpsilon() const noexcept
+{
   return true;
 }
 
-bool PrecedencePredicateTransition::matches(size_t /*symbol*/, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const {
+bool PrecedencePredicateTransition::matches(size_t /*symbol*/, size_t /*minVocabSymbol*/, size_t /*maxVocabSymbol*/) const noexcept
+{
   return false;
 }
 
-Ref<SemanticContext::PrecedencePredicate> PrecedencePredicateTransition::getPredicate() const {
+Ref<SemanticContext::PrecedencePredicate> PrecedencePredicateTransition::getPredicate() const 
+{
   return std::make_shared<SemanticContext::PrecedencePredicate>(precedence);
 }
 

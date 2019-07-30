@@ -10,6 +10,11 @@ using namespace antlr4;
 ConsoleErrorListener ConsoleErrorListener::INSTANCE;
 
 void ConsoleErrorListener::syntaxError(Recognizer * /*recognizer*/, Token * /*offendingSymbol*/,
-  size_t line, size_t charPositionInLine, const std::string &msg, std::exception_ptr /*e*/)  {
+  size_t line, size_t charPositionInLine, const std::string &msg, std::exception_ptr /*e*/) noexcept
+try {
   std::cerr << "line " << line << ":" << charPositionInLine << " " << msg << std::endl;
+}
+catch (std::exception&)
+{
+	std::terminate();
 }

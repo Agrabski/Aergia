@@ -174,6 +174,7 @@ std::vector<DecisionInfo> ProfilingATNSimulator::getDecisionInfo() const {
   return _decisions;
 }
 
-DFAState* ProfilingATNSimulator::getCurrentState() const {
+DFAState* ProfilingATNSimulator::getCurrentState() const noexcept
+{
   return _currentState;
 }

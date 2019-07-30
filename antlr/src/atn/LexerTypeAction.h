@@ -18,22 +18,22 @@ namespace atn {
     /// <summary>
     /// Constructs a new {@code type} action with the specified token type value. </summary>
     /// <param name="type"> The type to assign to the token using <seealso cref="Lexer#setType"/>. </param>
-    LexerTypeAction(int type);
+    LexerTypeAction(int type) noexcept;
 
     /// <summary>
     /// Gets the type to assign to a token created by the lexer. </summary>
     /// <returns> The type to assign to a token created by the lexer. </returns>
-    virtual int getType() const;
+    virtual int getType() const noexcept;
 
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns <seealso cref="LexerActionType#TYPE"/>. </returns>
-    virtual LexerActionType getActionType() const override;
+    virtual LexerActionType getActionType() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns {@code false}. </returns>
-    virtual bool isPositionDependent() const override;
+    virtual bool isPositionDependent() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc}
@@ -41,10 +41,10 @@ namespace atn {
     /// <para>This action is implemented by calling <seealso cref="Lexer#setType"/> with the
     /// value provided by <seealso cref="#getType"/>.</para>
     /// </summary>
-    virtual void execute(Lexer *lexer) override;
+    virtual void execute(Lexer *lexer) noexcept override;
 
-    virtual size_t hashCode() const override;
-    virtual bool operator == (const LexerAction &obj) const override;
+    virtual size_t hashCode() const noexcept override;
+    virtual bool operator == (const LexerAction &obj) const noexcept override;
     virtual std::string toString() const override;
 
   private:

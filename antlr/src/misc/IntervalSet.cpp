@@ -28,7 +28,7 @@ IntervalSet::IntervalSet(const IntervalSet &set) : IntervalSet() {
 IntervalSet::IntervalSet(IntervalSet&& set) noexcept : IntervalSet(std::move(set._intervals)) {
 }
 
-IntervalSet::IntervalSet(std::vector<Interval>&& intervals) : _intervals(std::move(intervals)) {
+IntervalSet::IntervalSet(std::vector<Interval>&& intervals) noexcept : _intervals(std::move(intervals)) {
 }
 
 IntervalSet& IntervalSet::operator=(const IntervalSet& other) {
@@ -49,7 +49,7 @@ IntervalSet IntervalSet::of(ssize_t a, ssize_t b) {
   return IntervalSet({ Interval(a, b) });
 }
 
-void IntervalSet::clear() {
+void IntervalSet::clear() noexcept {
   _intervals.clear();
 }
 
@@ -279,7 +279,7 @@ bool IntervalSet::contains(ssize_t el) const {
   return false;
 }
 
-bool IntervalSet::isEmpty() const {
+bool IntervalSet::isEmpty() const noexcept {
   return _intervals.empty();
 }
 
@@ -309,7 +309,7 @@ ssize_t IntervalSet::getMinElement() const {
   return _intervals[0].a;
 }
 
-std::vector<Interval> const& IntervalSet::getIntervals() const {
+std::vector<Interval> const& IntervalSet::getIntervals() const noexcept {
   return _intervals;
 }
 
@@ -434,7 +434,7 @@ std::string IntervalSet::elementName(const dfa::Vocabulary &vocabulary, ssize_t 
   }
 }
 
-size_t IntervalSet::size() const {
+size_t IntervalSet::size() const noexcept {
   size_t result = 0;
   for (auto &interval : _intervals) {
     result += size_t(interval.b - interval.a + 1);
@@ -466,7 +466,7 @@ std::set<ssize_t> IntervalSet::toSet() const {
   return result;
 }
 
-ssize_t IntervalSet::get(size_t i) const {
+ssize_t IntervalSet::get(size_t i) const noexcept {
   size_t index = 0;
   for (auto &interval : _intervals) {
     ssize_t a = interval.a;

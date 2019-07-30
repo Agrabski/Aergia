@@ -23,23 +23,23 @@ namespace atn {
     /// <summary>
     /// Constructs a new {@code mode} action with the specified mode value. </summary>
     /// <param name="mode"> The mode value to pass to <seealso cref="Lexer#mode"/>. </param>
-    LexerModeAction(int mode);
+    LexerModeAction(int mode) noexcept;
 
     /// <summary>
     /// Get the lexer mode this action should transition the lexer to.
     /// </summary>
     /// <returns> The lexer mode for this {@code mode} command. </returns>
-    int getMode();
+    int getMode() noexcept;
 
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns <seealso cref="LexerActionType#MODE"/>. </returns>
-    virtual LexerActionType getActionType() const override;
+    LexerActionType getActionType() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns {@code false}. </returns>
-    virtual bool isPositionDependent() const override;
+    bool isPositionDependent() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc}
@@ -47,11 +47,11 @@ namespace atn {
     /// <para>This action is implemented by calling <seealso cref="Lexer#mode"/> with the
     /// value provided by <seealso cref="#getMode"/>.</para>
     /// </summary>
-    virtual void execute(Lexer *lexer) override;
+    void execute(Lexer *lexer) noexcept override;
 
-    virtual size_t hashCode() const override;
-    virtual bool operator == (const LexerAction &obj) const override;
-    virtual std::string toString() const override;
+    size_t hashCode() const noexcept override;
+    bool operator == (const LexerAction &obj) const noexcept override;
+    std::string toString() const override;
 
   private:
     const int _mode;

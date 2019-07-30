@@ -28,27 +28,27 @@ namespace atn {
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns <seealso cref="LexerActionType#SKIP"/>. </returns>
-    virtual LexerActionType getActionType() const override;
+    virtual LexerActionType getActionType() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns {@code false}. </returns>
-    virtual bool isPositionDependent() const override;
+    virtual bool isPositionDependent() const noexcept override;
 
     /// <summary>
     /// {@inheritDoc}
     ///
     /// <para>This action is implemented by calling <seealso cref="Lexer#skip"/>.</para>
     /// </summary>
-    virtual void execute(Lexer *lexer) override;
+    virtual void execute(Lexer *lexer) noexcept override;
 
-    virtual size_t hashCode() const override;
-    virtual bool operator == (const LexerAction &obj) const override;
-    virtual std::string toString() const override;
+    size_t hashCode() const noexcept override;
+    bool operator == (const LexerAction &obj) const noexcept override;
+    std::string toString() const override;
 
   private:
     /// Constructs the singleton instance of the lexer {@code skip} command.
-    LexerSkipAction();
+    LexerSkipAction()noexcept;
   };
 
 } // namespace atn

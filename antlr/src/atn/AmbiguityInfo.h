@@ -61,7 +61,7 @@ namespace atn {
     /// prediction; otherwise, {@code false} if the ambiguity was identified
     /// during SLL prediction </param>
     AmbiguityInfo(size_t decision, ATNConfigSet *configs, const antlrcpp::BitSet &ambigAlts, TokenStream *input,
-                  size_t startIndex, size_t stopIndex, bool fullCtx);
+                  size_t startIndex, size_t stopIndex, bool fullCtx) noexcept;
   };
 
 } // namespace atn

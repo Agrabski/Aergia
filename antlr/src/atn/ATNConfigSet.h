@@ -79,11 +79,11 @@ namespace atn {
 
     bool operator == (const ATNConfigSet &other);
     virtual size_t hashCode();
-    virtual size_t size();
-    virtual bool isEmpty();
+    virtual size_t size() noexcept;
+    virtual bool isEmpty() noexcept;
     virtual void clear();
-    virtual bool isReadonly();
-    virtual void setReadonly(bool readonly);
+    virtual bool isReadonly() noexcept;
+    virtual void setReadonly(bool readonly) noexcept;
     virtual std::string toString();
 
   protected:
@@ -103,7 +103,7 @@ namespace atn {
     /// when we go readonly as this set becomes a DFA state.
     std::unordered_map<size_t, ATNConfig *> _configLookup;
 
-    void InitializeInstanceFields();
+    void InitializeInstanceFields() noexcept;
   };
 
 } // namespace atn

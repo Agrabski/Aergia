@@ -38,7 +38,7 @@ namespace atn {
     /// executed. </param>
     /// <param name="action"> The lexer action to execute at a particular offset in the
     /// input <seealso cref="CharStream"/>. </param>
-    LexerIndexedCustomAction(int offset, Ref<LexerAction> const& action);
+    LexerIndexedCustomAction(int offset, Ref<LexerAction> const& action) noexcept;
 
     /// <summary>
     /// Gets the location in the input <seealso cref="CharStream"/> at which the lexer
@@ -47,30 +47,30 @@ namespace atn {
     /// </summary>
     /// <returns> The location in the input <seealso cref="CharStream"/> at which the lexer
     /// action should be executed. </returns>
-    int getOffset() const;
+    int getOffset() const noexcept;
 
     /// <summary>
     /// Gets the lexer action to execute.
     /// </summary>
     /// <returns> A <seealso cref="LexerAction"/> object which executes the lexer action. </returns>
-    Ref<LexerAction> getAction() const;
+    Ref<LexerAction> getAction() const noexcept;
 
     /// <summary>
     /// {@inheritDoc}
     /// </summary>
     /// <returns> This method returns the result of calling <seealso cref="#getActionType"/>
     /// on the <seealso cref="LexerAction"/> returned by <seealso cref="#getAction"/>. </returns>
-    virtual LexerActionType getActionType() const override;
+    LexerActionType getActionType() const override;
 
     /// <summary>
     /// {@inheritDoc} </summary>
     /// <returns> This method returns {@code true}. </returns>
-    virtual bool isPositionDependent() const override;
+    bool isPositionDependent() const noexcept override;
 
-    virtual void execute(Lexer *lexer) override;
-    virtual size_t hashCode() const override;
-    virtual bool operator == (const LexerAction &obj) const override;
-    virtual std::string toString() const override;
+    void execute(Lexer *lexer) override;
+    size_t hashCode() const noexcept override;
+    bool operator == (const LexerAction &obj) const override;
+    std::string toString() const override;
 
   private:
     const int _offset;

@@ -13,7 +13,7 @@ using namespace antlr4::atn;
 
 const size_t ATNConfig::SUPPRESS_PRECEDENCE_FILTER = 0x40000000;
 
-ATNConfig::ATNConfig( ATNState* state_, size_t alt_, Ref<PredictionContext> const& context_ )
+ATNConfig::ATNConfig( ATNState* state_, size_t alt_, Ref<PredictionContext> const& context_ ) noexcept
 	: ATNConfig( state_, alt_, context_, SemanticContext::NONE ) {
 }
 
@@ -22,21 +22,22 @@ ATNConfig::ATNConfig( ATNState* state_, size_t alt_, Ref<PredictionContext> cons
 	reachesIntoOuterContext = 0;
 }
 
-ATNConfig::ATNConfig( Ref<ATNConfig> const& c ) : ATNConfig( c, c->state, c->context, c->semanticContext ) {
+ATNConfig::ATNConfig( Ref<ATNConfig> const& c ) noexcept : ATNConfig( c, c->state, c->context, c->semanticContext ) {
 }
 
-ATNConfig::ATNConfig( Ref<ATNConfig> const& c, ATNState* state_ ) : ATNConfig( c, state_, c->context, c->semanticContext ) {
+ATNConfig::ATNConfig( Ref<ATNConfig> const& c, ATNState* state_ ) noexcept : ATNConfig( c, state_, c->context, c->semanticContext )
+{
 }
 
-ATNConfig::ATNConfig( Ref<ATNConfig> const& c, ATNState* state, Ref<SemanticContext> const& semanticContext )
+ATNConfig::ATNConfig( Ref<ATNConfig> const& c, ATNState* state, Ref<SemanticContext> const& semanticContext ) noexcept
 	: ATNConfig( c, state, c->context, semanticContext ) {
 }
 
-ATNConfig::ATNConfig( Ref<ATNConfig> const& c, Ref<SemanticContext> const& semanticContext )
+ATNConfig::ATNConfig( Ref<ATNConfig> const& c, Ref<SemanticContext> const& semanticContext ) noexcept
 	: ATNConfig( c, c->state, c->context, semanticContext ) {
 }
 
-ATNConfig::ATNConfig( Ref<ATNConfig> const& c, ATNState* state, Ref<PredictionContext> const& context )
+ATNConfig::ATNConfig( Ref<ATNConfig> const& c, ATNState* state, Ref<PredictionContext> const& context ) noexcept
 	: ATNConfig( c, state, context, c->semanticContext ) {
 }
 
@@ -49,7 +50,7 @@ ATNConfig::ATNConfig( Ref<ATNConfig> const& c, ATNState* state, Ref<PredictionCo
 ATNConfig::~ATNConfig() {
 }
 
-size_t ATNConfig::hashCode() const {
+size_t ATNConfig::hashCode() const noexcept {
 	size_t hashCode = misc::MurmurHash::initialize( 7 );
 	hashCode = misc::MurmurHash::update( hashCode, state->stateNumber );
 	hashCode = misc::MurmurHash::update( hashCode, alt );
@@ -59,15 +60,18 @@ size_t ATNConfig::hashCode() const {
 	return hashCode;
 }
 
-size_t ATNConfig::getOuterContextDepth() const {
+size_t ATNConfig::getOuterContextDepth() const noexcept
+{
 	return reachesIntoOuterContext & ~SUPPRESS_PRECEDENCE_FILTER;
 }
 
-bool ATNConfig::isPrecedenceFilterSuppressed() const {
+bool ATNConfig::isPrecedenceFilterSuppressed() const noexcept
+{
 	return (reachesIntoOuterContext & SUPPRESS_PRECEDENCE_FILTER) != 0;
 }
 
-void ATNConfig::setPrecedenceFilterSuppressed( bool value ) {
+void ATNConfig::setPrecedenceFilterSuppressed( bool value ) noexcept
+{
 	if (value) {
 		reachesIntoOuterContext |= SUPPRESS_PRECEDENCE_FILTER;
 	}

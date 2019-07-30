@@ -15,7 +15,7 @@ namespace atn {
   class ANTLR4CPP_PUBLIC PlusLoopbackState final : public DecisionState {
 
   public:
-    virtual size_t getStateType() override;
+    virtual size_t getStateType() noexcept override;
   };
 
 } // namespace atn

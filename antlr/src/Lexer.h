@@ -89,9 +89,9 @@ namespace antlr4 {
     /// a lexer rule finishes with token set to SKIP_TOKEN.  Recall that
     /// if token == null at end of any token rule, it creates one for you
     /// and emits it.
-    virtual void skip();
-    virtual void more();
-    virtual void setMode(size_t m);
+    virtual void skip() noexcept;
+    virtual void more() noexcept;
+    virtual void setMode(size_t m) noexcept;
     virtual void pushMode(size_t m);
     virtual size_t popMode();
 
@@ -100,20 +100,20 @@ namespace antlr4 {
       this->_factory = factory;
     }
 
-    virtual Ref<TokenFactory<CommonToken>> getTokenFactory() override;
+    Ref<TokenFactory<CommonToken>> getTokenFactory() noexcept override;
 
     /// Set the char stream and reset the lexer
-    virtual void setInputStream(IntStream *input) override;
+    void setInputStream(IntStream *input) override;
 
-    virtual std::string getSourceName() override;
+    std::string getSourceName() override;
 
-    virtual CharStream* getInputStream() override;
+    CharStream* getInputStream() noexcept override;
 
     /// By default does not support multiple emits per nextToken invocation
     /// for efficiency reasons. Subclasses can override this method, nextToken,
     /// and getToken (to push tokens into a list and pull from that list
     /// rather than a single variable as this implementation does).
-    virtual void emit(std::unique_ptr<Token> newToken);
+    void emit(std::unique_ptr<Token> newToken) noexcept;
 
     /// The standard method called to automatically emit a token at the
     /// outermost lexical rule.  The token object should point into the
@@ -124,16 +124,16 @@ namespace antlr4 {
 
     virtual Token* emitEOF();
 
-    virtual size_t getLine() const override;
+    size_t getLine() const override;
 
-    virtual size_t getCharPositionInLine() override;
+    size_t getCharPositionInLine() override;
 
     virtual void setLine(size_t line);
 
     virtual void setCharPositionInLine(size_t charPositionInLine);
 
     /// What is the index of the current character of lookahead?
-    virtual size_t getCharIndex();
+    virtual size_t getCharIndex() noexcept;
 
     /// Return the text matched so far for the current token or any
     /// text override.
@@ -144,17 +144,17 @@ namespace antlr4 {
     virtual void setText(const std::string &text);
 
     /// Override if emitting multiple tokens.
-    virtual std::unique_ptr<Token> getToken();
+    virtual std::unique_ptr<Token> getToken() noexcept;
 
-    virtual void setToken(std::unique_ptr<Token> newToken);
+    virtual void setToken(std::unique_ptr<Token> newToken) noexcept;
 
-    virtual void setType(size_t ttype);
+    virtual void setType(size_t ttype) noexcept;
 
-    virtual size_t getType();
+    virtual size_t getType() noexcept;
 
-    virtual void setChannel(size_t newChannel);
+    virtual void setChannel(size_t newChannel) noexcept;
 
-    virtual size_t getChannel();
+    virtual size_t getChannel() noexcept;
 
     virtual const std::vector<std::string>& getChannelNames() const = 0;
 
@@ -181,7 +181,7 @@ namespace antlr4 {
     /// incremented each time <seealso cref="#notifyErrorListeners"/> is called.
     /// </summary>
     /// <seealso cref= #notifyListeners </seealso>
-    virtual size_t getNumberOfSyntaxErrors();
+    virtual size_t getNumberOfSyntaxErrors() noexcept;
 
   protected:
     /// You can set the text for the current token to override what is in
@@ -190,7 +190,7 @@ namespace antlr4 {
 
   private:
     size_t _syntaxErrors;
-    void InitializeInstanceFields();
+    void InitializeInstanceFields()noexcept;
   };
 
 } // namespace antlr4

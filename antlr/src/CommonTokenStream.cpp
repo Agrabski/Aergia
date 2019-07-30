@@ -9,10 +9,10 @@
 
 using namespace antlr4;
 
-CommonTokenStream::CommonTokenStream(TokenSource *tokenSource) : CommonTokenStream(tokenSource, Token::DEFAULT_CHANNEL) {
+CommonTokenStream::CommonTokenStream(TokenSource *tokenSource)  noexcept : CommonTokenStream(tokenSource, Token::DEFAULT_CHANNEL) {
 }
 
-CommonTokenStream::CommonTokenStream(TokenSource *tokenSource, size_t channel_)
+CommonTokenStream::CommonTokenStream(TokenSource *tokenSource, size_t channel_) noexcept
 : BufferedTokenStream(tokenSource), channel(channel_) {
 }
 

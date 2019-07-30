@@ -79,10 +79,10 @@ namespace antlr4 {
       this->_factory = factory;
     }
 
-    virtual Ref<TokenFactory<CommonToken>> getTokenFactory() override;
+    Ref<TokenFactory<CommonToken>> getTokenFactory() noexcept override;
 
   private:
-    void InitializeInstanceFields();
+    void InitializeInstanceFields()noexcept;
   };
 
 } // namespace antlr4

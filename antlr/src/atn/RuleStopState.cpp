@@ -7,6 +7,7 @@
 
 using namespace antlr4::atn;
 
-size_t RuleStopState::getStateType() {
+size_t RuleStopState::getStateType() noexcept 
+{
   return RULE_STOP;
 }

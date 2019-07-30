@@ -7,7 +7,8 @@
 
 using namespace antlr4::atn;
 
-void DecisionState::InitializeInstanceFields() {
+void DecisionState::InitializeInstanceFields() noexcept
+{
   decision = -1;
   nonGreedy = false;
 }

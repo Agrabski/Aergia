@@ -33,7 +33,7 @@ namespace Aergia::DataStructures
 
 		ClassContext* getClass( std::string const& name ) override;
 
-		std::vector<IContext*>&& getMembers( std::string const& name ) override;
+		std::vector<IContext*> getMembers( std::string const& name ) override;
 
 		bool appendMember( NamespaceContext&& newMember ) override;
 

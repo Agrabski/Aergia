@@ -14,7 +14,7 @@ namespace atn {
   class ANTLR4CPP_PUBLIC StarBlockStartState final : public BlockStartState {
 
   public:
-    virtual size_t getStateType() override;
+    virtual size_t getStateType() noexcept override;
   };
 
 } // namespace atn

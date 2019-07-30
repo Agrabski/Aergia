@@ -71,7 +71,7 @@ size_t ANTLRInputStream::LA( ssize_t i ) {
 		return 0; // undefined
 	}
 
-	auto position = p;
+	auto const position = p;
 	if (i < 0) {
 		i++; // e.g., translate LA(-1) to use offset i=0; then _data[p+0-1]
 		if ((position + i - 1LL) < 0) {

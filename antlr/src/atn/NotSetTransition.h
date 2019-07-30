@@ -14,9 +14,9 @@ namespace atn {
   public:
     NotSetTransition(ATNState *target, const misc::IntervalSet &set);
 
-    virtual SerializationType getSerializationType() const override;
+    virtual SerializationType getSerializationType() const noexcept override;
 
-    virtual bool matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const override;
+    virtual bool matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const noexcept override;
 
     virtual std::string toString() const override;
   };

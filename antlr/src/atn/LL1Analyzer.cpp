@@ -22,7 +22,7 @@ using namespace antlr4;
 using namespace antlr4::atn;
 using namespace antlrcpp;
 
-LL1Analyzer::LL1Analyzer(const ATN &atn) : _atn(atn) {
+LL1Analyzer::LL1Analyzer(const ATN &atn) noexcept : _atn(atn) {
 }
 
 LL1Analyzer::~LL1Analyzer() {
@@ -37,7 +37,7 @@ std::vector<misc::IntervalSet> LL1Analyzer::getDecisionLookahead(ATNState *s) co
 
   look.resize(s->transitions.size()); // Fills all interval sets with defaults.
   for (size_t alt = 0; alt < s->transitions.size(); alt++) {
-    bool seeThruPreds = false; // fail to get lookahead upon pred
+    bool const seeThruPreds = false; // fail to get lookahead upon pred
 
     ATNConfig::Set lookBusy;
     antlrcpp::BitSet callRuleStack;

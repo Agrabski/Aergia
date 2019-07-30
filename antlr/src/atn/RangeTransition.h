@@ -17,10 +17,10 @@ namespace atn {
 
     RangeTransition(ATNState *target, size_t from, size_t to);
 
-    virtual SerializationType getSerializationType() const override;
+    virtual SerializationType getSerializationType() const noexcept override;
 
     virtual misc::IntervalSet label() const override;
-    virtual bool matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const override;
+    virtual bool matches(size_t symbol, size_t minVocabSymbol, size_t maxVocabSymbol) const noexcept override;
 
     virtual std::string toString() const override;
   };

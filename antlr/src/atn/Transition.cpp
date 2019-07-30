@@ -28,7 +28,7 @@ Transition::Transition(ATNState *target) {
 Transition::~Transition() {
 }
 
-bool Transition::isEpsilon() const {
+bool Transition::isEpsilon() const  noexcept {
   return false;
 }
 

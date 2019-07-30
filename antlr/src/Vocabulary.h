@@ -79,7 +79,7 @@ namespace dfa {
     /// Returns the highest token type value. It can be used to iterate from
     /// zero to that number, inclusively, thus querying all stored entries. </summary>
     /// <returns> the highest token type value </returns>
-    virtual size_t getMaxTokenType() const;
+    virtual size_t getMaxTokenType() const noexcept;
 
     /// <summary>
     /// Gets the string literal associated with a token type. The string returned

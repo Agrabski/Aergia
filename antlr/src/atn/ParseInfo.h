@@ -16,7 +16,7 @@ namespace atn {
   /// during profiling of a parser.
   class ANTLR4CPP_PUBLIC ParseInfo {
   public:
-    ParseInfo(ProfilingATNSimulator *atnSimulator);
+    ParseInfo(ProfilingATNSimulator *atnSimulator)noexcept;
     ParseInfo(ParseInfo const&) = default;
     virtual ~ParseInfo();
 

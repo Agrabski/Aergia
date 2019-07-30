@@ -32,7 +32,7 @@ namespace misc {
     /// The list of sorted, disjoint intervals.
     std::vector<Interval> _intervals;
 
-    explicit IntervalSet(std::vector<Interval>&& intervals);
+    explicit IntervalSet(std::vector<Interval>&& intervals) noexcept;
 
   public:
     IntervalSet();
@@ -55,7 +55,7 @@ namespace misc {
     /// Create a set with all ints within range [a..b] (inclusive)
     static IntervalSet of(ssize_t a, ssize_t b);
 
-    void clear();
+    void clear() noexcept;
 
     /// Add a single element to the set.  An isolated element is stored
     /// as a range el..el.
@@ -117,7 +117,7 @@ namespace misc {
     bool contains(ssize_t el) const;
 
     /// return true if this set has no members
-    bool isEmpty() const;
+    bool isEmpty() const noexcept;
 
     /// If this set is a single integer, return it otherwise Token.INVALID_TYPE.
     ssize_t getSingleElement() const;
@@ -140,7 +140,7 @@ namespace misc {
 
     /// <summary>
     /// Return a list of Interval objects. </summary>
-    std::vector<Interval> const& getIntervals() const;
+    std::vector<Interval> const& getIntervals() const noexcept;
 
     size_t hashCode() const;
 
@@ -165,19 +165,19 @@ namespace misc {
     std::string elementName(const dfa::Vocabulary &vocabulary, ssize_t a) const;
 
   public:
-    size_t size() const;
+    size_t size() const noexcept;
     std::vector<ssize_t> toList() const;
     std::set<ssize_t> toSet() const;
 
     /// Get the ith element of ordered set.  Used only by RandomPhrase so
     /// don't bother to implement if you're not doing that for a new
     /// ANTLR code gen target.
-    ssize_t get(size_t i) const;
+    ssize_t get(size_t i) const noexcept;
     void remove(size_t el); // For mapping of e.g. Token::EOF to -1 etc.
     void remove(ssize_t el);
 
   private:
-    void addItems() { /* No-op */ }
+    void addItems() noexcept { /* No-op */ }
   };
 
 } // namespace atn

@@ -16,18 +16,18 @@ public:
   XPathLexer(antlr4::CharStream *input);
   ~XPathLexer();
 
-  virtual std::string getGrammarFileName() const override;
-  virtual const std::vector<std::string>& getRuleNames() const override;
+  std::string getGrammarFileName() const override;
+  const std::vector<std::string>& getRuleNames() const noexcept override;
 
-  virtual const std::vector<std::string>& getChannelNames() const override;
-  virtual const std::vector<std::string>& getModeNames() const override;
-  virtual const std::vector<std::string>& getTokenNames() const override; // deprecated, use vocabulary instead
-  virtual antlr4::dfa::Vocabulary& getVocabulary() const override;
+  const std::vector<std::string>& getChannelNames() const noexcept override;
+  const std::vector<std::string>& getModeNames() const noexcept override;
+  const std::vector<std::string>& getTokenNames() const noexcept override; // deprecated, use vocabulary instead
+  antlr4::dfa::Vocabulary& getVocabulary() const noexcept override;
 
-  virtual const std::vector<uint16_t> getSerializedATN() const override;
-  virtual const antlr4::atn::ATN& getATN() const override;
+  const std::vector<uint16_t> getSerializedATN() const override;
+  const antlr4::atn::ATN& getATN() const noexcept override;
 
-  virtual void action(antlr4::RuleContext *context, size_t ruleIndex, size_t actionIndex) override;
+  void action(antlr4::RuleContext *context, size_t ruleIndex, size_t actionIndex) override;
 private:
   static std::vector<antlr4::dfa::DFA> _decisionToDFA;
   static antlr4::atn::PredictionContextCache _sharedContextCache;

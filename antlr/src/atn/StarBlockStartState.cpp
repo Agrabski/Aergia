@@ -7,6 +7,6 @@
 
 using namespace antlr4::atn;
 
-size_t StarBlockStartState::getStateType() {
+size_t StarBlockStartState::getStateType() noexcept {
   return STAR_BLOCK_START;
 }

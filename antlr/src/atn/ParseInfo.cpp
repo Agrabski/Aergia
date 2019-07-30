@@ -10,7 +10,7 @@
 
 using namespace antlr4::atn;
 
-ParseInfo::ParseInfo(ProfilingATNSimulator *atnSimulator) : _atnSimulator(atnSimulator) {
+ParseInfo::ParseInfo(ProfilingATNSimulator *atnSimulator)noexcept : _atnSimulator(atnSimulator) {
 }
 
 ParseInfo::~ParseInfo() {
@@ -24,7 +24,7 @@ std::vector<size_t> ParseInfo::getLLDecisions() {
   std::vector<DecisionInfo> decisions = _atnSimulator->getDecisionInfo();
   std::vector<size_t> LL;
   for (size_t i = 0; i < decisions.size(); ++i) {
-    long long fallBack = decisions[i].LL_Fallback;
+    auto const fallBack = decisions[i].LL_Fallback;
     if (fallBack > 0) {
       LL.push_back(i);
     }

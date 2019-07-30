@@ -19,7 +19,7 @@ const Ref<DFAState> ATNSimulator::ERROR = std::make_shared<DFAState>(INT32_MAX);
 antlrcpp::SingleWriteMultipleReadLock ATNSimulator::_stateLock;
 antlrcpp::SingleWriteMultipleReadLock ATNSimulator::_edgeLock;
 
-ATNSimulator::ATNSimulator(const ATN &atn, PredictionContextCache &sharedContextCache)
+ATNSimulator::ATNSimulator(const ATN &atn, PredictionContextCache &sharedContextCache) noexcept
 : atn(atn), _sharedContextCache(sharedContextCache) {
 }
 
@@ -30,7 +30,8 @@ void ATNSimulator::clearDFA() {
   throw UnsupportedOperationException("This ATN simulator does not support clearing the DFA.");
 }
 
-PredictionContextCache& ATNSimulator::getSharedContextCache() {
+PredictionContextCache& ATNSimulator::getSharedContextCache() noexcept
+{
   return _sharedContextCache;
 }
 

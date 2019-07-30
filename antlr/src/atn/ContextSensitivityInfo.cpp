@@ -9,6 +9,6 @@ using namespace antlr4;
 using namespace antlr4::atn;
 
 ContextSensitivityInfo::ContextSensitivityInfo(size_t decision, ATNConfigSet *configs, TokenStream *input,
-  size_t startIndex, size_t stopIndex)
+  size_t startIndex, size_t stopIndex) noexcept
   : DecisionEventInfo(decision, configs, input, startIndex, stopIndex, true) {
 }

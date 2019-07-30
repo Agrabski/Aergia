@@ -12,7 +12,7 @@ namespace atn {
   public:
     ATN *atn;
 
-    ATNSerializer(ATN *atn);
+    ATNSerializer(ATN *atn) noexcept;
     ATNSerializer(ATN *atn, const std::vector<std::string> &tokenNames);
     virtual ~ATNSerializer();
 

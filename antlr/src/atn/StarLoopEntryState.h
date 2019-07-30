@@ -12,7 +12,7 @@ namespace atn {
 
   class ANTLR4CPP_PUBLIC StarLoopEntryState final : public DecisionState {
   public:
-    StarLoopEntryState();
+    StarLoopEntryState() noexcept;
 
     /**
      * Indicates whether this state can benefit from a precedence DFA during SLL
@@ -28,7 +28,7 @@ namespace atn {
 
     StarLoopbackState *loopBackState = nullptr;
 
-    virtual size_t getStateType() override;
+    size_t getStateType() noexcept override;
   };
 
 } // namespace atn
