@@ -18,9 +18,21 @@ namespace Aergia::DataStructures
 		IContext( IContext* parent, MemberAccessibility accessibility ) noexcept :_parent( parent ), _accessability( accessibility ) {}
 	public:
 		template<typename T>
+		T* findChildOfType( std::string const& name )
+		{
+			static_assert(sizeof( T ) != sizeof( T ), "not implemented");
+		}
+
+		template<>
+		ClassContext* findChildOfType( std::string const& name )
+		{
+			return getClass(name);
+		}
+
+		template<typename T>
 		T* findInChildren( std::string const& name )
 		{
-			throw std::runtime_error( "not implemented" );
+			static_assert(sizeof( T ) != sizeof( T ), "not implemented");
 		}
 
 		template<>

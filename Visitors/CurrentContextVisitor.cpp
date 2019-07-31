@@ -1,9 +1,8 @@
 #include "CurrentContextVisitor.hpp"
-#include "..//AntlrUtilities/NameExtractor.hpp"
-#include "../AntlrUtilities/TypeFinder.hpp"
-#include "..//DataStructures/ClassContext.hpp"
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string_regex.hpp>
+#include "..//AntlrUtilities/NameExtractor.hpp"
+#include "../AntlrUtilities/TypeFinder.hpp"
 
 Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor() noexcept : _currentContext( &_rootContext )
 {
@@ -83,9 +82,7 @@ void Aergia::Visitors::CurrentContextVisitor::applyRewrites( antlr4::TokenStream
 			rewriter.replace( rewrite._from, rewrite._to, rewrite._replaceBy );
 }
 
-Aergia::DataStructures::IContext* Aergia::Visitors::CurrentContextVisitor::getByQualifiedName( std::string& const qualifiedName )
+gsl::not_null<Aergia::DataStructures::IContext*> Aergia::Visitors::CurrentContextVisitor::getRootNamespace() noexcept
 {
-	std::vector<std::string> result;
-	boost::split( result, qualifiedName, boost::regex( "::" ) );
-
+	return  &_rootContext;
 }

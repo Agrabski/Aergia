@@ -1,7 +1,9 @@
 #pragma once
 #include <gsl.h>
 #include "..//Lexer/Antlr_include.hpp"
+#include "..//DataStructures/Definitions.hpp"
 #include "..//DataStructures/NamespaceContext.hpp"
+#include "..//DataStructures/IContext.hpp"
 #include "ContextProvider.hpp"
 #include "BaseVisitor.hpp"
 #include "AnonymousVisitor.hpp"
@@ -55,9 +57,8 @@ namespace Aergia::Visitors
 
 		void applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const;
 
+		gsl::not_null<DataStructures::IContext*> getRootNamespace() noexcept override;
 
-		// Inherited via ContextProvider
-		virtual DataStructures::IContext* getByQualifiedName( std::string& const qualifiedName ) override;
 
 	};
 }
