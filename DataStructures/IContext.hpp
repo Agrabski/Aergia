@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <gsl.h>
 #include "Definitions.hpp"
 #include "MemberAccessibility.hpp"
 
@@ -27,6 +28,12 @@ namespace Aergia::DataStructures
 		ClassContext* findChildOfType( std::string const& name )
 		{
 			return getClass(name);
+		}
+
+		template<>
+		MethodContext* findChildOfType( std::string const& name )
+		{
+			return getMethod( name );
 		}
 
 		template<typename T>
@@ -60,7 +67,7 @@ namespace Aergia::DataStructures
 
 		virtual VariableContext* getVariable( std::string const& name ) = 0;
 
-		virtual std::vector<IContext*> getMembers( std::string const& name ) = 0;
+		virtual std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) = 0;
 
 		virtual bool appendMember( NamespaceContext&& newMember ) = 0;
 
@@ -71,5 +78,7 @@ namespace Aergia::DataStructures
 		virtual bool appendMember( VariableContext&& newMember ) = 0;
 
 		virtual ~IContext() = default;
+
+		MemberAccessibility accesibility() const noexcept { return _accessability; }
 	};
 }

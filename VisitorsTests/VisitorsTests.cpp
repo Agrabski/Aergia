@@ -65,5 +65,20 @@ namespace VisitorsTests
 			Assert::IsTrue( testClass->getVariable( "z" ) != nullptr );
 		}
 
+		TEST_METHOD( FreeFunctionFullQualification )
+		{
+			using namespace std::literals;
+			std::stringstream input = std::stringstream( "namespace XX {int main() {return 0;}}"s );
+
+			AntlrHelper helper( input );
+
+			Aergia::Visitors::CurrentContextVisitor visitor;
+
+			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
+
+			auto  main = visitor.getByQualifiedName<Aergia::DataStructures::MethodContext>( "XX::main" );
+			Assert::IsTrue( main != nullptr );
+			Assert::IsTrue( main->accesibility() == Aergia::DataStructures::MemberAccessibility::None );
+		}
 	};
 }

@@ -75,7 +75,7 @@ size_t MurmurHash::initialize(size_t seed) noexcept {
 
 #if defined(ENVIRONMENT32)
 
-size_t MurmurHash::update(size_t hash, size_t value) {
+size_t MurmurHash::update(size_t hash, size_t value) noexcept {
   static const size_t c1 = 0xCC9E2D51;
   static const size_t c2 = 0x1B873593;
 
@@ -92,7 +92,7 @@ size_t MurmurHash::update(size_t hash, size_t value) {
 }
 
 
-size_t MurmurHash::finish(size_t hash, size_t entryCount) {
+size_t MurmurHash::finish(size_t hash, size_t entryCount) noexcept {
   hash ^= entryCount * 4;
   hash ^= hash >> 16;
   hash *= 0x85EBCA6B;

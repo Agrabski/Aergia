@@ -61,9 +61,9 @@ namespace Aergia::DataStructures
 
 		}
 
-		std::vector<IContext*> getMembers( std::string const& name ) override
+		std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) override
 		{
-			std::vector<IContext*>result;
+			std::vector<gsl::not_null<IContext*>>result;
 			result.push_back( getNamespace( name ) );
 			result.push_back( getMethod( name ) );
 			result.push_back( getClass( name ) );
