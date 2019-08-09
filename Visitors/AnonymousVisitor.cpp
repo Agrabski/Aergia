@@ -23,7 +23,7 @@ antlrcpp::Any Aergia::Visitors::AnonymousVisitor::visitAnonymousExpression( Aerg
 	auto follow = TokenFinder::findFollow( (antlr4::ParserRuleContext*)context->parent );
 
 	_rewrites.push_back( { before, follow, formatAssigment( content, getVariableName( context->start->getLine() ) ) } );
-	return 0;
+	return antlrcpp::Any();
 }
 
 std::vector<Aergia::Visitors::Rewrite>const & Aergia::Visitors::AnonymousVisitor::getRewrites() const

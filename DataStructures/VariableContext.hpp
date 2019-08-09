@@ -1,19 +1,20 @@
 #pragma once
 #include <gsl.h>
+#include "Definitions.hpp"
 #include "IContext.hpp"
-
 
 namespace Aergia::DataStructures
 {
+	class IContext;
 	class VariableContext : public IContext
 	{
 		std::string _name;
-		ClassContext* _type;
+		TypeContext* _type;
 	public:
 
-		VariableContext( std::string name, ClassContext* type, IContext* parent, MemberAccessibility accessibility );
+		VariableContext( std::string name, TypeContext* type, IContext* parent, MemberAccessibility accessibility );
 
-		ClassContext* getType();
+		TypeContext* getType();
 
 		std::string const& getName() const noexcept override;
 
@@ -21,7 +22,7 @@ namespace Aergia::DataStructures
 
 		MethodContext* getMethod( std::string const& name ) override;
 
-		ClassContext* getClass( std::string const& name ) override;
+		TypeContext* getClass( std::string const& name ) override;
 
 		std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) override;
 
@@ -29,7 +30,7 @@ namespace Aergia::DataStructures
 
 		bool appendMember( MethodContext&& newMember ) override;
 
-		bool appendMember( ClassContext&& newMember ) override;
+		bool appendMember( TypeContext&& newMember ) override;
 
 		VariableContext* getVariable( std::string const& name ) override;
 

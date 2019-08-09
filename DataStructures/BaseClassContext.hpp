@@ -1,37 +1,19 @@
 #pragma once
 #include "Definitions.hpp"
 #include "ClassContext.hpp"
-#include "IContext.hpp"
 
 namespace Aergia::DataStructures
 {
-	class BaseClassContext : public IContext
+	class BaseClassContext
 	{
-		ClassContext* const _type;
+		gsl::not_null<TypeContext*> const _type;
 		static const inline std::string _name;
+		MemberAccessibility _accesibility;
+		gsl::not_null<TypeContext*> _parent;
 	public:
-		BaseClassContext( ClassContext* parent, MemberAccessibility accessibility, ClassContext* type );
-		ClassContext* getType() const { return _type; }
-
-		std::string const& getName() const noexcept override;
-
-		NamespaceContext* getNamespace( std::string const& name )override { return nullptr; }
-
-		MethodContext* getMethod( std::string const& name )override { return nullptr; }
-
-		ClassContext* getClass( std::string const& name )override { return nullptr; }
-
-		VariableContext* getVariable( std::string const& name )override { return nullptr; }
-
-		std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name )override { return std::vector<gsl::not_null<IContext*>>(); }
-
-		bool appendMember( NamespaceContext&& newMember )override { return false; }
-
-		bool appendMember( MethodContext&& newMember )override { return false; }
-
-		bool appendMember( ClassContext&& newMember )override { return false; }
-
-		bool appendMember( VariableContext&& newMember )override { return false; }
-
+		BaseClassContext( gsl::not_null<TypeContext*> parent, MemberAccessibility accessibility, gsl::not_null<TypeContext*> type );
+		gsl::not_null<TypeContext*> getType() const noexcept { return _type; }
+		MemberAccessibility accesibility() const noexcept { return _accesibility; }
+		std::string const& getName() const noexcept;
 	};
 }

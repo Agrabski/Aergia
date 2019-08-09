@@ -17,6 +17,14 @@ std::string Aergia::Utilities::NameExtractor::getName( AergiaCpp14Parser::Classs
 	return x;
 }
 
+std::string Aergia::Utilities::NameExtractor::getName( AergiaCpp14Parser::FunctiondefinitionContext* context )
+{
+	FunctionNameExtractionVisitor visitor;
+	auto  t = context->getText();
+	auto x = visitor.visit( context ).as<std::string>();
+	return x;
+}
+
 std::vector<std::string> Aergia::Utilities::NameExtractor::getNames( AergiaCpp14Parser::MemberdeclarationContext* context )
 {
 	VariableNameExtractionVisitor visitor;
@@ -71,4 +79,16 @@ antlrcpp::Any Aergia::Utilities::NameExtractor::VariableNameExtractionVisitor::a
 			result.push_back( x );
 	}
 	return result;
+}
+
+antlrcpp::Any Aergia::Utilities::NameExtractor::FunctionNameExtractionVisitor::visitIdexpression( AergiaCpp14Parser::IdexpressionContext* context)
+{
+	return context->getText();
+}
+
+antlrcpp::Any Aergia::Utilities::NameExtractor::FunctionNameExtractionVisitor::aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult )
+{
+	if (prevResult.isNotNull())
+		return prevResult;
+	return nextResult;
 }

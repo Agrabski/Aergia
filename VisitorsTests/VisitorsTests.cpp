@@ -40,7 +40,7 @@ namespace VisitorsTests
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  testClass = visitor.getRootNamespace()->getNamespace("XX")->getClass( "Test" );
+			auto  testClass = visitor.getRootNamespace()->getNamespace( "XX" )->getClass( "Test" );
 			Assert::IsTrue( testClass != nullptr );
 			Assert::IsTrue( testClass->getVariable( "x" ) != nullptr );
 			Assert::IsTrue( testClass->getVariable( "y" ) != nullptr );
@@ -58,7 +58,7 @@ namespace VisitorsTests
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  testClass = visitor.getByQualifiedName<Aergia::DataStructures::ClassContext>( "XX::Test" );
+			auto  testClass = visitor.getByQualifiedName<Aergia::DataStructures::TypeContext>( "XX::Test" );
 			Assert::IsTrue( testClass != nullptr );
 			Assert::IsTrue( testClass->getVariable( "x" ) != nullptr );
 			Assert::IsTrue( testClass->getVariable( "y" ) != nullptr );
@@ -79,6 +79,26 @@ namespace VisitorsTests
 			auto  main = visitor.getByQualifiedName<Aergia::DataStructures::MethodContext>( "XX::main" );
 			Assert::IsTrue( main != nullptr );
 			Assert::IsTrue( main->accesibility() == Aergia::DataStructures::MemberAccessibility::None );
+			Assert::IsTrue( main->returnValue() == visitor.getRootNamespace()->findInChildren<Aergia::DataStructures::TypeContext>( "int" ) );
+		}
+
+		TEST_METHOD( PrimitivesPresent )
+		{
+			using namespace Aergia::DataStructures;
+			Aergia::Visitors::CurrentContextVisitor visitor;
+			auto root = visitor.getRootNamespace();
+			auto primitives =
+			{
+				"int", "long", "double", "float"
+			};
+			for (auto const& primive : primitives)
+			{
+				auto type = root->getClass( primive );
+				Assert::IsTrue( type != nullptr );
+				Assert::IsTrue( type->accesibility() == None );
+				Assert::IsTrue( type->getBases().size() == 0 );
+				Assert::IsTrue( type->getName() == primive );
+			}
 		}
 	};
 }

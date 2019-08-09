@@ -1,4 +1,5 @@
 #pragma once
+#include "Definitions.hpp"
 #include "IContext.hpp"
 #include "VariableContext.hpp"
 
@@ -8,11 +9,14 @@ namespace Aergia::DataStructures
 	{
 		std::string const _name;
 		std::vector<VariableContext> _paramters;
-		ClassContext* _returnValue;
+		TypeContext* _returnValue;
 
 	public:
 
-		MethodContext( std::string name, std::vector<VariableContext>&& variables, ClassContext* returnValue, IContext* parent, MemberAccessibility accessibility );
+		TypeContext* returnValue() const noexcept;
+		std::vector<VariableContext> const& parameters() const noexcept;
+
+		MethodContext( std::string name, std::vector<VariableContext>&& variables, TypeContext* returnValue, IContext* parent, MemberAccessibility accessibility );
 
 		MethodContext( std::string name, IContext* parent, MemberAccessibility accessibility );
 
@@ -24,7 +28,7 @@ namespace Aergia::DataStructures
 
 		MethodContext* getMethod( std::string const& name ) override;
 
-		ClassContext* getClass( std::string const& name ) override;
+		TypeContext* getClass( std::string const& name ) override;
 
 		std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) override;
 
@@ -32,7 +36,7 @@ namespace Aergia::DataStructures
 
 		bool appendMember( MethodContext&& newMember ) override;
 
-		bool appendMember( ClassContext&& newMember ) override;
+		bool appendMember( TypeContext&& newMember ) override;
 
 
 		VariableContext* getVariable( std::string const& name ) override;

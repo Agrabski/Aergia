@@ -2,6 +2,8 @@ class Test : X
 {
 public:
     int n,c,d;
+    void x() const
+    {}
 private:
     float f;
 };
@@ -13,9 +15,9 @@ namespace Test{
 
 }
 
-
+namespace l{
 int main(int t)
 {
     $foreach($var in $t.bases)
         $var$$
-}
+}}

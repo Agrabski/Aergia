@@ -28,9 +28,16 @@ namespace Aergia::Utilities
 			antlrcpp::Any aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult )override;
 		};
 
+		class FunctionNameExtractionVisitor : public AergiaCpp14BaseVisitor
+		{
+			antlrcpp::Any visitIdexpression( AergiaCpp14Parser::IdexpressionContext* ) override;
+			antlrcpp::Any aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult )override;
+		};
+
 	public:
 		static std::string getName( AergiaCpp14Parser::NamespacedefinitionContext* context );
 		static std::string getName( AergiaCpp14Parser::ClassspecifierContext* context );
+		static std::string getName( AergiaCpp14Parser::FunctiondefinitionContext* context );
 		static std::vector<std::string> getNames( AergiaCpp14Parser::MemberdeclarationContext* context );
 	};
 }

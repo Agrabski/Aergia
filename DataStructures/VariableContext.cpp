@@ -3,12 +3,12 @@
 
 using namespace Aergia::DataStructures;
 
-Aergia::DataStructures::VariableContext::VariableContext( std::string name, ClassContext* type, IContext* parent, MemberAccessibility accessibility ) :
+Aergia::DataStructures::VariableContext::VariableContext( std::string name, TypeContext* type, IContext* parent, MemberAccessibility accessibility ) :
 	_name( name ), _type( type ), IContext( parent, accessibility )
 {
 }
 
-ClassContext* Aergia::DataStructures::VariableContext::getType()
+TypeContext* Aergia::DataStructures::VariableContext::getType()
 {
 	return _type;
 }
@@ -28,7 +28,7 @@ MethodContext* Aergia::DataStructures::VariableContext::getMethod( std::string c
 	return nullptr;
 }
 
-ClassContext* Aergia::DataStructures::VariableContext::getClass( std::string const& name )
+TypeContext* Aergia::DataStructures::VariableContext::getClass( std::string const& name )
 {
 	return nullptr;
 }
@@ -48,7 +48,7 @@ bool Aergia::DataStructures::VariableContext::appendMember( MethodContext&& newM
 	return false;
 }
 
-bool Aergia::DataStructures::VariableContext::appendMember( ClassContext&& newMember )
+bool Aergia::DataStructures::VariableContext::appendMember( TypeContext&& newMember )
 {
 	return false;
 }

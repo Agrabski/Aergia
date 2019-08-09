@@ -2,9 +2,10 @@
 namespace Aergia::DataStructures
 {
 	class MethodContext;
-	class ClassContext;
+	class TypeContext;
 	class NamespaceContext;
 	class IContext;
 	class BaseClassContext;
 	class VariableContext;
+	struct TypeAlias;
 }

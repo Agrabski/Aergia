@@ -9,7 +9,7 @@
 namespace Aergia::DataStructures
 {
 	class MethodContext;
-	class ClassContext;
+	class TypeContext;
 
 	class IContext
 	{
@@ -25,9 +25,9 @@ namespace Aergia::DataStructures
 		}
 
 		template<>
-		ClassContext* findChildOfType( std::string const& name )
+		TypeContext* findChildOfType( std::string const& name )
 		{
-			return getClass(name);
+			return getClass( name );
 		}
 
 		template<>
@@ -43,7 +43,7 @@ namespace Aergia::DataStructures
 		}
 
 		template<>
-		ClassContext* findInChildren( std::string const& name )
+		TypeContext* findInChildren( std::string const& name )
 		{
 			IContext* current = this;
 			while (current != nullptr)
@@ -63,7 +63,7 @@ namespace Aergia::DataStructures
 
 		virtual MethodContext* getMethod( std::string const& name ) = 0;
 
-		virtual ClassContext* getClass( std::string const& name ) = 0;
+		virtual TypeContext* getClass( std::string const& name ) = 0;
 
 		virtual VariableContext* getVariable( std::string const& name ) = 0;
 
@@ -73,7 +73,7 @@ namespace Aergia::DataStructures
 
 		virtual bool appendMember( MethodContext&& newMember ) = 0;
 
-		virtual bool appendMember( ClassContext&& newMember ) = 0;
+		virtual bool appendMember( TypeContext&& newMember ) = 0;
 
 		virtual bool appendMember( VariableContext&& newMember ) = 0;
 

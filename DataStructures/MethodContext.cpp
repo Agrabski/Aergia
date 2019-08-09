@@ -3,7 +3,17 @@
 
 using namespace Aergia::DataStructures;
 
-Aergia::DataStructures::MethodContext::MethodContext( std::string name, std::vector<VariableContext>&& variables, ClassContext* returnValue, IContext* parent, MemberAccessibility accessibility ) :
+TypeContext* Aergia::DataStructures::MethodContext::returnValue() const noexcept
+{
+	return _returnValue;
+}
+
+std::vector<VariableContext> const& Aergia::DataStructures::MethodContext::parameters() const noexcept
+{
+	return _paramters;
+}
+
+Aergia::DataStructures::MethodContext::MethodContext( std::string name, std::vector<VariableContext>&& variables, TypeContext* returnValue, IContext* parent, MemberAccessibility accessibility ) :
 	_name( std::move( name ) ), _paramters( variables ), _returnValue( returnValue ), IContext( parent,accessibility )
 {
 }
@@ -27,7 +37,7 @@ MethodContext* Aergia::DataStructures::MethodContext::getMethod( std::string con
 	return nullptr;
 }
 
-ClassContext* Aergia::DataStructures::MethodContext::getClass( std::string const& name )
+TypeContext* Aergia::DataStructures::MethodContext::getClass( std::string const& name )
 {
 	return nullptr;
 }
@@ -51,7 +61,7 @@ bool Aergia::DataStructures::MethodContext::appendMember( MethodContext&& newMem
 	return false;
 }
 
-bool Aergia::DataStructures::MethodContext::appendMember( ClassContext&& newMember )
+bool Aergia::DataStructures::MethodContext::appendMember( TypeContext&& newMember )
 {
 	return false;
 }

@@ -15,13 +15,14 @@ namespace Aergia::DataStructures
 	{
 		std::vector<NamespaceContext> _namespaces;
 		std::vector<MethodContext> _functions;
-		std::vector<ClassContext> _classes;
+		std::vector<TypeContext> _classes;
 		std::vector<VariableContext> _globals;
 		std::string _name;
 
+		void bootstrapPrimitives();
 	public:
-		NamespaceContext( std::string const& name, IContext* const parent ) : _name( std::move( name ) ), IContext( parent, MemberAccessibility::None ) {}
-		NamespaceContext() noexcept : _name( "DEFAULT_NAMESPACE" ), IContext( nullptr, MemberAccessibility::None ) {}
+		NamespaceContext( std::string const& name, IContext* const parent ) : _name( std::move( name ) ), IContext( parent, MemberAccessibility::None ) { }
+		NamespaceContext() noexcept : _name( "GLOBAL_NAMESPACE" ), IContext( nullptr, MemberAccessibility::None ) { bootstrapPrimitives(); }
 
 		std::string const& getName() const noexcept override
 		{
@@ -44,7 +45,7 @@ namespace Aergia::DataStructures
 			return nullptr;
 		}
 
-		ClassContext* getClass( std::string const& name ) noexcept override
+		TypeContext* getClass( std::string const& name ) noexcept override
 		{
 			for (auto& ns : _classes)
 				if (ns.getName() == name)
@@ -64,9 +65,15 @@ namespace Aergia::DataStructures
 		std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) override
 		{
 			std::vector<gsl::not_null<IContext*>>result;
-			result.push_back( getNamespace( name ) );
-			result.push_back( getMethod( name ) );
-			result.push_back( getClass( name ) );
+			IContext* tmp = getNamespace( name );
+			if (tmp != nullptr)
+				result.push_back( tmp );
+			tmp = getMethod( name );
+			if (tmp != nullptr)
+				result.push_back( tmp );
+			tmp = getClass( name );
+			if (tmp != nullptr)
+				result.push_back( getClass( name ) );
 			return std::move( result );
 		}
 
@@ -82,7 +89,7 @@ namespace Aergia::DataStructures
 			return true;
 		}
 
-		bool appendMember( ClassContext&& newMember ) override
+		bool appendMember( TypeContext&& newMember ) override
 		{
 			_classes.push_back( newMember );
 			return true;

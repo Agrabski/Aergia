@@ -51,6 +51,9 @@ namespace Aergia::Visitors
 		void enterClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override;
 		void exitClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override;
 
+		void enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* ) override;
+		void exitFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* /*ctx*/ ) override {}
+
 		void enterClasshead( AergiaCpp14Parser::ClassheadContext* /*ctx*/ ) override { }
 
 		void enterEveryRule( antlr4::ParserRuleContext* /*ctx*/ ) override;

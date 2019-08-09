@@ -35,7 +35,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterMemberspecification( AergiaCp
 
 void Aergia::Visitors::CurrentContextVisitor::exitMemberspecification( AergiaCpp14Parser::MemberspecificationContext* context )
 {
-	auto accesibilitySpecifier = context->accessspecifier();
+	auto const accesibilitySpecifier = context->accessspecifier();
 	if (accesibilitySpecifier != nullptr)
 		_contextStack.pop();
 }
@@ -48,14 +48,14 @@ void Aergia::Visitors::CurrentContextVisitor::enterMemberdeclaration( AergiaCpp1
 	auto names = Utilities::NameExtractor::getNames( context );
 	for (auto const& name : names)
 	{
-		_currentContext->appendMember( DataStructures::VariableContext( name, _currentContext->findInChildren<DataStructures::ClassContext>( type ), _currentContext, _contextStack.top()._currentAccessibility ) );
+		_currentContext->appendMember( DataStructures::VariableContext( name, _currentContext->findInChildren<DataStructures::TypeContext>( type ), _currentContext, _contextStack.top()._currentAccessibility ) );
 	}
 }
 
 void Aergia::Visitors::CurrentContextVisitor::enterClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context )
 {
 	auto name = Utilities::NameExtractor::getName( context );
-	_currentContext->appendMember( DataStructures::ClassContext( name, _currentContext, _contextStack.top()._currentAccessibility ) );
+	_currentContext->appendMember( DataStructures::TypeContext( name, _currentContext, _contextStack.top()._currentAccessibility ) );
 	_currentContext = _currentContext->getClass( name );
 	_contextStack.push( { DataStructures::Private } );
 }
@@ -64,6 +64,12 @@ void Aergia::Visitors::CurrentContextVisitor::exitClassspecifier( AergiaCpp14Par
 {
 	_currentContext = _currentContext->parent();
 	_contextStack.pop();
+}
+
+void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* context )
+{
+	auto const name = Utilities::NameExtractor::getName( context );
+	_currentContext->appendMember( DataStructures::MethodContext( name, _currentContext, _contextStack.top()._currentAccessibility ));
 }
 
 void Aergia::Visitors::CurrentContextVisitor::enterEveryRule( antlr4::ParserRuleContext* node )
