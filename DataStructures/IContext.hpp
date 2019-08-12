@@ -5,6 +5,7 @@
 #include <gsl.h>
 #include "Definitions.hpp"
 #include "MemberAccessibility.hpp"
+#include "QualifiedName.hpp"
 
 namespace Aergia::DataStructures
 {
@@ -16,6 +17,7 @@ namespace Aergia::DataStructures
 		IContext* const _parent;
 		MemberAccessibility _accessability;
 	protected:
+		IContext* getRoot();
 		IContext( IContext* parent, MemberAccessibility accessibility ) noexcept :_parent( parent ), _accessability( accessibility ) {}
 	public:
 		template<typename T>
@@ -34,26 +36,6 @@ namespace Aergia::DataStructures
 		MethodContext* findChildOfType( std::string const& name )
 		{
 			return getMethod( name );
-		}
-
-		template<typename T>
-		T* findInChildren( std::string const& name )
-		{
-			static_assert(sizeof( T ) != sizeof( T ), "not implemented");
-		}
-
-		template<>
-		TypeContext* findInChildren( std::string const& name )
-		{
-			IContext* current = this;
-			while (current != nullptr)
-			{
-				auto result = current->getClass( name );
-				if (result != nullptr)
-					return result;
-				current = current->parent();
-			}
-			return nullptr;
 		}
 
 		IContext* parent() noexcept { return _parent; }
@@ -79,6 +61,60 @@ namespace Aergia::DataStructures
 
 		virtual ~IContext() = default;
 
+
+		/// <summary>
+		/// When overriden, finds type in imported namespaces and type aliases
+		/// </summary>
+		/// <param name="name">Qualified name of searched type, relative to current context (ex: when looking for A::B::C in namespace B is called with C)</param>
+		/// <returns></returns>
+		virtual TypeContext* resolveTypeInImports( QualifiedName name ) noexcept { return nullptr; }
+
+		virtual MethodContext* resolveMethodInImports( QualifiedName name ) noexcept { return nullptr; }
+
+		virtual VariableContext* resolveVariableInImports( QualifiedName name ) noexcept { return nullptr; }
+
 		MemberAccessibility accesibility() const noexcept { return _accessability; }
+
+		template<typename T>
+		T* resolveInImports( QualifiedName name ) noexcept { static_assert(sizeof( T ) != sizeof( T ), "not implemented"); }
+
+		template<>
+		TypeContext* resolveInImports( QualifiedName name ) noexcept
+		{
+			return resolveTypeInImports( name );
+		}
+
+		template<>
+		MethodContext* resolveInImports( QualifiedName name ) noexcept
+		{
+			return resolveMethodInImports( name );
+		}
+
+		template<typename T>
+		T* resolve( QualifiedName qualifiedName, bool fallbackToRoot = true )
+		{
+			if (qualifiedName.levelCount() == 1)
+			{
+				auto result = findChildOfType<T>( qualifiedName.peekQualificationLevel() );
+				if (result != nullptr)
+					return result;
+			}
+
+			for (auto member : getMembers( qualifiedName.peekQualificationLevel() ))
+			{
+				auto result = member->resolve<T>( qualifiedName.next(), fallbackToRoot );
+				if (result != nullptr)
+					return result;
+			}
+
+			auto imported = resolveInImports<T>( qualifiedName );
+			if (imported != nullptr)
+				return imported;
+
+			auto const root = getRoot();
+			if (root != this && fallbackToRoot)
+				return getRoot()->resolve<T>( qualifiedName );
+			return nullptr;
+		}
 	};
 }

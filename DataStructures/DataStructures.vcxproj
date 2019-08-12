@@ -184,16 +184,22 @@
     <ClInclude Include="Definitions.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IContext.hpp" />
+    <ClInclude Include="INamespaceImportable.hpp" />
+    <ClInclude Include="ITypeImportable.hpp" />
     <ClInclude Include="MemberAccessibility.hpp" />
     <ClInclude Include="MethodContext.hpp" />
     <ClInclude Include="NamespaceContext.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="QualifiedName.hpp" />
     <ClInclude Include="TypeAlias.hpp" />
     <ClInclude Include="VariableContext.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseClassContext.cpp" />
     <ClCompile Include="ClassContext.cpp" />
+    <ClCompile Include="IContext.cpp" />
+    <ClCompile Include="INamespaceImportable.cpp" />
+    <ClCompile Include="ITypeImportable.cpp" />
     <ClCompile Include="MemberAccessibility.cpp" />
     <ClCompile Include="MethodContext.cpp" />
     <ClCompile Include="NamespaceContext.cpp" />
@@ -203,6 +209,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="QualifiedName.cpp" />
     <ClCompile Include="VariableContext.cpp" />
   </ItemGroup>
   <ItemGroup>

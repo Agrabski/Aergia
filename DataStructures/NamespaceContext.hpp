@@ -2,16 +2,18 @@
 #include <vector>
 #include <map>
 #include <stdexcept>
+#include "QualifiedName.hpp"
 #include "Definitions.hpp"
+#include "INamespaceImportable.hpp"
 #include "IContext.hpp"
 #include "ClassContext.hpp"
 #include "MethodContext.hpp"
-
+#include "ITypeImportable.hpp"
 
 
 namespace Aergia::DataStructures
 {
-	class NamespaceContext : public IContext
+	class NamespaceContext : public IContext, public INamespaceImportable, public ITypeImportable
 	{
 		std::vector<NamespaceContext> _namespaces;
 		std::vector<MethodContext> _functions;
@@ -99,6 +101,13 @@ namespace Aergia::DataStructures
 		{
 			_globals.push_back( newMember );
 			return true;
+		}
+
+		TypeContext* resolveTypeInImports( QualifiedName name ) noexcept override
+		{
+			if (name.levelCount() == 1)
+				return resolveInAliases( name.peekQualificationLevel() );
+			return getInImportedNamespace<TypeContext>( name );
 		}
 	};
 

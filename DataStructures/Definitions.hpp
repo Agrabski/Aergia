@@ -8,4 +8,5 @@ namespace Aergia::DataStructures
 	class BaseClassContext;
 	class VariableContext;
 	struct TypeAlias;
+	class INamespaceImportable;
 }

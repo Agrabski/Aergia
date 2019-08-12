@@ -34,9 +34,12 @@ std::vector<gsl::not_null<IContext*>> Aergia::DataStructures::TypeContext::getMe
 {
 	std::vector<gsl::not_null<IContext*>> result;
 
-	result.push_back( getClass( name ) );
-	result.push_back( getMethod( name ) );
-	result.erase( std::remove( result.begin(), result.end(), nullptr ) );
+	auto c = getClass( name );
+	if (c != nullptr)
+		result.push_back( c );
+	auto m = getMethod( name );
+	if (m != nullptr)
+		result.push_back( m );
 	return std::move( result );
 }
 

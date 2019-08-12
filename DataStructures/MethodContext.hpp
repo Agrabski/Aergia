@@ -16,10 +16,7 @@ namespace Aergia::DataStructures
 		TypeContext* returnValue() const noexcept;
 		std::vector<VariableContext> const& parameters() const noexcept;
 
-		MethodContext( std::string name, std::vector<VariableContext>&& variables, TypeContext* returnValue, IContext* parent, MemberAccessibility accessibility );
-
-		MethodContext( std::string name, IContext* parent, MemberAccessibility accessibility );
-
+		MethodContext( std::string name, std::vector<VariableContext>&& parameters, TypeContext* returnValue, IContext* parent, MemberAccessibility accessibility );
 
 		std::string const& getName() const noexcept override;
 

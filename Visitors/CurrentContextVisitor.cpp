@@ -48,7 +48,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterMemberdeclaration( AergiaCpp1
 	auto names = Utilities::NameExtractor::getNames( context );
 	for (auto const& name : names)
 	{
-		_currentContext->appendMember( DataStructures::VariableContext( name, _currentContext->findInChildren<DataStructures::TypeContext>( type ), _currentContext, _contextStack.top()._currentAccessibility ) );
+		_currentContext->appendMember( DataStructures::VariableContext( name, _currentContext->resolve<DataStructures::TypeContext>( type ), _currentContext, _contextStack.top()._currentAccessibility ) );
 	}
 }
 
@@ -68,8 +68,13 @@ void Aergia::Visitors::CurrentContextVisitor::exitClassspecifier( AergiaCpp14Par
 
 void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* context )
 {
+	using DataStructures::MethodContext;
+	using DataStructures::VariableContext;
 	auto const name = Utilities::NameExtractor::getName( context );
-	_currentContext->appendMember( DataStructures::MethodContext( name, _currentContext, _contextStack.top()._currentAccessibility ));
+	auto type = Utilities::TypeFinder::getType( context->declspecifierseq() );
+	_currentContext->appendMember(
+		MethodContext( name, std::vector<VariableContext>(), _currentContext->resolve<DataStructures::TypeContext>(type),
+			_currentContext, _contextStack.top()._currentAccessibility ) );
 }
 
 void Aergia::Visitors::CurrentContextVisitor::enterEveryRule( antlr4::ParserRuleContext* node )
