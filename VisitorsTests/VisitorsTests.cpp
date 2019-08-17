@@ -85,23 +85,24 @@ namespace VisitorsTests
 		TEST_METHOD( PrimitivesPresent )
 		{
 			using namespace Aergia::DataStructures;
+			using namespace std::string_literals;
 			Aergia::Visitors::CurrentContextVisitor visitor;
-			auto root = visitor.getRootNamespace();
+			auto const root = visitor.getRootNamespace();
 			auto primitives =
 			{
-				"int", "long", "double", "float"
+				"int"s, "long"s, "double"s, "float"s
 			};
 			for (auto const& primive : primitives)
 			{
 				auto type = root->getClass( primive );
 				Assert::IsTrue( type != nullptr );
-				Assert::IsTrue( type->accesibility() == None );
+				Assert::IsTrue( type->accesibility() == MemberAccessibility::None );
 				Assert::IsTrue( type->getBases().size() == 0 );
 				Assert::IsTrue( type->getName() == primive );
 			}
 		}
 
-		TEST_METHOD( NamespaceImport )
+		TEST_METHOD( NamespaceImportToNamespace )
 		{
 			using namespace std::literals;
 			std::stringstream input = std::stringstream( "namespace YY{class T{};} namespace XX {using namespace YY; int main() {return 0;}}"s );
@@ -114,7 +115,10 @@ namespace VisitorsTests
 
 			auto  xx = visitor.getRootNamespace()->getNamespace( "XX"s );
 			Assert::IsTrue( xx != nullptr );
-			Assert::IsTrue( xx->resolve<Aergia::DataStructures::TypeContext>( "XX::T"s ) != nullptr );
+			auto resoved = visitor.getRootNamespace()->resolve<Aergia::DataStructures::TypeContext>( "YY::T"s );
+			auto imported = xx->resolve<Aergia::DataStructures::TypeContext>( "T"s );
+			Assert::IsTrue( resoved == imported );
+
 
 		}
 
@@ -134,6 +138,24 @@ namespace VisitorsTests
 			Assert::IsTrue( xx->getMethod( "main"s ) != nullptr );
 			Assert::IsTrue( xx->getMethod( "main"s )->returnValue() == visitor.getRootNamespace()->resolve<Aergia::DataStructures::TypeContext>( "YY::T"s ) );
 
+		}
+
+		TEST_METHOD( TypeImportToNamespace )
+		{
+			using namespace std::literals;
+			std::stringstream input = std::stringstream( "namespace YY{class T{};} namespace XX {using Lssss = YY::T; int main() {return 0;}}"s );
+
+			AntlrHelper helper( input );
+
+			Aergia::Visitors::CurrentContextVisitor visitor;
+
+			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
+
+			auto  xx = visitor.getRootNamespace()->getNamespace( "XX"s );
+			Assert::IsTrue( xx != nullptr );
+			auto resoved = visitor.getRootNamespace()->resolve<Aergia::DataStructures::TypeContext>( "YY::T"s );
+			auto imported = xx->resolve<Aergia::DataStructures::TypeContext>( "Lssss"s );
+			Assert::IsTrue( resoved == imported );
 		}
 	};
 }

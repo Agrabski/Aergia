@@ -5,9 +5,12 @@ std::string Aergia::Utilities::NameExtractor::getName( AergiaCpp14Parser::Namesp
 {
 	NamespaceNameExtractionVisitor visitor;
 
-
-	auto x = visitor.visit( context ).as<std::string>();
-	return x;
+	auto t = context->getText();
+	auto x = visitor.visit( context );
+	if (x.isNull())
+		throw NameNotFoundException( context->start->getLine(), context->start->getCharPositionInLine() );
+	assert( x.is<std::string>() );
+	return x.as<std::string>();
 }
 
 std::string Aergia::Utilities::NameExtractor::getName( AergiaCpp14Parser::ClassspecifierContext* context )
@@ -19,6 +22,8 @@ std::string Aergia::Utilities::NameExtractor::getName( AergiaCpp14Parser::Classs
 
 std::string Aergia::Utilities::NameExtractor::getName( AergiaCpp14Parser::FunctiondefinitionContext* context )
 {
+	assert( context != nullptr );
+
 	FunctionNameExtractionVisitor visitor;
 	auto  t = context->getText();
 	auto x = visitor.visit( context ).as<std::string>();
@@ -34,6 +39,7 @@ std::vector<std::string> Aergia::Utilities::NameExtractor::getNames( AergiaCpp14
 
 antlrcpp::Any Aergia::Utilities::NameExtractor::NamespaceNameExtractionVisitor::visitOriginalnamespacedefinition( AergiaCpp14Parser::OriginalnamespacedefinitionContext* context )
 {
+	assert( context != nullptr );
 
 	return context->Identifier()->getText();
 }

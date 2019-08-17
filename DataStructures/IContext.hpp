@@ -27,6 +27,12 @@ namespace Aergia::DataStructures
 		}
 
 		template<>
+		NamespaceContext* findChildOfType( std::string const& name )
+		{
+			return getNamespace( name );
+		}
+
+		template<>
 		TypeContext* findChildOfType( std::string const& name )
 		{
 			return getClass( name );
@@ -73,6 +79,8 @@ namespace Aergia::DataStructures
 
 		virtual VariableContext* resolveVariableInImports( QualifiedName name ) noexcept { return nullptr; }
 
+		virtual NamespaceContext* resolveNamespaceInImports( QualifiedName name ) noexcept { return nullptr; }
+
 		MemberAccessibility accesibility() const noexcept { return _accessability; }
 
 		template<typename T>
@@ -88,6 +96,12 @@ namespace Aergia::DataStructures
 		MethodContext* resolveInImports( QualifiedName name ) noexcept
 		{
 			return resolveMethodInImports( name );
+		}
+
+		template<>
+		NamespaceContext* resolveInImports( QualifiedName name ) noexcept
+		{
+			return resolveNamespaceInImports( name );
 		}
 
 		template<typename T>
@@ -111,7 +125,7 @@ namespace Aergia::DataStructures
 			if (imported != nullptr)
 				return imported;
 
-			auto const root = getRoot();
+			auto * const root = getRoot();
 			if (root != this && fallbackToRoot)
 				return getRoot()->resolve<T>( qualifiedName );
 			return nullptr;

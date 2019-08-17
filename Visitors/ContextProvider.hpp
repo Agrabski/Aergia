@@ -2,6 +2,7 @@
 #include <gsl.h>
 #include <sstream>
 #include "..//DataStructures/IContext.hpp"
+#include "CallChainResolver.hpp"
 
 
 namespace Aergia::Visitors
@@ -48,6 +49,8 @@ namespace Aergia::Visitors
 			}
 			return findByFullyQualifiedName<TargetType>( result, getRootNamespace() );
 		}
+
+		CallChainResolver& getResolver() const noexcept;
 
 	};
 }

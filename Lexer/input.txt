@@ -1,23 +1,7 @@
-class Test : X
+namespace YY{class T{};} namespace XX {using Lssss = YY::T; 
+int main() 
 {
-public:
-    int n,c,d;
-    void x() const
-    {}
-private:
-    float f;
-};
-
-namespace Test{
-}
-
-namespace Test{
-
-}
-
-namespace l{
-int main(int t)
-{
-    $foreach($var in $t.bases)
-        $var$$
+    return 0;
+    $foreach($var in $t)
+        $x$$
 }}

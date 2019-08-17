@@ -2,7 +2,7 @@
 
 namespace Aergia::DataStructures
 {
-	enum MemberAccessibility { Public, Protected, Private, None };
+	enum class MemberAccessibility { Public, Protected, Private, None };
 
 	MemberAccessibility parse( std::string const& );
 }

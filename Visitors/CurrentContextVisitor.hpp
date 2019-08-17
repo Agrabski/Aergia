@@ -29,7 +29,7 @@ namespace Aergia::Visitors
 		template<typename T, typename... Args>
 		void addVisitor( Args&& ... arguments )
 		{
-			_visitors.push_back( std::make_unique<T>( std::forward( Args )... ) );
+			_visitors.push_back( std::make_unique<T>( std::forward<Args>( arguments )... ) );
 		}
 
 		template<typename T>
@@ -54,11 +54,17 @@ namespace Aergia::Visitors
 		void enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* ) override;
 		void exitFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* /*ctx*/ ) override {}
 
+		void enterUsingdirective( AergiaCpp14Parser::UsingdirectiveContext* context ) override;
+
 		void enterClasshead( AergiaCpp14Parser::ClassheadContext* /*ctx*/ ) override { }
+
+		void enterAliasdeclaration( AergiaCpp14Parser::AliasdeclarationContext* /*ctx*/ ) override;
 
 		void enterEveryRule( antlr4::ParserRuleContext* /*ctx*/ ) override;
 
 		void applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const;
+
+
 
 		gsl::not_null<DataStructures::IContext*> getRootNamespace() noexcept override;
 

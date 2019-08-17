@@ -106,7 +106,11 @@ namespace Aergia::DataStructures
 		TypeContext* resolveTypeInImports( QualifiedName name ) noexcept override
 		{
 			if (name.levelCount() == 1)
-				return resolveInAliases( name.peekQualificationLevel() );
+			{
+				auto alias = resolveInAliases( name.peekQualificationLevel() );
+				if (alias != nullptr)
+					return alias;
+			}
 			return getInImportedNamespace<TypeContext>( name );
 		}
 	};

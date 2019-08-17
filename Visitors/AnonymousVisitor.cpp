@@ -17,6 +17,7 @@ std::string Aergia::Visitors::AnonymousVisitor::formatAssigment( std::string con
 
 antlrcpp::Any Aergia::Visitors::AnonymousVisitor::visitAnonymousExpression( AergiaCpp14Parser::AnonymousExpressionContext* context )
 {
+	assert( context != nullptr );
 	using Utilities::TokenFinder;
 	auto content = context->anoynmousBody()->getText();
 	auto before = TokenFinder::findTokenBefore( (antlr4::ParserRuleContext*) context->parent );
@@ -26,7 +27,7 @@ antlrcpp::Any Aergia::Visitors::AnonymousVisitor::visitAnonymousExpression( Aerg
 	return antlrcpp::Any();
 }
 
-std::vector<Aergia::Visitors::Rewrite>const & Aergia::Visitors::AnonymousVisitor::getRewrites() const
+std::vector<Aergia::Visitors::Rewrite>const& Aergia::Visitors::AnonymousVisitor::getRewrites() const
 {
 	return _rewrites;
 }

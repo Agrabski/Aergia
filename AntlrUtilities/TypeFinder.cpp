@@ -10,5 +10,6 @@ std::string Aergia::Utilities::TypeFinder::getType( AergiaCpp14Parser::Declspeci
 
 antlrcpp::Any Aergia::Utilities::TypeFinder::ClassNameExtractionVisitor::visitTypespecifier( AergiaCpp14Parser::TypespecifierContext* ctx )
 {
+	assert( ctx != nullptr );
 	return ctx->getText();
 }

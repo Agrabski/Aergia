@@ -276,7 +276,8 @@ void ParserInterpreter::visitRuleStopState(atn::ATNState *p) {
   setState(ruleTransition->followState->stateNumber);
 }
 
-void ParserInterpreter::recover(RecognitionException &e) {
+void ParserInterpreter::recover(RecognitionException &e)
+{
   size_t i = _input->index();
   getErrorHandler()->recover(this, std::make_exception_ptr(e));
 

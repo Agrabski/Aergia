@@ -4,6 +4,8 @@
 
 namespace Aergia::Utilities
 {
+	using namespace std::literals;
+
 	class NameExtractor
 	{
 
@@ -35,6 +37,12 @@ namespace Aergia::Utilities
 		};
 
 	public:
+		class NameNotFoundException : public std::runtime_error
+		{
+		public:
+			NameNotFoundException( unsigned line, unsigned character ) : 
+				runtime_error( "requested name was not found. You might have a syntax error! Position: (line, character):"s + std::to_string( line ) + ", "s + std::to_string( character ) ) {}
+		};
 		static std::string getName( AergiaCpp14Parser::NamespacedefinitionContext* context );
 		static std::string getName( AergiaCpp14Parser::ClassspecifierContext* context );
 		static std::string getName( AergiaCpp14Parser::FunctiondefinitionContext* context );

@@ -107,7 +107,7 @@
       <PreprocessorDefinitions>_DEBUG;ANTLR4CPP_STATIC;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>../antlr/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -126,7 +126,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;ANTLR4CPP_STATIC;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>../antlr/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -147,7 +147,7 @@
       <PreprocessorDefinitions>WIN32;ANTLR4CPP_STATIC;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>../antlr/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
@@ -170,7 +170,7 @@
       <PreprocessorDefinitions>NDEBUG;ANTLR4CPP_STATIC;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>../antlr/src/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
