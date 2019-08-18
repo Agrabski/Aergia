@@ -57,13 +57,13 @@ namespace Aergia::DataStructures
 
 		virtual std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) = 0;
 
-		virtual bool appendMember( NamespaceContext&& newMember ) = 0;
+		virtual bool appendMember( std::unique_ptr< NamespaceContext>&& newMember ) = 0;
 
-		virtual bool appendMember( MethodContext&& newMember ) = 0;
+		virtual bool appendMember( std::unique_ptr<MethodContext>&& newMember ) = 0;
 
-		virtual bool appendMember( TypeContext&& newMember ) = 0;
+		virtual bool appendMember( std::unique_ptr<TypeContext>&& newMember ) = 0;
 
-		virtual bool appendMember( VariableContext&& newMember ) = 0;
+		virtual bool appendMember( std::unique_ptr<VariableContext>&& newMember ) = 0;
 
 		virtual ~IContext() = default;
 

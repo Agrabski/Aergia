@@ -13,27 +13,28 @@ using namespace antlr4;
 
 const Ref<TokenFactory<CommonToken>> CommonTokenFactory::DEFAULT = std::make_shared<CommonTokenFactory>();
 
-CommonTokenFactory::CommonTokenFactory(bool copyText_) noexcept : copyText(copyText_) {
+CommonTokenFactory::CommonTokenFactory( bool copyText_ ) noexcept : copyText( copyText_ ) {
 }
 
-CommonTokenFactory::CommonTokenFactory() : CommonTokenFactory(false) {
+CommonTokenFactory::CommonTokenFactory() : CommonTokenFactory( false ) {
 }
 
-std::unique_ptr<CommonToken> CommonTokenFactory::create(std::pair<TokenSource*, CharStream*> source, size_t type,
-  const std::string &text, size_t channel, size_t start, size_t stop, size_t line, size_t charPositionInLine) {
+std::unique_ptr<CommonToken> CommonTokenFactory::create( std::pair<TokenSource*, CharStream*> source, size_t type,
+	const std::string& text, size_t channel, size_t start, size_t stop, size_t line, size_t charPositionInLine ) {
 
-  std::unique_ptr<CommonToken> t(new CommonToken(source, type, channel, start, stop));
-  t->setLine(line);
-  t->setCharPositionInLine(charPositionInLine);
-  if (text != "") {
-    t->setText(text);
-  } else if (copyText && source.second != nullptr) {
-    t->setText(source.second->getText(misc::Interval(start, stop)));
-  }
+	std::unique_ptr<CommonToken> t( new CommonToken( source, type, channel, start, stop ) );
+	t->setLine( line );
+	t->setCharPositionInLine( charPositionInLine );
+	if (text != "") {
+		t->setText( text );
+	}
+	else if (copyText && source.second != nullptr) {
+		t->setText( source.second->getText( misc::Interval( start, stop ) ) );
+	}
 
-  return t;
+	return t;
 }
 
-std::unique_ptr<CommonToken> CommonTokenFactory::create(size_t type, const std::string &text) {
-  return std::unique_ptr<CommonToken>(new CommonToken(type, text));
+std::unique_ptr<CommonToken> CommonTokenFactory::create( size_t type, const std::string& text ) {
+	return std::unique_ptr<CommonToken>( new CommonToken( type, text ) );
 }

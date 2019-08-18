@@ -19,5 +19,10 @@ namespace XXX
 	int main()
 	{
 		$anonymous( std::mutex() )$$
+
+		$foreach( $var in $vvv )
+		${
+            int n =0;
+		$}
 	}
 }

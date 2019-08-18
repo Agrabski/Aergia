@@ -183,6 +183,7 @@
     <ClInclude Include="ImportHelper.hpp" />
     <ClInclude Include="NameExtractor.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="TokenFactoryProxy.hpp" />
     <ClInclude Include="TokenFinder.hpp" />
     <ClInclude Include="TypeFinder.hpp" />
   </ItemGroup>
@@ -195,6 +196,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TokenFactoryProxy.cpp" />
     <ClCompile Include="TokenFinder.cpp" />
     <ClCompile Include="TypeFinder.cpp" />
   </ItemGroup>

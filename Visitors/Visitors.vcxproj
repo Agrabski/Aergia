@@ -189,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnonymousVisitor.cpp" />
+    <ClCompile Include="CallChainResolver.cpp" />
     <ClCompile Include="ContextProvider.cpp" />
     <ClCompile Include="CurrentContextVisitor.cpp" />
     <ClCompile Include="ForeachVisitor.cpp" />

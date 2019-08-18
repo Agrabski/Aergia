@@ -3,11 +3,8 @@
 
 void Aergia::DataStructures::NamespaceContext::bootstrapPrimitives()
 {
-	_classes = std::vector
-	{
-		TypeContext( "int",this,MemberAccessibility::None ),
-		TypeContext( "float",this,MemberAccessibility::None ),
-		TypeContext( "double",this,MemberAccessibility::None ),
-		TypeContext( "long",this,MemberAccessibility::None )
-	};
+	_classes.emplace_back( std::make_unique<TypeContext>( "int", this, MemberAccessibility::None ) );
+	_classes.emplace_back( std::make_unique<TypeContext>( "float", this, MemberAccessibility::None ) );
+	_classes.emplace_back( std::make_unique<TypeContext>( "double", this, MemberAccessibility::None ) );
+	_classes.emplace_back( std::make_unique<TypeContext>( "long", this, MemberAccessibility::None ) );
 }

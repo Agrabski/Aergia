@@ -15,10 +15,10 @@ namespace Aergia::DataStructures
 {
 	class NamespaceContext : public IContext, public INamespaceImportable, public ITypeImportable
 	{
-		std::vector<NamespaceContext> _namespaces;
-		std::vector<MethodContext> _functions;
-		std::vector<TypeContext> _classes;
-		std::vector<VariableContext> _globals;
+		std::vector< std::unique_ptr<NamespaceContext>> _namespaces;
+		std::vector< std::unique_ptr<MethodContext>> _functions;
+		std::vector<std::unique_ptr<TypeContext>> _classes;
+		std::vector< std::unique_ptr<VariableContext>> _globals;
 		std::string _name;
 
 		void bootstrapPrimitives();
@@ -34,32 +34,32 @@ namespace Aergia::DataStructures
 		NamespaceContext* getNamespace( std::string const& name ) noexcept override
 		{
 			for (auto& ns : _namespaces)
-				if (ns.getName() == name)
-					return &ns;
+				if (ns->getName() == name)
+					return ns.get();
 			return nullptr;
 		}
 
 		MethodContext* getMethod( std::string const& name ) noexcept override
 		{
 			for (auto& ns : _functions)
-				if (ns.getName() == name)
-					return &ns;
+				if (ns->getName() == name)
+					return ns.get();
 			return nullptr;
 		}
 
 		TypeContext* getClass( std::string const& name ) noexcept override
 		{
 			for (auto& ns : _classes)
-				if (ns.getName() == name)
-					return &ns;
+				if (ns->getName() == name)
+					return ns.get();
 			return nullptr;
 		}
 
 		VariableContext* getVariable( std::string const& name ) noexcept override
 		{
 			for (auto& ns : _globals)
-				if (ns.getName() == name)
-					return &ns;
+				if (ns->getName() == name)
+					return ns.get();
 			return nullptr;
 
 		}
@@ -79,27 +79,27 @@ namespace Aergia::DataStructures
 			return std::move( result );
 		}
 
-		bool appendMember( NamespaceContext&& newMember ) override
+		bool appendMember( std::unique_ptr<NamespaceContext> && newMember ) override
 		{
-			_namespaces.push_back( newMember );
+			_namespaces.push_back(std::move( newMember));
 			return true;
 		}
 
-		bool appendMember( MethodContext&& newMember ) override
+		bool appendMember( std::unique_ptr<MethodContext>&& newMember ) override
 		{
-			_functions.push_back( newMember );
+			_functions.push_back(std::move( newMember ));
 			return true;
 		}
 
-		bool appendMember( TypeContext&& newMember ) override
+		bool appendMember( std::unique_ptr<TypeContext>&& newMember ) override
 		{
-			_classes.push_back( newMember );
+			_classes.push_back(std::move( newMember  ));
 			return true;
 		}
 
-		bool appendMember( VariableContext&& newMember ) override
+		bool appendMember( std::unique_ptr<VariableContext>&& newMember ) override
 		{
-			_globals.push_back( newMember );
+			_globals.push_back(std::move(newMember ));
 			return true;
 		}
 

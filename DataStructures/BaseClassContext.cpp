@@ -2,11 +2,12 @@
 #include "BaseClassContext.hpp"
 
 Aergia::DataStructures::BaseClassContext::BaseClassContext( gsl::not_null< TypeContext*> parent, MemberAccessibility accessibility, gsl::not_null <TypeContext*> type ) :
-	_parent( parent ), _accesibility( accessibility ), _type( type )
+	_type( type ), IContext( parent, accessibility )
 {
 }
 
 std::string const& Aergia::DataStructures::BaseClassContext::getName() const noexcept
 {
-	return _name;
+	return _type->getName();
 }
+

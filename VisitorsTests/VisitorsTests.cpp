@@ -3,6 +3,7 @@
 #include "CppUnitTest.h"
 #include "..//Visitors/CurrentContextVisitor.hpp"
 #include "AntlrHelper.hpp"
+#include "../Visitors/ForeachVisitor.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -18,7 +19,7 @@ namespace VisitorsTests
 
 			AntlrHelper helper( input );
 
-			Aergia::Visitors::CurrentContextVisitor visitor;
+			auto& visitor = helper.getVisitor();
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
@@ -36,7 +37,7 @@ namespace VisitorsTests
 
 			AntlrHelper helper( input );
 
-			Aergia::Visitors::CurrentContextVisitor visitor;
+			auto& visitor = helper.getVisitor();
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
@@ -54,7 +55,7 @@ namespace VisitorsTests
 
 			AntlrHelper helper( input );
 
-			Aergia::Visitors::CurrentContextVisitor visitor;
+			auto& visitor = helper.getVisitor();
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
@@ -72,7 +73,7 @@ namespace VisitorsTests
 
 			AntlrHelper helper( input );
 
-			Aergia::Visitors::CurrentContextVisitor visitor;
+			auto& visitor = helper.getVisitor();
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
@@ -86,7 +87,11 @@ namespace VisitorsTests
 		{
 			using namespace Aergia::DataStructures;
 			using namespace std::string_literals;
-			Aergia::Visitors::CurrentContextVisitor visitor;
+			std::stringstream input = std::stringstream( "namespace XX {int main() {return 0;}}"s );
+
+			AntlrHelper helper( input );
+
+			auto& visitor = helper.getVisitor();
 			auto const root = visitor.getRootNamespace();
 			auto primitives =
 			{
@@ -109,7 +114,7 @@ namespace VisitorsTests
 
 			AntlrHelper helper( input );
 
-			Aergia::Visitors::CurrentContextVisitor visitor;
+			auto& visitor = helper.getVisitor();
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
@@ -129,7 +134,7 @@ namespace VisitorsTests
 
 			AntlrHelper helper( input );
 
-			Aergia::Visitors::CurrentContextVisitor visitor;
+			auto& visitor = helper.getVisitor();
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
@@ -147,8 +152,7 @@ namespace VisitorsTests
 
 			AntlrHelper helper( input );
 
-			Aergia::Visitors::CurrentContextVisitor visitor;
-
+			auto& visitor = helper.getVisitor();
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
 			auto  xx = visitor.getRootNamespace()->getNamespace( "XX"s );
@@ -156,6 +160,24 @@ namespace VisitorsTests
 			auto resoved = visitor.getRootNamespace()->resolve<Aergia::DataStructures::TypeContext>( "YY::T"s );
 			auto imported = xx->resolve<Aergia::DataStructures::TypeContext>( "Lssss"s );
 			Assert::IsTrue( resoved == imported );
+		}
+
+		TEST_METHOD( s )
+		{
+			using namespace std::literals;
+			using namespace Aergia::Visitors;
+			std::stringstream input = std::stringstream( "class A{}; class B{}; class C : public A, B{}; int main(){ $foreach($x in $typeof(C).bases) ${ $x$$ $}}"s );
+
+			AntlrHelper helper( input );
+			auto translationUnit = helper.getParser()->translationunit();
+			auto l = helper.getParser()->translationunit()->getText();
+			auto& visitor = helper.getVisitor();
+			visitor.addVisitor<ForeachVisitor>( &visitor );
+
+			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, translationUnit );
+
+			auto g = translationUnit->getText();
+			auto x = helper.getParser()->translationunit()->getText();
 		}
 	};
 }

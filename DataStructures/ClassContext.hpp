@@ -14,15 +14,15 @@ namespace Aergia::DataStructures
 	class TypeContext : public IContext
 	{
 		std::string _name;
-		std::vector<VariableContext> _fields;
-		std::vector<MethodContext> _methods;
-		std::vector<TypeContext> _internalClasses;
-		std::vector<BaseClassContext> _bases;
+		std::vector< std::unique_ptr<VariableContext>> _fields;
+		std::vector< std::unique_ptr<MethodContext>> _methods;
+		std::vector<std::unique_ptr<TypeContext>> _internalClasses;
+		std::vector<std::unique_ptr<BaseClassContext>> _bases;
 	public:
 
-		std::vector<BaseClassContext> const& getBases() const noexcept { return _bases; }
+		std::vector<gsl::not_null<BaseClassContext*>> const& getBases() const noexcept;
 
-		void appendBase( BaseClassContext&& base ) { _bases.push_back( base ); }
+		void appendBase( BaseClassContext&& base );
 
 		TypeContext( std::string name, IContext* parent, MemberAccessibility accessibility ) : _name( std::move( name ) ), IContext( parent, accessibility ) {}
 
@@ -36,15 +36,15 @@ namespace Aergia::DataStructures
 
 		std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) override;
 
-		bool appendMember( NamespaceContext&& newMember ) noexcept override;
+		bool appendMember( std::unique_ptr<NamespaceContext>&& newMember ) noexcept override;
 
-		bool appendMember( MethodContext&& newMember ) override;
+		bool appendMember( std::unique_ptr < MethodContext>&& newMember ) override;
 
-		bool appendMember( TypeContext&& newMember ) override;
+		bool appendMember( std::unique_ptr < TypeContext>&& newMember ) override;
 
 		VariableContext* getVariable( std::string const& name ) noexcept override;
 
-		bool appendMember( VariableContext&& newMember ) override;
+		bool appendMember( std::unique_ptr < VariableContext>&& newMember ) override;
 
 
 	};

@@ -26,15 +26,15 @@ namespace Aergia::DataStructures
 
 		std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) override;
 
-		bool appendMember( NamespaceContext&& newMember ) override;
+		bool appendMember( std::unique_ptr<NamespaceContext > && newMember ) override;
 
-		bool appendMember( MethodContext&& newMember ) override;
+		bool appendMember( std::unique_ptr<MethodContext>&& newMember ) override;
 
-		bool appendMember( TypeContext&& newMember ) override;
+		bool appendMember( std::unique_ptr<TypeContext>&& newMember ) override;
 
 		VariableContext* getVariable( std::string const& name ) override;
 
-		bool appendMember( VariableContext&& newMember ) override;
+		bool appendMember( std::unique_ptr<VariableContext>&& newMember ) override;
 
 	};
 }

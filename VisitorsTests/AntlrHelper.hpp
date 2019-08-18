@@ -12,12 +12,15 @@ class AntlrHelper
 	AergiaCpp14Lexer _lexer;
 	antlr4::CommonTokenStream tokens;
 	AergiaCpp14Parser parser;
-
+	Aergia::Visitors::CurrentContextVisitor _visitor;
 public:
-	AntlrHelper( std::istream& stream ) : _stream( stream ), _lexer( &_stream ), tokens( &_lexer ), parser( &tokens )
+	AntlrHelper( std::istream& stream ) : _stream( stream ), _lexer( &_stream ), tokens( &_lexer ), parser( &tokens ),
+		_visitor( parser, _lexer, tokens )
 	{
 
 	}
+
+	Aergia::Visitors::CurrentContextVisitor& getVisitor() { return _visitor; }
 
 	AergiaCpp14Parser* getParser() { return &parser; }
 };

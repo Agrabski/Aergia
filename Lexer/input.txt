@@ -1,7 +1,28 @@
-namespace YY{class T{};} namespace XX {using Lssss = YY::T; 
-int main() 
+
+namespace XXX
 {
-    return 0;
-    $foreach($var in $t)
-        $x$$
-}}
+	class Test : X
+	{
+	public:
+		int n;
+	private:
+		float f;
+	};
+
+	namespace Test {
+	}
+
+	namespace Test {
+
+	}
+
+	int main()
+	{
+		$anonymous( std::mutex() )$$
+
+		$foreach( $var in $vvv )
+		${
+            int n =0;
+		$}
+	}
+}

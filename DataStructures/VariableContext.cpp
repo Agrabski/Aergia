@@ -38,17 +38,17 @@ std::vector<gsl::not_null<IContext*>> Aergia::DataStructures::VariableContext::g
 	return std::vector <gsl::not_null<IContext*>>();
 }
 
-bool Aergia::DataStructures::VariableContext::appendMember( NamespaceContext&& newMember )
+bool Aergia::DataStructures::VariableContext::appendMember(std::unique_ptr< NamespaceContext>&& newMember )
 {
 	return false;
 }
 
-bool Aergia::DataStructures::VariableContext::appendMember( MethodContext&& newMember )
+bool Aergia::DataStructures::VariableContext::appendMember( std::unique_ptr<MethodContext>&& newMember )
 {
 	return false;
 }
 
-bool Aergia::DataStructures::VariableContext::appendMember( TypeContext&& newMember )
+bool Aergia::DataStructures::VariableContext::appendMember( std::unique_ptr<TypeContext>&& newMember )
 {
 	return false;
 }
@@ -58,7 +58,7 @@ VariableContext* Aergia::DataStructures::VariableContext::getVariable( std::stri
 	return nullptr;
 }
 
-bool Aergia::DataStructures::VariableContext::appendMember( VariableContext&& newMember )
+bool Aergia::DataStructures::VariableContext::appendMember( std::unique_ptr<VariableContext>&& newMember )
 {
 	return false;
 }

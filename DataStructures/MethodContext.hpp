@@ -8,15 +8,15 @@ namespace Aergia::DataStructures
 	class MethodContext : public IContext
 	{
 		std::string const _name;
-		std::vector<VariableContext> _paramters;
+		std::vector<std::unique_ptr<VariableContext>> _paramters;
 		TypeContext* _returnValue;
 
 	public:
 
 		TypeContext* returnValue() const noexcept;
-		std::vector<VariableContext> const& parameters() const noexcept;
+		std::vector<std::unique_ptr<VariableContext>> const& parameters() const noexcept;
 
-		MethodContext( std::string name, std::vector<VariableContext>&& parameters, TypeContext* returnValue, IContext* parent, MemberAccessibility accessibility );
+		MethodContext( std::string name, std::vector<std::unique_ptr<VariableContext>>&& parameters, TypeContext* returnValue, IContext* parent, MemberAccessibility accessibility );
 
 		std::string const& getName() const noexcept override;
 
@@ -29,16 +29,16 @@ namespace Aergia::DataStructures
 
 		std::vector<gsl::not_null<IContext*>> getMembers( std::string const& name ) override;
 
-		bool appendMember( NamespaceContext&& newMember ) override;
+		bool appendMember( std::unique_ptr<NamespaceContext>&& newMember ) override { return false; }
 
-		bool appendMember( MethodContext&& newMember ) override;
+		bool appendMember( std::unique_ptr<MethodContext>&& newMember ) override { return false; }
 
-		bool appendMember( TypeContext&& newMember ) override;
+		bool appendMember( std::unique_ptr<TypeContext>&& newMember ) override { return false; }
 
 
 		VariableContext* getVariable( std::string const& name ) override;
 
-		bool appendMember( VariableContext&& newMember ) override;
+		bool appendMember( std::unique_ptr<VariableContext>&& newMember ) override;
 
 	};
 }

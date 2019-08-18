@@ -15,7 +15,7 @@ namespace Aergia::Visitors
 		struct ContextData
 		{
 			DataStructures::MemberAccessibility _currentAccessibility;
-			std::map<std::string, gsl::not_null<DataStructures::IContext*>> _variables;
+			std::map<std::string,DataStructures::IContext*> _variables;
 		};
 
 		std::vector<std::unique_ptr<BaseVisitor>> _visitors;
@@ -24,7 +24,7 @@ namespace Aergia::Visitors
 		std::stack<ContextData> _contextStack;
 
 	public:
-		CurrentContextVisitor() noexcept;
+		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::TokenStream& stream ) noexcept;
 
 		template<typename T, typename... Args>
 		void addVisitor( Args&& ... arguments )
