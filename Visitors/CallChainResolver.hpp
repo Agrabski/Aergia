@@ -19,7 +19,7 @@ namespace Aergia::Visitors
 
 		bool isFunctionCall( std::string text );
 
-		std::vector<IContextPtr> resolveCall( std::string text, std::vector<IContextPtr>& currentContext );
+		std::vector<IContextPtr> resolveCall( std::string text, std::vector<IContextPtr>& currentContext ){ std::terminate(); }
 
 		std::vector<IContextPtr> resolveMemberAccess( std::string text, std::vector<IContextPtr>& currentContext );
 
@@ -30,10 +30,10 @@ namespace Aergia::Visitors
 		CallChainResolver( gsl::not_null<ContextProvider*> contextPovider ) noexcept :_contextProvider( contextPovider ) {}
 
 		template<typename T>
-		T resolveCallChain( std::string callChain );
+		T resolveCallChain( std::string callChain ) { std::terminate(); }
 
 		template<>
-		std::vector<DataStructures::IContext*> resolveCallChain( std::string callChain );
+		std::vector<DataStructures::IContext*> resolveCallChain( std::string callChain ) { std::terminate(); }
 
 		template<typename T>
 		T resolveCallChain( gsl::not_null<AergiaCpp14Parser::CallchainContext*> callChain ) { throw std::exception(); }

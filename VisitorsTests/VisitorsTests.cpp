@@ -9,12 +9,15 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace VisitorsTests
 {
+	using namespace Aergia::DataStructures;
+
 	TEST_CLASS( CurrentContextVisitorTests )
 	{
 	public:
 		TEST_METHOD( PrimitiveClassMembers )
 		{
 			using namespace std::literals;
+			using namespace Aergia::DataStructures;
 			std::stringstream input = std::stringstream( "class Test { public: int x,y,z = 3; std::string getString();};"s );
 
 			AntlrHelper helper( input );
@@ -23,11 +26,11 @@ namespace VisitorsTests
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  testClass = visitor.getRootNamespace()->getClass( "Test" );
+			auto  testClass = visitor.getRootNamespace()->resolveInContents<TypeContext>( "Test"s );
 			Assert::IsTrue( testClass != nullptr );
-			Assert::IsTrue( testClass->getVariable( "x" ) != nullptr );
-			Assert::IsTrue( testClass->getVariable( "y" ) != nullptr );
-			Assert::IsTrue( testClass->getVariable( "z" ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "x"s ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "y"s ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "z"s ) != nullptr );
 		}
 
 		TEST_METHOD( PrimitiveClassMembersInNamespace )
@@ -41,11 +44,11 @@ namespace VisitorsTests
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  testClass = visitor.getRootNamespace()->getNamespace( "XX" )->getClass( "Test" );
+			auto  testClass = visitor.getRootNamespace()->resolveInContents<TypeContext>( "XX::Test"s );
 			Assert::IsTrue( testClass != nullptr );
-			Assert::IsTrue( testClass->getVariable( "x" ) != nullptr );
-			Assert::IsTrue( testClass->getVariable( "y" ) != nullptr );
-			Assert::IsTrue( testClass->getVariable( "z" ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "x"s ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "y"s ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "z"s ) != nullptr );
 		}
 
 		TEST_METHOD( FullClassQualification )
@@ -59,11 +62,11 @@ namespace VisitorsTests
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  testClass = visitor.getByQualifiedName<Aergia::DataStructures::TypeContext>( "XX::Test" );
+			auto  testClass = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "XX::Test"s );
 			Assert::IsTrue( testClass != nullptr );
-			Assert::IsTrue( testClass->getVariable( "x" ) != nullptr );
-			Assert::IsTrue( testClass->getVariable( "y" ) != nullptr );
-			Assert::IsTrue( testClass->getVariable( "z" ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "x"s ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "y"s ) != nullptr );
+			Assert::IsTrue( testClass->resolveInContents<VariableContext>( "z"s ) != nullptr );
 		}
 
 		TEST_METHOD( FreeFunctionFullQualification )
@@ -77,10 +80,10 @@ namespace VisitorsTests
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  main = visitor.getByQualifiedName<Aergia::DataStructures::MethodContext>( "XX::main" );
+			auto  main = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::MethodContext>( "XX::main"s );
 			Assert::IsTrue( main != nullptr );
-			Assert::IsTrue( main->accesibility() == Aergia::DataStructures::MemberAccessibility::None );
-			Assert::IsTrue( main->returnValue() == visitor.getRootNamespace()->resolve<Aergia::DataStructures::TypeContext>( "int"s ) );
+			Assert::IsTrue( main->accessibility() == Aergia::DataStructures::MemberAccessibility::None );
+			Assert::IsTrue( main->returnValue() == visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "int"s ) );
 		}
 
 		TEST_METHOD( PrimitivesPresent )
@@ -99,9 +102,9 @@ namespace VisitorsTests
 			};
 			for (auto const& primive : primitives)
 			{
-				auto type = root->getClass( primive );
+				auto type = root->resolveInContents<TypeContext>( primive );
 				Assert::IsTrue( type != nullptr );
-				Assert::IsTrue( type->accesibility() == MemberAccessibility::None );
+				Assert::IsTrue( type->accessibility() == MemberAccessibility::None );
 				Assert::IsTrue( type->getBases().size() == 0 );
 				Assert::IsTrue( type->getName() == primive );
 			}
@@ -118,10 +121,10 @@ namespace VisitorsTests
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  xx = visitor.getRootNamespace()->getNamespace( "XX"s );
+			auto  xx = visitor.getRootNamespace()->resolveInContents<NamespaceContext>( "XX"s );
 			Assert::IsTrue( xx != nullptr );
-			auto resoved = visitor.getRootNamespace()->resolve<Aergia::DataStructures::TypeContext>( "YY::T"s );
-			auto imported = xx->resolve<Aergia::DataStructures::TypeContext>( "T"s );
+			auto resoved = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "YY::T"s );
+			auto imported = xx->resolveImports<Aergia::DataStructures::TypeContext>( "T"s );
 			Assert::IsTrue( resoved == imported );
 
 
@@ -138,10 +141,10 @@ namespace VisitorsTests
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  xx = visitor.getRootNamespace()->getNamespace( "XX"s );
+			auto  xx = visitor.getRootNamespace()->resolveInContents<NamespaceContext>( "XX"s );
 			Assert::IsTrue( xx != nullptr );
-			Assert::IsTrue( xx->getMethod( "main"s ) != nullptr );
-			Assert::IsTrue( xx->getMethod( "main"s )->returnValue() == visitor.getRootNamespace()->resolve<Aergia::DataStructures::TypeContext>( "YY::T"s ) );
+			Assert::IsTrue( xx->resolveInContents<MethodContext>( "main"s ) != nullptr );
+			Assert::IsTrue( xx->resolveInContents<MethodContext>( "main"s )->returnValue() == visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "YY::T"s ) );
 
 		}
 
@@ -155,10 +158,10 @@ namespace VisitorsTests
 			auto& visitor = helper.getVisitor();
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
 
-			auto  xx = visitor.getRootNamespace()->getNamespace( "XX"s );
+			auto  xx = visitor.getRootNamespace()->resolveInContents<NamespaceContext>( "XX"s );
 			Assert::IsTrue( xx != nullptr );
-			auto resoved = visitor.getRootNamespace()->resolve<Aergia::DataStructures::TypeContext>( "YY::T"s );
-			auto imported = xx->resolve<Aergia::DataStructures::TypeContext>( "Lssss"s );
+			auto resoved = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "YY::T"s );
+			auto imported = xx->resolveImports<Aergia::DataStructures::TypeContext>( "Lssss"s );
 			Assert::IsTrue( resoved == imported );
 		}
 

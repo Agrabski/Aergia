@@ -17,7 +17,7 @@ namespace Aergia::DataStructures
 			{
 				if (im == nullptr)
 					std::terminate();
-				auto result = im->resolve<T>( name, false );
+				auto result = im->resolveInContents<T>( name, false );
 				if (result != nullptr)
 					return result;
 			}

@@ -7,6 +7,7 @@
 #include "ContextProvider.hpp"
 #include "BaseVisitor.hpp"
 #include "AnonymousVisitor.hpp"
+#include "../DataStructures/Resolver.hpp"
 
 namespace Aergia::Visitors
 {
@@ -22,6 +23,7 @@ namespace Aergia::Visitors
 		DataStructures::NamespaceContext _rootContext;
 		gsl::not_null<DataStructures::IContext*> _currentContext;
 		std::stack<ContextData> _contextStack;
+		DataStructures::Resolver _resolver;
 
 	public:
 		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::TokenStream& stream ) noexcept;
@@ -66,7 +68,7 @@ namespace Aergia::Visitors
 
 
 
-		gsl::not_null<DataStructures::IContext*> getRootNamespace() noexcept override;
+		gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept override;
 
 
 	};
