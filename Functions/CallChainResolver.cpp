@@ -2,9 +2,9 @@
 #include "../DataStructures/ClassContext.hpp"
 #include <regex>
 
-using namespace Aergia::Visitors;
+using namespace Aergia::Functions;
 
-std::vector<CallChainResolver::IContextPtr> Aergia::Visitors::CallChainResolver::getBases( IContextPtr context )
+std::vector<CallChainResolver::IContextPtr> CallChainResolver::getBases( IContextPtr context )
 {
 	auto casted = dynamic_cast<DataStructures::TypeContext*>(context.get());
 
@@ -18,13 +18,13 @@ std::vector<CallChainResolver::IContextPtr> Aergia::Visitors::CallChainResolver:
 	return result;
 }
 
-bool Aergia::Visitors::CallChainResolver::isFunctionCall( std::string text )
+bool CallChainResolver::isFunctionCall( std::string text )
 {
 	static std::regex regex = std::regex( "[a-zA-Z]+\\([a-zA-Z]+\\)" );
 	return std::regex_match( text, regex );
 }
 
-std::vector<CallChainResolver::IContextPtr> Aergia::Visitors::CallChainResolver::resolveMemberAccess( std::string text, std::vector<IContextPtr>& currentContext )
+std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveMemberAccess( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context )
 {
 	using namespace std::literals;
 
@@ -37,16 +37,16 @@ std::vector<CallChainResolver::IContextPtr> Aergia::Visitors::CallChainResolver:
 	return std::vector<IContextPtr>();
 }
 
-std::vector<CallChainResolver::IContextPtr> Aergia::Visitors::CallChainResolver::resolveCallChainInternal( std::vector<std::string>& calls )
+std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveCallChainInternal( std::vector<std::string>& calls, IContextPtr currentContext )
 {
 	std::vector<IContextPtr> result;
 
 	for (auto const& element : calls)
 	{
 		if (isFunctionCall( element ))
-			result = resolveCall( element, result );
+			result = resolveCall( element, result,currentContext );
 
-		result = resolveMemberAccess( element, result );
+		result = resolveMemberAccess( element, result, currentContext );
 	}
 	return result;
 }

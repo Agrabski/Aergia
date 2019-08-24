@@ -161,7 +161,7 @@ namespace VisitorsTests
 			auto  xx = visitor.getRootNamespace()->resolveInContents<NamespaceContext>( "XX"s );
 			Assert::IsTrue( xx != nullptr );
 			auto resoved = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "YY::T"s );
-			auto imported = xx->resolveImports<Aergia::DataStructures::TypeContext>( "Lssss"s );
+			auto imported = xx->resolveInAliases<Aergia::DataStructures::TypeContext>( "Lssss"s );
 			Assert::IsTrue( resoved == imported );
 		}
 

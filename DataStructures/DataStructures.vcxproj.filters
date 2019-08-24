@@ -78,6 +78,9 @@
     <ClInclude Include="Imports.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HasResolveInAliases.hpp">
+      <Filter>Header Files\Concepts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

@@ -17,10 +17,10 @@ namespace Aergia::DataStructures
 		IContext* const _parent;
 		MemberAccessibility _accessability;
 	protected:
-		IContext* getRoot();
 		IContext( IContext* parent, MemberAccessibility accessibility ) noexcept :_parent( parent ), _accessability( accessibility ) {}
 	
 	public:
+		IContext* getRoot();
 		IContext* parent() noexcept { return _parent; }
 		IContext const* parent() const noexcept { return _parent; }
 		MemberAccessibility accessibility() const noexcept { return _accessability; }

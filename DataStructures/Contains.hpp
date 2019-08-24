@@ -2,7 +2,6 @@
 #include <tuple>
 #include <vector>
 #include <gsl.h>
-#include <boost/fusion/include/for_each.hpp>
 #include "QualifiedName.hpp"
 #include "IContext.hpp"
 #include "../MetaProgramming/FindInTupple.hpp"
@@ -18,6 +17,7 @@ namespace Aergia::DataStructures
 	using gsl::not_null;
 	using std::unique_ptr;
 	using std::enable_if;
+	using std::is_same;
 
 	template<typename... Types>
 	class Contains : public virtual IContext
@@ -28,30 +28,32 @@ namespace Aergia::DataStructures
 		tuple<vector<unique_ptr<Types>>...> _imports;
 
 		template<typename T, typename Importable>
-		typename std::enable_if<std::is_same<T, Importable>::value, int>::type resolveImportsFinalLevel( QualifiedName name, vector<unique_ptr<Importable>>& im, T*& result )
+		typename enable_if<is_same<T, Importable>::value, T>::type* verifyTypeMatch( Importable* im )
 		{
-			if (result != nullptr)
-				return 0;
-			auto r = std::find_if( im.begin(), im.end(), [&]( auto const& a ) {return a->getName() == name.peekQualificationLevel(); } );
-			if (r != im.end())
-				result = r->get();
-			return r != im.end();
-
+			return im;
 		}
 
 		template<typename T, typename Importable>
-		typename std::enable_if<!std::is_same<T, Importable>::value, int>::type resolveImportsFinalLevel( QualifiedName, vector<unique_ptr<Importable>>&, T*& )
+		typename enable_if<!is_same<T, Importable>::value, T>::type* verifyTypeMatch( Importable* im )
 		{
-			return 0;
+			return nullptr;
 		}
-
 
 		template<typename T, typename Importable>
 		int resolveContent( QualifiedName name, vector <unique_ptr<Importable>>& im, T*& result )
 		{
 			if (result == nullptr)
 				for (auto& element : im)
-					Resolver::resolveOnKnownType( *element, name, result );
+					if (element->getName() == name.peekQualificationLevel())
+					{
+						if (name.levelCount() == 1)
+						{
+							result = verifyTypeMatch<T, Importable>( element.get() );
+							return 0;
+						}
+						else
+							Resolver::resolveOnKnownType( *element, name.next(), result );
+					}
 			return 0;
 		}
 
@@ -59,10 +61,7 @@ namespace Aergia::DataStructures
 		T* resolveInternal( QualifiedName name, std::index_sequence<N...> )
 		{
 			T* result = nullptr;
-			if (name.levelCount() > 1)
-				auto t = { resolveContent<T>( name,std::get<N>( _imports ),result )... };
-			else
-				auto l = { resolveImportsFinalLevel<T>( name,std::get<N>( _imports ),result )... };
+			auto t = { resolveContent<T>( name,std::get<N>( _imports ),result )... };
 			return result;
 
 		}

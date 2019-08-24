@@ -34,7 +34,7 @@ antlrcpp::Any Aergia::Visitors::ForeachVisitor::visitForeach( AergiaCpp14Parser:
 	auto resolver = _contextProvider->getResolver();
 	auto const callChain = ctx->foreachheader()->callchain();
 	auto const variableName = ctx->foreachheader()->Identifier()->getText();
-	auto collection = resolver.resolveCallChain<std::vector<gsl::not_null<IContext*>>>( callChain );
+	auto collection = resolver.resolveCallChain<std::vector<gsl::not_null<IContext*>>>( callChain, _contextProvider->getContext() );
 
 	auto body = ctx->foreachbody();
 	if (body->aergiaBlock() != nullptr)

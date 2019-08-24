@@ -185,6 +185,7 @@
     <ClInclude Include="Contains.hpp" />
     <ClInclude Include="Definitions.hpp" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="HasResolveInAliases.hpp" />
     <ClInclude Include="HasResolveInContents.hpp" />
     <ClInclude Include="HasResolveInImports.hpp" />
     <ClInclude Include="IContext.hpp" />

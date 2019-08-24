@@ -103,14 +103,11 @@ void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition( AergiaCpp
 
 void Aergia::Visitors::CurrentContextVisitor::enterUsingdirective( AergiaCpp14Parser::UsingdirectiveContext* context )
 {
-	using Aergia::DataStructures::INamespaceImportable;
 	using Aergia::DataStructures::NamespaceContext;
-	using Aergia::DataStructures::QualifiedName;
 	using Aergia::Utilities::ImportHelper;
-	gsl::not_null const casted = dynamic_cast<INamespaceImportable*>(_currentContext.get());
+
 	auto qualifiedName = ImportHelper::getQualifiedName( context );
-	auto ns = _resolver.resolve<NamespaceContext>( _currentContext, qualifiedName );
-	casted->appendNamespaceImport( ns );
+	_resolver.appendImport<NamespaceContext>( _currentContext, qualifiedName );
 }
 
 void Aergia::Visitors::CurrentContextVisitor::enterAliasdeclaration( AergiaCpp14Parser::AliasdeclarationContext* context )

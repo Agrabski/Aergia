@@ -16,7 +16,7 @@ namespace Aergia::Visitors
 		struct ContextData
 		{
 			DataStructures::MemberAccessibility _currentAccessibility;
-			std::map<std::string,DataStructures::IContext*> _variables;
+			std::map<std::string, DataStructures::IContext*> _variables;
 		};
 
 		std::vector<std::unique_ptr<BaseVisitor>> _visitors;
@@ -69,6 +69,9 @@ namespace Aergia::Visitors
 
 
 		gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept override;
+
+		virtual gsl::not_null<DataStructures::IContext*> getContext() noexcept { return _currentContext; }
+
 
 
 	};
