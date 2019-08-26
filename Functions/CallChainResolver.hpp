@@ -16,7 +16,7 @@ namespace Aergia::Functions
 
 		bool isFunctionCall( std::string text );
 
-		std::vector<IContextPtr> resolveCall( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context ){ std::terminate(); }
+		std::vector<IContextPtr> resolveCall( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context );
 
 		std::vector<IContextPtr> resolveMemberAccess( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context );
 

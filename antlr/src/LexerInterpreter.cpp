@@ -14,62 +14,62 @@
 
 using namespace antlr4;
 
-LexerInterpreter::LexerInterpreter(const std::string &grammarFileName, const std::vector<std::string> &tokenNames,
-  const std::vector<std::string> &ruleNames, const std::vector<std::string> &channelNames, const std::vector<std::string> &modeNames,
-  const atn::ATN &atn, CharStream *input)
-  : LexerInterpreter(grammarFileName, dfa::Vocabulary::fromTokenNames(tokenNames), ruleNames, channelNames, modeNames, atn, input) {
+LexerInterpreter::LexerInterpreter( const std::string& grammarFileName, const std::vector<std::string>& tokenNames,
+	const std::vector<std::string>& ruleNames, const std::vector<std::string>& channelNames, const std::vector<std::string>& modeNames,
+	const atn::ATN& atn, CharStream* input )
+	: LexerInterpreter( grammarFileName, dfa::Vocabulary::fromTokenNames( tokenNames ), ruleNames, channelNames, modeNames, atn, input ) {
 }
 
-LexerInterpreter::LexerInterpreter(const std::string &grammarFileName, const dfa::Vocabulary &vocabulary,
-  const std::vector<std::string> &ruleNames, const std::vector<std::string> &channelNames, const std::vector<std::string> &modeNames,
-  const atn::ATN &atn, CharStream *input)
-  : Lexer(input), _grammarFileName(grammarFileName), _atn(atn), _ruleNames(ruleNames),
-                  _channelNames(channelNames), _modeNames(modeNames),
-                  _vocabulary(vocabulary) {
+LexerInterpreter::LexerInterpreter( const std::string& grammarFileName, const dfa::Vocabulary& vocabulary,
+	const std::vector<std::string>& ruleNames, const std::vector<std::string>& channelNames, const std::vector<std::string>& modeNames,
+	const atn::ATN& atn, CharStream* input )
+	: Lexer( input, 0 ), _grammarFileName( grammarFileName ), _atn( atn ), _ruleNames( ruleNames ),
+	_channelNames( channelNames ), _modeNames( modeNames ),
+	_vocabulary( vocabulary ) {
 
-  if (_atn.grammarType != atn::ATNType::LEXER) {
-    throw IllegalArgumentException("The ATN must be a lexer ATN.");
-  }
+	if (_atn.grammarType != atn::ATNType::LEXER) {
+		throw IllegalArgumentException( "The ATN must be a lexer ATN." );
+	}
 
-  for (size_t i = 0; i < atn.maxTokenType; i++) {
-    _tokenNames.push_back(vocabulary.getDisplayName(i));
-  }
+	for (size_t i = 0; i < atn.maxTokenType; i++) {
+		_tokenNames.push_back( vocabulary.getDisplayName( i ) );
+	}
 
-  for (size_t i = 0; i < atn.getNumberOfDecisions(); ++i) {
-    _decisionToDFA.push_back(dfa::DFA(_atn.getDecisionState(i), i));
-  }
-  _interpreter = new atn::LexerATNSimulator(this, _atn, _decisionToDFA, _sharedContextCache); /* mem-check: deleted in d-tor */
+	for (size_t i = 0; i < atn.getNumberOfDecisions(); ++i) {
+		_decisionToDFA.push_back( dfa::DFA( _atn.getDecisionState( i ), i ) );
+	}
+	_interpreter = new atn::LexerATNSimulator( this, _atn, _decisionToDFA, _sharedContextCache ); /* mem-check: deleted in d-tor */
 }
 
 LexerInterpreter::~LexerInterpreter()
 {
-  delete _interpreter;
+	delete _interpreter;
 }
 
 const atn::ATN& LexerInterpreter::getATN() const noexcept {
-  return _atn;
+	return _atn;
 }
 
 std::string LexerInterpreter::getGrammarFileName() const {
-  return _grammarFileName;
+	return _grammarFileName;
 }
 
 const std::vector<std::string>& LexerInterpreter::getTokenNames() const noexcept {
-  return _tokenNames;
+	return _tokenNames;
 }
 
 const std::vector<std::string>& LexerInterpreter::getRuleNames() const noexcept {
-  return _ruleNames;
+	return _ruleNames;
 }
 
 const std::vector<std::string>& LexerInterpreter::getChannelNames() const noexcept {
-  return _channelNames;
+	return _channelNames;
 }
 
 const std::vector<std::string>& LexerInterpreter::getModeNames() const noexcept {
-  return _modeNames;
+	return _modeNames;
 }
 
 const dfa::Vocabulary& LexerInterpreter::getVocabulary()  const noexcept {
-  return _vocabulary;
+	return _vocabulary;
 }

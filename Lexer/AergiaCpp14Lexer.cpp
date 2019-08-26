@@ -8,7 +8,7 @@
 using namespace antlr4;
 
 
-AergiaCpp14Lexer::AergiaCpp14Lexer(CharStream *input) : Lexer(input) {
+AergiaCpp14Lexer::AergiaCpp14Lexer(CharStream *input ) : Lexer(input) {
   _interpreter = new atn::LexerATNSimulator(this, _atn, _decisionToDFA, _sharedContextCache);
 }
 

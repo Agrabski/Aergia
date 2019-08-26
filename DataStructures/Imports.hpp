@@ -2,7 +2,6 @@
 #include <tuple>
 #include <vector>
 #include <gsl.h>
-#include <boost/fusion/include/for_each.hpp>
 #include "QualifiedName.hpp"
 #include "IContext.hpp"
 #include "../MetaProgramming/FindInTupple.hpp"
@@ -49,7 +48,6 @@ namespace Aergia::DataStructures
 		template<typename T>
 		void appendImport( not_null<T*> import )
 		{
-			std::enable_if<MetaProgramming::has_type<T, t>::value>::type;
 			using searched = vector<not_null<T*>>;
 			auto& collection = MetaProgramming::findInTuple<searched, 0>( _imports );
 			assert( std::find( collection.begin(), collection.end(), import ) == collection.end() );

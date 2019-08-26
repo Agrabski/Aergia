@@ -14,7 +14,7 @@ class AntlrHelper
 	AergiaCpp14Parser parser;
 	Aergia::Visitors::CurrentContextVisitor _visitor;
 public:
-	AntlrHelper( std::istream& stream ) : _stream( stream ), _lexer( &_stream ), tokens( &_lexer ), parser( &tokens ),
+	AntlrHelper( std::istream& stream ) : _stream( stream ), _lexer( &_stream, 0 ), tokens( &_lexer ), parser( &tokens ),
 		_visitor( parser, _lexer, tokens )
 	{
 

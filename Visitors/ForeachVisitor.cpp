@@ -1,6 +1,7 @@
 #include <algorithm>
 #include "ForeachVisitor.hpp"
 #include "../DataStructures/IContext.hpp"
+#include "../AntlrUtilities/TreeCloner.hpp"
 
 void Aergia::Visitors::ForeachVisitor::handleExpression( std::string variableName, std::vector<gsl::not_null<DataStructures::IContext*>>& values, gsl::not_null<AergiaCpp14Parser::AergiaexpressionContext*> block, gsl::not_null<AergiaCpp14Parser::ForeachContext*> root )
 {
@@ -11,17 +12,17 @@ void Aergia::Visitors::ForeachVisitor::handleBlock( std::string variableName, st
 {
 	auto sequence = block->statementseq();
 
-	
 
+	Utilities::TreeCloner cloner;
 	for (auto& value : values)
 	{
 		using namespace std::literals;
 		auto compoundStatement = _contextProvider->createParserContext<AergiaCpp14Parser::CompoundstatementContext>( root, root->invokingState );
-		auto lBrace = _contextProvider->createTerminalNode( _contextProvider->getTokenFactory().create( AergiaCpp14Lexer::LeftBrace, "{"s ));
-		auto rBrace = _contextProvider->createTerminalNode( _contextProvider->getTokenFactory().create( AergiaCpp14Lexer::RightBrace, "}"s ));
+		auto lBrace = _contextProvider->createTerminalNode( _contextProvider->getTokenFactory().create( AergiaCpp14Lexer::LeftBrace, "{"s ) );
+		auto rBrace = _contextProvider->createTerminalNode( _contextProvider->getTokenFactory().create( AergiaCpp14Lexer::RightBrace, "}"s ) );
 		_contextProvider->appendNodeMetadata( compoundStatement, variableName, value );
 		compoundStatement->children.push_back( lBrace );
-		compoundStatement->children.push_back( root->foreachbody()->aergiaBlock()->statementseq() );
+		compoundStatement->children.push_back( cloner.cloneStatementSeq( block->statementseq() ).release() );
 		compoundStatement->children.push_back( rBrace );
 	}
 }

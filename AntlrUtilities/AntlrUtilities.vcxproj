@@ -185,6 +185,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="TokenFactoryProxy.hpp" />
     <ClInclude Include="TokenFinder.hpp" />
+    <ClInclude Include="TreeCloner.hpp" />
     <ClInclude Include="TypeFinder.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +199,7 @@
     </ClCompile>
     <ClCompile Include="TokenFactoryProxy.cpp" />
     <ClCompile Include="TokenFinder.cpp" />
+    <ClCompile Include="TreeCloner.cpp" />
     <ClCompile Include="TypeFinder.cpp" />
   </ItemGroup>
   <ItemGroup>

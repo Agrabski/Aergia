@@ -1,6 +1,7 @@
 #include "CallChainResolver.hpp"
 #include "../DataStructures/ClassContext.hpp"
 #include <regex>
+#include "FunctionLibrary.hpp"
 
 using namespace Aergia::Functions;
 
@@ -32,9 +33,15 @@ std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveMemberAcce
 	{
 		{"bases"s, [this]( IContextPtr a ) {return getBases( a ); }}
 	};
+	std::vector<IContextPtr> result;
+	for (auto e : currentContext)
+	{
+		auto member = map[text]( e );
+		// todo: handle invalid member name for given context
+		result.insert( result.end(), member.begin(), member.end() );
+	}
 
-
-	return std::vector<IContextPtr>();
+	return result;
 }
 
 std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveCallChainInternal( std::vector<std::string>& calls, IContextPtr currentContext )
@@ -44,9 +51,16 @@ std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveCallChainI
 	for (auto const& element : calls)
 	{
 		if (isFunctionCall( element ))
-			result = resolveCall( element, result,currentContext );
-
-		result = resolveMemberAccess( element, result, currentContext );
+			result = resolveCall( element, result, currentContext );
+		else
+			result = resolveMemberAccess( element, result, currentContext );
 	}
 	return result;
 }
+
+std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveCall( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context )
+{
+	//todo: error handling
+	return FunctionLibrary::resolveCall( currentContext, context, text );
+}
+

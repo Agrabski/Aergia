@@ -15,13 +15,9 @@ namespace Aergia::DataStructures
 	class TypeContext : public virtual IContext,public Contains<TypeContext,VariableContext,MethodContext,BaseClassContext>
 	{
 		std::string _name;
-		std::vector< std::unique_ptr<VariableContext>> _fields;
-		std::vector< std::unique_ptr<MethodContext>> _methods;
-		std::vector<std::unique_ptr<TypeContext>> _internalClasses;
-		std::vector<std::unique_ptr<BaseClassContext>> _bases;
 	public:
 
-		std::vector<gsl::not_null<BaseClassContext*>> const& getBases() const noexcept;
+		std::vector<gsl::not_null<BaseClassContext*>> const getBases();
 
 		TypeContext( std::string name, IContext* parent, MemberAccessibility accessibility ) : _name( std::move( name ) ), IContext( parent, accessibility ) {}
 

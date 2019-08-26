@@ -25,7 +25,7 @@ Lexer::Lexer() : Recognizer() {
   _input = nullptr;
 }
 
-Lexer::Lexer(CharStream *input) : Recognizer(), _input(input) {
+Lexer::Lexer(CharStream *input ) : Recognizer(), _input(input) {
   InitializeInstanceFields();
 }
 
@@ -281,7 +281,7 @@ size_t Lexer::getNumberOfSyntaxErrors() noexcept {
   return _syntaxErrors;
 }
 
-void Lexer::InitializeInstanceFields() noexcept {
+void Lexer::InitializeInstanceFields( ) noexcept {
   _syntaxErrors = 0;
   token = nullptr;
   _factory = CommonTokenFactory::DEFAULT;

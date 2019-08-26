@@ -3,6 +3,8 @@
 #include <type_traits>
 #include "QualifiedName.hpp"
 #include "HasResolveInAliases.hpp"
+#include "HasResolveInContents.hpp"
+#include "HasResolveInImports.hpp"
 
 
 namespace Aergia::DataStructures

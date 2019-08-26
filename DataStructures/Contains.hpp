@@ -91,6 +91,17 @@ namespace Aergia::DataStructures
 			return resolveInternal<T>( name, std::make_index_sequence<sizeof...(Types)>() );
 		}
 
+		template<typename T>
+		vector<gsl::not_null<T*>> getMembersOfType()
+		{
+			using searched = vector<unique_ptr<T>>;
+			auto& collection = MetaProgramming::findInTuple<searched, 0>( _imports );
+			vector<gsl::not_null<T*>> result;
+			for (auto& e : collection)
+				result.push_back( e.get() );
+			return result;
+		}
+
 	};
 
 }

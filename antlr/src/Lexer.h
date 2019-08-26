@@ -76,7 +76,7 @@ namespace antlr4 {
     size_t mode;
 
     Lexer();
-    Lexer(CharStream *input);
+    Lexer(CharStream *input );
     virtual ~Lexer() {}
 
     virtual void reset();

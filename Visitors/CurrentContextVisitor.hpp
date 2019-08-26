@@ -64,6 +64,8 @@ namespace Aergia::Visitors
 
 		void enterEveryRule( antlr4::ParserRuleContext* /*ctx*/ ) override;
 
+		void enterBasespecifier( AergiaCpp14Parser::BasespecifierContext* /*ctx*/ ) override;
+
 		void applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const;
 
 

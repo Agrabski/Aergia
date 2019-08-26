@@ -137,6 +137,20 @@ void Aergia::Visitors::CurrentContextVisitor::enterEveryRule( antlr4::ParserRule
 	}
 }
 
+void Aergia::Visitors::CurrentContextVisitor::enterBasespecifier( AergiaCpp14Parser::BasespecifierContext* ctx)
+{
+	using DataStructures::BaseClassContext;
+	using DataStructures::TypeContext;
+	using namespace std::literals;
+	auto typeName = Utilities::TypeFinder::getType( ctx );
+	auto accessibilityNode = ctx->accessspecifier();
+	auto accessibility = DataStructures::parse( accessibilityNode == nullptr ? ""s : accessibilityNode->getText() );
+	auto baseClass = _resolver.resolve<TypeContext>( _currentContext, typeName );
+	//todo: is it virtual?
+	_resolver.appendContent<BaseClassContext>( _currentContext,
+		std::make_unique<BaseClassContext>( dynamic_cast<TypeContext*>(_currentContext.get()), accessibility, baseClass ) );
+}
+
 void Aergia::Visitors::CurrentContextVisitor::applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const
 {
 	for (auto& visitor : _visitors)
