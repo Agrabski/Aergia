@@ -13,6 +13,10 @@ std::unique_ptr<RuleContext> Aergia::Utilities::TreeCloner::cloneStatementSeq( n
 	AergiaCpp14Parser parser( &tokens );
 
 	auto a = parser.statementseq();
+	auto g = a->getText();
+
+	_tokens.recieveTokens( std::move( tokens.releaseTokens() ) );
+	g = a->getText();
 	return std::unique_ptr<RuleContext>( a );
 
 }

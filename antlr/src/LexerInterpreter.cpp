@@ -23,7 +23,7 @@ LexerInterpreter::LexerInterpreter( const std::string& grammarFileName, const st
 LexerInterpreter::LexerInterpreter( const std::string& grammarFileName, const dfa::Vocabulary& vocabulary,
 	const std::vector<std::string>& ruleNames, const std::vector<std::string>& channelNames, const std::vector<std::string>& modeNames,
 	const atn::ATN& atn, CharStream* input )
-	: Lexer( input, 0 ), _grammarFileName( grammarFileName ), _atn( atn ), _ruleNames( ruleNames ),
+	: Lexer( input ), _grammarFileName( grammarFileName ), _atn( atn ), _ruleNames( ruleNames ),
 	_channelNames( channelNames ), _modeNames( modeNames ),
 	_vocabulary( vocabulary ) {
 

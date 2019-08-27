@@ -95,6 +95,7 @@ namespace antlr4 {
      * @param text The text of the token.
      */
     CommonToken(size_t type, const std::string &text);
+	~CommonToken() {}
 
     /**
      * Constructs a new {@link CommonToken} as a copy of another {@link Token}.

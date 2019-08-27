@@ -6,10 +6,10 @@ namespace Aergia::Utilities
 {
 	class TokenFactoryProxy
 	{
-		antlr4::TokenStream& _stream;
+		antlr4::BufferedTokenStream& _stream;
 		AergiaCpp14Lexer& _lexer;
 	public:
-		TokenFactoryProxy(AergiaCpp14Lexer&lexer, antlr4::TokenStream&stream) noexcept;
+		TokenFactoryProxy(AergiaCpp14Lexer&lexer, antlr4::BufferedTokenStream&stream) noexcept;
 
 		antlr4::Token* create( size_t type, std::string text );
 	};

@@ -4,7 +4,7 @@
 #include "..//antlr/src/TokenStream.h"
 #include "..//Lexer/AergiaCpp14Parser.h"
 #include "..//Lexer/AergiaCpp14Lexer.h"
-
+#include "../AntlrUtilities/TreeCloner.hpp"
 
 class AntlrHelper
 {
@@ -14,10 +14,10 @@ class AntlrHelper
 	AergiaCpp14Parser parser;
 	Aergia::Visitors::CurrentContextVisitor _visitor;
 public:
-	AntlrHelper( std::istream& stream ) : _stream( stream ), _lexer( &_stream, 0 ), tokens( &_lexer ), parser( &tokens ),
+	AntlrHelper( std::istream& stream ) : _stream( stream ), _lexer( &_stream ), tokens( &_lexer ), parser( &tokens ),
 		_visitor( parser, _lexer, tokens )
 	{
-
+		new Aergia::Utilities::TreeCloner( tokens );
 	}
 
 	Aergia::Visitors::CurrentContextVisitor& getVisitor() { return _visitor; }

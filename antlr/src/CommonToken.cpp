@@ -22,174 +22,180 @@ using namespace antlrcpp;
 
 const std::pair<TokenSource*, CharStream*> CommonToken::EMPTY_SOURCE;
 
-CommonToken::CommonToken(size_t type) noexcept {
-  InitializeInstanceFields();
-  _type = type;
+CommonToken::CommonToken( size_t type ) noexcept {
+	InitializeInstanceFields();
+	_type = type;
 }
 
-CommonToken::CommonToken(std::pair<TokenSource*, CharStream*> source, size_t type, size_t channel, size_t start, size_t stop) {
-  InitializeInstanceFields();
-  _source = source;
-  _type = type;
-  _channel = channel;
-  _start = start;
-  _stop = stop;
-  if (_source.first != nullptr) {
-    _line = static_cast<int>(source.first->getLine());
-    _charPositionInLine = source.first->getCharPositionInLine();
-  }
+CommonToken::CommonToken( std::pair<TokenSource*, CharStream*> source, size_t type, size_t channel, size_t start, size_t stop ) {
+	InitializeInstanceFields();
+	_source = source;
+	_type = type;
+	_channel = channel;
+	_start = start;
+	_stop = stop;
+	if (_source.first != nullptr) {
+		_line = static_cast<int>(source.first->getLine());
+		_charPositionInLine = source.first->getCharPositionInLine();
+	}
+	_text = getText();
 }
 
-CommonToken::CommonToken(size_t type, const std::string &text) {
-  InitializeInstanceFields();
-  _type = type;
-  _channel = DEFAULT_CHANNEL;
-  _text = text;
-  _source = EMPTY_SOURCE;
+CommonToken::CommonToken( size_t type, const std::string& text ) {
+	InitializeInstanceFields();
+	_type = type;
+	_channel = DEFAULT_CHANNEL;
+	_text = text;
+	_source = EMPTY_SOURCE;
 }
 
-CommonToken::CommonToken(Token *oldToken) {
-  InitializeInstanceFields();
-  _type = oldToken->getType();
-  _line = oldToken->getLine();
-  _index = oldToken->getTokenIndex();
-  _charPositionInLine = oldToken->getCharPositionInLine();
-  _channel = oldToken->getChannel();
-  _start = oldToken->getStartIndex();
-  _stop = oldToken->getStopIndex();
+CommonToken::CommonToken( Token* oldToken ) {
+	InitializeInstanceFields();
+	_type = oldToken->getType();
+	_line = oldToken->getLine();
+	_index = oldToken->getTokenIndex();
+	_charPositionInLine = oldToken->getCharPositionInLine();
+	_channel = oldToken->getChannel();
+	_start = oldToken->getStartIndex();
+	_stop = oldToken->getStopIndex();
 
-  if (is<CommonToken *>(oldToken)) {
-    _text = (static_cast<CommonToken *>(oldToken))->_text;
-    _source = (static_cast<CommonToken *>(oldToken))->_source;
-  } else {
-    _text = oldToken->getText();
-    _source = { oldToken->getTokenSource(), oldToken->getInputStream() };
-  }
+	if (is<CommonToken*>( oldToken )) {
+		_text = (static_cast<CommonToken*>(oldToken))->_text;
+		_source = (static_cast<CommonToken*>(oldToken))->_source;
+	}
+	else {
+		_text = oldToken->getText();
+		_source = { oldToken->getTokenSource(), oldToken->getInputStream() };
+	}
+	_text = getText();
+
 }
 
 size_t CommonToken::getType() const noexcept {
-  return _type;
+	return _type;
 }
 
-void CommonToken::setLine(size_t line) noexcept {
-  _line = line;
+void CommonToken::setLine( size_t line ) noexcept {
+	_line = line;
 }
 
 std::string CommonToken::getText() const {
-  if (!_text.empty()) {
-    return _text;
-  }
+	if (!_text.empty()) {
+		return _text;
+	}
 
-  CharStream *input = getInputStream();
-  if (input == nullptr) {
-    return "";
-  }
-  size_t n = input->size();
-  if (_start < n && _stop < n) {
-    return input->getText(misc::Interval(_start, _stop));
-  } else {
-    return "<EOF>";
-  }
+	CharStream* input = getInputStream();
+	if (input == nullptr) {
+		return "";
+	}
+	size_t n = input->size();
+	if (_start < n && _stop < n) {
+		return input->getText( misc::Interval( _start, _stop ) );
+	}
+	else {
+		return "<EOF>";
+	}
 }
 
-void CommonToken::setText(const std::string &text) {
-  _text = text;
+void CommonToken::setText( const std::string& text ) {
+	_text = text;
 }
 
 size_t CommonToken::getLine() const noexcept {
-  return _line;
+	return _line;
 }
 
 size_t CommonToken::getCharPositionInLine() const noexcept {
-  return _charPositionInLine;
+	return _charPositionInLine;
 }
 
-void CommonToken::setCharPositionInLine(size_t charPositionInLine) noexcept {
-  _charPositionInLine = charPositionInLine;
+void CommonToken::setCharPositionInLine( size_t charPositionInLine ) noexcept {
+	_charPositionInLine = charPositionInLine;
 }
 
 size_t CommonToken::getChannel() const noexcept {
-  return _channel;
+	return _channel;
 }
 
-void CommonToken::setChannel(size_t channel) noexcept {
-  _channel = channel;
+void CommonToken::setChannel( size_t channel ) noexcept {
+	_channel = channel;
 }
 
-void CommonToken::setType(size_t type) noexcept {
-  _type = type;
+void CommonToken::setType( size_t type ) noexcept {
+	_type = type;
 }
 
 size_t CommonToken::getStartIndex() const noexcept {
-  return _start;
+	return _start;
 }
 
-void CommonToken::setStartIndex(size_t start) noexcept {
-  _start = start;
+void CommonToken::setStartIndex( size_t start ) noexcept {
+	_start = start;
 }
 
 size_t CommonToken::getStopIndex() const noexcept {
-  return _stop;
+	return _stop;
 }
 
-void CommonToken::setStopIndex(size_t stop) noexcept {
-  _stop = stop;
+void CommonToken::setStopIndex( size_t stop ) noexcept {
+	_stop = stop;
 }
 
 size_t CommonToken::getTokenIndex() const noexcept {
-  return _index;
+	return _index;
 }
 
-void CommonToken::setTokenIndex(size_t index)  noexcept {
-  _index = index;
+void CommonToken::setTokenIndex( size_t index )  noexcept {
+	_index = index;
 }
 
-antlr4::TokenSource *CommonToken::getTokenSource() const noexcept {
-  return _source.first;
+antlr4::TokenSource* CommonToken::getTokenSource() const noexcept {
+	return _source.first;
 }
 
-antlr4::CharStream *CommonToken::getInputStream() const noexcept {
-  return _source.second;
+antlr4::CharStream* CommonToken::getInputStream() const noexcept {
+	return _source.second;
 }
 
 std::string CommonToken::toString() const {
-  return toString(nullptr);
+	return toString( nullptr );
 }
 
-std::string CommonToken::toString(Recognizer *r) const {
-  std::stringstream ss;
+std::string CommonToken::toString( Recognizer* r ) const {
+	std::stringstream ss;
 
-  std::string channelStr;
-  if (_channel > 0) {
-    channelStr = ",channel=" + std::to_string(_channel);
-  }
-  std::string txt = getText();
-  if (!txt.empty()) {
-    antlrcpp::replaceAll(txt, "\n", "\\n");
-    antlrcpp::replaceAll(txt, "\r", "\\r");
-    antlrcpp::replaceAll(txt, "\t", "\\t");
-  } else {
-    txt = "<no text>";
-  }
+	std::string channelStr;
+	if (_channel > 0) {
+		channelStr = ",channel=" + std::to_string( _channel );
+	}
+	std::string txt = getText();
+	if (!txt.empty()) {
+		antlrcpp::replaceAll( txt, "\n", "\\n" );
+		antlrcpp::replaceAll( txt, "\r", "\\r" );
+		antlrcpp::replaceAll( txt, "\t", "\\t" );
+	}
+	else {
+		txt = "<no text>";
+	}
 
-  std::string typeString = std::to_string(symbolToNumeric(_type));
-  if (r != nullptr)
-    typeString = r->getVocabulary().getDisplayName(_type);
+	std::string typeString = std::to_string( symbolToNumeric( _type ) );
+	if (r != nullptr)
+		typeString = r->getVocabulary().getDisplayName( _type );
 
-  ss << "[@" << symbolToNumeric(getTokenIndex()) << "," << symbolToNumeric(_start) << ":" << symbolToNumeric(_stop)
-    << "='" << txt << "',<" << typeString << ">" << channelStr << "," << _line << ":"
-    << getCharPositionInLine() << "]";
+	ss << "[@" << symbolToNumeric( getTokenIndex() ) << "," << symbolToNumeric( _start ) << ":" << symbolToNumeric( _stop )
+		<< "='" << txt << "',<" << typeString << ">" << channelStr << "," << _line << ":"
+		<< getCharPositionInLine() << "]";
 
-  return ss.str();
+	return ss.str();
 }
 
 void CommonToken::InitializeInstanceFields() noexcept {
-  _type = 0;
-  _line = 0;
-  _charPositionInLine = INVALID_INDEX;
-  _channel = DEFAULT_CHANNEL;
-  _index = INVALID_INDEX;
-  _start = 0;
-  _stop = 0;
-  _source = EMPTY_SOURCE;
+	_type = 0;
+	_line = 0;
+	_charPositionInLine = INVALID_INDEX;
+	_channel = DEFAULT_CHANNEL;
+	_index = INVALID_INDEX;
+	_start = 0;
+	_stop = 0;
+	_source = EMPTY_SOURCE;
 }

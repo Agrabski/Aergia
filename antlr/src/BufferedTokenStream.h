@@ -94,6 +94,13 @@ namespace antlr4 {
 		/// Get all tokens from lexer until EOF.
 		void fill();
 
+		std::vector<std::unique_ptr<Token>> releaseTokens() { return std::move( _tokens ); }
+		void recieveTokens( std::vector<std::unique_ptr<Token>>&& tokens )
+		{
+			for (auto& token : tokens)
+				_tokens.push_back( std::move( token ) );
+		}
+
 	protected:
 		/**
 		 * The {@link TokenSource} from which tokens for this stream are fetched.

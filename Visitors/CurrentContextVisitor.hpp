@@ -22,11 +22,11 @@ namespace Aergia::Visitors
 		std::vector<std::unique_ptr<BaseVisitor>> _visitors;
 		DataStructures::NamespaceContext _rootContext;
 		gsl::not_null<DataStructures::IContext*> _currentContext;
-		std::stack<ContextData> _contextStack;
+		std::vector<ContextData> _contextStack;
 		DataStructures::Resolver _resolver;
 
 	public:
-		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::TokenStream& stream ) noexcept;
+		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept;
 
 		template<typename T, typename... Args>
 		void addVisitor( Args&& ... arguments )
@@ -72,8 +72,9 @@ namespace Aergia::Visitors
 
 		gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept override;
 
-		virtual gsl::not_null<DataStructures::IContext*> getContext() noexcept { return _currentContext; }
+		gsl::not_null<DataStructures::IContext*> getContext() noexcept override { return _currentContext; }
 
+		DataStructures::IContext* getVariableValue( std::string const& name ) override;
 
 
 	};

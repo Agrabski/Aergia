@@ -94,7 +94,7 @@ namespace antlr4 {
 			}
 
 		private:
-			std::vector<std::unique_ptr<ParseTree >> _allocated;
+			static inline std::vector<std::unique_ptr<ParseTree >> _allocated;
 		};
 
 

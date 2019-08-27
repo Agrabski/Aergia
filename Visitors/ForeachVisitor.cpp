@@ -13,7 +13,7 @@ void Aergia::Visitors::ForeachVisitor::handleBlock( std::string variableName, st
 	auto sequence = block->statementseq();
 
 
-	Utilities::TreeCloner cloner;
+	auto cloner = Utilities::TreeCloner::instance();
 	for (auto& value : values)
 	{
 		using namespace std::literals;
@@ -22,9 +22,14 @@ void Aergia::Visitors::ForeachVisitor::handleBlock( std::string variableName, st
 		auto rBrace = _contextProvider->createTerminalNode( _contextProvider->getTokenFactory().create( AergiaCpp14Lexer::RightBrace, "}"s ) );
 		_contextProvider->appendNodeMetadata( compoundStatement, variableName, value );
 		compoundStatement->children.push_back( lBrace );
-		compoundStatement->children.push_back( cloner.cloneStatementSeq( block->statementseq() ).release() );
+		auto x = compoundStatement->getText();
+		compoundStatement->children.push_back( cloner->cloneStatementSeq( block->statementseq() ).release() );
+		x = compoundStatement->getText();
 		compoundStatement->children.push_back( rBrace );
+		x = compoundStatement->getText();
+		root->addChild( compoundStatement );
 	}
+	auto t = root->getText();
 }
 
 antlrcpp::Any Aergia::Visitors::ForeachVisitor::visitForeach( AergiaCpp14Parser::ForeachContext* ctx )

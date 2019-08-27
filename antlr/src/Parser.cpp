@@ -92,7 +92,6 @@ void Parser::reset() {
 	_precedenceStack.clear();
 	_precedenceStack.push_back( 0 );
 	_ctx = nullptr;
-	_tracker.reset();
 
 	atn::ATNSimulator* interpreter = getInterpreter<atn::ParserATNSimulator>();
 	if (interpreter != nullptr) {

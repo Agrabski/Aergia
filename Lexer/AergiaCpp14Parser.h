@@ -405,6 +405,7 @@ public:
 	class  AergiaexpressionContext : public antlr4::ParserRuleContext {
 	public:
 		AergiaexpressionContext( antlr4::ParserRuleContext* parent, size_t invokingState );
+		~AergiaexpressionContext() {}
 		virtual size_t getRuleIndex() const override;
 		ForeachContext* foreach();
 		AergiaexpressionbeginContext* aergiaexpressionbegin();

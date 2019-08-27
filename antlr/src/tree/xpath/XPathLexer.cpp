@@ -4,7 +4,7 @@
 using namespace antlr4;
 
 
-XPathLexer::XPathLexer( CharStream* input ) : Lexer( input, 0 ) {
+XPathLexer::XPathLexer( CharStream* input ) : Lexer( input ) {
 	_interpreter = new atn::LexerATNSimulator( this, _atn, _decisionToDFA, _sharedContextCache );
 }
 
