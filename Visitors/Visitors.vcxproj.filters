@@ -33,6 +33,9 @@
     <ClInclude Include="ForeachVisitor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AergiaExpressionVisitor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnonymousVisitor.cpp">
@@ -47,7 +50,7 @@
     <ClCompile Include="ForeachVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CallChainResolver.cpp">
+    <ClCompile Include="AergiaExpressionVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

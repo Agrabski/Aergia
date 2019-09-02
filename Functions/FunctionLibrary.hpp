@@ -4,8 +4,7 @@
 #include <functional>
 #include "../DataStructures/IContext.hpp"
 #include "FunctionCall.hpp"
-
-
+#include "Variable.hpp"
 #include "Typeof.hpp"
 
 namespace Aergia::Functions
@@ -18,11 +17,11 @@ namespace Aergia::Functions
 
 	class FunctionLibrary
 	{
-		static inline std::map<std::string, std::function<vector<not_null<IContext*>>( vector<not_null<IContext*>>&, not_null<IContext*>, FunctionCall const& )>> _functions =
+		static inline std::map<std::string, std::function<Variable( Variable&, not_null<IContext*>, FunctionCall const& )>> _functions =
 		{
 			{"typeof"s,&typeof}
 		};
 	public:
-		static vector<not_null<IContext*>> resolveCall( vector<not_null<IContext*>>& current, not_null<IContext*>context, FunctionCall const& function );
+		static Variable resolveCall( Variable& current, not_null<IContext*>context, FunctionCall const& function );
 	};
 }

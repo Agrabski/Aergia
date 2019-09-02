@@ -167,6 +167,8 @@
     <ClInclude Include="InvalidArgumentCount.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Typeof.hpp" />
+    <ClInclude Include="Variable.hpp" />
+    <ClInclude Include="VariableProvider.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CallChainResolver.cpp" />

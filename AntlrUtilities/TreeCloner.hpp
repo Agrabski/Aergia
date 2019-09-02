@@ -14,7 +14,7 @@ namespace Aergia::Utilities
 	public:
 		TreeCloner( antlr4::CommonTokenStream& tokens ) : _tokens( tokens )
 		{
-			assert( _instance == nullptr );
+			delete _instance;
 			_instance = this;
 		}
 		static TreeCloner* instance() { return _instance; }

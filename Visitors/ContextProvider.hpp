@@ -10,7 +10,7 @@
 
 namespace Aergia::Visitors
 {
-	class ContextProvider
+	class ContextProvider : public Functions::VariableProvider
 	{
 	private:
 		AergiaCpp14Parser& _parser;
@@ -44,8 +44,6 @@ namespace Aergia::Visitors
 		{
 			return _parser.createTerminalNode( token );
 		}
-
-		virtual DataStructures::IContext* getVariableValue( std::string const& name ) = 0;
 
 	};
 }

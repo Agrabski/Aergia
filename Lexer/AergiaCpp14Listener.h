@@ -335,9 +335,6 @@ public:
   virtual void enterOriginalnamespacedefinition(AergiaCpp14Parser::OriginalnamespacedefinitionContext *ctx) = 0;
   virtual void exitOriginalnamespacedefinition(AergiaCpp14Parser::OriginalnamespacedefinitionContext *ctx) = 0;
 
-  virtual void enterExtensionnamespacedefinition(AergiaCpp14Parser::ExtensionnamespacedefinitionContext *ctx) = 0;
-  virtual void exitExtensionnamespacedefinition(AergiaCpp14Parser::ExtensionnamespacedefinitionContext *ctx) = 0;
-
   virtual void enterUnnamednamespacedefinition(AergiaCpp14Parser::UnnamednamespacedefinitionContext *ctx) = 0;
   virtual void exitUnnamednamespacedefinition(AergiaCpp14Parser::UnnamednamespacedefinitionContext *ctx) = 0;
 

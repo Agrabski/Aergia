@@ -179,6 +179,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AergiaExpressionVisitor.hpp" />
     <ClInclude Include="AnonymousVisitor.hpp" />
     <ClInclude Include="BaseVisitor.hpp" />
     <ClInclude Include="ContextProvider.hpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Rewrite.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AergiaExpressionVisitor.cpp" />
     <ClCompile Include="AnonymousVisitor.cpp" />
     <ClCompile Include="ContextProvider.cpp" />
     <ClCompile Include="CurrentContextVisitor.cpp" />

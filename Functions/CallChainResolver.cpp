@@ -5,7 +5,7 @@
 
 using namespace Aergia::Functions;
 
-std::vector<CallChainResolver::IContextPtr> CallChainResolver::getBases( IContextPtr context )
+Variable CallChainResolver::getBases( IContextPtr context )
 {
 	auto casted = dynamic_cast<DataStructures::TypeContext*>(context.get());
 
@@ -25,42 +25,60 @@ bool CallChainResolver::isFunctionCall( std::string text )
 	return std::regex_match( text, regex );
 }
 
-std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveMemberAccess( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context )
+Variable CallChainResolver::resolveMemberAccess( std::string text, Variable& currentContext, IContextPtr context )
 {
 	using namespace std::literals;
-
-	static std::map < std::string, std::function<std::vector<IContextPtr>( IContextPtr )>> map =
+	
+	static std::map < std::string, std::function<Variable( IContextPtr )>> map =
 	{
 		{"bases"s, [this]( IContextPtr a ) {return getBases( a ); }}
 	};
-	std::vector<IContextPtr> result;
-	for (auto e : currentContext)
-	{
-		auto member = map[text]( e );
-		// todo: handle invalid member name for given context
-		result.insert( result.end(), member.begin(), member.end() );
-	}
-
-	return result;
+	if (currentContext.as<IContextPtr>() != nullptr)
+		return map[text]( *currentContext.as<IContextPtr>() );
+	else
+		if (currentContext.as<Collection>() != nullptr)
+		{
+			auto& current = *currentContext.as<Collection>();
+			Collection result;
+			for (auto& element : current)
+			{
+				auto tmp = map[text]( element );
+				if (tmp.as<IContextPtr>() != nullptr)
+					result.push_back( *tmp.as<IContextPtr>() );
+				else
+				{
+					auto collectionResult = *tmp.as<Collection>();
+					result.insert( result.end(), collectionResult.begin(), collectionResult.end() );
+				}
+			}
+			return result;
+		}
+	std::terminate();
 }
 
-std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveCallChainInternal( std::vector<std::string>& calls, IContextPtr currentContext )
+Variable CallChainResolver::resolveCallChainInternal( std::vector<std::string>const& calls, IContextPtr currentContext )
 {
-	std::vector<IContextPtr> result;
+	Variable result;
 
 	for (auto const& element : calls)
 	{
 		if (isFunctionCall( element ))
 			result = resolveCall( element, result, currentContext );
 		else
-			result = resolveMemberAccess( element, result, currentContext );
+		{
+			auto variable = _variableProvider->getVariableValue( element );
+			if (variable != nullptr)
+				result = variable;
+			else
+				result = resolveMemberAccess( element, result, currentContext );
+		}
 	}
 	return result;
 }
 
-std::vector<CallChainResolver::IContextPtr> CallChainResolver::resolveCall( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context )
+Aergia::Functions::Variable CallChainResolver::resolveCall( std::string text, Variable& currentValue, IContextPtr context )
 {
 	//todo: error handling
-	return FunctionLibrary::resolveCall( currentContext, context, text );
+	return FunctionLibrary::resolveCall( currentValue, context, text );
 }
 

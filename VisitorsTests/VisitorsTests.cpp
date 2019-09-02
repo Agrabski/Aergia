@@ -4,6 +4,7 @@
 #include "..//Visitors/CurrentContextVisitor.hpp"
 #include "AntlrHelper.hpp"
 #include "../Visitors/ForeachVisitor.hpp"
+#include "../Visitors/AergiaExpressionVisitor.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -176,6 +177,7 @@ namespace VisitorsTests
 			auto l = helper.getParser()->translationunit()->getText();
 			auto& visitor = helper.getVisitor();
 			visitor.addVisitor<ForeachVisitor>( &visitor );
+			visitor.addVisitor<AergiaExpressionVisitor>(visitor);
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, translationUnit );
 

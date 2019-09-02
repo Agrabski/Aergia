@@ -8,6 +8,7 @@
 #include "BaseVisitor.hpp"
 #include "AnonymousVisitor.hpp"
 #include "../DataStructures/Resolver.hpp"
+#include "../Functions/VariableProvider.hpp"
 
 namespace Aergia::Visitors
 {

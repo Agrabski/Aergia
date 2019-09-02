@@ -42,8 +42,7 @@ aergiaexpressionend : '$$';
 aergiaBlock : '${'statementseq'$}';
 
 aergiaexpression
-   : foreach
-   | aergiaexpressionbegin callchain aergiaexpressionend
+   : aergiaexpressionbegin callchain aergiaexpressionend
    | aergiaexpressionbegin anonymousExpression aergiaexpressionend
    ;
 
@@ -386,6 +385,7 @@ statement
    | attributespecifierseq? jumpstatement
    | declarationstatement
    | aergiaexpression
+   | foreach
    | attributespecifierseq? tryblock
    ;
 

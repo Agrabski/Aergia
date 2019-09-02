@@ -1,8 +1,1 @@
-
-
-int main()
-{
-    $x$$
-    $foreach($x in $t)
-        $t$$
-}
+class A{}; class B{}; class C : public A, B{}; int main(){ $foreach($x in $typeof(C).bases) ${ $x$$ $}}

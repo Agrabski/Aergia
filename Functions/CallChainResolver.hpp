@@ -1,45 +1,67 @@
 #pragma once
 #include <string>
-#include <any>
+#include <variant>
+#include <optional>
 #include "../DataStructures/IContext.hpp"
 #include "../Lexer/AergiaCpp14Parser.h"
-
+#include "Variable.hpp"
+#include "VariableProvider.hpp"
 
 namespace Aergia::Functions
 {
 	class CallChainResolver
 	{
 		using IContextPtr = gsl::not_null<DataStructures::IContext*>;
+		using Collection = std::vector<IContextPtr>;
+		using ResolutionResult = std::variant<std::vector<IContextPtr>, std::string,DataStructures::MemberAccessibility>;
 
-		std::vector<IContextPtr> getBases( IContextPtr context );
-
+		gsl::not_null<VariableProvider*> _variableProvider;
 
 		bool isFunctionCall( std::string text );
 
-		std::vector<IContextPtr> resolveCall( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context );
+		Variable getBases( IContextPtr context );
 
-		std::vector<IContextPtr> resolveMemberAccess( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context );
+		Variable resolveCall( std::string text, Variable& currentValue, IContextPtr context );
 
-		std::vector<IContextPtr> resolveCallChainInternal( std::vector<std::string>& calls, IContextPtr currentContext );
+		Variable resolveMemberAccess( std::string text, Variable& currentContext, IContextPtr context );
 
+		Variable resolveCallChainInternal( std::vector<std::string>const& calls, IContextPtr currentContext );
+
+		ResolutionResult resolveSingleValue( std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context );
+
+		std::vector<std::string> prepareCalls( std::string callChain )
+		{
+			std::replace( callChain.begin(), callChain.end(), '.', ' ' );
+			std::stringstream stream( std::move( callChain ) );
+			std::vector<std::string> result;
+			while (!stream.eof())
+			{
+				std::string temp;
+				stream >> temp;
+				result.push_back( temp );
+			}
+			return result;
+		}
 
 	public:
 
-		template<typename T>
-		T resolveCallChain( std::string callChain, IContextPtr currentContext ) { std::terminate(); }
-
-		template<>
-		std::vector<DataStructures::IContext*> resolveCallChain( std::string callChain, IContextPtr currentContext ) { std::terminate(); }
+		CallChainResolver( gsl::not_null<VariableProvider*> variableProvider ) noexcept : _variableProvider( variableProvider ) {}
 
 		template<typename T>
-		T resolveCallChain( gsl::not_null<AergiaCpp14Parser::CallchainContext*> callChain, IContextPtr currentContext ) { throw std::exception(); }
-
-		template<>
-		std::vector<gsl::not_null<DataStructures::IContext*>> resolveCallChain( gsl::not_null<AergiaCpp14Parser::CallchainContext*> callChain,IContextPtr currentContext )
+		std::optional<T> resolveCallChain( std::string callChain, IContextPtr currentContext ) 
 		{
-			std::string tmp = callChain->getText();
-			std::replace( tmp.begin(), tmp.end(), '.', ' ' );
-			std::stringstream stream( std::move( tmp ) );
+			auto r = resolveCallChainInternal( prepareCalls(callChain), currentContext );
+			if (r.as<T>() != nullptr)
+				return *r.as<T>();
+			return std::optional<T>();
+
+		}
+
+		template<>
+		std::optional<std::string> resolveCallChain( std::string callChain, IContextPtr currentContext )
+		{
+			std::replace( callChain.begin(), callChain.end(), '.', ' ' );
+			std::stringstream stream( std::move( callChain ) );
 			std::vector<std::string> result;
 			while (!stream.eof())
 			{
@@ -48,7 +70,9 @@ namespace Aergia::Functions
 				result.push_back( temp );
 			}
 
-			return resolveCallChainInternal(result,currentContext);
+			auto r = resolveCallChainInternal( prepareCalls( callChain ), currentContext );
+			return r.toString();
+
 		}
 	};
 }

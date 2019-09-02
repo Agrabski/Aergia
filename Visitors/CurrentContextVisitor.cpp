@@ -82,7 +82,7 @@ void Aergia::Visitors::CurrentContextVisitor::exitClassspecifier( AergiaCpp14Par
 {
 	assert( context != nullptr );
 	_currentContext = _currentContext->parent();
-	_contextStack.back();
+	_contextStack.pop_back();
 }
 
 void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* context )

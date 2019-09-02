@@ -5,7 +5,7 @@
 
 Aergia::Functions::CallChainResolver Aergia::Visitors::ContextProvider::getResolver() noexcept
 {
-	return Functions::CallChainResolver( );
+	return Functions::CallChainResolver( gsl::not_null( this ) );
 }
 
 void Aergia::Visitors::ContextProvider::appendNodeMetadata( antlr4::ParserRuleContext* node, std::string variableName, DataStructures::IContext* value )

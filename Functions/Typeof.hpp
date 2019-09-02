@@ -3,6 +3,7 @@
 #include <gsl.h>
 #include "../DataStructures/IContext.hpp"
 #include "FunctionCall.hpp"
+#include "Variable.hpp"
 
 namespace Aergia::Functions
 {
@@ -10,5 +11,5 @@ namespace Aergia::Functions
 	using gsl::not_null;
 	using DataStructures::IContext;
 
-	vector<not_null<IContext*>> typeof( vector<not_null<IContext*>>& current, not_null<IContext*>context, FunctionCall const& function );
+	Variable typeof( Variable& current, not_null<IContext*>context, FunctionCall const& function );
 }

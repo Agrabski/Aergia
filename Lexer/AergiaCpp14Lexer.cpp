@@ -6,9 +6,10 @@
 
 
 using namespace antlr4;
+using namespace std::literals;
 
 
-AergiaCpp14Lexer::AergiaCpp14Lexer(CharStream *input ) : Lexer(input) {
+AergiaCpp14Lexer::AergiaCpp14Lexer(CharStream *input) : Lexer(input) {
   _interpreter = new atn::LexerATNSimulator(this, _atn, _decisionToDFA, _sharedContextCache);
 }
 
@@ -59,7 +60,6 @@ atn::PredictionContextCache AergiaCpp14Lexer::_sharedContextCache;
 atn::ATN AergiaCpp14Lexer::_atn;
 std::vector<uint16_t> AergiaCpp14Lexer::_serializedATN;
 
-using namespace std::literals;
 std::vector<std::string> AergiaCpp14Lexer::_ruleNames = {
   "T__0"s, "T__1"s, "T__2"s, "T__3"s, "T__4"s, "T__5"s, "T__6"s, 
   "T__7"s, "T__8"s, "T__9"s, "T__10"s, "T__11"s, "T__12"s, "T__13"s, 
@@ -95,7 +95,7 @@ std::vector<std::string> AergiaCpp14Lexer::_ruleNames = {
   "Digitsequence"s, "Floatingsuffix"s, "Stringliteral"s, "Schar"s, "Rawstring"s, 
   "Userdefinedintegerliteral"s, "Userdefinedfloatingliteral"s, "Userdefinedstringliteral"s, 
   "Userdefinedcharacterliteral"s, "Udsuffix"s, "Whitespace"s, "Newline"s, 
-  "BlockComment"s, "LineComment"
+  "BlockComment"s, "LineComment"s
 };
 
 std::vector<std::string> AergiaCpp14Lexer::_channelNames = {
@@ -129,7 +129,7 @@ std::vector<std::string> AergiaCpp14Lexer::_literalNames = {
   "'/='"s, "'%='"s, "'^='"s, "'&='"s, "'|='"s, "'<<'"s, "'>>'"s, 
   "'<<='"s, "'>>='"s, "'=='"s, "'!='"s, "'<='"s, "'>='"s, ""s, ""s, 
   "'++'"s, "'--'"s, "','"s, "'->*'"s, "'->'"s, "'?'"s, "':'"s, "'::'"s, 
-  "';'"s, "'.'"s, "'.*'"s, "'...'"
+  "';'"s, "'.'"s, "'.*'"s, "'...'"s
 };
 
 std::vector<std::string> AergiaCpp14Lexer::_symbolicNames = {
@@ -159,7 +159,7 @@ std::vector<std::string> AergiaCpp14Lexer::_symbolicNames = {
   "Octalliteral"s, "Hexadecimalliteral"s, "Binaryliteral"s, "Integersuffix"s, 
   "Characterliteral"s, "Floatingliteral"s, "Stringliteral"s, "Userdefinedintegerliteral"s, 
   "Userdefinedfloatingliteral"s, "Userdefinedstringliteral"s, "Userdefinedcharacterliteral"s, 
-  "Whitespace"s, "Newline"s, "BlockComment"s, "LineComment"
+  "Whitespace"s, "Newline"s, "BlockComment"s, "LineComment"s
 };
 
 dfa::Vocabulary AergiaCpp14Lexer::_vocabulary(_literalNames, _symbolicNames);

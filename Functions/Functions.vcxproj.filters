@@ -42,6 +42,12 @@
     <ClInclude Include="InvalidArgumentCount.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Variable.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableProvider.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

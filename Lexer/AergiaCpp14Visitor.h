@@ -233,8 +233,6 @@ public:
 
     virtual antlrcpp::Any visitOriginalnamespacedefinition(AergiaCpp14Parser::OriginalnamespacedefinitionContext *context) = 0;
 
-    virtual antlrcpp::Any visitExtensionnamespacedefinition(AergiaCpp14Parser::ExtensionnamespacedefinitionContext *context) = 0;
-
     virtual antlrcpp::Any visitUnnamednamespacedefinition(AergiaCpp14Parser::UnnamednamespacedefinitionContext *context) = 0;
 
     virtual antlrcpp::Any visitNamespacebody(AergiaCpp14Parser::NamespacebodyContext *context) = 0;
