@@ -182,7 +182,7 @@ namespace VisitorsTests
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, translationUnit );
 
 			auto g = translationUnit->getText();
-			auto x = helper.getParser()->translationunit()->getText();
+			Assert::IsTrue( g == "classA{};classB{};classC:publicA,B{};intmain(){{{A}{B}}}<EOF>"s );
 		}
 	};
 }
