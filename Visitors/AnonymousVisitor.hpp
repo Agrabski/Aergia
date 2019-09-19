@@ -13,6 +13,5 @@ namespace Aergia::Visitors
 		static std::string formatAssigment( std::string const& variableName, std::string const& value );
 	public:
 		antlrcpp::Any visitAnonymousExpression( AergiaCpp14Parser::AnonymousExpressionContext* context ) override;
-		std::vector<Rewrite> const& getRewrites() const override;
 	};
 }

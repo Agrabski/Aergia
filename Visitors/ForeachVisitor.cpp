@@ -12,8 +12,6 @@ void Aergia::Visitors::ForeachVisitor::handleBlock( std::string variableName, st
 {
 	using namespace std::literals;
 	using gsl::not_null;
-	auto * const sequence = block->statementseq();
-
 	not_null const parent = _contextProvider->createParserContext<AergiaCpp14Parser::CompoundstatementContext>( root, root->invokingState );
 	parent->addChild( _contextProvider->createTerminalNode( _contextProvider->getTokenFactory().create( AergiaCpp14Lexer::LeftBrace, "{"s ) ));
 	not_null const cloner = Utilities::TreeCloner::instance();
@@ -70,7 +68,3 @@ antlrcpp::Any Aergia::Visitors::ForeachVisitor::visitForeach( AergiaCpp14Parser:
 	return antlrcpp::Any();
 }
 
-std::vector<Aergia::Visitors::Rewrite> const& Aergia::Visitors::ForeachVisitor::getRewrites() const
-{
-	return std::vector<Rewrite>();
-}

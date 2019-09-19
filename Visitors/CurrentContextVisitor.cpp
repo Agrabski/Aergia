@@ -137,8 +137,9 @@ void Aergia::Visitors::CurrentContextVisitor::enterEveryRule( antlr4::ParserRule
 	}
 }
 
-void Aergia::Visitors::CurrentContextVisitor::enterBasespecifier( AergiaCpp14Parser::BasespecifierContext* ctx)
+void Aergia::Visitors::CurrentContextVisitor::enterBasespecifier( AergiaCpp14Parser::BasespecifierContext* ctx )
 {
+	assert( ctx != nullptr );
 	using DataStructures::BaseClassContext;
 	using DataStructures::TypeContext;
 	using namespace std::literals;
@@ -151,12 +152,6 @@ void Aergia::Visitors::CurrentContextVisitor::enterBasespecifier( AergiaCpp14Par
 		std::make_unique<BaseClassContext>( dynamic_cast<TypeContext*>(_currentContext.get()), accessibility, baseClass ) );
 }
 
-void Aergia::Visitors::CurrentContextVisitor::applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const
-{
-	for (auto& visitor : _visitors)
-		for (auto& rewrite : visitor->getRewrites())
-			rewriter.replace( rewrite._from, rewrite._to, rewrite._replaceBy );
-}
 
 gsl::not_null<Aergia::DataStructures::NamespaceContext*> Aergia::Visitors::CurrentContextVisitor::getRootNamespace() noexcept
 {
