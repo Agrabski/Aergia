@@ -24,7 +24,7 @@ namespace Aergia::Visitors
 		DataStructures::NamespaceContext _rootContext;
 		gsl::not_null<DataStructures::IContext*> _currentContext;
 		std::vector<ContextData> _contextStack;
-		DataStructures::Resolver _resolver;
+		DataStructures::Resolver& _resolver = DataStructures::Resolver::instance();
 
 	public:
 		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept;

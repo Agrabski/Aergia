@@ -52,7 +52,7 @@ namespace Aergia::DataStructures
 							return 0;
 						}
 						else
-							Resolver::resolveOnKnownType( *element, name.next(), result );
+							result = Resolver::instance().resolveOnKnownType<T,Importable>( element.get(), name.next() );
 					}
 			return 0;
 		}
@@ -66,6 +66,7 @@ namespace Aergia::DataStructures
 
 		}
 
+		Contains( Contains& ) = delete;
 	protected:
 		Contains() : IContext( nullptr, MemberAccessibility::None ) {}
 

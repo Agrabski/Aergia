@@ -8,7 +8,7 @@ namespace Aergia::DataStructures
 		typedef char one;
 		struct two { char x[2]; };
 
-		template <typename C> static one test( decltype( &C::template resolveInImports<Result> ) );
+		template <typename C> static one test( decltype( &C::template resolveImports<Result> ) );
 		template <typename C> static two test( ... );
 
 	public:

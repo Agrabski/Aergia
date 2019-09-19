@@ -8,7 +8,8 @@
 using namespace Aergia::Functions;
 Aergia::Functions::Variable Aergia::Functions::typeof( Aergia::Functions::Variable& current, not_null<IContext*> context, FunctionCall const& function )
 {
-	DataStructures::Resolver resolver;
+	using namespace DataStructures;
+	auto& resolver = Resolver::instance();
 	if (function.arguments().size() != 1)
 		throw InvalidArgumentCountException( function,1U,function.arguments().size() );
 	vector<not_null<IContext*>> result;

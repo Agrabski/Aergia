@@ -7,6 +7,8 @@
 #include "../Visitors/AergiaExpressionVisitor.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace std::literals;
+using namespace Aergia::DataStructures;
 
 namespace VisitorsTests
 {
@@ -125,7 +127,8 @@ namespace VisitorsTests
 			auto  xx = visitor.getRootNamespace()->resolveInContents<NamespaceContext>( "XX"s );
 			Assert::IsTrue( xx != nullptr );
 			auto resoved = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "YY::T"s );
-			auto imported = xx->resolveImports<Aergia::DataStructures::TypeContext>( "T"s );
+			auto& r = Aergia::DataStructures::Resolver::instance();
+			auto imported = r.resolve<TypeContext>( visitor.getRootNamespace(), "XX::T"s );
 			Assert::IsTrue( resoved == imported );
 
 
@@ -133,7 +136,6 @@ namespace VisitorsTests
 
 		TEST_METHOD( NamespaceQualifiedReturnType )
 		{
-			using namespace std::literals;
 			std::stringstream input = std::stringstream( "namespace YY{class T{};} namespace XX {YY::T main() {return 0;}}"s );
 
 			AntlrHelper helper( input );
@@ -144,8 +146,10 @@ namespace VisitorsTests
 
 			auto  xx = visitor.getRootNamespace()->resolveInContents<NamespaceContext>( "XX"s );
 			Assert::IsTrue( xx != nullptr );
-			Assert::IsTrue( xx->resolveInContents<MethodContext>( "main"s ) != nullptr );
-			Assert::IsTrue( xx->resolveInContents<MethodContext>( "main"s )->returnValue() == visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "YY::T"s ) );
+			auto main = Resolver::instance().resolve<MethodContext>( visitor.getRootNamespace(), "XX::main"s );
+			auto t = Resolver::instance().resolve<TypeContext>( visitor.getRootNamespace(), "YY::T"s );
+			Assert::IsTrue( main!= nullptr );
+			Assert::IsTrue( main->returnValue() == t);
 
 		}
 
@@ -177,7 +181,7 @@ namespace VisitorsTests
 			auto l = helper.getParser()->translationunit()->getText();
 			auto& visitor = helper.getVisitor();
 			visitor.addVisitor<ForeachVisitor>( &visitor );
-			visitor.addVisitor<AergiaExpressionVisitor>(visitor);
+			visitor.addVisitor<AergiaExpressionVisitor>( visitor );
 
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, translationUnit );
 
