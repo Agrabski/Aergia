@@ -31,6 +31,9 @@ namespace Aergia::DataStructures
 			return _name;
 		}
 
+		static std::unique_ptr<NamespaceContext> mergeRoots( std::unique_ptr<NamespaceContext>&& a, std::unique_ptr<NamespaceContext>&& b );
+
+
 	};
 
 }

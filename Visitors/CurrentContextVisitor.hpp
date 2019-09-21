@@ -21,13 +21,16 @@ namespace Aergia::Visitors
 		};
 
 		std::vector<std::unique_ptr<BaseVisitor>> _visitors;
-		DataStructures::NamespaceContext _rootContext;
+		std::unique_ptr<DataStructures::NamespaceContext>_rootContext;
 		gsl::not_null<DataStructures::IContext*> _currentContext;
 		std::vector<ContextData> _contextStack;
 		DataStructures::Resolver& _resolver = DataStructures::Resolver::instance();
 
 	public:
+		std::unique_ptr<DataStructures::NamespaceContext>releaseRoot() { return std::move( _rootContext ); }
+
 		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept;
+		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream, std::unique_ptr<DataStructures::NamespaceContext>&& rootnamespace ) noexcept;
 
 		template<typename T, typename... Args>
 		void addVisitor( Args&& ... arguments )
@@ -66,9 +69,6 @@ namespace Aergia::Visitors
 		void enterEveryRule( antlr4::ParserRuleContext* /*ctx*/ ) override;
 
 		void enterBasespecifier( AergiaCpp14Parser::BasespecifierContext* /*ctx*/ ) override;
-
-		void applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const;
-
 
 
 		gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept override;

@@ -189,11 +189,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Assembly.hpp" />
+    <ClInclude Include="MissingDependencyException.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Processor.hpp" />
+    <ClInclude Include="ProjectProcessor.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aergis.cpp" />
+    <ClCompile Include="Assembly.cpp" />
+    <ClCompile Include="MissingDependencyException.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -201,6 +206,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Processor.cpp" />
+    <ClCompile Include="ProjectProcessor.cpp" />
     <Text Include="Tests\TestFile.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
@@ -215,6 +221,9 @@
   <ItemGroup>
     <ProjectReference Include="..\antlr\antlr.vcxproj">
       <Project>{83be66cd-9c4f-4f84-b72a-dd1855c8fc8a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Configuration\Configuration.vcxproj">
+      <Project>{7a161ac3-8563-4b28-bc48-61d77ac0dbd7}</Project>
     </ProjectReference>
     <ProjectReference Include="..\DataStructures\DataStructures.vcxproj">
       <Project>{1b49fa52-d1c9-4066-af5c-5624155cc721}</Project>
@@ -237,6 +246,7 @@
     <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
     <Import Project="..\packages\boost.1.70.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.70.0.0\build\boost.targets')" />
     <Import Project="..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets" Condition="Exists('..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets')" />
+    <Import Project="..\packages\pugixml.1.10.0\build\native\pugixml.targets" Condition="Exists('..\packages\pugixml.1.10.0\build\native\pugixml.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -245,5 +255,6 @@
     <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
     <Error Condition="!Exists('..\packages\boost.1.70.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.70.0.0\build\boost.targets'))" />
     <Error Condition="!Exists('..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets'))" />
+    <Error Condition="!Exists('..\packages\pugixml.1.10.0\build\native\pugixml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\pugixml.1.10.0\build\native\pugixml.targets'))" />
   </Target>
 </Project>

@@ -5,10 +5,19 @@
 #include "../AntlrUtilities/TypeFinder.hpp"
 #include "../AntlrUtilities/ImportHelper.hpp"
 
-Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept : _currentContext( &_rootContext ), ContextProvider( parser, lexer, stream )
+using namespace Aergia::DataStructures;
+
+Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept : CurrentContextVisitor( parser, lexer, stream, std::make_unique<NamespaceContext>() )
+{
+
+}
+
+
+Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream, std::unique_ptr<NamespaceContext>&& root ) noexcept : ContextProvider( parser, lexer, stream ), _currentContext( root.get() )
 {
 	try
 	{
+		_rootContext = std::move( root );
 		_contextStack.push_back( { DataStructures::MemberAccessibility::None } );
 	}
 	catch (const std::exception&)
@@ -155,7 +164,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterBasespecifier( AergiaCpp14Par
 
 gsl::not_null<Aergia::DataStructures::NamespaceContext*> Aergia::Visitors::CurrentContextVisitor::getRootNamespace() noexcept
 {
-	return  &_rootContext;
+	return _rootContext.get();
 }
 
 Aergia::DataStructures::IContext* Aergia::Visitors::CurrentContextVisitor::getVariableValue( std::string const& name )

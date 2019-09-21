@@ -14,11 +14,15 @@ namespace Aergia::DataStructures
 
 	class IContext
 	{
-		IContext* const _parent;
+		IContext* _parent;
 		MemberAccessibility _accessability;
 	protected:
 		constexpr IContext( IContext* parent, MemberAccessibility accessibility ) noexcept :_parent( parent ), _accessability( accessibility ) {}
 	public:
+		void changeParent( IContext* parent ) noexcept
+		{
+			_parent = parent;
+		}
 		IContext* getRoot();
 		IContext const* getRoot() const;
 		IContext* parent() noexcept { return _parent; }

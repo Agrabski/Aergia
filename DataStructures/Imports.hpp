@@ -2,6 +2,7 @@
 #include <tuple>
 #include <vector>
 #include <gsl.h>
+#include <algorithm>
 #include "QualifiedName.hpp"
 #include "IContext.hpp"
 #include "../MetaProgramming/FindInTupple.hpp"
@@ -41,12 +42,34 @@ namespace Aergia::DataStructures
 			T* result = nullptr;
 			auto t = { resolveImport<T>( name,std::get<N>( _imports ),result )... };
 			return result;
+		}
 
+		template<typename Importable>
+		int copyOnce( Collection<Importable>& from, Collection<Importable>& to )
+		{
+			for (auto e : from)
+			{
+				auto found = std::find( to.begin(), to.end(), e );
+				if (found == to.end())
+					to.push_back( e );
+			}
+			return 0;
+		}
+
+		template<size_t... N>
+		void copy( Imports& from, std::index_sequence<N...> )
+		{
+			auto t = { copyOnce( std::get<N>( from._imports ),std::get<N>( _imports ) )... };
 		}
 
 
 	protected:
 		Imports() : IContext( nullptr, MemberAccessibility::None ) {}
+
+		void copyImports( Imports& from )
+		{
+			copy( from, std::make_index_sequence<sizeof...(Import)>() );
+		}
 
 	public:
 		template<typename T>
@@ -61,9 +84,9 @@ namespace Aergia::DataStructures
 		template<typename T>
 		T* resolveImports( QualifiedName name )
 		{
-
 			return resolveInternal<T>( name, std::make_index_sequence<sizeof...(Import)>() );
 		}
+
 
 	};
 

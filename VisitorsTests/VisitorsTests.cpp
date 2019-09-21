@@ -148,8 +148,8 @@ namespace VisitorsTests
 			Assert::IsTrue( xx != nullptr );
 			auto main = Resolver::instance().resolve<MethodContext>( visitor.getRootNamespace(), "XX::main"s );
 			auto t = Resolver::instance().resolve<TypeContext>( visitor.getRootNamespace(), "YY::T"s );
-			Assert::IsTrue( main!= nullptr );
-			Assert::IsTrue( main->returnValue() == t);
+			Assert::IsTrue( main != nullptr );
+			Assert::IsTrue( main->returnValue() == t );
 
 		}
 

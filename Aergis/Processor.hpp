@@ -14,6 +14,5 @@ namespace Aergia
 		Processor( IO::Configuration const&, AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream );
 
 		void parseText( AergiaCpp14Parser::TranslationunitContext* root );
-		void setupRewriter( antlr4::TokenStreamRewriter& rewriter );
 	};
 }
