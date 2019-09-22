@@ -170,6 +170,23 @@ namespace VisitorsTests
 			Assert::IsTrue( resoved == imported );
 		}
 
+		TEST_METHOD( InterdependentTypes )
+		{
+			using namespace std::literals;
+			std::stringstream input = std::stringstream( "namespace t{ class B; class A {B* n;}; class B{};}"s );
+
+			AntlrHelper helper( input );
+
+			auto& visitor = helper.getVisitor();
+			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
+
+			auto  xx = visitor.getRootNamespace()->resolveInContents<NamespaceContext>( "XX"s );
+			Assert::IsTrue( xx != nullptr );
+			auto resoved = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "YY::T"s );
+			auto imported = xx->resolveInAliases<Aergia::DataStructures::TypeContext>( "Lssss"s );
+			Assert::IsTrue( resoved == imported );
+		}
+
 		TEST_METHOD( s )
 		{
 			using namespace std::literals;

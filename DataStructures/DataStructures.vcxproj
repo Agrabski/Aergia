@@ -201,6 +201,7 @@
     <ClInclude Include="QualifiedName.hpp" />
     <ClInclude Include="Resolver.hpp" />
     <ClInclude Include="TypeAlias.hpp" />
+    <ClInclude Include="UnconfirmedReference.hpp" />
     <ClInclude Include="VariableContext.hpp" />
   </ItemGroup>
   <ItemGroup>

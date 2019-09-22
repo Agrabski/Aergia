@@ -19,3 +19,11 @@ IContext const* Aergia::DataStructures::IContext::getRoot() const
 		current = current->parent();
 	return current;
 }
+
+QualifiedName IContext::qualifiedName()
+{
+	if (_parent != nullptr)
+		return _parent->qualifiedName() + getName();
+	else
+		return QualifiedName();
+}

@@ -12,7 +12,6 @@ Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor( AergiaCpp14Parse
 
 }
 
-
 Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream, std::unique_ptr<NamespaceContext>&& root ) noexcept : ContextProvider( parser, lexer, stream ), _currentContext( root.get() )
 {
 	try
@@ -160,7 +159,6 @@ void Aergia::Visitors::CurrentContextVisitor::enterBasespecifier( AergiaCpp14Par
 	_resolver.appendContent<BaseClassContext>( _currentContext,
 		std::make_unique<BaseClassContext>( dynamic_cast<TypeContext*>(_currentContext.get()), accessibility, baseClass ) );
 }
-
 
 gsl::not_null<Aergia::DataStructures::NamespaceContext*> Aergia::Visitors::CurrentContextVisitor::getRootNamespace() noexcept
 {

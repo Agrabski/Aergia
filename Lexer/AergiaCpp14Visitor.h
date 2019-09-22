@@ -33,8 +33,6 @@ public:
 
     virtual antlrcpp::Any visitAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext *context) = 0;
 
-    virtual antlrcpp::Any visitAergiastring(AergiaCpp14Parser::AergiastringContext *context) = 0;
-
     virtual antlrcpp::Any visitForeach(AergiaCpp14Parser::ForeachContext *context) = 0;
 
     virtual antlrcpp::Any visitForeachheader(AergiaCpp14Parser::ForeachheaderContext *context) = 0;

@@ -120,10 +120,10 @@ namespace Aergia::DataStructures
 		template<typename Target, typename Source>
 		Target const* resolveOnKnownType( not_null< Source const*> im, QualifiedName name ) const
 		{
-			using std::vector;
+			using std::array;
 			using std::function;
 			static_assert(std::is_base_of<IContext, Source>::value);
-			vector<function<Target const* (QualifiedName, Source const&)>> functions =
+			array<function<Target const* (QualifiedName, Source const&)>> functions =
 			{
 				&resolveInImports<Target, Source>,
 				&resolveInChildContents<Target, Source>,
@@ -141,6 +141,8 @@ namespace Aergia::DataStructures
 		template<typename T>
 		T* resolve( not_null<IContext*> source, QualifiedName name, bool fallbackToRoot = true )
 		{
+			if (name.levelCount() == 0)
+				return source;
 			T* result = tryResolveOnType<T, NamespaceContext>( source, name );
 			if (result != nullptr)
 				return result;

@@ -374,7 +374,7 @@ namespace antlr4 {
      */
     bool isTrace() const noexcept;
 
-    tree::ParseTreeTracker& getTreeTracker() { return _tracker; }
+    tree::ParseTreeTracker& getTreeTracker() noexcept { return _tracker; }
 
     /** How to create a token leaf node associated with a parent.
      *  Typically, the terminal node to create is not a function of the parent

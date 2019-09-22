@@ -32,7 +32,7 @@ namespace antlr4 {
 				void InitializeInstanceFields() noexcept;
 
 			public:
-				SimState() {
+				SimState() noexcept {
 					InitializeInstanceFields();
 				}
 			};

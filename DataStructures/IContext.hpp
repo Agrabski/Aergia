@@ -28,6 +28,7 @@ namespace Aergia::DataStructures
 		IContext* parent() noexcept { return _parent; }
 		IContext const* parent() const noexcept { return _parent; }
 		MemberAccessibility accessibility() const noexcept { return _accessability; }
+		QualifiedName qualifiedName();
 		virtual std::string const& getName() const = 0;
 
 		virtual ~IContext() = default;

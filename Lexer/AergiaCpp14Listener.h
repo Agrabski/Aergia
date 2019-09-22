@@ -35,9 +35,6 @@ public:
   virtual void enterAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext *ctx) = 0;
   virtual void exitAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext *ctx) = 0;
 
-  virtual void enterAergiastring(AergiaCpp14Parser::AergiastringContext *ctx) = 0;
-  virtual void exitAergiastring(AergiaCpp14Parser::AergiastringContext *ctx) = 0;
-
   virtual void enterForeach(AergiaCpp14Parser::ForeachContext *ctx) = 0;
   virtual void exitForeach(AergiaCpp14Parser::ForeachContext *ctx) = 0;
 
