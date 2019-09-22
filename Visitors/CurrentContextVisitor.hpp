@@ -120,7 +120,7 @@ namespace Aergia::Visitors
 	inline std::unique_ptr<T> CurrentContextVisitor::findUnresolvedReference( not_null<Context const*> currentContext, QualifiedName name )
 	{
 		auto& collection = findInTuple<UnconfirmedReferenceCollection<T>, 0>( _unconfirmedReferences );
-		if(collection.size())
+		if(collection.size()) //TODO: YOU NOT DONE YET NIBBA
 		auto& objectName = name.objectName();
 		for (auto& reference : collection)
 			if (reference.referenceName() == objectName)
