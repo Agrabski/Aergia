@@ -21,7 +21,7 @@ namespace Aergia::DataStructures
 	public:
 		bool satisifed() const noexcept { return _reference == nullptr; }
 		UnconfirmedReference(T&& value, UncofrimedReferenceContext&& context) : _reference(value), _context(std::move(context)) {}
-		UnconfirmedReference(unique_ptr<T>&& value, UncofrimedReferenceContext&& context) : _reference(value), _context(std::move(context)) {}
+		UnconfirmedReference(unique_ptr<T>&& value, UncofrimedReferenceContext&& context) : _reference(std::move(value)), _context(std::move(context)) {}
 		std::string const& referenceName() const noexcept
 		{
 			return _reference->getName();

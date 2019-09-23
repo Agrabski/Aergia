@@ -179,12 +179,13 @@ namespace VisitorsTests
 
 			auto& visitor = helper.getVisitor();
 			antlr4::tree::ParseTreeWalker::DEFAULT.walk( &visitor, helper.getParser()->translationunit() );
+			
+			auto& r = Aergia::DataStructures::Resolver::instance();
+			auto variable = r.resolve<VariableContext>( visitor.getRootNamespace(), "t::A::n"s );
+			auto type = r.resolve<TypeContext>( visitor.getRootNamespace(), "t::B"s );
+			Assert::IsTrue( variable->getType() == type);
 
-			auto  xx = visitor.getRootNamespace()->resolveInContents<NamespaceContext>( "XX"s );
-			Assert::IsTrue( xx != nullptr );
-			auto resoved = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "YY::T"s );
-			auto imported = xx->resolveInAliases<Aergia::DataStructures::TypeContext>( "Lssss"s );
-			Assert::IsTrue( resoved == imported );
+
 		}
 
 		TEST_METHOD( s )

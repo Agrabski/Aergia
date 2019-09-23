@@ -16,7 +16,7 @@ namespace Aergia::DataStructures
 	class Resolver
 	{
 		template<typename T, typename Value, typename  N = void>
-		bool appendContent( T * source, unique_ptr<Value> & value )
+		bool appendContent( T* source, unique_ptr<Value>& value )
 		{
 			if (source != nullptr)
 				source->appendContent( std::move( value ) );
@@ -33,10 +33,10 @@ namespace Aergia::DataStructures
 		typename enable_if<!HasResolveInContents<Importable, T>::value, T>::type* resolveInChildContents( QualifiedName name, Importable& im ) { return nullptr; }
 
 		template<typename T, typename Importable, typename enable_if<HasResolveInImports<Importable, T>::value, int>::type = 0>
-		T * resolveInImports( QualifiedName name, Importable & im ) { return im.resolveImports<T>( name ); }
+		T* resolveInImports( QualifiedName name, Importable& im ) { return im.resolveImports<T>( name ); }
 
 		template<typename T, typename Importable, typename enable_if<!HasResolveInImports<Importable, T>::value, int>::type = 0>
-		T * resolveInImports( QualifiedName name, Importable & im ) { return nullptr; }
+		T* resolveInImports( QualifiedName name, Importable& im ) { return nullptr; }
 
 		template<typename T, typename Importable, typename enable_if<HasResolveInImports<Importable, T>::value, int>::type = 0>
 		T const* resolveInImports( QualifiedName name, Importable const& im ) { return im.resolveImports<T>( name ); }
@@ -45,7 +45,7 @@ namespace Aergia::DataStructures
 		T const* resolveInImports( QualifiedName name, Importable const& im ) { return nullptr; }
 
 		template<typename T, typename Importable, typename enable_if<HasResolveInAliases<Importable, T>::value, int>::type = 0>
-		T * resolveInAliases( QualifiedName name, Importable & im )
+		T* resolveInAliases( QualifiedName name, Importable& im )
 		{
 			return im.resolveInAliases<T>( name );
 		}
@@ -90,6 +90,31 @@ namespace Aergia::DataStructures
 		{
 			return false;
 		}
+
+		template<typename T, typename X>
+		T* validateTypeMatch( X* a )
+		{
+			return nullptr;
+		}
+
+		template<typename T>
+		T* validateTypeMatch( T* a )
+		{
+			return a;
+		}
+
+		template<typename T, typename X>
+		T const* validateTypeMatch( X const* a )
+		{
+			return nullptr;
+		}
+
+		template<typename T>
+		T const* validateTypeMatch( T const* a )
+		{
+			return a;
+		}
+
 		static inline Resolver* _instance;
 		Resolver() = default;
 	public:
@@ -102,7 +127,7 @@ namespace Aergia::DataStructures
 			using std::vector;
 			using std::function;
 			static_assert(std::is_base_of<IContext, Source>::value);
-			vector<function<Target* (QualifiedName, Source&)>> functions =
+			vector<function<Target * (QualifiedName, Source&)>> functions =
 			{
 				[this]( auto a, auto& b ) {return resolveInImports<Target, Source>( a,b ); },
 				[this]( auto a, auto& b ) {return resolveInChildContents<Target, Source>( a,b ); },
@@ -139,32 +164,34 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename T>
-		T* resolve( not_null<IContext*> source, QualifiedName name, bool fallbackToRoot = true )
+		T* resolve( not_null<IContext*> source, QualifiedName name )
 		{
 			if (name.levelCount() == 0)
-				return source;
+				return validateTypeMatch<T>(source.get());
 			T* result = tryResolveOnType<T, NamespaceContext>( source, name );
 			if (result != nullptr)
 				return result;
 			result = tryResolveOnType<T, TypeContext>( source, name );
 			if (result != nullptr)
 				return result;
-			if (fallbackToRoot)
-				return resolve<T>( source->getRoot(), name, false );
+			if (source->parent() != nullptr)
+				return resolve<T>( source->parent(), name );
 			return nullptr;
 		}
 
 		template<typename T>
-		T const* resolve( not_null<IContext const*> source, QualifiedName name, bool fallbackToRoot = true ) const
+		T const* resolve( not_null<IContext const*> source, QualifiedName name ) const
 		{
+			if (name.levelCount() == 0)
+				return validateTypeMatch<T>( source.get() );
 			T* result = tryResolveOnType<T, NamespaceContext>( source, name );
 			if (result != nullptr)
 				return result;
 			result = tryResolveOnType<T, TypeContext>( source, name );
 			if (result != nullptr)
 				return result;
-			if (fallbackToRoot)
-				return resolve<T>( source->getRoot(), name, false );
+			if (source->parent() != nullptr)
+				return resolve<T>( source->parent(), name );
 			return nullptr;
 		}
 

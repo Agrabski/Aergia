@@ -17,6 +17,7 @@ namespace Aergia::Visitors
 	template<typename T>
 	using UnconfirmedReferenceCollection = std::vector<DataStructures::UnconfirmedReference<T>>;
 	using DataStructures::TypeContext;
+	using DataStructures::NamespaceContext;
 	using DataStructures::MethodContext;
 	using gsl::not_null;
 	using DataStructures::IContext;
@@ -41,10 +42,10 @@ namespace Aergia::Visitors
 		DataStructures::Resolver& _resolver = DataStructures::Resolver::instance();
 
 		template<typename T>
-		T* resolve( not_null<IContext const*> source, QualifiedName name );
+		T* resolve( not_null<IContext*> source, QualifiedName name );
 
-		template<typename T, typename Context>
-		std::unique_ptr<T> findUnresolvedReference( not_null<Context const*> currentContext, QualifiedName name );
+		template<typename T>
+		std::unique_ptr<T> findUnresolvedReference( not_null<IContext const*> currentContext, QualifiedName name );
 
 	public:
 		std::unique_ptr<DataStructures::NamespaceContext>releaseRoot() { return std::move( _rootContext ); }
@@ -101,7 +102,7 @@ namespace Aergia::Visitors
 	};
 
 	template<typename T>
-	inline T* CurrentContextVisitor::resolve( not_null<IContext const*> source, QualifiedName name )
+	inline T* CurrentContextVisitor::resolve( not_null<IContext*> source, QualifiedName name )
 	{
 		auto result = _resolver.resolve<T>( source, name );
 		if (result == nullptr)
@@ -111,28 +112,37 @@ namespace Aergia::Visitors
 			auto& collection = findInTuple<UnconfirmedReferenceCollection<T>, 0>( _unconfirmedReferences );
 			auto reference = std::make_unique<T>( name.objectName(), nullptr, MemberAccessibility::None );
 			result = reference.get();
-			collection.push_back( UnconfirmedReferenceCollection<T>( std::move( reference ), { source,name } ) );
+			collection.push_back( UnconfirmedReference<T>( std::move( reference ), { source,name } ) );
 		}
 		return result;
 	}
 
-	template<typename T, typename Context>
-	inline std::unique_ptr<T> CurrentContextVisitor::findUnresolvedReference( not_null<Context const*> currentContext, QualifiedName name )
+	template<typename T>
+	inline std::unique_ptr<T> CurrentContextVisitor::findUnresolvedReference( not_null<IContext const*> currentContext, QualifiedName name )
 	{
-		auto& collection = findInTuple<UnconfirmedReferenceCollection<T>, 0>( _unconfirmedReferences );
-		if(collection.size()) //TODO: YOU NOT DONE YET NIBBA
+		auto& collection =MetaProgramming::findInTuple<UnconfirmedReferenceCollection<T>, 0>( _unconfirmedReferences );
+		if (collection.size())
+		{
+
+		}
 		auto& objectName = name.objectName();
 		for (auto& reference : collection)
 			if (reference.referenceName() == objectName)
 			{
 				auto& referenceContext = reference.context();
-				auto parentName = referenceContext._fullReferenceName;
+				auto parentName = referenceContext._fullReferenceName.getAllQualificationLevels();
 				parentName.erase( parentName.end() - 1 );
-				auto resolved = _resolver.resolve<Context>( referenceContext._context, QualifiedName( parentName ) );
-				if (resolved == currentContext)
-				{
+				if (parentName.size() == 0UL)
 					return reference.releaseReference();
-				}
+				IContext const* resolved = nullptr;
+				if (dynamic_cast<NamespaceContext const*>(currentContext.get()) != nullptr)
+					resolved = _resolver.resolve<NamespaceContext>( referenceContext._context, QualifiedName( parentName ) );
+				else
+					if (dynamic_cast<TypeContext const*>(currentContext.get()) != nullptr)
+						resolved = _resolver.resolve<TypeContext>( referenceContext._context, QualifiedName( parentName ) );
+
+				if (resolved == currentContext)
+					return reference.releaseReference();
 			}
 		return std::unique_ptr<T>();
 	}

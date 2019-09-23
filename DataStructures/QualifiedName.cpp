@@ -22,7 +22,7 @@ QualifiedName Aergia::DataStructures::QualifiedName::operator+(std::string const
 {
 	auto list = _levels;
 	list.push_back(other);
-	return QualifiedName(std::move(list));
+	return QualifiedName(list);
 }
 
 std::vector<std::string> const& Aergia::DataStructures::QualifiedName::getAllQualificationLevels() const noexcept

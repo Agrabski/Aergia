@@ -66,10 +66,11 @@ void Aergia::Visitors::CurrentContextVisitor::enterMemberdeclaration( AergiaCpp1
 		return;
 	auto type = Utilities::TypeFinder::getType( context->declspecifierseq() );
 	auto names = Utilities::NameExtractor::getNames( context );
+	auto resolvedType = resolve<TypeContext>( _currentContext, type );
 	for (auto const& name : names)
 	{
 		_resolver.appendContent<VariableContext>( _currentContext,
-			std::make_unique<VariableContext>( name, _resolver.resolve<DataStructures::TypeContext>( _currentContext, type ),
+			std::make_unique<VariableContext>( name, resolvedType,
 				_currentContext, _contextStack.back()._currentAccessibility ) );
 	}
 }
@@ -79,9 +80,12 @@ void Aergia::Visitors::CurrentContextVisitor::enterClassspecifier( AergiaCpp14Pa
 	using  DataStructures::TypeContext;
 	assert( context != nullptr );
 	auto name = Utilities::NameExtractor::getName( context );
-
-	_currentContext = _resolver.appendContent<TypeContext>( _currentContext,
-		std::make_unique<TypeContext>( name, _currentContext, _contextStack.back()._currentAccessibility ) );
+	auto newType = findUnresolvedReference<TypeContext>( _currentContext, name );
+	if (newType == nullptr)
+		newType = std::make_unique<TypeContext>( name, _currentContext, _contextStack.back()._currentAccessibility );
+	else
+		newType->changeParent( _currentContext );
+	_currentContext = _resolver.appendContent<TypeContext>( _currentContext, std::move( newType ) );
 
 	_contextStack.push_back( { DataStructures::MemberAccessibility::Private } );
 }
@@ -102,7 +106,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition( AergiaCpp
 	using gsl::not_null;
 	auto type = Utilities::TypeFinder::getType( context->declspecifierseq() );
 	auto const name = Utilities::NameExtractor::getName( context );
-	auto const returnType = _resolver.resolve<TypeContext>( _currentContext, type );
+	auto const returnType = resolve<TypeContext>( _currentContext, type );
 
 	auto content = std::make_unique<MethodContext>( name, std::vector<std::unique_ptr<VariableContext>>(), returnType, _currentContext, _contextStack.back()._currentAccessibility );
 
@@ -120,6 +124,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterUsingdirective( AergiaCpp14Pa
 
 void Aergia::Visitors::CurrentContextVisitor::enterAliasdeclaration( AergiaCpp14Parser::AliasdeclarationContext* context )
 {
+	assert( context != nullptr );
 	using Aergia::DataStructures::ITypeImportable;
 	using Aergia::DataStructures::TypeContext;
 

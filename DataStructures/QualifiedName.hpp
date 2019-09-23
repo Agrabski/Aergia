@@ -8,7 +8,7 @@ namespace Aergia::DataStructures
 	{
 		std::vector<std::string> _levels;
 	public:
-		explicit QualifiedName( std::vector<std::string>&& v ) noexcept : _levels( std::move( v ) ) {}
+		explicit QualifiedName( std::vector<std::string>& v ) noexcept : _levels( v ) {}
 		explicit QualifiedName() = default;
 		QualifiedName(std::string name);
 		QualifiedName operator+(std::string const& other);

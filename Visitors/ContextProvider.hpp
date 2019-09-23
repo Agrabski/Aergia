@@ -21,7 +21,7 @@ namespace Aergia::Visitors
 		virtual gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept = 0;
 		std::map<antlr4::ParserRuleContext*, std::pair<std::string, DataStructures::IContext*>> _variableMetadata;
 
-		ContextProvider( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) :
+		ContextProvider( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept :
 			_factory( lexer, stream ), _parser( parser ) {}
 	public:
 
