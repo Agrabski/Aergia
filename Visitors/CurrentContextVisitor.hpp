@@ -4,6 +4,8 @@
 #include "..//DataStructures/Definitions.hpp"
 #include "..//DataStructures/NamespaceContext.hpp"
 #include "..//DataStructures/IContext.hpp"
+#include "..//DataStructures//UnconfirmedReference.hpp"
+#include "..//MetaProgramming//FindInTupple.hpp"
 #include "ContextProvider.hpp"
 #include "BaseVisitor.hpp"
 #include "AnonymousVisitor.hpp"
@@ -12,6 +14,14 @@
 
 namespace Aergia::Visitors
 {
+	template<typename T>
+	using UnconfirmedReferenceCollection = std::vector<DataStructures::UnconfirmedReference<T>>;
+	using DataStructures::TypeContext;
+	using DataStructures::MethodContext;
+	using gsl::not_null;
+	using DataStructures::IContext;
+	using DataStructures::QualifiedName;
+
 	class CurrentContextVisitor : public AergiaCpp14BaseListener, public ContextProvider
 	{
 		struct ContextData
@@ -21,13 +31,26 @@ namespace Aergia::Visitors
 		};
 
 		std::vector<std::unique_ptr<BaseVisitor>> _visitors;
-		DataStructures::NamespaceContext _rootContext;
+		std::unique_ptr<DataStructures::NamespaceContext>_rootContext;
 		gsl::not_null<DataStructures::IContext*> _currentContext;
 		std::vector<ContextData> _contextStack;
-		DataStructures::Resolver _resolver;
+		std::tuple<
+			UnconfirmedReferenceCollection<TypeContext>,
+			UnconfirmedReferenceCollection<MethodContext>
+		> _unconfirmedReferences;
+		DataStructures::Resolver& _resolver = DataStructures::Resolver::instance();
+
+		template<typename T>
+		T* resolve( not_null<IContext const*> source, QualifiedName name );
+
+		template<typename T, typename Context>
+		std::unique_ptr<T> findUnresolvedReference( not_null<Context const*> currentContext, QualifiedName name );
 
 	public:
+		std::unique_ptr<DataStructures::NamespaceContext>releaseRoot() { return std::move( _rootContext ); }
+
 		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept;
+		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream, std::unique_ptr<DataStructures::NamespaceContext>&& rootnamespace ) noexcept;
 
 		template<typename T, typename... Args>
 		void addVisitor( Args&& ... arguments )
@@ -67,9 +90,6 @@ namespace Aergia::Visitors
 
 		void enterBasespecifier( AergiaCpp14Parser::BasespecifierContext* /*ctx*/ ) override;
 
-		void applyRewrites( antlr4::TokenStreamRewriter& rewriter ) const;
-
-
 
 		gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept override;
 
@@ -79,4 +99,41 @@ namespace Aergia::Visitors
 
 
 	};
+
+	template<typename T>
+	inline T* CurrentContextVisitor::resolve( not_null<IContext const*> source, QualifiedName name )
+	{
+		auto result = _resolver.resolve<T>( source, name );
+		if (result == nullptr)
+		{
+			using DataStructures::MemberAccessibility;
+			using namespace MetaProgramming;
+			auto& collection = findInTuple<UnconfirmedReferenceCollection<T>, 0>( _unconfirmedReferences );
+			auto reference = std::make_unique<T>( name.objectName(), nullptr, MemberAccessibility::None );
+			result = reference.get();
+			collection.push_back( UnconfirmedReferenceCollection<T>( std::move( reference ), { source,name } ) );
+		}
+		return result;
+	}
+
+	template<typename T, typename Context>
+	inline std::unique_ptr<T> CurrentContextVisitor::findUnresolvedReference( not_null<Context const*> currentContext, QualifiedName name )
+	{
+		auto& collection = findInTuple<UnconfirmedReferenceCollection<T>, 0>( _unconfirmedReferences );
+		if(collection.size()) //TODO: YOU NOT DONE YET NIBBA
+		auto& objectName = name.objectName();
+		for (auto& reference : collection)
+			if (reference.referenceName() == objectName)
+			{
+				auto& referenceContext = reference.context();
+				auto parentName = referenceContext._fullReferenceName;
+				parentName.erase( parentName.end() - 1 );
+				auto resolved = _resolver.resolve<Context>( referenceContext._context, QualifiedName( parentName ) );
+				if (resolved == currentContext)
+				{
+					return reference.releaseReference();
+				}
+			}
+		return std::unique_ptr<T>();
+	}
 }

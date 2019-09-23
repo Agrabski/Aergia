@@ -20,14 +20,14 @@ namespace Aergia::DataStructures
 		tuple<Collection<Types>...> _aliases;
 
 
-		template<typename T, typename Importable>
-		typename enable_if<is_same<T, Importable>::value, T>::type* verifyTypeMatch( Importable* im )
+		template<typename T, typename Importable, typename enable_if<is_same<T, Importable>::value, int>::type = 0>
+		constexpr T* verifyTypeMatch( Importable* im )
 		{
 			return im;
 		}
 
-		template<typename T, typename Importable>
-		typename enable_if<!is_same<T, Importable>::value, T>::type* verifyTypeMatch( Importable* im )
+		template<typename T, typename Importable, typename enable_if<!is_same<T, Importable>::value, int>::type = 0>
+		constexpr T* verifyTypeMatch( Importable* im )
 		{
 			return nullptr;
 		}
@@ -35,6 +35,7 @@ namespace Aergia::DataStructures
 		template<typename T, typename Importable>
 		int resolveImport( QualifiedName name, Collection<Importable>& im, T*& result )
 		{
+			auto& resolver = Resolver::instance();
 			if (result == nullptr)
 				for (auto& element : im)
 					if (element.first == name.peekQualificationLevel())
@@ -45,7 +46,7 @@ namespace Aergia::DataStructures
 							return 0;
 						}
 						else
-							Resolver::resolveOnKnownType<T, Importable>( *element.second.get(), name.next(), result );
+							result = resolver.resolveOnKnownType<T, Importable>( element.second.get(), name.next() );
 					}
 			return 0;
 		}
@@ -59,9 +60,30 @@ namespace Aergia::DataStructures
 
 		}
 
-	protected:
-		Aliases() : IContext( nullptr, MemberAccessibility::None ) {}
+		template<typename Importable>
+		int copyOnce( Collection<Importable>& from, Collection<Importable>& to )
+		{
+			for (auto e : from)
+			{
+				auto found = to.find( e.first );
+				if (found == to.end())
+					to.insert( { e.first,e.second } );
+			}
+			return 0;
+		}
 
+		template<size_t... N>
+		void copy( Aliases& from, std::index_sequence<N...> )
+		{
+			auto t = { copyOnce( std::get<N>( from._aliases ),std::get<N>( _aliases ) )... };
+		}
+
+	protected:
+		Aliases() noexcept : IContext( nullptr, MemberAccessibility::None ) {}
+		void copyAliases( Aliases& from )
+		{
+			copy( from, std::make_index_sequence<sizeof...(Types)>() );
+		}
 	public:
 		template<typename T>
 		void appendAlias( std::string name, not_null<T*> import )

@@ -74,28 +74,28 @@
     <LinkIncremental>true</LinkIncremental>
     <ReferencePath>..\Antlr\lib\vs-2015\x64\Release DLL;$(ReferencePath)</ReferencePath>
     <LibraryPath>..\Antlr\lib\vs-2015\x64\Release DLL;$(LibraryPath)</LibraryPath>
-    <CodeAnalysisRuleSet>C:\Users\adamg\source\repos\Agrabski\Aergia\Strict_Set.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../Strict_Set.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <ReferencePath>..\Antlr\lib\vs-2015\x86\Release DLL;$(ReferencePath)</ReferencePath>
     <LibraryPath>..\Antlr\lib\vs-2015\x86\Release DLL;$(LibraryPath)</LibraryPath>
-    <CodeAnalysisRuleSet>C:\Users\adamg\source\repos\Agrabski\Aergia\Strict_Set.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../Strict_Set.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <ReferencePath>..\Antlr\lib\vs-2015\x86\Release DLL;$(ReferencePath)</ReferencePath>
     <LibraryPath>..\Antlr\lib\vs-2015\x86\Release DLL;$(LibraryPath)</LibraryPath>
-    <CodeAnalysisRuleSet>C:\Users\adamg\source\repos\Agrabski\Aergia\Strict_Set.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../Strict_Set.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <ReferencePath>..\Antlr\lib\vs-2015\x64\Release DLL;$(ReferencePath)</ReferencePath>
     <LibraryPath>..\Antlr\lib\vs-2015\x64\Release DLL;$(LibraryPath)</LibraryPath>
-    <CodeAnalysisRuleSet>C:\Users\adamg\source\repos\Agrabski\Aergia\Strict_Set.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../Strict_Set.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,6 +110,7 @@
       <AdditionalIncludeDirectories>..\Antlr\antlr4-runtime;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <AdditionalOptions>/bigobj /we4715 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -128,6 +129,7 @@
       <AdditionalIncludeDirectories>..\Antlr\antlr4-runtime;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <AdditionalOptions>/bigobj /we4715 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -199,6 +201,7 @@
     <ClInclude Include="QualifiedName.hpp" />
     <ClInclude Include="Resolver.hpp" />
     <ClInclude Include="TypeAlias.hpp" />
+    <ClInclude Include="UnconfirmedReference.hpp" />
     <ClInclude Include="VariableContext.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +220,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="QualifiedName.cpp" />
+    <ClCompile Include="Resolver.cpp" />
     <ClCompile Include="VariableContext.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,9 @@
     <Filter Include="Tests">
       <UniqueIdentifier>{6046208a-80a3-4a6e-ad56-3bf5a873950d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{883aa4e4-4e35-4fcf-898d-79b8837a1acf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -23,6 +26,15 @@
     </ClInclude>
     <ClInclude Include="Processor.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectProcessor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assembly.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissingDependencyException.hpp">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +45,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assembly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MissingDependencyException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

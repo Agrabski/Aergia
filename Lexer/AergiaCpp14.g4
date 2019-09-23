@@ -29,14 +29,6 @@ translationunit
    : declarationseq? EOF
    ;
 /*Expressions*/
-
-Encodingprefix
-   : 'u8'
-   | 'u'
-   | 'U'
-   | 'L'
-   ;
-
 aergiaexpressionbegin : '$' ;
 aergiaexpressionend : '$$';
 aergiaBlock : '${'statementseq'$}';
@@ -51,9 +43,6 @@ anonymousExpression
 
 anoynmousBody
    : initializerclause;
-
-aergiastring
-   : Encodingprefix? '@' callchain '@';
 
 foreach
    :'$foreach('foreachheader')' foreachbody
@@ -269,8 +258,7 @@ castexpression
    ;
 
 pmexpression
-   : primaryexpression 
-   
+   : castexpression
    | pmexpression '.*' castexpression
    | pmexpression '->*' castexpression
    ;
@@ -345,9 +333,8 @@ conditionalexpression
    ;
 
 assignmentexpression
-   : pmexpression
-   | castexpression
-   | logicalorexpression assignmentoperator pmexpression
+   : conditionalexpression
+   | logicalorexpression assignmentoperator initializerclause
    | throwexpression
    ;
 
@@ -493,7 +480,7 @@ simpledeclaration
    ;
 
 static_assertdeclaration
-   : Static_assert '(' constantexpression ',' (Stringliteral | aergiastring) ')' ';'
+   : Static_assert '(' constantexpression ',' Stringliteral ')' ';'
    ;
 
 emptydeclaration
@@ -768,12 +755,12 @@ initdeclarator
 
 declarator
    : ptrdeclarator
-   | noptrdeclarator
    | noptrdeclarator parametersandqualifiers trailingreturntype
    ;
 
 ptrdeclarator
-   : ptroperator ptrdeclarator
+   : noptrdeclarator
+   | ptroperator ptrdeclarator
    ;
 
 noptrdeclarator
@@ -1052,8 +1039,8 @@ operatorfunctionid
    ;
 
 literaloperatorid
-   : Operator (Stringliteral | aergiastring) Identifier
-   | Operator (Userdefinedstringliteral | aergiastring)
+   : Operator Stringliteral Identifier
+   | Operator Userdefinedstringliteral
    ;
 /*Templates*/
 
@@ -1773,7 +1760,6 @@ literal
    | booleanliteral
    | pointerliteral
    | userdefinedliteral
-   | aergiastring
    ;
 
 Integerliteral
@@ -1910,7 +1896,12 @@ Stringliteral
    | Encodingprefix? 'R' Rawstring
    ;
 
-
+fragment Encodingprefix
+   : 'u8'
+   | 'u'
+   | 'U'
+   | 'L'
+   ;
 
 fragment Schar
    : ~ ["\\\r\n]
@@ -1936,7 +1927,6 @@ userdefinedliteral
    | Userdefinedfloatingliteral
    | Userdefinedstringliteral
    | Userdefinedcharacterliteral
-   | aergiastring
    ;
 
 Userdefinedintegerliteral
@@ -1964,11 +1954,11 @@ fragment Udsuffix
    ;
 
 Whitespace
-   : [ \t]+ -> channel(HIDDEN)
+   : [ \t]+ -> skip
    ;
 
 Newline
-   : ('\r' '\n'? | '\n') -> channel(HIDDEN)
+   : ('\r' '\n'? | '\n') -> skip
    ;
 
 BlockComment

@@ -81,6 +81,9 @@
     <ClInclude Include="HasResolveInAliases.hpp">
       <Filter>Header Files\Concepts</Filter>
     </ClInclude>
+    <ClInclude Include="UnconfirmedReference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -114,6 +117,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ITypeImportable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Resolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

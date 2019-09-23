@@ -17,7 +17,7 @@ namespace misc {
     std::vector<std::string> channels; // Only valid for lexer grammars.
     std::vector<std::string> modes; // ditto
 
-    InterpreterData() {}; // For invalid content.
+    InterpreterData() noexcept {}; // For invalid content.
     InterpreterData(std::vector<std::string> const& literalNames, std::vector<std::string> const& symbolicNames);
   };
 

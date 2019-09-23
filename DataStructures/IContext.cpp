@@ -1,12 +1,29 @@
 #include "pch.h"
 #include "IContext.hpp"
 
+using namespace gsl;
 using namespace Aergia::DataStructures;
 
 IContext* Aergia::DataStructures::IContext::getRoot()
 {
-	IContext* current = this;
+	not_null<IContext*> current = this;
 	while (current->parent() != nullptr)
 		current = current->parent();
 	return current;
+}
+
+IContext const* Aergia::DataStructures::IContext::getRoot() const
+{
+	not_null<IContext const*> current = this;
+	while (current->parent() != nullptr)
+		current = current->parent();
+	return current;
+}
+
+QualifiedName IContext::qualifiedName()
+{
+	if (_parent != nullptr)
+		return _parent->qualifiedName() + getName();
+	else
+		return QualifiedName();
 }

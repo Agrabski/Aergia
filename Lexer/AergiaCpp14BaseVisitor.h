@@ -43,10 +43,6 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAergiastring(AergiaCpp14Parser::AergiastringContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
   virtual antlrcpp::Any visitForeach(AergiaCpp14Parser::ForeachContext *ctx) override {
     return visitChildren(ctx);
   }

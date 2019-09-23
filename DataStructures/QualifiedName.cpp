@@ -3,17 +3,26 @@
 #include <span.h>
 #include <sstream>
 
-Aergia::DataStructures::QualifiedName::QualifiedName( std::string name )
+using namespace Aergia::DataStructures;
+
+Aergia::DataStructures::QualifiedName::QualifiedName(std::string name)
 {
-	std::replace( name.begin(), name.end(), ':', ' ' );
-	std::stringstream stream( std::move( name ) );
+	std::replace(name.begin(), name.end(), ':', ' ');
+	std::stringstream stream(std::move(name));
 	while (!stream.eof())
 	{
 		std::string temp;
 		stream >> temp;
-		_levels.push_back( temp );
+		_levels.push_back(temp);
 	}
 
+}
+
+QualifiedName Aergia::DataStructures::QualifiedName::operator+(std::string const& other)
+{
+	auto list = _levels;
+	list.push_back(other);
+	return QualifiedName(std::move(list));
 }
 
 std::vector<std::string> const& Aergia::DataStructures::QualifiedName::getAllQualificationLevels() const noexcept
@@ -26,9 +35,14 @@ std::string const& Aergia::DataStructures::QualifiedName::peekQualificationLevel
 	return _levels.front();
 }
 
+std::string const& Aergia::DataStructures::QualifiedName::objectName() const
+{
+	return _levels.back();
+}
+
 void Aergia::DataStructures::QualifiedName::advanceLevel()
 {
-	_levels.erase( _levels.begin() );
+	_levels.erase(_levels.begin());
 }
 
 int Aergia::DataStructures::QualifiedName::levelCount() const noexcept

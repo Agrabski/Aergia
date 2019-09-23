@@ -30,7 +30,7 @@ namespace tree {
     virtual void enterEveryRule(ParserRuleContext *ctx) = 0;
     virtual void exitEveryRule(ParserRuleContext *ctx) = 0;
 
-    bool operator == (const ParseTreeListener &other) {
+    bool operator == (const ParseTreeListener &other) const noexcept {
       return this == &other;
     }
   };

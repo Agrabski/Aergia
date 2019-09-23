@@ -26,8 +26,3 @@ antlrcpp::Any Aergia::Visitors::AnonymousVisitor::visitAnonymousExpression( Aerg
 	_rewrites.push_back( { before, follow, formatAssigment( content, getVariableName( context->start->getLine() ) ) } );
 	return antlrcpp::Any();
 }
-
-std::vector<Aergia::Visitors::Rewrite>const& Aergia::Visitors::AnonymousVisitor::getRewrites() const
-{
-	return _rewrites;
-}

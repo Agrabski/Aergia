@@ -23,13 +23,16 @@ namespace Aergia::DataStructures
 
 		void bootstrapPrimitives();
 	public:
-		NamespaceContext( std::string const& name, IContext* const parent ) : _name( std::move( name ) ), IContext( parent, MemberAccessibility::None ) { }
+		NamespaceContext( std::string const& name, IContext* const parent ) : _name( name ), IContext( parent, MemberAccessibility::None ) { }
 		NamespaceContext() noexcept : _name( "GLOBAL_NAMESPACE" ), IContext( nullptr, MemberAccessibility::None ) { bootstrapPrimitives(); }
 
 		virtual std::string const& getName() const 
 		{
 			return _name;
 		}
+
+		static std::unique_ptr<NamespaceContext> mergeRoots( std::unique_ptr<NamespaceContext>&& a, std::unique_ptr<NamespaceContext>&& b );
+
 
 	};
 

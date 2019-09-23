@@ -20,7 +20,7 @@ namespace atn {
   public:
     struct Hasher
     {
-      size_t operator()(ATNConfig const& k) const {
+      size_t operator()(ATNConfig const& k) const noexcept {
         return k.hashCode();
       }
     };
@@ -129,7 +129,7 @@ namespace std {
 
   template <> struct hash<ATNConfig>
   {
-    size_t operator() (const ATNConfig &x) const
+    size_t operator() (const ATNConfig &x) const noexcept
     {
       return x.hashCode();
     }
@@ -137,7 +137,7 @@ namespace std {
 
   template <> struct hash<std::vector<Ref<ATNConfig>>>
   {
-    size_t operator() (const std::vector<Ref<ATNConfig>> &vector) const
+    size_t operator() (const std::vector<Ref<ATNConfig>> &vector) const noexcept
     {
       std::size_t seed = 0;
       for (auto &config : vector) {
