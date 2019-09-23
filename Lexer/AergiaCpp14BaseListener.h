@@ -37,9 +37,6 @@ public:
   virtual void enterAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext * /*ctx*/) override { }
   virtual void exitAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext * /*ctx*/) override { }
 
-  virtual void enterAergiastring(AergiaCpp14Parser::AergiastringContext * /*ctx*/) override { }
-  virtual void exitAergiastring(AergiaCpp14Parser::AergiastringContext * /*ctx*/) override { }
-
   virtual void enterForeach(AergiaCpp14Parser::ForeachContext * /*ctx*/) override { }
   virtual void exitForeach(AergiaCpp14Parser::ForeachContext * /*ctx*/) override { }
 

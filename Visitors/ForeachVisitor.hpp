@@ -16,8 +16,5 @@ namespace Aergia::Visitors
 		antlrcpp::Any visitForeach( AergiaCpp14Parser::ForeachContext* ctx ) override;
 
 
-		// Inherited via BaseVisitor
-		std::vector<Rewrite> const& getRewrites() const override;
-
 	};
 }
