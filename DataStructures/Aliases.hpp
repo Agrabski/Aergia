@@ -6,27 +6,23 @@
 
 namespace Aergia::DataStructures
 {
-	using std::map;
-	using std::tuple;
-	using gsl::not_null;
-	using std::pair;
 
 	template<typename... Types>
 	class Aliases : public virtual IContext
 	{
 		template<typename T>
-		using Collection = map<std::string, not_null<T*>>;
+		using Collection = std::map<std::string, gsl::not_null<T*>>;
 
-		tuple<Collection<Types>...> _aliases;
+		std::tuple<Collection<Types>...> _aliases;
 
 
-		template<typename T, typename Importable, typename enable_if<is_same<T, Importable>::value, int>::type = 0>
+		template<typename T, typename Importable, typename std::enable_if<std::is_same<T, Importable>::value, int>::type = 0>
 		constexpr T* verifyTypeMatch( Importable* im )
 		{
 			return im;
 		}
 
-		template<typename T, typename Importable, typename enable_if<!is_same<T, Importable>::value, int>::type = 0>
+		template<typename T, typename Importable, typename std::enable_if<!std::is_same<T, Importable>::value, int>::type = 0>
 		constexpr T* verifyTypeMatch( Importable* im )
 		{
 			return nullptr;
@@ -86,7 +82,7 @@ namespace Aergia::DataStructures
 		}
 	public:
 		template<typename T>
-		void appendAlias( std::string name, not_null<T*> import )
+		void appendAlias( std::string name, gsl::not_null<T*> import )
 		{
 			using searched = Collection<T>;
 			auto& collection = MetaProgramming::findInTuple<searched, 0>( _aliases );

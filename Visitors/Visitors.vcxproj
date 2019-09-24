@@ -187,7 +187,6 @@
     <ClInclude Include="ContextProvider.hpp" />
     <ClInclude Include="CurrentContextVisitor.hpp" />
     <ClInclude Include="ForeachVisitor.hpp" />
-    <ClInclude Include="Rewrite.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AergiaExpressionVisitor.cpp" />

@@ -1,6 +1,5 @@
 #pragma once
 #include "..//Lexer/Antlr_include.hpp"
-#include "Rewrite.hpp"
 
 namespace Aergia::Visitors
 {

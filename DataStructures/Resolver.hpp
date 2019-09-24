@@ -10,13 +10,11 @@
 
 namespace Aergia::DataStructures
 {
-	using gsl::not_null;
-	using std::unique_ptr;
-	using std::enable_if;
 	class Resolver
 	{
+
 		template<typename T, typename Value, typename  N = void>
-		bool appendContent( T* source, unique_ptr<Value>& value )
+		bool appendContent( T* source, std::unique_ptr<Value>& value )
 		{
 			if (source != nullptr)
 				source->appendContent( std::move( value ) );
@@ -24,37 +22,37 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename T, typename Importable>
-		typename enable_if<HasResolveInContents<Importable, T>::value, T>::type* resolveInChildContents( QualifiedName name, Importable& im )
+		typename std::enable_if<HasResolveInContents<Importable, T>::value, T>::type* resolveInChildContents( QualifiedName name, Importable& im )
 		{
 			return im.resolveInContents<T>( name );
 		}
 
 		template<typename T, typename Importable>
-		typename enable_if<!HasResolveInContents<Importable, T>::value, T>::type* resolveInChildContents( QualifiedName name, Importable& im ) { return nullptr; }
+		typename std::enable_if<!HasResolveInContents<Importable, T>::value, T>::type* resolveInChildContents( QualifiedName name, Importable& im ) { return nullptr; }
 
-		template<typename T, typename Importable, typename enable_if<HasResolveInImports<Importable, T>::value, int>::type = 0>
+		template<typename T, typename Importable, typename std::enable_if<HasResolveInImports<Importable, T>::value, int>::type = 0>
 		T* resolveInImports( QualifiedName name, Importable& im ) { return im.resolveImports<T>( name ); }
 
-		template<typename T, typename Importable, typename enable_if<!HasResolveInImports<Importable, T>::value, int>::type = 0>
+		template<typename T, typename Importable, typename std::enable_if<!HasResolveInImports<Importable, T>::value, int>::type = 0>
 		T* resolveInImports( QualifiedName name, Importable& im ) { return nullptr; }
 
-		template<typename T, typename Importable, typename enable_if<HasResolveInImports<Importable, T>::value, int>::type = 0>
+		template<typename T, typename Importable, typename std::enable_if<HasResolveInImports<Importable, T>::value, int>::type = 0>
 		T const* resolveInImports( QualifiedName name, Importable const& im ) { return im.resolveImports<T>( name ); }
 
-		template<typename T, typename Importable, typename enable_if<!HasResolveInImports<Importable, T>::value, int>::type = 0>
+		template<typename T, typename Importable, typename std::enable_if<!HasResolveInImports<Importable, T>::value, int>::type = 0>
 		T const* resolveInImports( QualifiedName name, Importable const& im ) { return nullptr; }
 
-		template<typename T, typename Importable, typename enable_if<HasResolveInAliases<Importable, T>::value, int>::type = 0>
+		template<typename T, typename Importable, typename std::enable_if<HasResolveInAliases<Importable, T>::value, int>::type = 0>
 		T* resolveInAliases( QualifiedName name, Importable& im )
 		{
 			return im.resolveInAliases<T>( name );
 		}
 
 		template<typename T, typename Importable>
-		typename enable_if<!HasResolveInAliases<Importable, T>::value, T>::type* resolveInAliases( QualifiedName name, Importable& im ) { return nullptr; }
+		typename std::enable_if<!HasResolveInAliases<Importable, T>::value, T>::type* resolveInAliases( QualifiedName name, Importable& im ) { return nullptr; }
 
 		template<typename Result, typename Source>
-		Result* tryResolveOnType( not_null<IContext*> source, QualifiedName name )
+		Result* tryResolveOnType( gsl::not_null<IContext*> source, QualifiedName name )
 		{
 			static_assert(std::is_base_of<IContext, Source>::value);
 			auto ns = dynamic_cast<Source*>(source.get());
@@ -64,7 +62,7 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename Result, typename Source>
-		Result const* tryResolveOnType( not_null<IContext const*> source, QualifiedName name )
+		Result const* tryResolveOnType( gsl::not_null<IContext const*> source, QualifiedName name )
 		{
 			static_assert(std::is_base_of<IContext, Source>::value);
 			auto ns = dynamic_cast<Source const*>(source.get());
@@ -73,8 +71,8 @@ namespace Aergia::DataStructures
 			return nullptr;
 		}
 
-		template<typename Import, typename Target, typename enable_if<sizeof( Target ) == sizeof( Target ) && HasResolveInAliases<Target, Import>::value, int>::type = 0>
-		bool tryImport( not_null<Import*> import, std::string name, not_null<IContext*>target )
+		template<typename Import, typename Target, typename std::enable_if<sizeof( Target ) == sizeof( Target ) && HasResolveInAliases<Target, Import>::value, int>::type = 0>
+		bool tryImport( gsl::not_null<Import*> import, std::string name, gsl::not_null<IContext*>target )
 		{
 			static_assert(std::is_base_of<IContext, Target>::value, "is not a context");
 			auto n = dynamic_cast<Target*>(target.get());
@@ -85,8 +83,8 @@ namespace Aergia::DataStructures
 			}
 			return false;
 		}
-		template<typename Import, typename Target, typename  enable_if<sizeof( Target ) == sizeof( Target ) && !HasResolveInAliases<Target, Import>::value, int>::type = 0 >
-		bool tryImport( not_null<Import*> import, std::string name, not_null<IContext*>target )
+		template<typename Import, typename Target, typename  std::enable_if<sizeof( Target ) == sizeof( Target ) && !HasResolveInAliases<Target, Import>::value, int>::type = 0 >
+		bool tryImport( gsl::not_null<Import*> import, std::string name, gsl::not_null<IContext*>target )
 		{
 			return false;
 		}
@@ -122,7 +120,7 @@ namespace Aergia::DataStructures
 		static Resolver& instance();
 
 		template<typename Target, typename Source>
-		Target* resolveOnKnownType( not_null< Source*> im, QualifiedName name )
+		Target* resolveOnKnownType( gsl::not_null< Source*> im, QualifiedName name )
 		{
 			using std::vector;
 			using std::function;
@@ -143,7 +141,7 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename Target, typename Source>
-		Target const* resolveOnKnownType( not_null< Source const*> im, QualifiedName name ) const
+		Target const* resolveOnKnownType( gsl::not_null< Source const*> im, QualifiedName name ) const
 		{
 			using std::array;
 			using std::function;
@@ -164,7 +162,7 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename T>
-		T* resolve( not_null<IContext*> source, QualifiedName name )
+		T* resolve( gsl::not_null<IContext*> source, QualifiedName name )
 		{
 			if (name.levelCount() == 0)
 				return validateTypeMatch<T>(source.get());
@@ -180,7 +178,7 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename T>
-		T const* resolve( not_null<IContext const*> source, QualifiedName name ) const
+		T const* resolve( gsl::not_null<IContext const*> source, QualifiedName name ) const
 		{
 			if (name.levelCount() == 0)
 				return validateTypeMatch<T>( source.get() );
@@ -196,7 +194,7 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename T>
-		T* appendImport( not_null<IContext*> source, QualifiedName name )
+		T* appendImport( gsl::not_null<IContext*> source, QualifiedName name )
 		{
 			auto ns = dynamic_cast<NamespaceContext*>(source.get());
 			if (ns != nullptr)
@@ -209,7 +207,7 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename T>
-		T* appendAlias( not_null<IContext*> source, std::string aliasName, QualifiedName path )
+		T* appendAlias( gsl::not_null<IContext*> source, std::string aliasName, QualifiedName path )
 		{
 			auto resolvedType = resolve<T>( source, path );
 
@@ -221,7 +219,7 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename T>
-		T* appendContent( not_null<IContext*> source, unique_ptr<T>&& value )
+		T* appendContent( gsl::not_null<IContext*> source, std::unique_ptr<T>&& value )
 		{
 			auto result = value.get();
 			if (appendContent<NamespaceContext, T>( dynamic_cast<NamespaceContext*>(source.get()), value ))

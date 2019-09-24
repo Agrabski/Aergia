@@ -5,16 +5,13 @@
 
 namespace Aergia::Configuration
 {
-	using std::vector;
-	using std::filesystem::path;
-	using std::string;
 	struct AssemblyConfiguration
 	{
-		vector<path> _files;
-		string _assemblyName;
+		std::vector<std::filesystem::path> _files;
+		std::string _assemblyName;
 		
 		// names of assemblies on which this assembly depends
-		vector<string> _dependencyNames;
+		std::vector<std::string> _dependencyNames;
 		AssemblyConfiguration( std::filesystem::path const& );
 	};
 }

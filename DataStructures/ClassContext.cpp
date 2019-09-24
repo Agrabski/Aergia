@@ -2,9 +2,8 @@
 #include <algorithm>
 #include "ClassContext.hpp"
 
-using namespace Aergia::DataStructures;
 
-std::vector<gsl::not_null<BaseClassContext*>> const Aergia::DataStructures::TypeContext::getBases()
+std::vector<gsl::not_null<Aergia::DataStructures::BaseClassContext*>> const Aergia::DataStructures::TypeContext::getBases()
 {
 	return getMembersOfType<BaseClassContext>();
 }

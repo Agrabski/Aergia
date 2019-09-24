@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "TypeFinder.hpp"
 
+using gsl::not_null;
+
 std::string Aergia::Utilities::TypeFinder::getType( not_null<AergiaCpp14Parser::DeclspecifierseqContext*> context )
 {
 	ClassNameExtractionVisitor visitor;

@@ -18,11 +18,14 @@ std::string Aergia::Visitors::AnonymousVisitor::formatAssigment( std::string con
 antlrcpp::Any Aergia::Visitors::AnonymousVisitor::visitAnonymousExpression( AergiaCpp14Parser::AnonymousExpressionContext* context )
 {
 	assert( context != nullptr );
+	using gsl::not_null;
 	using Utilities::TokenFinder;
-	auto content = context->anoynmousBody()->getText();
-	auto before = TokenFinder::findTokenBefore( (antlr4::ParserRuleContext*) context->parent );
-	auto follow = TokenFinder::findFollow( (antlr4::ParserRuleContext*)context->parent );
+	auto const content = context->anoynmousBody()->getText();
 
-	_rewrites.push_back( { before, follow, formatAssigment( content, getVariableName( context->start->getLine() ) ) } );
+	auto const assigment = formatAssigment( content, getVariableName( context->start->getLine() ) );
+
+	context->children.clear();
+	context->addChild( _contextProvider.createTerminalNode( _contextProvider.getTokenFactory().create( 0, assigment ) ) );
+
 	return antlrcpp::Any();
 }

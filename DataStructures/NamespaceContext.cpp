@@ -1,17 +1,17 @@
 #include "pch.h"
 #include "NamespaceContext.hpp"
 
-using namespace Aergia::DataStructures;
 
-void NamespaceContext::bootstrapPrimitives()
+void Aergia::DataStructures::NamespaceContext::bootstrapPrimitives()
 {
-	appendContent( std::make_unique<TypeContext>( "int", this, MemberAccessibility::None ) );
-	appendContent( std::make_unique<TypeContext>( "float", this, MemberAccessibility::None ) );
-	appendContent( std::make_unique<TypeContext>( "double", this, MemberAccessibility::None ) );
-	appendContent( std::make_unique<TypeContext>( "long", this, MemberAccessibility::None ) );
+	using namespace std::literals;
+	appendContent( std::make_unique<TypeContext>( "int"s, this, MemberAccessibility::None ) );
+	appendContent( std::make_unique<TypeContext>( "float"s, this, MemberAccessibility::None ) );
+	appendContent( std::make_unique<TypeContext>( "double"s, this, MemberAccessibility::None ) );
+	appendContent( std::make_unique<TypeContext>( "long"s, this, MemberAccessibility::None ) );
 }
 
-std::unique_ptr<NamespaceContext> NamespaceContext::mergeRoots( std::unique_ptr<NamespaceContext>&& a, std::unique_ptr<NamespaceContext>&& b )
+std::unique_ptr<Aergia::DataStructures::NamespaceContext> Aergia::DataStructures::NamespaceContext::mergeRoots( std::unique_ptr<Aergia::DataStructures::NamespaceContext>&& a, std::unique_ptr<NamespaceContext>&& b )
 {
 	if (a == nullptr)
 		return std::move( b );

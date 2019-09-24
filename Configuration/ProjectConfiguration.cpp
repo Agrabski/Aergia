@@ -2,7 +2,7 @@
 #include "ProjectConfiguration.hpp"
 #include <pugixml.hpp>
 
-Aergia::Configuration::ProjectConfiguration::ProjectConfiguration( path p)
+Aergia::Configuration::ProjectConfiguration::ProjectConfiguration( std::filesystem::path p)
 {
 	using namespace pugi;
 	pugi::xml_document configFile;

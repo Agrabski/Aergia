@@ -5,7 +5,7 @@
 #include "../Functions/CallChainResolver.hpp"
 #include "../AntlrUtilities/TokenFactoryProxy.hpp"
 #include "../Functions/CallChainResolver.hpp"
-#include <antlr4-common.h>
+#include "../antlr/src/antlr4-common.h"
 
 
 namespace Aergia::Visitors

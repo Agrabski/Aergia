@@ -36,9 +36,6 @@
     <ClInclude Include="MethodContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Definitions.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VariableContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

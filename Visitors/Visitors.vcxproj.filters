@@ -27,9 +27,6 @@
     <ClInclude Include="ContextProvider.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rewrite.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ForeachVisitor.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

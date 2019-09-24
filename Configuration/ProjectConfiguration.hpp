@@ -6,11 +6,11 @@ namespace Aergia::Configuration
 {
 	struct ProjectConfiguration
 	{
-		string _projectName;
-		vector<path> _assemblyDirectories;
-		path _outputDirectory;
-		path _projectDirectory;
-		string _targetAssemblyName;
-		ProjectConfiguration( path );
+		std::string _projectName;
+		std::vector<std::filesystem::path> _assemblyDirectories;
+		std::filesystem::path _outputDirectory;
+		std::filesystem::path _projectDirectory;
+		std::string _targetAssemblyName;
+		ProjectConfiguration( std::filesystem::path );
 	};
 }

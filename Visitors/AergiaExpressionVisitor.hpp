@@ -10,7 +10,7 @@ namespace Aergia::Visitors
 	{
 		ContextProvider& _contextProvider;
 	public:
-		AergiaExpressionVisitor( ContextProvider& contextProvider ) : _contextProvider( contextProvider ) {}
+		constexpr AergiaExpressionVisitor( ContextProvider& contextProvider ) noexcept : _contextProvider( contextProvider ) {}
 		antlrcpp::Any visitAergiaexpression( AergiaCpp14Parser::AergiaexpressionContext* ctx ) override;
 	};
 }

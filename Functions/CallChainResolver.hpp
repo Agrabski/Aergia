@@ -13,7 +13,7 @@ namespace Aergia::Functions
 	{
 		using IContextPtr = gsl::not_null<DataStructures::IContext*>;
 		using Collection = std::vector<IContextPtr>;
-		using ResolutionResult = std::variant<std::vector<IContextPtr>, std::string,DataStructures::MemberAccessibility>;
+		using ResolutionResult = std::variant<std::vector<IContextPtr>, std::string, DataStructures::MemberAccessibility>;
 
 		gsl::not_null<VariableProvider*> _variableProvider;
 

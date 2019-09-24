@@ -1,6 +1,5 @@
 #pragma once
 #include <gsl.h>
-#include "..//Lexer/Antlr_include.hpp"
 #include "..//DataStructures/Definitions.hpp"
 #include "..//DataStructures/NamespaceContext.hpp"
 #include "..//DataStructures/IContext.hpp"
@@ -16,12 +15,6 @@ namespace Aergia::Visitors
 {
 	template<typename T>
 	using UnconfirmedReferenceCollection = std::vector<DataStructures::UnconfirmedReference<T>>;
-	using DataStructures::TypeContext;
-	using DataStructures::NamespaceContext;
-	using DataStructures::MethodContext;
-	using gsl::not_null;
-	using DataStructures::IContext;
-	using DataStructures::QualifiedName;
 
 	class CurrentContextVisitor : public AergiaCpp14BaseListener, public ContextProvider
 	{
@@ -36,16 +29,16 @@ namespace Aergia::Visitors
 		gsl::not_null<DataStructures::IContext*> _currentContext;
 		std::vector<ContextData> _contextStack;
 		std::tuple<
-			UnconfirmedReferenceCollection<TypeContext>,
-			UnconfirmedReferenceCollection<MethodContext>
+			UnconfirmedReferenceCollection<DataStructures::TypeContext>,
+			UnconfirmedReferenceCollection<DataStructures::MethodContext>
 		> _unconfirmedReferences;
 		DataStructures::Resolver& _resolver = DataStructures::Resolver::instance();
 
 		template<typename T>
-		T* resolve( not_null<IContext*> source, QualifiedName name );
+		T* resolve( gsl::not_null<DataStructures::IContext*> source, DataStructures::QualifiedName name );
 
 		template<typename T>
-		std::unique_ptr<T> findUnresolvedReference( not_null<IContext const*> currentContext, QualifiedName name );
+		std::unique_ptr<T> findUnresolvedReference( gsl::not_null<DataStructures::IContext const*> currentContext, DataStructures::QualifiedName name );
 
 	public:
 		std::unique_ptr<DataStructures::NamespaceContext>releaseRoot() { return std::move( _rootContext ); }
@@ -102,7 +95,7 @@ namespace Aergia::Visitors
 	};
 
 	template<typename T>
-	inline T* CurrentContextVisitor::resolve( not_null<IContext*> source, QualifiedName name )
+	inline T* CurrentContextVisitor::resolve( gsl::not_null<DataStructures::IContext*> source, DataStructures::QualifiedName name )
 	{
 		auto result = _resolver.resolve<T>( source, name );
 		if (result == nullptr)
@@ -118,8 +111,9 @@ namespace Aergia::Visitors
 	}
 
 	template<typename T>
-	inline std::unique_ptr<T> CurrentContextVisitor::findUnresolvedReference( not_null<IContext const*> currentContext, QualifiedName name )
+	inline std::unique_ptr<T> CurrentContextVisitor::findUnresolvedReference( gsl::not_null<DataStructures::IContext const*> currentContext, DataStructures::QualifiedName name )
 	{
+		using namespace DataStructures;
 		auto& collection =MetaProgramming::findInTuple<UnconfirmedReferenceCollection<T>, 0>( _unconfirmedReferences );
 		if (collection.size())
 		{

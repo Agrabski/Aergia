@@ -10,20 +10,15 @@
 
 namespace Aergia::DataStructures
 {
-	using std::vector;
-	using std::tuple;
-	using gsl::not_null;
-
-
 	template<typename... Import>
 	class Imports : public virtual IContext
 	{
 
 		using t = std::tuple<Import...>;
 		template<typename T>
-		using Collection = vector<not_null<T*>>;
+		using Collection = std::vector<gsl::not_null<T*>>;
 
-		tuple<Collection<Import>...> _imports;
+		std::tuple<Collection<Import>...> _imports;
 
 		template<typename T, typename Importable>
 		int resolveImport( QualifiedName name, Collection<Importable>& im, T*& result )
@@ -73,9 +68,9 @@ namespace Aergia::DataStructures
 
 	public:
 		template<typename T>
-		void appendImport( not_null<T*> import )
+		void appendImport( gsl::not_null<T*> import )
 		{
-			using searched = vector<not_null<T*>>;
+			using searched = std::vector<gsl::not_null<T*>>;
 			auto& collection = MetaProgramming::findInTuple<searched, 0>( _imports );
 			assert( std::find( collection.begin(), collection.end(), import ) == collection.end() );
 			collection.push_back( import );

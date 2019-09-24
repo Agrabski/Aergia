@@ -12,12 +12,6 @@
 
 namespace Aergia::DataStructures
 {
-	using std::vector;
-	using std::tuple;
-	using gsl::not_null;
-	using std::unique_ptr;
-	using std::enable_if;
-	using std::is_same;
 
 	template<typename... Types>
 	class Contains : public virtual IContext
@@ -25,23 +19,23 @@ namespace Aergia::DataStructures
 
 		using t = std::tuple<Types...>;
 		template<typename T>
-		using Collection = vector<unique_ptr<T>>;
-		tuple<Collection<Types>...> _contents;
+		using Collection = std::vector<std::unique_ptr<T>>;
+		std::tuple<Collection<Types>...> _contents;
 
 		template<typename T, typename Importable>
-		typename enable_if<is_same<T, Importable>::value, T>::type* verifyTypeMatch( Importable* im )
+		typename std::enable_if<std::is_same<T, Importable>::value, T>::type* verifyTypeMatch( Importable* im )
 		{
 			return im;
 		}
 
 		template<typename T, typename Importable>
-		typename enable_if<!is_same<T, Importable>::value, T>::type* verifyTypeMatch( Importable* im )
+		typename std::enable_if<!std::is_same<T, Importable>::value, T>::type* verifyTypeMatch( Importable* im )
 		{
 			return nullptr;
 		}
 
 		template<typename T, typename Importable>
-		int resolveContent( QualifiedName name, vector <unique_ptr<Importable>>& im, T*& result )
+		int resolveContent( QualifiedName name, std::vector <std::unique_ptr<Importable>>& im, T*& result )
 		{
 			if (result == nullptr)
 				for (auto& element : im)
@@ -116,16 +110,16 @@ namespace Aergia::DataStructures
 
 	public:
 		template<typename T>
-		typename std::enable_if<MetaProgramming::has_type<T, t>::value>::type appendContent( unique_ptr<T>&& import )
+		typename std::enable_if<MetaProgramming::has_type<T, t>::value>::type appendContent( std::unique_ptr<T>&& import )
 		{
-			using searched = vector<unique_ptr<T>>;
+			using searched = std::vector<std::unique_ptr<T>>;
 			auto& collection = MetaProgramming::findInTuple<searched, 0>( _contents );
 			assert( std::find( collection.begin(), collection.end(), import ) == collection.end() );
 			collection.push_back( std::move( import ) );
 		}
 
 		template<typename T>
-		typename std::enable_if<!MetaProgramming::has_type<T, t>::value>::type appendContent( unique_ptr<T>&& import )
+		typename std::enable_if<!MetaProgramming::has_type<T, t>::value>::type appendContent( std::unique_ptr<T>&& import )
 		{
 			std::terminate();
 		}
@@ -137,11 +131,11 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename T>
-		vector<gsl::not_null<T*>> getMembersOfType()
+		std::vector<gsl::not_null<T*>> getMembersOfType()
 		{
-			using searched = vector<unique_ptr<T>>;
+			using searched = std::vector<std::unique_ptr<T>>;
 			auto& collection = MetaProgramming::findInTuple<searched, 0>( _contents );
-			vector<gsl::not_null<T*>> result;
+			std::vector<gsl::not_null<T*>> result;
 			for (auto& e : collection)
 				result.push_back( e.get() );
 			return result;
