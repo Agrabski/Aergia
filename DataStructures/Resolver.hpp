@@ -10,6 +10,8 @@
 
 namespace Aergia::DataStructures
 {
+	class NamespaceContext;
+
 	class Resolver
 	{
 

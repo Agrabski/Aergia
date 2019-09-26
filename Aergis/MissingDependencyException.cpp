@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "MissingDependencyException.hpp"
 
 std::string Aergia::Exceptions::MissingDependencyException::formatException( std::string const& assembly, std::string const& dependencyName )

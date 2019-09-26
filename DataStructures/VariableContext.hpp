@@ -1,11 +1,12 @@
 #pragma once
+#include <string> 
 #include <gsl.h>
-#include "Definitions.hpp"
 #include "IContext.hpp"
 
 namespace Aergia::DataStructures
 {
 	class IContext;
+	class TypeContext;
 	class VariableContext : public IContext
 	{
 		std::string _name;

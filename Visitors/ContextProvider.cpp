@@ -1,6 +1,4 @@
 #include "ContextProvider.hpp"
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string_regex.hpp>
 #include "../Functions/CallChainResolver.hpp"
 
 Aergia::Functions::CallChainResolver Aergia::Visitors::ContextProvider::getResolver() noexcept

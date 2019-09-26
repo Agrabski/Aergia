@@ -6,21 +6,20 @@
 
 namespace Aergia
 {
-	using std::vector;
 	using std::filesystem::path;
+	using std::vector;
 	using Configuration::AssemblyConfiguration;
-	using Configuration::ProjectConfiguration;
 	using DataStructures::NamespaceContext;
-	using gsl::not_null;
 	class Assembly;
 
 	class ProjectProcessor
 	{
-		vector<AssemblyConfiguration> prepareConfigurations( vector<path> const& );
-		void resolveDependencies( std::vector<Assembly>& assemblies );
-		std::unique_ptr<NamespaceContext> processFile( AssemblyConfiguration const& configuration, vector<not_null<Assembly*>> dependencies, path pathToFile, std::unique_ptr<NamespaceContext>& currentRoot );
+		vector<Configuration::AssemblyConfiguration> prepareConfigurations( vector<path> const& );
+		void resolveDependencies( vector<Assembly>& assemblies );
+		std::unique_ptr<NamespaceContext> processSourceFile( Configuration::AssemblyConfiguration const& configuration, vector<gsl::not_null<Assembly*>> dependencies, std::filesystem::path pathToFile, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot );
+		std::unique_ptr<NamespaceContext> processHeaderFile( Configuration::AssemblyConfiguration const& configuration, vector<gsl::not_null<Assembly*>> dependencies, std::filesystem::path pathToFile, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot );
 	public:
-		void processProject( ProjectConfiguration const& confiuration, IO::Configuration const& ioConfig );
-		std::unique_ptr<NamespaceContext> processAssembly( AssemblyConfiguration const&, vector<not_null<Assembly*>> dependencies , std::unique_ptr<NamespaceContext>& currentRoot );
+		void processProject( Configuration::ProjectConfiguration const& confiuration, IO::Configuration const& ioConfig );
+		std::unique_ptr<NamespaceContext> processAssembly( AssemblyConfiguration const&, vector<gsl::not_null<Assembly*>> dependencies , std::unique_ptr<DataStructures::NamespaceContext>& currentRoot );
 	};
 }

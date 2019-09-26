@@ -7,27 +7,21 @@
 
 namespace Aergia
 {
-	using Aergia::DataStructures::NamespaceContext;
-	using Aergia::Configuration::AssemblyConfiguration;
-	using gsl::not_null;
-	using std::string;
-	using std::vector;
-
 	class ProjectProcessor;
 
 	class Assembly
 	{
-		std::unique_ptr<NamespaceContext> _mergedGlobalNamespace;
-		AssemblyConfiguration _configuration;
-		vector<not_null<Assembly*>> _dependencies;
+		std::unique_ptr<DataStructures::NamespaceContext> _mergedGlobalNamespace;
+		Configuration::AssemblyConfiguration _configuration;
+		std::vector<gsl::not_null<Assembly*>> _dependencies;
 	public:
-		string const& assemblyName() const noexcept { return _configuration._assemblyName; }
-		Assembly( AssemblyConfiguration const& configuration );
-		void provideDependency( not_null<Assembly*> assembly );
+		std::string const& assemblyName() const noexcept { return _configuration._assemblyName; }
+		Assembly( Configuration::AssemblyConfiguration const& configuration );
+		void provideDependency( gsl::not_null<Assembly*> assembly );
 		bool isProcessed() const noexcept { return _mergedGlobalNamespace != nullptr;}
-		void process( not_null<ProjectProcessor*> processor,std::unique_ptr<NamespaceContext>&currentRoot );
+		void process( gsl::not_null<ProjectProcessor*> processor,std::unique_ptr<DataStructures::NamespaceContext>&currentRoot );
 		bool dependenciesSatisifed() const noexcept;
-		vector<string> getMissingDependencies() const;
+		std::vector<std::string> getMissingDependencies() const;
 
 	};
 }

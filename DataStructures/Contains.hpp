@@ -4,10 +4,8 @@
 #include <gsl.h>
 #include "QualifiedName.hpp"
 #include "IContext.hpp"
-#include "../MetaProgramming/FindInTupple.hpp"
 #include "../MetaProgramming/HasType.hpp"
-#include "HasResolveInContents.hpp"
-#include "HasResolveInImports.hpp"
+#include "../MetaProgramming/FindInTupple.hpp"
 #include "Resolver.hpp"
 
 namespace Aergia::DataStructures

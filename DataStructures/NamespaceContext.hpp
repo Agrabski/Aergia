@@ -1,14 +1,11 @@
 #pragma once
 #include <vector>
 #include <map>
-#include <stdexcept>
 #include "QualifiedName.hpp"
 #include "Definitions.hpp"
-#include "INamespaceImportable.hpp"
 #include "IContext.hpp"
 #include "ClassContext.hpp"
 #include "MethodContext.hpp"
-#include "ITypeImportable.hpp"
 #include "Imports.hpp"
 #include "Aliases.hpp"
 
@@ -26,7 +23,7 @@ namespace Aergia::DataStructures
 		NamespaceContext( std::string const& name, IContext* const parent ) : _name( name ), IContext( parent, MemberAccessibility::None ) { }
 		NamespaceContext() noexcept : _name( "GLOBAL_NAMESPACE" ), IContext( nullptr, MemberAccessibility::None ) { bootstrapPrimitives(); }
 
-		virtual std::string const& getName() const 
+		std::string const& getName() const noexcept override
 		{
 			return _name;
 		}

@@ -1,10 +1,10 @@
 #pragma once
 #include <gsl.h>
-#include "..//DataStructures/Definitions.hpp"
-#include "..//DataStructures/NamespaceContext.hpp"
-#include "..//DataStructures/IContext.hpp"
-#include "..//DataStructures//UnconfirmedReference.hpp"
-#include "..//MetaProgramming//FindInTupple.hpp"
+#include "../DataStructures/Definitions.hpp"
+#include "../DataStructures/NamespaceContext.hpp"
+#include "../DataStructures/IContext.hpp"
+#include "../DataStructures/UnconfirmedReference.hpp"
+#include "../MetaProgramming/FindInTupple.hpp"
 #include "ContextProvider.hpp"
 #include "BaseVisitor.hpp"
 #include "AnonymousVisitor.hpp"
@@ -41,7 +41,7 @@ namespace Aergia::Visitors
 		std::unique_ptr<T> findUnresolvedReference( gsl::not_null<DataStructures::IContext const*> currentContext, DataStructures::QualifiedName name );
 
 	public:
-		std::unique_ptr<DataStructures::NamespaceContext>releaseRoot() { return std::move( _rootContext ); }
+		std::unique_ptr<DataStructures::NamespaceContext>releaseRoot() noexcept { return std::move( _rootContext ); }
 
 		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept;
 		CurrentContextVisitor( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream, std::unique_ptr<DataStructures::NamespaceContext>&& rootnamespace ) noexcept;

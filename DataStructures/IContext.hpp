@@ -3,7 +3,6 @@
 #include <memory>
 #include <vector>
 #include <gsl.h>
-#include "Definitions.hpp"
 #include "MemberAccessibility.hpp"
 #include "QualifiedName.hpp"
 

@@ -1,6 +1,4 @@
 #include "CurrentContextVisitor.hpp"
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string_regex.hpp>
 #include "..//AntlrUtilities/NameExtractor.hpp"
 #include "../AntlrUtilities/TypeFinder.hpp"
 #include "../AntlrUtilities/ImportHelper.hpp"
@@ -125,7 +123,6 @@ void Aergia::Visitors::CurrentContextVisitor::enterUsingdirective( AergiaCpp14Pa
 void Aergia::Visitors::CurrentContextVisitor::enterAliasdeclaration( AergiaCpp14Parser::AliasdeclarationContext* context )
 {
 	assert( context != nullptr );
-	using Aergia::DataStructures::ITypeImportable;
 	using Aergia::DataStructures::TypeContext;
 
 	auto l = context->getText();

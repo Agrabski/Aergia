@@ -1,5 +1,4 @@
 #pragma once
-#include "Definitions.hpp"
 #include "IContext.hpp"
 #include "MethodContext.hpp"
 #include "VariableContext.hpp"
