@@ -19,6 +19,15 @@
     <Filter Include="Header Files\Exceptions">
       <UniqueIdentifier>{883aa4e4-4e35-4fcf-898d-79b8837a1acf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\TestProject">
+      <UniqueIdentifier>{6914d951-6ed7-46ce-a1b3-2f84a4c817ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\TestProject\Assembly">
+      <UniqueIdentifier>{8a4f782a-b008-4805-9c2c-88d02cda3406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\TestProject\Assembly\Headers">
+      <UniqueIdentifier>{00ab7383-6304-44cb-9cdf-ef3e91b9a7e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Processor.hpp">
@@ -58,5 +67,16 @@
     <Text Include="Tests\TestFile.cpp">
       <Filter>Tests</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Tests\TestProject\Assembly\Assembly.asd">
+      <Filter>Tests\TestProject\Assembly</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Tests\TestProject\TestProject.arg">
+      <Filter>Tests\TestProject</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Tests\TestProject\Assembly\headers\A.hpp">
+      <Filter>Tests\TestProject\Assembly\Headers</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

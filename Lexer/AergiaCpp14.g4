@@ -457,6 +457,8 @@ declaration
    | namespacedefinition
    | emptydeclaration
    | attributedeclaration
+   | MultiLineMacro
+   | Directive
    ;
 
 blockdeclaration
@@ -1156,11 +1158,11 @@ noexceptspecification
 
 
 MultiLineMacro
-   : '#' (~ [\n]*? '\\' '\r'? '\n')+ ~ [\n]+ -> channel (HIDDEN)
+   : '#' (~ [\n]*? '\\' '\r'? '\n')+ ~ [\n]+
    ;
 
 Directive
-   : '#' ~ [\n]* -> channel (HIDDEN)
+   : '#' ~ [\n]*
    ;
 /*Lexer*/
 

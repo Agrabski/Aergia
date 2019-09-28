@@ -1680,6 +1680,8 @@ public:
     NamespacedefinitionContext *namespacedefinition();
     EmptydeclarationContext *emptydeclaration();
     AttributedeclarationContext *attributedeclaration();
+    antlr4::tree::TerminalNode *MultiLineMacro();
+    antlr4::tree::TerminalNode *Directive();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;

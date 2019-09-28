@@ -1,1 +1,0 @@
-class B; class A {B*c;}; class B{A*c;};

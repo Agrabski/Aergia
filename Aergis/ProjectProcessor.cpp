@@ -75,9 +75,30 @@ std::unique_ptr<NamespaceContext> ProjectProcessor::processSourceFile(AssemblyCo
 	return std::move(currentRoot);
 }
 
-std::unique_ptr<NamespaceContext> Aergia::ProjectProcessor::processHeaderFile(Configuration::AssemblyConfiguration const & configuration, vector<gsl::not_null<Assembly*>> dependencies, std::filesystem::path pathToFile, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot, path outputDirectory)
+std::unique_ptr<NamespaceContext> Aergia::ProjectProcessor::processHeaderFile(Configuration::AssemblyConfiguration const& configuration, vector<gsl::not_null<Assembly*>> dependencies, std::filesystem::path pathToFile, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot, path outputDirectory)
 {
-	return std::unique_ptr<NamespaceContext>();
+	using namespace Aergia::Visitors;
+	auto ioManager = IO::IOManager::instance();
+	auto inputStream = ioManager->openInputFile(pathToFile);
+	if (inputStream)
+	{
+		antlr4::ANTLRInputStream stream(*inputStream);
+		AergiaCpp14Lexer lexer(&stream);
+		antlr4::CommonTokenStream tokens(&lexer);
+		AergiaCpp14Parser parser(&tokens);
+		auto root = parser.translationunit();
+		CurrentContextVisitor contextProvider(parser, lexer, tokens, std::move(currentRoot));
+		antlr4::tree::ParseTreeWalker::DEFAULT.walk(&contextProvider, parser.translationunit());
+
+		auto outputStream = ioManager->openOutputFile(outputDirectory / pathToFile.filename());
+		if (outputStream)
+			Utilities::PrettyPrinter(ioManager->prettyPrinterConfig()).prettyPrint(*outputStream, root);
+
+		return contextProvider.releaseRoot();
+	}
+
+
+	return std::move(currentRoot);
 }
 
 
@@ -87,6 +108,7 @@ void Aergia::ProjectProcessor::processProject(Configuration::ProjectConfiguratio
 	std::filesystem::current_path(configuration._projectDirectory, code);
 	// todo: do stuff with error code
 	std::filesystem::path const outputDirectory = configuration._outputDirectory;
+	std::filesystem::create_directory(outputDirectory);
 
 	auto const assemblyConfigurations = prepareConfigurations(configuration._assemblyDirectories);
 	std::vector<Assembly> assemblies;
@@ -99,7 +121,7 @@ void Aergia::ProjectProcessor::processProject(Configuration::ProjectConfiguratio
 	{return ass.assemblyName() == configuration._targetAssemblyName; }
 	);
 	assert(targetAssembly != assemblies.end());
-	std::unique_ptr<DataStructures::NamespaceContext> x = nullptr;
+	std::unique_ptr<DataStructures::NamespaceContext> x = std::make_unique<DataStructures::NamespaceContext>();
 	targetAssembly->process(this, x, outputDirectory);
 }
 
@@ -109,19 +131,21 @@ std::unique_ptr<Aergia::DataStructures::NamespaceContext> Aergia::ProjectProcess
 	for (auto dependency : dependencies)
 		if (!dependency->isProcessed())
 			dependency->process(this, currentRoot, outputDirectory);
+	std::filesystem::create_directory(outputDirectory / configuration._pathToSelf.parent_path());
+
 	// first, work through headers to gather definitions
 	for (auto header : configuration._files)
-		if (header.extension() == "hpp" || header.extension() == "h")
+		if (header.extension() == ".hpp" || header.extension() == ".h")
 		{
-			auto newRoot = processHeaderFile(configuration, dependencies, header, currentRoot, outputDirectory / configuration._pathToSelf / header.parent_path());
+			auto newRoot = processHeaderFile(configuration, dependencies, configuration._pathToSelf.parent_path() / header, currentRoot, outputDirectory / configuration._pathToSelf.parent_path() / header.parent_path());
 			currentRoot = DataStructures::NamespaceContext::mergeRoots(std::move(currentRoot), std::move(newRoot));
 		}
 
 	// process source files
 	for (auto file : configuration._files)
-		if (file.extension() == "cpp" || file.extension() == "c")
+		if (file.extension() == ".cpp" || file.extension() == ".c")
 		{
-			auto newRoot = processSourceFile(configuration, dependencies, file, currentRoot, outputDirectory / configuration._pathToSelf / file.parent_path());
+			auto newRoot = processSourceFile(configuration, dependencies, file, currentRoot, outputDirectory / configuration._pathToSelf.parent_path() / file.parent_path());
 			currentRoot = DataStructures::NamespaceContext::mergeRoots(std::move(currentRoot), std::move(newRoot));
 		}
 	return std::unique_ptr<DataStructures::NamespaceContext>();

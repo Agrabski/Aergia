@@ -1,0 +1,8 @@
+<Project>
+	<projectName>test project</projectName>
+	<targetAssembly>Assembly</targetAssembly>
+	<assemblies>
+		<assembly>Assembly\Assembly.asd</assembly>
+	</assemblies>
+  <outputDirectory>output</outputDirectory>
+</Project>

@@ -5,33 +5,36 @@
 #include <fstream>
 #include <optional>
 #include <gsl.h>
+#include <filesystem>
 #include <boost\program_options\options_description.hpp>
 #include "Configuraton.hpp"
+#include "../Configuration/ProjectConfiguration.hpp"
 
 namespace Aergia::IO
 {
+	using Aergia::Configuration::ProjectConfiguration;
 	class IOManager
 	{
 		using Options = boost::program_options::options_description;
 		Options _programOptions;
-		std::ifstream _inputStream;
-		std::ofstream _outputstream;
-		static inline IOManager * _instance = nullptr;
+		static inline IOManager* _instance = nullptr;
 		Configuration _configuration;
+		bool _continueExecution = true;
+		std::filesystem::path _pathToProject;
 
 		void reportFileOpened(std::filesystem::path const& file, bool isInputFile) const;
 		void reportFileOpenFailed(std::filesystem::path const& file, bool isInputFile) const;
 		void setupOptions();
 	public:
-		IOManager( std::vector<gsl::not_null<char const*>>args );
+		bool continueExecution() const noexcept { return _continueExecution; }
+		IOManager(int argc, char const* const argv[]);
 		static gsl::not_null<IOManager*> instance() { return _instance; }
-		std::istream& getInputFile();
-		std::ostream& getOutputFile();
 		void startProcessing() const;
 		void endProcessing() const;
 		Configuration getConfiguration() const;
 		std::optional<std::ifstream> openInputFile(std::filesystem::path path);
 		std::optional<std::ofstream> openOutputFile(std::filesystem::path path);
 		PrettyPrinterConfiguration prettyPrinterConfig() const noexcept { return _configuration._prettyPrinterConfig; }
+		ProjectConfiguration getProject() const;
 	};
 }

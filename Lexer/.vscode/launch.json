@@ -5,15 +5,14 @@
             "type": "antlr-debug",
             "request": "launch",
             "name": "Debug Current Grammar",
-            "input": "input.txt",
+            "input": "input.cpp",
             "visualParseTree": true,
-            "startRule": "translationunit"
         },
         {
             "name": "antlr4",
             "type": "antlr-debug",
             "request": "launch",
-            "input": "input.txt",
+            "input": "input.cpp",
             "grammar": "AergiaCpp14.g4",
             "printParseTree": true,
             "visualParseTree": true,

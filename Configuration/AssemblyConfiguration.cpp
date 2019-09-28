@@ -6,9 +6,10 @@ Aergia::Configuration::AssemblyConfiguration::AssemblyConfiguration(std::filesys
 {
 	pugi::xml_document file;
 	file.load_file(p.c_str());
-	_assemblyName = file.child("name").value();
-	for (auto child : file.child("dependencies").children("dependency"))
-		_dependencyNames.emplace_back(child.value());
-	for (auto child : file.child("files").children("file"))
-		_files.emplace_back(child.value());
+	auto root = file.child("Assembly");
+	_assemblyName = root.child("name").child_value();
+	for (auto child : root.child("dependencies").children("dependency"))
+		_dependencyNames.emplace_back(child.child_value());
+	for (auto child : root.child("files").children("file"))
+		_files.emplace_back(child.child_value());
 }

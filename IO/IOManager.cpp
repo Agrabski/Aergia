@@ -2,17 +2,19 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <boost/program_options/parsers.hpp>
+#include <boost/program_options/variables_map.hpp>
 
 using namespace Aergia::IO;
 
 void Aergia::IO::IOManager::reportFileOpened(std::filesystem::path const& file, bool isInputFile) const
 {
-	std::cout << "Opened file: " << file.c_str();
+	std::wcout << L"Opened file: " << file.native() << std::endl;
 }
 
 void Aergia::IO::IOManager::reportFileOpenFailed(std::filesystem::path const& file, bool isInputFile) const
 {
-	std::cout << "Failed to open file: " << file.c_str();
+	std::wcout << L"Failed to open file: " << file.native() << std::endl;
 	std::terminate();
 }
 
@@ -20,46 +22,52 @@ void Aergia::IO::IOManager::setupOptions()
 {
 	using namespace std::literals;
 	using path = std::filesystem::path;
-	auto od = [](char const* n, boost::program_options::value_semantic* vs, char const* desc)
-	{return boost::shared_ptr<boost::program_options::option_description>(new boost::program_options::option_description(n, vs, desc)); };
 	using boost::program_options::value;
-	_programOptions.add(od("help", value<void>(), "Show allowed commands"));
-	_programOptions.add(od("project", value<path>(), "path to project to be transpiled"));
+	_programOptions.add_options()
+		("help", "Show allowed commands")
+		("project", value<path>()->value_name("path"s), "path to project to be transpiled");
 }
 
-Aergia::IO::IOManager::IOManager(std::vector<gsl::not_null<char const*>> args) : _programOptions("Comand line arguments")
+void Aergia::IO::IOManager::startProcessing() const
 {
-	if (args.size() < 3)
+	std::cout << "Precompilation started" << std::endl;
+}
+
+void Aergia::IO::IOManager::endProcessing() const
+{
+	std::cout << "Precompilation finished" << std::endl;
+}
+
+Aergia::IO::IOManager::IOManager(int argc, char const* const argv[]) : _programOptions("Comand line arguments")
+{
+	namespace po = boost::program_options;
+	namespace fs = std::filesystem;
+
+	setupOptions();
+	po::variables_map vm;
+	try
 	{
-		std::cout << "required parameters were not provided";
-		throw std::runtime_error("required parameters were not provided");
+		po::store(po::parse_command_line(argc, argv, _programOptions), vm);
+	}
+	catch (std::exception const& e)
+	{
+		std::cout << e.what();
+		_continueExecution = false;
+		return;
 	}
 
-	_inputStream.open(args[1]);
+	if (vm.contains("help"))
+	{
+		std::cout << _programOptions;
+		_continueExecution = false;
+		return;
+	}
 
-	if (!_inputStream.is_open())
-		throw std::runtime_error("failed to open the input file");
-
-	_outputstream.open(args[2], _outputstream.out);
-
-	if (!_outputstream.is_open())
-		throw std::runtime_error("failed to open the output file");
-
-	std::cout << "both files successfully loaded" << std::endl;
-
+	if (vm.contains("project"))
+		this->_pathToProject = vm["project"].as<fs::path>();
 	if (_instance != nullptr)
 		std::terminate();
 	_instance = this;
-}
-
-std::istream& Aergia::IO::IOManager::getInputFile()
-{
-	return _inputStream;
-}
-
-std::ostream& Aergia::IO::IOManager::getOutputFile()
-{
-	return _outputstream;
 }
 
 Aergia::IO::Configuration Aergia::IO::IOManager::getConfiguration() const
@@ -81,7 +89,8 @@ std::optional<std::ifstream> Aergia::IO::IOManager::openInputFile(std::filesyste
 
 std::optional<std::ofstream> Aergia::IO::IOManager::openOutputFile(std::filesystem::path path)
 {
-	auto stream = std::ofstream(path, std::ios::out);
+	std::filesystem::create_directory(path.parent_path());
+	auto stream = std::ofstream(path, std::ios::out | std::ios::trunc);
 	if (stream.is_open())
 	{
 		reportFileOpened(path, false);
@@ -89,5 +98,10 @@ std::optional<std::ofstream> Aergia::IO::IOManager::openOutputFile(std::filesyst
 	}
 	reportFileOpenFailed(path, false);
 	return std::optional<std::ofstream>();
+}
+
+ProjectConfiguration Aergia::IO::IOManager::getProject() const
+{
+	return ProjectConfiguration(_pathToProject);
 }
 
