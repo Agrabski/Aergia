@@ -7,6 +7,7 @@ namespace Aergia::Configuration
 {
 	struct AssemblyConfiguration
 	{
+		std::filesystem::path _pathToSelf;
 		std::vector<std::filesystem::path> _files;
 		std::string _assemblyName;
 		

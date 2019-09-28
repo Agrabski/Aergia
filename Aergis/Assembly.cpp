@@ -15,10 +15,10 @@ void Aergia::Assembly::provideDependency( gsl::not_null<Assembly*> assembly )
 
 }
 
-void Aergia::Assembly::process( gsl::not_null<ProjectProcessor*> processor, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot )
+void Aergia::Assembly::process( gsl::not_null<ProjectProcessor*> processor, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot, std::filesystem::path outputDirectory)
 {
 	assert( dependenciesSatisifed() );
-	_mergedGlobalNamespace = processor->processAssembly( _configuration, _dependencies,currentRoot );
+	_mergedGlobalNamespace = processor->processAssembly( _configuration, _dependencies,currentRoot,outputDirectory );
 }
 
 bool Aergia::Assembly::dependenciesSatisifed() const noexcept

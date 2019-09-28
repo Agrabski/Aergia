@@ -8,8 +8,15 @@
 #include "../Visitors/AnonymousVisitor.hpp"
 #include "../Visitors/AergiaExpressionVisitor.hpp"
 #include "../Visitors/ForeachVisitor.hpp"
+#include "../IO/IOManager.hpp"
+#include "../AntlrUtilities/PrettyPrinter.hpp"
 
 using namespace Aergia;
+using Configuration::AssemblyConfiguration;
+using Configuration::ProjectConfiguration;
+using DataStructures::NamespaceContext;
+using gsl::not_null;
+using std::filesystem::path;
 
 std::vector<Aergia::Configuration::AssemblyConfiguration> Aergia::ProjectProcessor::prepareConfigurations(std::vector<std::filesystem::path> const& paths)
 {
@@ -39,14 +46,36 @@ void Aergia::ProjectProcessor::resolveDependencies(std::vector<Assembly>& assemb
 
 }
 
-std::unique_ptr<Aergia::DataStructures::NamespaceContext> Aergia::ProjectProcessor::processSourceFile(Configuration::AssemblyConfiguration const& configuration, std::vector<gsl::not_null<Assembly*>> dependencies, std::filesystem::path pathToFile, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot)
+std::unique_ptr<NamespaceContext> ProjectProcessor::processSourceFile(AssemblyConfiguration const& configuration, std::vector<not_null<Assembly*>> dependencies, path pathToFile, std::unique_ptr<NamespaceContext>& currentRoot, path outputDirectory)
 {
+	using namespace Aergia::Visitors;
+	auto ioManager = IO::IOManager::instance();
+	auto inputStream = ioManager->openInputFile(pathToFile);
+	if (inputStream)
+	{
+		antlr4::ANTLRInputStream stream(*inputStream);
+		AergiaCpp14Lexer lexer(&stream);
+		antlr4::CommonTokenStream tokens(&lexer);
+		AergiaCpp14Parser parser(&tokens);
+		auto root = parser.translationunit();
+		CurrentContextVisitor contextProvider(parser, lexer, tokens, std::move(currentRoot));
+		contextProvider.addVisitor<AnonymousVisitor>(contextProvider);
+		contextProvider.addVisitor<ForeachVisitor>(&contextProvider);
+		contextProvider.addVisitor<AergiaExpressionVisitor>(contextProvider);
+		antlr4::tree::ParseTreeWalker::DEFAULT.walk(&contextProvider, parser.translationunit());
+
+		auto outputStream = ioManager->openOutputFile(outputDirectory / pathToFile.filename());
+		if (outputStream)
+			Utilities::PrettyPrinter(ioManager->prettyPrinterConfig()).prettyPrint(*outputStream, root);
+
+		return contextProvider.releaseRoot();
+	}
 
 
-	return std::unique_ptr<DataStructures::NamespaceContext>();
+	return std::move(currentRoot);
 }
 
-std::unique_ptr<NamespaceContext> Aergia::ProjectProcessor::processHeaderFile(Configuration::AssemblyConfiguration const & configuration, vector<gsl::not_null<Assembly*>> dependencies, std::filesystem::path pathToFile, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot)
+std::unique_ptr<NamespaceContext> Aergia::ProjectProcessor::processHeaderFile(Configuration::AssemblyConfiguration const & configuration, vector<gsl::not_null<Assembly*>> dependencies, std::filesystem::path pathToFile, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot, path outputDirectory)
 {
 	return std::unique_ptr<NamespaceContext>();
 }
@@ -71,20 +100,20 @@ void Aergia::ProjectProcessor::processProject(Configuration::ProjectConfiguratio
 	);
 	assert(targetAssembly != assemblies.end());
 	std::unique_ptr<DataStructures::NamespaceContext> x = nullptr;
-	targetAssembly->process(this, x);
+	targetAssembly->process(this, x, outputDirectory);
 }
 
-std::unique_ptr<Aergia::DataStructures::NamespaceContext> Aergia::ProjectProcessor::processAssembly(Configuration::AssemblyConfiguration const& configuration, std::vector<gsl::not_null<Assembly*>> dependencies, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot)
+std::unique_ptr<Aergia::DataStructures::NamespaceContext> Aergia::ProjectProcessor::processAssembly(Configuration::AssemblyConfiguration const& configuration, std::vector<gsl::not_null<Assembly*>> dependencies, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot, std::filesystem::path outputDirectory)
 {
 	// ensure dependencies are ready
 	for (auto dependency : dependencies)
 		if (!dependency->isProcessed())
-			dependency->process(this, currentRoot);
+			dependency->process(this, currentRoot, outputDirectory);
 	// first, work through headers to gather definitions
 	for (auto header : configuration._files)
 		if (header.extension() == "hpp" || header.extension() == "h")
 		{
-			auto newRoot = processHeaderFile(configuration, dependencies, header, currentRoot);
+			auto newRoot = processHeaderFile(configuration, dependencies, header, currentRoot, outputDirectory / configuration._pathToSelf / header.parent_path());
 			currentRoot = DataStructures::NamespaceContext::mergeRoots(std::move(currentRoot), std::move(newRoot));
 		}
 
@@ -92,7 +121,7 @@ std::unique_ptr<Aergia::DataStructures::NamespaceContext> Aergia::ProjectProcess
 	for (auto file : configuration._files)
 		if (file.extension() == "cpp" || file.extension() == "c")
 		{
-			auto newRoot = processSourceFile(configuration, dependencies, file, currentRoot);
+			auto newRoot = processSourceFile(configuration, dependencies, file, currentRoot, outputDirectory / configuration._pathToSelf / file.parent_path());
 			currentRoot = DataStructures::NamespaceContext::mergeRoots(std::move(currentRoot), std::move(newRoot));
 		}
 	return std::unique_ptr<DataStructures::NamespaceContext>();

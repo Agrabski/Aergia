@@ -19,7 +19,7 @@ namespace Aergia
 		Assembly( Configuration::AssemblyConfiguration const& configuration );
 		void provideDependency( gsl::not_null<Assembly*> assembly );
 		bool isProcessed() const noexcept { return _mergedGlobalNamespace != nullptr;}
-		void process( gsl::not_null<ProjectProcessor*> processor,std::unique_ptr<DataStructures::NamespaceContext>&currentRoot );
+		void process( gsl::not_null<ProjectProcessor*> processor,std::unique_ptr<DataStructures::NamespaceContext>&currentRoot, std::filesystem::path outputDirectory );
 		bool dependenciesSatisifed() const noexcept;
 		std::vector<std::string> getMissingDependencies() const;
 
