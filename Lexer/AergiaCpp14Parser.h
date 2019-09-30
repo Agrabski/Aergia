@@ -8,7 +8,6 @@
 
 
 
-
 class  AergiaCpp14Parser : public antlr4::Parser {
 public:
   enum {
@@ -115,8 +114,8 @@ public:
     RuleFunctiontryblock = 195, RuleHandlerseq = 196, RuleHandler = 197, 
     RuleExceptiondeclaration = 198, RuleThrowexpression = 199, RuleExceptionspecification = 200, 
     RuleDynamicexceptionspecification = 201, RuleTypeidlist = 202, RuleNoexceptspecification = 203, 
-    RuleTheoperator = 204, RuleLiteral = 205, RuleBooleanliteral = 206, 
-    RulePointerliteral = 207, RuleUserdefinedliteral = 208
+    RulePreprocessorDirective = 204, RuleTheoperator = 205, RuleLiteral = 206, 
+    RuleBooleanliteral = 207, RulePointerliteral = 208, RuleUserdefinedliteral = 209
   };
 
   AergiaCpp14Parser(antlr4::TokenStream *input);
@@ -333,6 +332,7 @@ public:
   class DynamicexceptionspecificationContext;
   class TypeidlistContext;
   class NoexceptspecificationContext;
+  class PreprocessorDirectiveContext;
   class TheoperatorContext;
   class LiteralContext;
   class BooleanliteralContext;
@@ -1680,8 +1680,7 @@ public:
     NamespacedefinitionContext *namespacedefinition();
     EmptydeclarationContext *emptydeclaration();
     AttributedeclarationContext *attributedeclaration();
-    antlr4::tree::TerminalNode *MultiLineMacro();
-    antlr4::tree::TerminalNode *Directive();
+    PreprocessorDirectiveContext *preprocessorDirective();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -4025,6 +4024,22 @@ public:
   };
 
   NoexceptspecificationContext* noexceptspecification();
+
+  class  PreprocessorDirectiveContext : public antlr4::ParserRuleContext {
+  public:
+    PreprocessorDirectiveContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *MultiLineMacro();
+    antlr4::tree::TerminalNode *Directive();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  PreprocessorDirectiveContext* preprocessorDirective();
 
   class  TheoperatorContext : public antlr4::ParserRuleContext {
   public:

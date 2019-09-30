@@ -8,7 +8,6 @@
 
 
 
-
 class  AergiaCpp14Lexer : public antlr4::Lexer {
 public:
   enum {

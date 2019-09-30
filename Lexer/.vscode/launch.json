@@ -2,21 +2,14 @@
     "version": "2.0.0",
     "configurations": [
         {
+            "name": "antlr4-mysql",
             "type": "antlr-debug",
             "request": "launch",
-            "name": "Debug Current Grammar",
-            "input": "input.cpp",
-            "visualParseTree": true,
-        },
-        {
-            "name": "antlr4",
-            "type": "antlr-debug",
-            "request": "launch",
-            "input": "input.cpp",
+            "input": "input.txt",
             "grammar": "AergiaCpp14.g4",
+            "startRule": "translationunit",
             "printParseTree": true,
-            "visualParseTree": true,
-            "trace": true
+            "visualParseTree": true
         }
     ]
 }

@@ -457,8 +457,7 @@ declaration
    | namespacedefinition
    | emptydeclaration
    | attributedeclaration
-   | MultiLineMacro
-   | Directive
+   | preprocessorDirective
    ;
 
 blockdeclaration
@@ -1153,6 +1152,11 @@ typeidlist
 noexceptspecification
    : Noexcept '(' constantexpression ')'
    | Noexcept
+   ;
+   
+preprocessorDirective
+   : MultiLineMacro
+   | Directive
    ;
 /*Preprocessing directives*/
 

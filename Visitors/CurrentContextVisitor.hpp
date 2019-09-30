@@ -13,6 +13,8 @@
 
 namespace Aergia::Visitors
 {
+	using DataStructures::IContext;
+
 	template<typename T>
 	using UnconfirmedReferenceCollection = std::vector<DataStructures::UnconfirmedReference<T>>;
 
@@ -20,6 +22,7 @@ namespace Aergia::Visitors
 	{
 		struct ContextData
 		{
+			gsl::not_null<IContext*> _currentContext;
 			DataStructures::MemberAccessibility _currentAccessibility;
 			std::map<std::string, DataStructures::IContext*> _variables;
 		};
@@ -33,6 +36,9 @@ namespace Aergia::Visitors
 			UnconfirmedReferenceCollection<DataStructures::MethodContext>
 		> _unconfirmedReferences;
 		DataStructures::Resolver& _resolver = DataStructures::Resolver::instance();
+
+		void pushContextStack(gsl::not_null<IContext*> current, gsl::not_null<IContext*> newContext, DataStructures::MemberAccessibility accessibility);
+		void popContextStack();
 
 		template<typename T>
 		T* resolve( gsl::not_null<DataStructures::IContext*> source, DataStructures::QualifiedName name );
@@ -72,7 +78,7 @@ namespace Aergia::Visitors
 		void exitClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override;
 
 		void enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* ) override;
-		void exitFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* /*ctx*/ ) override {}
+		void exitFunctiondefinition(AergiaCpp14Parser::FunctiondefinitionContext* /*ctx*/) override;
 
 		void enterUsingdirective( AergiaCpp14Parser::UsingdirectiveContext* context ) override;
 

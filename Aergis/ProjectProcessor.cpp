@@ -62,7 +62,7 @@ std::unique_ptr<NamespaceContext> ProjectProcessor::processSourceFile(AssemblyCo
 		contextProvider.addVisitor<AnonymousVisitor>(contextProvider);
 		contextProvider.addVisitor<ForeachVisitor>(&contextProvider);
 		contextProvider.addVisitor<AergiaExpressionVisitor>(contextProvider);
-		antlr4::tree::ParseTreeWalker::DEFAULT.walk(&contextProvider, parser.translationunit());
+		antlr4::tree::ParseTreeWalker::DEFAULT.walk(&contextProvider, root);
 
 		auto outputStream = ioManager->openOutputFile(outputDirectory / pathToFile.filename());
 		if (outputStream)
@@ -88,7 +88,7 @@ std::unique_ptr<NamespaceContext> Aergia::ProjectProcessor::processHeaderFile(Co
 		AergiaCpp14Parser parser(&tokens);
 		auto root = parser.translationunit();
 		CurrentContextVisitor contextProvider(parser, lexer, tokens, std::move(currentRoot));
-		antlr4::tree::ParseTreeWalker::DEFAULT.walk(&contextProvider, parser.translationunit());
+		antlr4::tree::ParseTreeWalker::DEFAULT.walk(&contextProvider, root);
 
 		auto outputStream = ioManager->openOutputFile(outputDirectory / pathToFile.filename());
 		if (outputStream)
@@ -145,7 +145,7 @@ std::unique_ptr<Aergia::DataStructures::NamespaceContext> Aergia::ProjectProcess
 	for (auto file : configuration._files)
 		if (file.extension() == ".cpp" || file.extension() == ".c")
 		{
-			auto newRoot = processSourceFile(configuration, dependencies, file, currentRoot, outputDirectory / configuration._pathToSelf.parent_path() / file.parent_path());
+			auto newRoot = processSourceFile(configuration, dependencies, configuration._pathToSelf.parent_path() / file, currentRoot, outputDirectory / configuration._pathToSelf.parent_path() / file.parent_path());
 			currentRoot = DataStructures::NamespaceContext::mergeRoots(std::move(currentRoot), std::move(newRoot));
 		}
 	return std::unique_ptr<DataStructures::NamespaceContext>();

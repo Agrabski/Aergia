@@ -427,6 +427,8 @@ public:
 
     virtual antlrcpp::Any visitNoexceptspecification(AergiaCpp14Parser::NoexceptspecificationContext *context) = 0;
 
+    virtual antlrcpp::Any visitPreprocessorDirective(AergiaCpp14Parser::PreprocessorDirectiveContext *context) = 0;
+
     virtual antlrcpp::Any visitTheoperator(AergiaCpp14Parser::TheoperatorContext *context) = 0;
 
     virtual antlrcpp::Any visitLiteral(AergiaCpp14Parser::LiteralContext *context) = 0;

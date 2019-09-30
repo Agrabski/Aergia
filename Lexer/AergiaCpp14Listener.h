@@ -626,6 +626,9 @@ public:
   virtual void enterNoexceptspecification(AergiaCpp14Parser::NoexceptspecificationContext *ctx) = 0;
   virtual void exitNoexceptspecification(AergiaCpp14Parser::NoexceptspecificationContext *ctx) = 0;
 
+  virtual void enterPreprocessorDirective(AergiaCpp14Parser::PreprocessorDirectiveContext *ctx) = 0;
+  virtual void exitPreprocessorDirective(AergiaCpp14Parser::PreprocessorDirectiveContext *ctx) = 0;
+
   virtual void enterTheoperator(AergiaCpp14Parser::TheoperatorContext *ctx) = 0;
   virtual void exitTheoperator(AergiaCpp14Parser::TheoperatorContext *ctx) = 0;
 

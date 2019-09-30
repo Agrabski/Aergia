@@ -18,3 +18,8 @@ void Aergia::Utilities::PrettyPrinter::PrintingVisitor::visitTerminal(antlr4::tr
 		return;
 	_stream << node->getText() << " ";
 }
+
+void Aergia::Utilities::PrettyPrinter::PrintingVisitor::exitPreprocessorDirective(AergiaCpp14Parser::PreprocessorDirectiveContext* node)
+{
+	_stream << std::endl;
+}

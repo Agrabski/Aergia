@@ -59,7 +59,6 @@ atn::PredictionContextCache AergiaCpp14Lexer::_sharedContextCache;
 atn::ATN AergiaCpp14Lexer::_atn;
 std::vector<uint16_t> AergiaCpp14Lexer::_serializedATN;
 
-
 std::vector<std::string> AergiaCpp14Lexer::_ruleNames = {
   "T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", 
   "T__7", "T__8", "T__9", "T__10", "T__11", "T__12", "T__13", 

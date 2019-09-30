@@ -21,6 +21,7 @@ namespace Aergia::Utilities
 		public:
 			constexpr PrintingVisitor(std::ostream& stream, PrettyPrinterConfiguration const& configuration);
 			void visitTerminal(antlr4::tree::TerminalNode* node) final;
+			void exitPreprocessorDirective(AergiaCpp14Parser::PreprocessorDirectiveContext* node) final;
 		};
 	public:
 		constexpr PrettyPrinter(PrettyPrinterConfiguration& configuration) noexcept : _configuration(configuration) {}
