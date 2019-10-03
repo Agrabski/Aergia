@@ -19,7 +19,7 @@ namespace Aergia::IO
 		Options _programOptions;
 		static inline IOManager* _instance = nullptr;
 		Configuration _configuration;
-		bool _continueExecution = true;
+		bool _continueExecution = false;
 		std::filesystem::path _pathToProject;
 
 		void reportFileOpened(std::filesystem::path const& file, bool isInputFile) const;

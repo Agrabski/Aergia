@@ -25,7 +25,8 @@ void Aergia::IO::IOManager::setupOptions()
 	using boost::program_options::value;
 	_programOptions.add_options()
 		("help", "Show allowed commands")
-		("project", value<path>()->value_name("path"s), "path to project to be transpiled");
+		("project", value<path>()->value_name("path"s), "Path to project to be transpiled")
+		("clean", "Clean the indicated projects output directory. Project option must be supplied");
 }
 
 void Aergia::IO::IOManager::startProcessing() const
@@ -64,7 +65,10 @@ Aergia::IO::IOManager::IOManager(int argc, char const* const argv[]) : _programO
 	}
 
 	if (vm.contains("project"))
+	{
 		this->_pathToProject = vm["project"].as<fs::path>();
+		_continueExecution = true;
+	}
 	if (_instance != nullptr)
 		std::terminate();
 	_instance = this;
@@ -107,7 +111,7 @@ ProjectConfiguration Aergia::IO::IOManager::getProject() const
 
 void Aergia::IO::IOManager::reportCallchainError(std::string const& callchain, std::string const& exceptionText)
 {
-	std::cout<<"error occured while processing callchain:\"";
+	std::cout << "error occured while processing callchain:\"";
 	std::cout << callchain << "\"" << std::endl;
 	std::cout << "exception text was: " << exceptionText;
 	std::terminate();
