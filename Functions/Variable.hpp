@@ -10,7 +10,9 @@ namespace Aergia::Functions
 {
 	class Variable
 	{
+	public:
 		using IContextPtr = gsl::not_null< DataStructures::IContext*>;
+	private:
 		std::variant<IContextPtr, std::vector<IContextPtr>, DataStructures::MemberAccessibility, std::monostate> _value;
 
 	public:

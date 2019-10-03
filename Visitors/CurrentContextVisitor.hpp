@@ -80,6 +80,8 @@ namespace Aergia::Visitors
 		void enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* ) override;
 		void exitFunctiondefinition(AergiaCpp14Parser::FunctiondefinitionContext* /*ctx*/) override;
 
+		void enterMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext* /*ctx*/) override;
+
 		void enterUsingdirective( AergiaCpp14Parser::UsingdirectiveContext* context ) override;
 
 		void enterClasshead( AergiaCpp14Parser::ClassheadContext* /*ctx*/ ) override { }

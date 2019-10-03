@@ -508,6 +508,9 @@ public:
   virtual void enterMemberdeclarator(AergiaCpp14Parser::MemberdeclaratorContext * /*ctx*/) override { }
   virtual void exitMemberdeclarator(AergiaCpp14Parser::MemberdeclaratorContext * /*ctx*/) override { }
 
+  virtual void enterMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext * /*ctx*/) override { }
+  virtual void exitMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext * /*ctx*/) override { }
+
   virtual void enterVirtspecifierseq(AergiaCpp14Parser::VirtspecifierseqContext * /*ctx*/) override { }
   virtual void exitVirtspecifierseq(AergiaCpp14Parser::VirtspecifierseqContext * /*ctx*/) override { }
 

@@ -108,7 +108,6 @@
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/bigobj /we4715 %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
@@ -128,7 +127,6 @@
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/bigobj /we4715 %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
@@ -150,7 +148,6 @@
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
@@ -174,7 +171,6 @@
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      
       <EnablePREfast>true</EnablePREfast>
       <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
@@ -226,6 +222,7 @@
     <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
     <Import Project="..\packages\boost.1.70.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.70.0.0\build\boost.targets')" />
     <Import Project="..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets" Condition="Exists('..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets')" />
+    <Import Project="..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets" Condition="Exists('..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -234,5 +231,6 @@
     <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
     <Error Condition="!Exists('..\packages\boost.1.70.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.70.0.0\build\boost.targets'))" />
     <Error Condition="!Exists('..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets'))" />
   </Target>
 </Project>

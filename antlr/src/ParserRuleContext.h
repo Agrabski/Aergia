@@ -95,7 +95,7 @@ namespace antlr4 {
 		virtual std::vector<tree::TerminalNode*> getTokens( size_t ttype );
 
 		template<typename T>
-		T* getRuleContext( size_t i ) {
+		T* getRuleContext( size_t i ) noexcept {
 			if (children.empty()) {
 				return nullptr;
 			}

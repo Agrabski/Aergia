@@ -19,7 +19,6 @@ namespace Aergia::Functions
 
 		bool isFunctionCall( std::string text );
 
-		Variable getBases( IContextPtr context );
 
 		Variable resolveCall( std::string text, Variable& currentValue, IContextPtr context );
 

@@ -53,7 +53,7 @@ foreachheader
    ;
 
 foreachbody
-   : aergiaexpression
+   : statement
    | aergiaBlock
    ;
 
@@ -528,6 +528,7 @@ typespecifier
    : trailingtypespecifier
    | classspecifier
    | enumspecifier
+   | aergiaexpression
    ;
 
 trailingtypespecifier
@@ -927,8 +928,9 @@ memberspecification
    ;
 
 memberdeclaration
-   : attributespecifierseq? declspecifierseq? memberdeclaratorlist? ';'
-   | functiondefinition
+   : functiondefinition
+   | memberFunctionDeclaration
+   | attributespecifierseq? declspecifierseq? memberdeclaratorlist? ';'
    | usingdeclaration
    | static_assertdeclaration
    | templatedeclaration
@@ -947,6 +949,10 @@ memberdeclarator
    | Identifier? attributespecifierseq? ':' constantexpression
    ;
 
+memberFunctionDeclaration
+    : declspecifierseq unqualifiedid parametersandqualifiers virtspecifierseq? purespecifier? ';'
+    ;
+
 virtspecifierseq
    : virtspecifier
    | virtspecifierseq virtspecifier
@@ -956,17 +962,10 @@ virtspecifier
    : Override
    | Final
    ;
-/*
+
 purespecifier:
    '=' '0'//Conflicts with the lexer
  ;
- */
-
-
-purespecifier
-   : Assign val = Octalliteral
-   {if($val.text.compareTo("0")!=0) throw new InputMismatchException(this);}
-   ;
 /*Derived classes*/
 
 

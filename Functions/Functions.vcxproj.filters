@@ -16,6 +16,9 @@
     <Filter Include="Header Files\Functions">
       <UniqueIdentifier>{8e8858e8-5308-4c2f-9177-856f289f885b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Accessor">
+      <UniqueIdentifier>{340ee3a2-a5b2-4b1c-b662-ed4aa25ef453}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -48,6 +51,15 @@
     <ClInclude Include="VariableProvider.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AccessorLibrary.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GetBases.hpp">
+      <Filter>Header Files\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="GetFields.hpp">
+      <Filter>Header Files\Accessor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -63,6 +75,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FunctionCall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AccessorLibrary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetBases.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetFields.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

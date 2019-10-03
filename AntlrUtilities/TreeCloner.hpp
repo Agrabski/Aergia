@@ -19,5 +19,6 @@ namespace Aergia::Utilities
 		}
 		static TreeCloner* instance() noexcept { return _instance; }
 		std::unique_ptr<RuleContext> cloneStatementSeq( not_null<AergiaCpp14Parser::StatementseqContext*> original );
+		std::unique_ptr<RuleContext> cloneStatement( not_null<AergiaCpp14Parser::StatementContext*> original );
 	};
 }

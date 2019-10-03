@@ -72,7 +72,7 @@ namespace antlr4 {
     /// Get the ATN interpreter (in fact one of it's descendants) used by the recognizer for prediction.
     /// @returns The ATN interpreter used by the recognizer for prediction.
     template <class T>
-    T* getInterpreter() const {
+    T* getInterpreter() const noexcept {
       return dynamic_cast<T *>(_interpreter);
     }
 

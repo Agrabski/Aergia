@@ -347,6 +347,8 @@ public:
 
     virtual antlrcpp::Any visitMemberdeclarator(AergiaCpp14Parser::MemberdeclaratorContext *context) = 0;
 
+    virtual antlrcpp::Any visitMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext *context) = 0;
+
     virtual antlrcpp::Any visitVirtspecifierseq(AergiaCpp14Parser::VirtspecifierseqContext *context) = 0;
 
     virtual antlrcpp::Any visitVirtspecifier(AergiaCpp14Parser::VirtspecifierContext *context) = 0;

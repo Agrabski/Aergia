@@ -506,6 +506,9 @@ public:
   virtual void enterMemberdeclarator(AergiaCpp14Parser::MemberdeclaratorContext *ctx) = 0;
   virtual void exitMemberdeclarator(AergiaCpp14Parser::MemberdeclaratorContext *ctx) = 0;
 
+  virtual void enterMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext *ctx) = 0;
+  virtual void exitMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext *ctx) = 0;
+
   virtual void enterVirtspecifierseq(AergiaCpp14Parser::VirtspecifierseqContext *ctx) = 0;
   virtual void exitVirtspecifierseq(AergiaCpp14Parser::VirtspecifierseqContext *ctx) = 0;
 

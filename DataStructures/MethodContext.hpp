@@ -7,16 +7,27 @@ namespace Aergia::DataStructures
 {
 	class MethodContext : public IContext
 	{
-		std::string const _name;
-		std::vector<std::unique_ptr<VariableContext>> _paramters;
-		TypeContext* _returnValue;
-
 	public:
+		struct Overload;
+	private:
+		std::string const _name;
+		TypeContext* _returnValue;
+		std::vector<Overload> _overloads;
+	public:
+		struct Overload
+		{
+			TypeContext* _returnValue;
+			std::vector<std::unique_ptr<VariableContext>>_parameters;
+		};
 
 		TypeContext* returnValue() const noexcept;
-		std::vector<std::unique_ptr<VariableContext>> const& parameters() const noexcept;
 
-		MethodContext( std::string name, std::vector<std::unique_ptr<VariableContext>>&& parameters, TypeContext* returnValue, IContext* parent, MemberAccessibility accessibility );
+		MethodContext( std::string name, IContext* parent, MemberAccessibility accessibility );
+
+		void addOverload(Overload&& o)
+		{
+			_overloads.push_back(std::move(o));
+		}
 
 		std::string const& getName() const noexcept override;
 

@@ -2,6 +2,7 @@
 #include "..//AntlrUtilities/NameExtractor.hpp"
 #include "../AntlrUtilities/TypeFinder.hpp"
 #include "../AntlrUtilities/ImportHelper.hpp"
+#include "../AntlrUtilities/FunctionParametersExtractor.hpp"
 
 using namespace Aergia::DataStructures;
 
@@ -112,6 +113,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition(AergiaCpp1
 	using DataStructures::MethodContext;
 	using DataStructures::VariableContext;
 	using DataStructures::TypeContext;
+	using Utilities::FunctionParametersExtractor;
 	using gsl::not_null;
 	auto type = Utilities::TypeFinder::getType(context->declspecifierseq());
 	auto const name = Utilities::NameExtractor::getName(context);
@@ -120,7 +122,15 @@ void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition(AergiaCpp1
 	auto resolvedMethod = _resolver.resolve<MethodContext>(_currentContext, name);
 	if (resolvedMethod == nullptr)
 	{
-		auto content = std::make_unique<MethodContext>(name, std::vector<std::unique_ptr<VariableContext>>(), returnType, _currentContext, _contextStack.back()._currentAccessibility);
+		auto simpleParameters = FunctionParametersExtractor::extractParameters(context->declarator()->parametersandqualifiers());
+		std::vector<std::unique_ptr<VariableContext>> parameters;
+		auto content = std::make_unique<MethodContext>(name, _currentContext, _contextStack.back()._currentAccessibility);
+		for (auto const& parameter : simpleParameters)
+		{
+			auto type = resolve<TypeContext>(_currentContext, parameter._type);
+			parameters.push_back(std::make_unique<VariableContext>(parameter._name, type, content.get(), MemberAccessibility::None));
+		}
+		content->addOverload(MethodContext::Overload{ ._returnValue = returnType,._parameters = std::move(parameters) });
 		resolvedMethod = content.get();
 		_resolver.appendContent<MethodContext>(_currentContext, std::move(content));
 	}
@@ -131,6 +141,35 @@ void Aergia::Visitors::CurrentContextVisitor::exitFunctiondefinition(AergiaCpp14
 {
 	assert(context != nullptr);
 	popContextStack();
+}
+
+void Aergia::Visitors::CurrentContextVisitor::enterMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext* context)
+{
+	using DataStructures::MethodContext;
+	using DataStructures::VariableContext;
+	using DataStructures::TypeContext;
+	using Utilities::FunctionParametersExtractor;
+	using gsl::not_null;
+	auto type = Utilities::TypeFinder::getType(context->declspecifierseq());
+	auto const name = context->unqualifiedid()->getText();
+	auto const returnType = resolve<TypeContext>(_currentContext, type);
+
+	auto resolvedMethod = _resolver.resolve<MethodContext>(_currentContext, name);
+	if (resolvedMethod == nullptr)
+	{
+		auto simpleParameters = FunctionParametersExtractor::extractParameters(context->parametersandqualifiers());
+		std::vector<std::unique_ptr<VariableContext>> parameters;
+		auto content = std::make_unique<MethodContext>(name, _currentContext, _contextStack.back()._currentAccessibility);
+		for (auto const& parameter : simpleParameters)
+		{
+			auto type = resolve<TypeContext>(_currentContext, parameter._type);
+			parameters.push_back(std::make_unique<VariableContext>(parameter._name, type, content.get(), MemberAccessibility::None));
+		}
+		content->addOverload(MethodContext::Overload{ ._returnValue = returnType,._parameters = std::move(parameters) });
+		resolvedMethod = content.get();
+		_resolver.appendContent<MethodContext>(_currentContext, std::move(content));
+	}
+	pushContextStack(_currentContext, resolvedMethod, DataStructures::MemberAccessibility::None);
 }
 
 void Aergia::Visitors::CurrentContextVisitor::enterUsingdirective(AergiaCpp14Parser::UsingdirectiveContext* context)

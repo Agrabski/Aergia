@@ -10,6 +10,7 @@
 #include "../Visitors/ForeachVisitor.hpp"
 #include "../IO/IOManager.hpp"
 #include "../AntlrUtilities/PrettyPrinter.hpp"
+#include "../AntlrUtilities/TreeCloner.hpp"
 
 using namespace Aergia;
 using Configuration::AssemblyConfiguration;
@@ -62,6 +63,7 @@ std::unique_ptr<NamespaceContext> ProjectProcessor::processSourceFile(AssemblyCo
 		contextProvider.addVisitor<AnonymousVisitor>(contextProvider);
 		contextProvider.addVisitor<ForeachVisitor>(&contextProvider);
 		contextProvider.addVisitor<AergiaExpressionVisitor>(contextProvider);
+		new Aergia::Utilities::TreeCloner(tokens);
 		antlr4::tree::ParseTreeWalker::DEFAULT.walk(&contextProvider, root);
 
 		auto outputStream = ioManager->openOutputFile(outputDirectory / pathToFile.filename());

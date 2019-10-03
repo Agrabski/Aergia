@@ -671,6 +671,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitVirtspecifierseq(AergiaCpp14Parser::VirtspecifierseqContext *ctx) override {
     return visitChildren(ctx);
   }

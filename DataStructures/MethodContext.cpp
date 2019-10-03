@@ -8,13 +8,8 @@ TypeContext* Aergia::DataStructures::MethodContext::returnValue() const noexcept
 	return _returnValue;
 }
 
-std::vector<std::unique_ptr<VariableContext>> const& Aergia::DataStructures::MethodContext::parameters() const noexcept
-{
-	return _paramters;
-}
-
-Aergia::DataStructures::MethodContext::MethodContext( std::string name, std::vector<std::unique_ptr<VariableContext>>&& variables, TypeContext* returnValue, IContext* parent, MemberAccessibility accessibility ) :
-	_name( std::move( name ) ), _paramters( std::move( variables ) ), _returnValue( returnValue ), IContext( parent, accessibility )
+Aergia::DataStructures::MethodContext::MethodContext( std::string name, IContext* parent, MemberAccessibility accessibility ) :
+	_name( std::move( name ) ), IContext( parent, accessibility )
 {
 }
 
