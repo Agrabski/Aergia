@@ -105,3 +105,11 @@ ProjectConfiguration Aergia::IO::IOManager::getProject() const
 	return ProjectConfiguration(_pathToProject);
 }
 
+void Aergia::IO::IOManager::reportCallchainError(std::string const& callchain, std::string const& exceptionText)
+{
+	std::cout<<"error occured while processing callchain:\"";
+	std::cout << callchain << "\"" << std::endl;
+	std::cout << "exception text was: " << exceptionText;
+	std::terminate();
+}
+

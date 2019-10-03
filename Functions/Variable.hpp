@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <variant>
+#include <optional>
 #include "../DataStructures/MemberAccessibility.hpp"
 #include "../DataStructures/IContext.hpp"
 #include "../MetaProgramming/HasType.hpp"
@@ -17,15 +18,21 @@ namespace Aergia::Functions
 
 	public:
 		template<typename T>
-		T* as() noexcept
+		std::optional<T> as() noexcept
 		{
-			return std::get_if<T>( &_value );
+			auto result = std::get_if<T>( &_value );
+			if (result == nullptr)
+				return std::optional<T>();
+			return *result;
 		}
 
 		template<typename T>
-		T const* as() const noexcept
+		std::optional<T> const as() const noexcept
 		{
-			return std::get_if<T>( &_value );
+			auto result = std::get_if<T>(&_value);
+			if (result == nullptr)
+				return std::optional<T>();
+			return *result;
 		}
 
 		template<typename T>

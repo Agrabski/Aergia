@@ -1,6 +1,8 @@
 #include "CallChainResolver.hpp"
 #include "../DataStructures/ClassContext.hpp"
+#include "../IO/IOManager.hpp"
 #include <regex>
+#include <exception>
 #include "FunctionLibrary.hpp"
 #include "AccessorLibrary.hpp"
 
@@ -39,7 +41,6 @@ Variable CallChainResolver::resolveCallChainInternal(std::vector<std::string>con
 
 Aergia::Functions::Variable CallChainResolver::resolveCall(std::string text, Variable& currentValue, IContextPtr context)
 {
-	//todo: error handling
 	return FunctionLibrary::resolveCall(currentValue, context, text);
 }
 

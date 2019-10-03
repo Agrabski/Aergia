@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Accessor">
       <UniqueIdentifier>{340ee3a2-a5b2-4b1c-b662-ed4aa25ef453}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{2ac38af6-0436-48da-b271-4bd31cafba21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -51,14 +54,23 @@
     <ClInclude Include="VariableProvider.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AccessorLibrary.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="GetBases.hpp">
       <Filter>Header Files\Accessor</Filter>
     </ClInclude>
     <ClInclude Include="GetFields.hpp">
       <Filter>Header Files\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="GetType.hpp">
+      <Filter>Header Files\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="AccessorLibrary.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AccessorException.hpp">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="InvalidTargetException.hpp">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +96,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GetFields.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AccessorException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InvalidTargetException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

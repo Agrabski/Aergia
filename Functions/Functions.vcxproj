@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AccessorException.hpp" />
     <ClInclude Include="AccessorLibrary.hpp" />
     <ClInclude Include="CallChainResolver.hpp" />
     <ClInclude Include="framework.h" />
@@ -169,19 +170,24 @@
     <ClInclude Include="FunctionLibrary.hpp" />
     <ClInclude Include="GetBases.hpp" />
     <ClInclude Include="GetFields.hpp" />
+    <ClInclude Include="GetType.hpp" />
     <ClInclude Include="InvalidArgumentCount.hpp" />
+    <ClInclude Include="InvalidTargetException.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Typeof.hpp" />
     <ClInclude Include="Variable.hpp" />
     <ClInclude Include="VariableProvider.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AccessorException.cpp" />
     <ClCompile Include="AccessorLibrary.cpp" />
     <ClCompile Include="CallChainResolver.cpp" />
     <ClCompile Include="FunctionCall.cpp" />
     <ClCompile Include="FunctionLibrary.cpp" />
     <ClCompile Include="GetBases.cpp" />
     <ClCompile Include="GetFields.cpp" />
+    <ClCompile Include="GetType.cpp" />
+    <ClCompile Include="InvalidTargetException.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -193,6 +199,9 @@
   <ItemGroup>
     <ProjectReference Include="..\DataStructures\DataStructures.vcxproj">
       <Project>{1b49fa52-d1c9-4066-af5c-5624155cc721}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\IO\IO.vcxproj">
+      <Project>{8cd9696d-8bfe-4b49-8805-da17c8b6feed}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Lexer\Lexer.vcxproj">
       <Project>{e723eb38-47f6-47c7-b3e1-9a9c79c00a90}</Project>
@@ -209,6 +218,7 @@
     <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
     <Import Project="..\packages\boost.1.70.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.70.0.0\build\boost.targets')" />
     <Import Project="..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets" Condition="Exists('..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets')" />
+    <Import Project="..\packages\pugixml.1.10.0\build\native\pugixml.targets" Condition="Exists('..\packages\pugixml.1.10.0\build\native\pugixml.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -217,5 +227,6 @@
     <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
     <Error Condition="!Exists('..\packages\boost.1.70.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.70.0.0\build\boost.targets'))" />
     <Error Condition="!Exists('..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets'))" />
+    <Error Condition="!Exists('..\packages\pugixml.1.10.0\build\native\pugixml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\pugixml.1.10.0\build\native\pugixml.targets'))" />
   </Target>
 </Project>

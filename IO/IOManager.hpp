@@ -36,5 +36,6 @@ namespace Aergia::IO
 		std::optional<std::ofstream> openOutputFile(std::filesystem::path path);
 		PrettyPrinterConfiguration prettyPrinterConfig() const noexcept { return _configuration._prettyPrinterConfig; }
 		ProjectConfiguration getProject() const;
+		void reportCallchainError(std::string const& callchain, std::string const& exceptionText);
 	};
 }

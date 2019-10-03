@@ -9,7 +9,7 @@ Aergia::Functions::Variable Aergia::Functions::getBases(Variable& context)
 	if (base == nullptr)
 	{
 		auto collection = context.as<std::vector<IContextPtr>>();
-		if (collection == nullptr)
+		if (!collection)
 			throw std::exception();
 		std::vector<IContextPtr> result;
 		for (auto c : *collection)

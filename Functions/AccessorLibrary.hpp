@@ -22,12 +22,6 @@ namespace Aergia::Functions
 		AccessorNotFoundException(Variable& current, not_null<IContext*> context, std::string accessorName);
 	};
 
-	class AccessorException : public std::runtime_error
-	{
-	public:
-		AccessorException(Variable& current, not_null<IContext*> context, std::string accessorName, std::exception& innerException);
-	};
-
 	class AccessorLibrary
 	{
 		static inline std::map<std::string, std::function<Variable(Variable&, not_null<IContext*>)>> _accessors =

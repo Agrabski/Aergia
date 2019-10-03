@@ -9,6 +9,7 @@ namespace Aergia::DataStructures
 		gsl::not_null<TypeContext*> const _type;
 
 	public:
+
 		BaseClassContext( gsl::not_null<TypeContext*> parent, MemberAccessibility accessibility, gsl::not_null<TypeContext*> type );
 		gsl::not_null<TypeContext*> getType() const noexcept { return _type; }
 
