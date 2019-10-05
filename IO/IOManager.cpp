@@ -1,5 +1,6 @@
 #include "IOManager.hpp"
 #include <filesystem>
+#include <exception>
 #include <fstream>
 #include <iostream>
 #include <boost/program_options/parsers.hpp>
@@ -7,6 +8,22 @@
 
 using namespace Aergia::IO;
 
+void Aergia::IO::IOManager::cleanProject(std::filesystem::path path) const noexcept
+{
+	try {
+		auto project = ProjectConfiguration(path);
+		std::error_code error;
+		auto const p = path.parent_path() / project._outputDirectory;
+		if (!std::filesystem::remove_all(p, error))
+			std::cout << "error cleaning output directory. Error code: " << error << std::endl;
+		else
+			std::cout << "directory: \"" << p.string() << "\" removed sucessfully" << std::endl;
+	}
+	catch (std::exception const& e)
+	{
+		std::cout << "error cleaning output directory. Exception: " << e.what();
+	}
+}
 void Aergia::IO::IOManager::reportFileOpened(std::filesystem::path const& file, bool isInputFile) const
 {
 	std::wcout << L"Opened file: " << file.native() << std::endl;
@@ -57,18 +74,27 @@ Aergia::IO::IOManager::IOManager(int argc, char const* const argv[]) : _programO
 		return;
 	}
 
-	if (vm.contains("help"))
-	{
-		std::cout << _programOptions;
-		_continueExecution = false;
-		return;
-	}
-
-	if (vm.contains("project"))
-	{
-		this->_pathToProject = vm["project"].as<fs::path>();
-		_continueExecution = true;
-	}
+	if (vm.contains("clean"))
+		if (vm.contains("project"))
+			cleanProject(vm["project"].as<fs::path>());
+		else
+		{
+			std::cout << "path to project not supplied" << std::endl;
+			_continueExecution = false;
+		}
+	else
+		if (vm.contains("help"))
+		{
+			std::cout << _programOptions;
+			_continueExecution = false;
+			return;
+		}
+		else
+			if (vm.contains("project"))
+			{
+				this->_pathToProject = vm["project"].as<fs::path>();
+				_continueExecution = true;
+			}
 	if (_instance != nullptr)
 		std::terminate();
 	_instance = this;
@@ -94,7 +120,7 @@ std::optional<std::ifstream> Aergia::IO::IOManager::openInputFile(std::filesyste
 std::optional<std::ofstream> Aergia::IO::IOManager::openOutputFile(std::filesystem::path path)
 {
 	std::filesystem::create_directory(path.parent_path());
-	auto stream = std::ofstream(path, std::ios::out | std::ios::trunc);
+	auto stream{ std::ofstream(path, std::ios::out | std::ios::trunc) };
 	if (stream.is_open())
 	{
 		reportFileOpened(path, false);

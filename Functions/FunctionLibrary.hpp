@@ -6,6 +6,7 @@
 #include "FunctionCall.hpp"
 #include "Variable.hpp"
 #include "Typeof.hpp"
+#include "Valueof.hpp"
 
 namespace Aergia::Functions
 {
@@ -19,7 +20,8 @@ namespace Aergia::Functions
 	{
 		static inline std::map<std::string, std::function<Variable( Variable&, not_null<IContext*>, FunctionCall const& )>> _functions =
 		{
-			{"typeof"s,&typeof}
+			{"typeof"s,&typeof},
+			{"valueof",&valueof}
 		};
 	public:
 		static Variable resolveCall( Variable& current, not_null<IContext*>context, FunctionCall const& function );

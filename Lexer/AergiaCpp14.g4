@@ -38,6 +38,15 @@ aergiaexpression
    | aergiaexpressionbegin anonymousExpression aergiaexpressionend
    ;
 
+aergiaExpression_type_target
+    : aergiaexpression;
+
+    aergiaExpression_value_target
+        : aergiaexpression;
+
+    aergiaExpression_identifier_target
+        : aergiaexpression;
+
 anonymousExpression
    : 'anonymous' '('anoynmousBody')';
 
@@ -528,7 +537,7 @@ typespecifier
    : trailingtypespecifier
    | classspecifier
    | enumspecifier
-   | aergiaexpression
+   | aergiaExpression_type_target
    ;
 
 trailingtypespecifier
@@ -880,6 +889,7 @@ braceorequalinitializer
 initializerclause
    : assignmentexpression
    | bracedinitlist
+   | aergiaExpression_value_target
    ;
 
 initializerlist

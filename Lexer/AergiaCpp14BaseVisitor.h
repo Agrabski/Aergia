@@ -35,6 +35,18 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitAergiaExpression_type_target(AergiaCpp14Parser::AergiaExpression_type_targetContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitAergiaExpression_value_target(AergiaCpp14Parser::AergiaExpression_value_targetContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitAergiaExpression_identifier_target(AergiaCpp14Parser::AergiaExpression_identifier_targetContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext *ctx) override {
     return visitChildren(ctx);
   }

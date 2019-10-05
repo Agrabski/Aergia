@@ -66,16 +66,6 @@ namespace Aergia::Functions
 		template<>
 		std::optional<std::string> resolveCallChain(std::string callChain, IContextPtr currentContext)
 		{
-			std::replace(callChain.begin(), callChain.end(), '.', ' ');
-			std::stringstream stream(std::move(callChain));
-			std::vector<std::string> result;
-			while (!stream.eof())
-			{
-				std::string temp;
-				stream >> temp;
-				result.push_back(temp);
-			}
-
 			auto r = resolveCallChainInternal(prepareCalls(callChain), currentContext);
 			return r.toString();
 

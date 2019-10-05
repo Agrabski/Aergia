@@ -13,3 +13,8 @@ Aergia::Functions::AccessorException::AccessorException(Variable& current, std::
 	: runtime_error("error processing accessor: "s + accessorName + " "s + typeSpecificMessage())
 {
 }
+
+Aergia::Functions::AccessorException::AccessorException(Variable& current, std::string const& accessorName, std::string const& message)
+	: runtime_error("error processing accessor: "s + accessorName + " "s + message)
+{
+}

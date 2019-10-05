@@ -21,7 +21,9 @@ namespace Aergia::IO
 		Configuration _configuration;
 		bool _continueExecution = false;
 		std::filesystem::path _pathToProject;
-
+		
+		
+		void cleanProject(std::filesystem::path path) const noexcept;
 		void reportFileOpened(std::filesystem::path const& file, bool isInputFile) const;
 		void reportFileOpenFailed(std::filesystem::path const& file, bool isInputFile) const;
 		void setupOptions();

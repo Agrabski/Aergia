@@ -13,5 +13,6 @@ namespace Aergia::Functions
 	public:
 		AccessorException(Variable& current, std::string accessorName, std::exception& innerException);
 		AccessorException(Variable& current, std::string accessorName);
+		AccessorException(Variable& current, std::string const& accessorName, std::string const& message);
 	};
 }

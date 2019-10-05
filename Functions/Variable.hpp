@@ -13,8 +13,11 @@ namespace Aergia::Functions
 	{
 	public:
 		using IContextPtr = gsl::not_null< DataStructures::IContext*>;
+		using Text = std::string;
+		using ContextCollection= std::vector<IContextPtr>;
+		using Accessibility = DataStructures::MemberAccessibility;
 	private:
-		std::variant<IContextPtr, std::vector<IContextPtr>, DataStructures::MemberAccessibility, std::monostate> _value;
+		std::variant<IContextPtr, std::vector<IContextPtr>, DataStructures::MemberAccessibility, std::string, std::monostate> _value;
 
 	public:
 		template<typename T>
@@ -55,6 +58,8 @@ namespace Aergia::Functions
 		std::string toString() const
 		{
 			using namespace std::literals;
+			if (as<std::string>())
+				return *as<std::string>();
 			if (as<IContextPtr>() != nullptr)
 				return as<IContextPtr>()->get()->getName();
 			return ""s;

@@ -5,6 +5,7 @@
 #include <exception>
 #include "GetBases.hpp"
 #include "GetFields.hpp"
+#include "GetType.hpp"
 #include "../DataStructures/IContext.hpp"
 #include "Variable.hpp"
 
@@ -27,7 +28,8 @@ namespace Aergia::Functions
 		static inline std::map<std::string, std::function<Variable(Variable&, not_null<IContext*>)>> _accessors =
 		{
 			{"bases"s, [](auto& a,auto b) {return getBases(a); }},
-			{"fields"s,[](auto& a,auto b) {return getFields(a); }}
+			{"fields"s,[](auto& a,auto b) {return getFields(a); }},
+			{"type"s,[](auto& a, auto b) {return getType(a); }}
 
 		};
 	public:

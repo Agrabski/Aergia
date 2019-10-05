@@ -31,6 +31,15 @@ public:
   virtual void enterAergiaexpression(AergiaCpp14Parser::AergiaexpressionContext * /*ctx*/) override { }
   virtual void exitAergiaexpression(AergiaCpp14Parser::AergiaexpressionContext * /*ctx*/) override { }
 
+  virtual void enterAergiaExpression_type_target(AergiaCpp14Parser::AergiaExpression_type_targetContext * /*ctx*/) override { }
+  virtual void exitAergiaExpression_type_target(AergiaCpp14Parser::AergiaExpression_type_targetContext * /*ctx*/) override { }
+
+  virtual void enterAergiaExpression_value_target(AergiaCpp14Parser::AergiaExpression_value_targetContext * /*ctx*/) override { }
+  virtual void exitAergiaExpression_value_target(AergiaCpp14Parser::AergiaExpression_value_targetContext * /*ctx*/) override { }
+
+  virtual void enterAergiaExpression_identifier_target(AergiaCpp14Parser::AergiaExpression_identifier_targetContext * /*ctx*/) override { }
+  virtual void exitAergiaExpression_identifier_target(AergiaCpp14Parser::AergiaExpression_identifier_targetContext * /*ctx*/) override { }
+
   virtual void enterAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext * /*ctx*/) override { }
   virtual void exitAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext * /*ctx*/) override { }
 

@@ -48,76 +48,78 @@ public:
 
   enum {
     RuleTranslationunit = 0, RuleAergiaexpressionbegin = 1, RuleAergiaexpressionend = 2, 
-    RuleAergiaBlock = 3, RuleAergiaexpression = 4, RuleAnonymousExpression = 5, 
-    RuleAnoynmousBody = 6, RuleForeach = 7, RuleForeachheader = 8, RuleForeachbody = 9, 
-    RuleCallchain = 10, RulePrimaryexpression = 11, RuleIdexpression = 12, 
-    RuleUnqualifiedid = 13, RuleQualifiedid = 14, RuleNestednamespecifier = 15, 
-    RuleLambdaexpression = 16, RuleLambdaintroducer = 17, RuleLambdacapture = 18, 
-    RuleCapturedefault = 19, RuleCapturelist = 20, RuleCapture = 21, RuleSimplecapture = 22, 
-    RuleInitcapture = 23, RuleLambdadeclarator = 24, RulePostfixexpression = 25, 
-    RuleTypeidofexpr = 26, RuleTypeidofthetypeid = 27, RuleExpressionlist = 28, 
-    RulePseudodestructorname = 29, RuleUnaryexpression = 30, RuleUnaryoperator = 31, 
-    RuleNewexpression = 32, RuleNewplacement = 33, RuleNewtypeid = 34, RuleNewdeclarator = 35, 
-    RuleNoptrnewdeclarator = 36, RuleNewinitializer = 37, RuleDeleteexpression = 38, 
-    RuleNoexceptexpression = 39, RuleCastexpression = 40, RulePmexpression = 41, 
-    RuleMultiplicativeexpression = 42, RuleAdditiveexpression = 43, RuleShiftexpression = 44, 
-    RuleShiftoperator = 45, RuleRelationalexpression = 46, RuleEqualityexpression = 47, 
-    RuleAndexpression = 48, RuleExclusiveorexpression = 49, RuleInclusiveorexpression = 50, 
-    RuleLogicalandexpression = 51, RuleLogicalorexpression = 52, RuleConditionalexpression = 53, 
-    RuleAssignmentexpression = 54, RuleAssignmentoperator = 55, RuleExpression = 56, 
-    RuleConstantexpression = 57, RuleStatement = 58, RuleLabeledstatement = 59, 
-    RuleExpressionstatement = 60, RuleCompoundstatement = 61, RuleStatementseq = 62, 
-    RuleSelectionstatement = 63, RuleCondition = 64, RuleIterationstatement = 65, 
-    RuleForinitstatement = 66, RuleForrangedeclaration = 67, RuleForrangeinitializer = 68, 
-    RuleJumpstatement = 69, RuleDeclarationstatement = 70, RuleDeclarationseq = 71, 
-    RuleDeclaration = 72, RuleBlockdeclaration = 73, RuleAliasdeclaration = 74, 
-    RuleSimpledeclaration = 75, RuleStatic_assertdeclaration = 76, RuleEmptydeclaration = 77, 
-    RuleAttributedeclaration = 78, RuleDeclspecifier = 79, RuleDeclspecifierseq = 80, 
-    RuleStorageclassspecifier = 81, RuleFunctionspecifier = 82, RuleTypedefname = 83, 
-    RuleTypespecifier = 84, RuleTrailingtypespecifier = 85, RuleTypespecifierseq = 86, 
-    RuleTrailingtypespecifierseq = 87, RuleSimpletypespecifier = 88, RuleThetypename = 89, 
-    RuleDecltypespecifier = 90, RuleElaboratedtypespecifier = 91, RuleEnumname = 92, 
-    RuleEnumspecifier = 93, RuleEnumhead = 94, RuleOpaqueenumdeclaration = 95, 
-    RuleEnumkey = 96, RuleEnumbase = 97, RuleEnumeratorlist = 98, RuleEnumeratordefinition = 99, 
-    RuleEnumerator = 100, RuleNamespacename = 101, RuleOriginalnamespacename = 102, 
-    RuleNamespacedefinition = 103, RuleNamednamespacedefinition = 104, RuleOriginalnamespacedefinition = 105, 
-    RuleUnnamednamespacedefinition = 106, RuleNamespacebody = 107, RuleNamespacealias = 108, 
-    RuleNamespacealiasdefinition = 109, RuleQualifiednamespacespecifier = 110, 
-    RuleUsingdeclaration = 111, RuleUsingdirective = 112, RuleAsmdefinition = 113, 
-    RuleLinkagespecification = 114, RuleAttributespecifierseq = 115, RuleAttributespecifier = 116, 
-    RuleAlignmentspecifier = 117, RuleAttributelist = 118, RuleAttribute = 119, 
-    RuleAttributetoken = 120, RuleAttributescopedtoken = 121, RuleAttributenamespace = 122, 
-    RuleAttributeargumentclause = 123, RuleBalancedtokenseq = 124, RuleBalancedtoken = 125, 
-    RuleInitdeclaratorlist = 126, RuleInitdeclarator = 127, RuleDeclarator = 128, 
-    RulePtrdeclarator = 129, RuleNoptrdeclarator = 130, RuleParametersandqualifiers = 131, 
-    RuleTrailingreturntype = 132, RulePtroperator = 133, RuleCvqualifierseq = 134, 
-    RuleCvqualifier = 135, RuleRefqualifier = 136, RuleDeclaratorid = 137, 
-    RuleThetypeid = 138, RuleAbstractdeclarator = 139, RulePtrabstractdeclarator = 140, 
-    RuleNoptrabstractdeclarator = 141, RuleAbstractpackdeclarator = 142, 
-    RuleNoptrabstractpackdeclarator = 143, RuleParameterdeclarationclause = 144, 
-    RuleParameterdeclarationlist = 145, RuleParameterdeclaration = 146, 
-    RuleFunctiondefinition = 147, RuleFunctionbody = 148, RuleInitializer = 149, 
-    RuleBraceorequalinitializer = 150, RuleInitializerclause = 151, RuleInitializerlist = 152, 
-    RuleBracedinitlist = 153, RuleClassname = 154, RuleClassspecifier = 155, 
-    RuleClasshead = 156, RuleClassheadname = 157, RuleClassvirtspecifier = 158, 
-    RuleClasskey = 159, RuleMemberspecification = 160, RuleMemberdeclaration = 161, 
-    RuleMemberdeclaratorlist = 162, RuleMemberdeclarator = 163, RuleMemberFunctionDeclaration = 164, 
-    RuleVirtspecifierseq = 165, RuleVirtspecifier = 166, RulePurespecifier = 167, 
-    RuleBaseclause = 168, RuleBasespecifierlist = 169, RuleBasespecifier = 170, 
-    RuleClassordecltype = 171, RuleBasetypespecifier = 172, RuleAccessspecifier = 173, 
-    RuleConversionfunctionid = 174, RuleConversiontypeid = 175, RuleConversiondeclarator = 176, 
-    RuleCtorinitializer = 177, RuleMeminitializerlist = 178, RuleMeminitializer = 179, 
-    RuleMeminitializerid = 180, RuleOperatorfunctionid = 181, RuleLiteraloperatorid = 182, 
-    RuleTemplatedeclaration = 183, RuleTemplateparameterlist = 184, RuleTemplateparameter = 185, 
-    RuleTypeparameter = 186, RuleSimpletemplateid = 187, RuleTemplateid = 188, 
-    RuleTemplatename = 189, RuleTemplateargumentlist = 190, RuleTemplateargument = 191, 
-    RuleTypenamespecifier = 192, RuleExplicitinstantiation = 193, RuleExplicitspecialization = 194, 
-    RuleTryblock = 195, RuleFunctiontryblock = 196, RuleHandlerseq = 197, 
-    RuleHandler = 198, RuleExceptiondeclaration = 199, RuleThrowexpression = 200, 
-    RuleExceptionspecification = 201, RuleDynamicexceptionspecification = 202, 
-    RuleTypeidlist = 203, RuleNoexceptspecification = 204, RulePreprocessorDirective = 205, 
-    RuleTheoperator = 206, RuleLiteral = 207, RuleBooleanliteral = 208, 
-    RulePointerliteral = 209, RuleUserdefinedliteral = 210
+    RuleAergiaBlock = 3, RuleAergiaexpression = 4, RuleAergiaExpression_type_target = 5, 
+    RuleAergiaExpression_value_target = 6, RuleAergiaExpression_identifier_target = 7, 
+    RuleAnonymousExpression = 8, RuleAnoynmousBody = 9, RuleForeach = 10, 
+    RuleForeachheader = 11, RuleForeachbody = 12, RuleCallchain = 13, RulePrimaryexpression = 14, 
+    RuleIdexpression = 15, RuleUnqualifiedid = 16, RuleQualifiedid = 17, 
+    RuleNestednamespecifier = 18, RuleLambdaexpression = 19, RuleLambdaintroducer = 20, 
+    RuleLambdacapture = 21, RuleCapturedefault = 22, RuleCapturelist = 23, 
+    RuleCapture = 24, RuleSimplecapture = 25, RuleInitcapture = 26, RuleLambdadeclarator = 27, 
+    RulePostfixexpression = 28, RuleTypeidofexpr = 29, RuleTypeidofthetypeid = 30, 
+    RuleExpressionlist = 31, RulePseudodestructorname = 32, RuleUnaryexpression = 33, 
+    RuleUnaryoperator = 34, RuleNewexpression = 35, RuleNewplacement = 36, 
+    RuleNewtypeid = 37, RuleNewdeclarator = 38, RuleNoptrnewdeclarator = 39, 
+    RuleNewinitializer = 40, RuleDeleteexpression = 41, RuleNoexceptexpression = 42, 
+    RuleCastexpression = 43, RulePmexpression = 44, RuleMultiplicativeexpression = 45, 
+    RuleAdditiveexpression = 46, RuleShiftexpression = 47, RuleShiftoperator = 48, 
+    RuleRelationalexpression = 49, RuleEqualityexpression = 50, RuleAndexpression = 51, 
+    RuleExclusiveorexpression = 52, RuleInclusiveorexpression = 53, RuleLogicalandexpression = 54, 
+    RuleLogicalorexpression = 55, RuleConditionalexpression = 56, RuleAssignmentexpression = 57, 
+    RuleAssignmentoperator = 58, RuleExpression = 59, RuleConstantexpression = 60, 
+    RuleStatement = 61, RuleLabeledstatement = 62, RuleExpressionstatement = 63, 
+    RuleCompoundstatement = 64, RuleStatementseq = 65, RuleSelectionstatement = 66, 
+    RuleCondition = 67, RuleIterationstatement = 68, RuleForinitstatement = 69, 
+    RuleForrangedeclaration = 70, RuleForrangeinitializer = 71, RuleJumpstatement = 72, 
+    RuleDeclarationstatement = 73, RuleDeclarationseq = 74, RuleDeclaration = 75, 
+    RuleBlockdeclaration = 76, RuleAliasdeclaration = 77, RuleSimpledeclaration = 78, 
+    RuleStatic_assertdeclaration = 79, RuleEmptydeclaration = 80, RuleAttributedeclaration = 81, 
+    RuleDeclspecifier = 82, RuleDeclspecifierseq = 83, RuleStorageclassspecifier = 84, 
+    RuleFunctionspecifier = 85, RuleTypedefname = 86, RuleTypespecifier = 87, 
+    RuleTrailingtypespecifier = 88, RuleTypespecifierseq = 89, RuleTrailingtypespecifierseq = 90, 
+    RuleSimpletypespecifier = 91, RuleThetypename = 92, RuleDecltypespecifier = 93, 
+    RuleElaboratedtypespecifier = 94, RuleEnumname = 95, RuleEnumspecifier = 96, 
+    RuleEnumhead = 97, RuleOpaqueenumdeclaration = 98, RuleEnumkey = 99, 
+    RuleEnumbase = 100, RuleEnumeratorlist = 101, RuleEnumeratordefinition = 102, 
+    RuleEnumerator = 103, RuleNamespacename = 104, RuleOriginalnamespacename = 105, 
+    RuleNamespacedefinition = 106, RuleNamednamespacedefinition = 107, RuleOriginalnamespacedefinition = 108, 
+    RuleUnnamednamespacedefinition = 109, RuleNamespacebody = 110, RuleNamespacealias = 111, 
+    RuleNamespacealiasdefinition = 112, RuleQualifiednamespacespecifier = 113, 
+    RuleUsingdeclaration = 114, RuleUsingdirective = 115, RuleAsmdefinition = 116, 
+    RuleLinkagespecification = 117, RuleAttributespecifierseq = 118, RuleAttributespecifier = 119, 
+    RuleAlignmentspecifier = 120, RuleAttributelist = 121, RuleAttribute = 122, 
+    RuleAttributetoken = 123, RuleAttributescopedtoken = 124, RuleAttributenamespace = 125, 
+    RuleAttributeargumentclause = 126, RuleBalancedtokenseq = 127, RuleBalancedtoken = 128, 
+    RuleInitdeclaratorlist = 129, RuleInitdeclarator = 130, RuleDeclarator = 131, 
+    RulePtrdeclarator = 132, RuleNoptrdeclarator = 133, RuleParametersandqualifiers = 134, 
+    RuleTrailingreturntype = 135, RulePtroperator = 136, RuleCvqualifierseq = 137, 
+    RuleCvqualifier = 138, RuleRefqualifier = 139, RuleDeclaratorid = 140, 
+    RuleThetypeid = 141, RuleAbstractdeclarator = 142, RulePtrabstractdeclarator = 143, 
+    RuleNoptrabstractdeclarator = 144, RuleAbstractpackdeclarator = 145, 
+    RuleNoptrabstractpackdeclarator = 146, RuleParameterdeclarationclause = 147, 
+    RuleParameterdeclarationlist = 148, RuleParameterdeclaration = 149, 
+    RuleFunctiondefinition = 150, RuleFunctionbody = 151, RuleInitializer = 152, 
+    RuleBraceorequalinitializer = 153, RuleInitializerclause = 154, RuleInitializerlist = 155, 
+    RuleBracedinitlist = 156, RuleClassname = 157, RuleClassspecifier = 158, 
+    RuleClasshead = 159, RuleClassheadname = 160, RuleClassvirtspecifier = 161, 
+    RuleClasskey = 162, RuleMemberspecification = 163, RuleMemberdeclaration = 164, 
+    RuleMemberdeclaratorlist = 165, RuleMemberdeclarator = 166, RuleMemberFunctionDeclaration = 167, 
+    RuleVirtspecifierseq = 168, RuleVirtspecifier = 169, RulePurespecifier = 170, 
+    RuleBaseclause = 171, RuleBasespecifierlist = 172, RuleBasespecifier = 173, 
+    RuleClassordecltype = 174, RuleBasetypespecifier = 175, RuleAccessspecifier = 176, 
+    RuleConversionfunctionid = 177, RuleConversiontypeid = 178, RuleConversiondeclarator = 179, 
+    RuleCtorinitializer = 180, RuleMeminitializerlist = 181, RuleMeminitializer = 182, 
+    RuleMeminitializerid = 183, RuleOperatorfunctionid = 184, RuleLiteraloperatorid = 185, 
+    RuleTemplatedeclaration = 186, RuleTemplateparameterlist = 187, RuleTemplateparameter = 188, 
+    RuleTypeparameter = 189, RuleSimpletemplateid = 190, RuleTemplateid = 191, 
+    RuleTemplatename = 192, RuleTemplateargumentlist = 193, RuleTemplateargument = 194, 
+    RuleTypenamespecifier = 195, RuleExplicitinstantiation = 196, RuleExplicitspecialization = 197, 
+    RuleTryblock = 198, RuleFunctiontryblock = 199, RuleHandlerseq = 200, 
+    RuleHandler = 201, RuleExceptiondeclaration = 202, RuleThrowexpression = 203, 
+    RuleExceptionspecification = 204, RuleDynamicexceptionspecification = 205, 
+    RuleTypeidlist = 206, RuleNoexceptspecification = 207, RulePreprocessorDirective = 208, 
+    RuleTheoperator = 209, RuleLiteral = 210, RuleBooleanliteral = 211, 
+    RulePointerliteral = 212, RuleUserdefinedliteral = 213
   };
 
   AergiaCpp14Parser(antlr4::TokenStream *input);
@@ -135,6 +137,9 @@ public:
   class AergiaexpressionendContext;
   class AergiaBlockContext;
   class AergiaexpressionContext;
+  class AergiaExpression_type_targetContext;
+  class AergiaExpression_value_targetContext;
+  class AergiaExpression_identifier_targetContext;
   class AnonymousExpressionContext;
   class AnoynmousBodyContext;
   class ForeachContext;
@@ -418,6 +423,51 @@ public:
   };
 
   AergiaexpressionContext* aergiaexpression();
+
+  class  AergiaExpression_type_targetContext : public antlr4::ParserRuleContext {
+  public:
+    AergiaExpression_type_targetContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    AergiaexpressionContext *aergiaexpression();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  AergiaExpression_type_targetContext* aergiaExpression_type_target();
+
+  class  AergiaExpression_value_targetContext : public antlr4::ParserRuleContext {
+  public:
+    AergiaExpression_value_targetContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    AergiaexpressionContext *aergiaexpression();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  AergiaExpression_value_targetContext* aergiaExpression_value_target();
+
+  class  AergiaExpression_identifier_targetContext : public antlr4::ParserRuleContext {
+  public:
+    AergiaExpression_identifier_targetContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    AergiaexpressionContext *aergiaexpression();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  AergiaExpression_identifier_targetContext* aergiaExpression_identifier_target();
 
   class  AnonymousExpressionContext : public antlr4::ParserRuleContext {
   public:
@@ -1901,7 +1951,7 @@ public:
     TrailingtypespecifierContext *trailingtypespecifier();
     ClassspecifierContext *classspecifier();
     EnumspecifierContext *enumspecifier();
-    AergiaexpressionContext *aergiaexpression();
+    AergiaExpression_type_targetContext *aergiaExpression_type_target();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -3106,6 +3156,7 @@ public:
     virtual size_t getRuleIndex() const override;
     AssignmentexpressionContext *assignmentexpression();
     BracedinitlistContext *bracedinitlist();
+    AergiaExpression_value_targetContext *aergiaExpression_value_target();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
