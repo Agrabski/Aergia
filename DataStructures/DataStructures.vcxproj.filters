@@ -13,83 +13,101 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Concepts">
+      <UniqueIdentifier>{608cf10b-ea29-4ec4-b008-31cb3e3bb22d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Property.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TypeInfo.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Acessibility.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AergiaString.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Function.hpp">
+    <ClInclude Include="NamespaceContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NullContext.hpp">
+    <ClInclude Include="ClassContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LocalContext.hpp">
+    <ClInclude Include="MethodContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IObject.hpp">
+    <ClInclude Include="VariableContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultContext.hpp">
+    <ClInclude Include="MemberAccessibility.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CollectionProxy.hpp">
+    <ClInclude Include="BaseClassContext.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Base.hpp">
+    <ClInclude Include="TypeAlias.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PrimitiveWrapper.hpp">
+    <ClInclude Include="QualifiedName.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Contains.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resolver.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Aliases.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HasResolveInContents.hpp">
+      <Filter>Header Files\Concepts</Filter>
+    </ClInclude>
+    <ClInclude Include="HasResolveInImports.hpp">
+      <Filter>Header Files\Concepts</Filter>
+    </ClInclude>
+    <ClInclude Include="Imports.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HasResolveInAliases.hpp">
+      <Filter>Header Files\Concepts</Filter>
+    </ClInclude>
+    <ClInclude Include="UnconfirmedReference.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Definitions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Property.cpp">
+    <ClCompile Include="ClassContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NullContext.cpp">
+    <ClCompile Include="MethodContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LocalContext.cpp">
+    <ClCompile Include="VariableContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MemberAccessibility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseClassContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NamespaceContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Acessibility.cpp">
+    <ClCompile Include="QualifiedName.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TypeInfo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Base.cpp">
+    <ClCompile Include="Resolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

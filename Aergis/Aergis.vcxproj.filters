@@ -13,21 +13,70 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{6046208a-80a3-4a6e-ad56-3bf5a873950d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{883aa4e4-4e35-4fcf-898d-79b8837a1acf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\TestProject">
+      <UniqueIdentifier>{6914d951-6ed7-46ce-a1b3-2f84a4c817ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\TestProject\Assembly">
+      <UniqueIdentifier>{8a4f782a-b008-4805-9c2c-88d02cda3406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\TestProject\Assembly\Headers">
+      <UniqueIdentifier>{00ab7383-6304-44cb-9cdf-ef3e91b9a7e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Processor.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectProcessor.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Assembly.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissingDependencyException.hpp">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="Aergis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Aergis.cpp">
+    <ClCompile Include="Processor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Assembly.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MissingDependencyException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Tests\TestFile.cpp">
+      <Filter>Tests</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Tests\TestProject\Assembly\Assembly.asd">
+      <Filter>Tests\TestProject\Assembly</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Tests\TestProject\TestProject.arg">
+      <Filter>Tests\TestProject</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Tests\TestProject\Assembly\headers\A.hpp">
+      <Filter>Tests\TestProject\Assembly\Headers</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

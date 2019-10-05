@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{D5358038-74DB-4287-87CC-DF5D12497F01}</ProjectGuid>
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{1B49FA52-D1C9-4066-AF5C-5624155CC721}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>DataStructures</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.10240.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -72,22 +72,30 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <CodeAnalysisRuleSet>CppCoreCheckRules.ruleset</CodeAnalysisRuleSet>
+    <ReferencePath>..\Antlr\lib\vs-2015\x64\Release DLL;$(ReferencePath)</ReferencePath>
+    <LibraryPath>..\Antlr\lib\vs-2015\x64\Release DLL;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>../Strict_Set.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <CodeAnalysisRuleSet>CppCoreCheckRules.ruleset</CodeAnalysisRuleSet>
+    <ReferencePath>..\Antlr\lib\vs-2015\x86\Release DLL;$(ReferencePath)</ReferencePath>
+    <LibraryPath>..\Antlr\lib\vs-2015\x86\Release DLL;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>../Strict_Set.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <CodeAnalysisRuleSet>CppCoreCheckRules.ruleset</CodeAnalysisRuleSet>
+    <ReferencePath>..\Antlr\lib\vs-2015\x86\Release DLL;$(ReferencePath)</ReferencePath>
+    <LibraryPath>..\Antlr\lib\vs-2015\x86\Release DLL;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>../Strict_Set.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <CodeAnalysisRuleSet>CppCoreCheckRules.ruleset</CodeAnalysisRuleSet>
+    <ReferencePath>..\Antlr\lib\vs-2015\x64\Release DLL;$(ReferencePath)</ReferencePath>
+    <LibraryPath>..\Antlr\lib\vs-2015\x64\Release DLL;$(LibraryPath)</LibraryPath>
+    <CodeAnalysisRuleSet>../Strict_Set.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -96,10 +104,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;_DEBUG;ANTLR4CPP_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\Antlr\antlr4-runtime;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <AdditionalOptions>/bigobj /we4715 %(AdditionalOptions)</AdditionalOptions>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -112,10 +124,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;WIN32;_DEBUG;ANTLR4CPP_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\Antlr\antlr4-runtime;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <AdditionalOptions>/bigobj /we4715 %(AdditionalOptions)</AdditionalOptions>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,10 +146,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;WIN32;ANTLR4CPP_STATIC;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\Antlr\antlr4-runtime;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,10 +169,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING;NDEBUG;ANTLR4CPP_STATIC_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>..\Antlr\antlr4-runtime;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -163,52 +185,63 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Acessibility.hpp" />
-    <ClInclude Include="AergiaString.hpp" />
-    <ClInclude Include="Base.hpp" />
-    <ClInclude Include="CollectionProxy.hpp" />
-    <ClInclude Include="DefaultContext.hpp" />
-    <ClInclude Include="IObject.hpp" />
-    <ClInclude Include="LocalContext.hpp" />
-    <ClInclude Include="Function.hpp" />
+    <ClInclude Include="Aliases.hpp" />
+    <ClInclude Include="BaseClassContext.hpp" />
+    <ClInclude Include="ClassContext.hpp" />
+    <ClInclude Include="Contains.hpp" />
+    <ClInclude Include="Definitions.hpp" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="HasResolveInAliases.hpp" />
+    <ClInclude Include="HasResolveInContents.hpp" />
+    <ClInclude Include="HasResolveInImports.hpp" />
     <ClInclude Include="IContext.hpp" />
-    <ClInclude Include="NullContext.hpp" />
-    <ClInclude Include="PrimitiveWrapper.hpp" />
-    <ClInclude Include="Property.hpp" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="TypeInfo.hpp" />
+    <ClInclude Include="Imports.hpp" />
+    <ClInclude Include="MemberAccessibility.hpp" />
+    <ClInclude Include="MethodContext.hpp" />
+    <ClInclude Include="NamespaceContext.hpp" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="QualifiedName.hpp" />
+    <ClInclude Include="Resolver.hpp" />
+    <ClInclude Include="TypeAlias.hpp" />
+    <ClInclude Include="UnconfirmedReference.hpp" />
+    <ClInclude Include="VariableContext.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Acessibility.cpp" />
-    <ClCompile Include="Base.cpp" />
-    <ClCompile Include="DefaultContext.cpp" />
+    <ClCompile Include="BaseClassContext.cpp" />
+    <ClCompile Include="ClassContext.cpp" />
     <ClCompile Include="IContext.cpp" />
-    <ClCompile Include="IObject.cpp" />
-    <ClCompile Include="LocalContext.cpp" />
-    <ClCompile Include="NullContext.cpp" />
-    <ClCompile Include="Property.cpp" />
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="MemberAccessibility.cpp" />
+    <ClCompile Include="MethodContext.cpp" />
+    <ClCompile Include="NamespaceContext.cpp" />
+    <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TypeInfo.cpp" />
+    <ClCompile Include="QualifiedName.cpp" />
+    <ClCompile Include="Resolver.cpp" />
+    <ClCompile Include="VariableContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\boost.1.69.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.69.0.0\build\boost.targets')" />
-    <Import Project="..\packages\boost_regex-vc141.1.69.0.0\build\boost_regex-vc141.targets" Condition="Exists('..\packages\boost_regex-vc141.1.69.0.0\build\boost_regex-vc141.targets')" />
+    <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
+    <Import Project="..\packages\boost.1.70.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.70.0.0\build\boost.targets')" />
+    <Import Project="..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets" Condition="Exists('..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets')" />
+    <Import Project="..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets" Condition="Exists('..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets')" />
+    <Import Project="..\packages\pugixml.1.10.0\build\native\pugixml.targets" Condition="Exists('..\packages\pugixml.1.10.0\build\native\pugixml.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\boost.1.69.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.69.0.0\build\boost.targets'))" />
-    <Error Condition="!Exists('..\packages\boost_regex-vc141.1.69.0.0\build\boost_regex-vc141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_regex-vc141.1.69.0.0\build\boost_regex-vc141.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
+    <Error Condition="!Exists('..\packages\boost.1.70.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.70.0.0\build\boost.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_regex-vc142.1.70.0.0\build\boost_regex-vc142.targets'))" />
+    <Error Condition="!Exists('..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets'))" />
+    <Error Condition="!Exists('..\packages\pugixml.1.10.0\build\native\pugixml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\pugixml.1.10.0\build\native\pugixml.targets'))" />
   </Target>
 </Project>
