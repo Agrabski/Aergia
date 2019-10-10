@@ -16,6 +16,8 @@ namespace Aergia::Visitors
 		antlrcpp::Any visitAergiaExpression_value_target(AergiaCpp14Parser::AergiaExpression_value_targetContext* ctx) final;
 
 		antlrcpp::Any visitAergiaExpression_identifier_target(AergiaCpp14Parser::AergiaExpression_identifier_targetContext* ctx) final;
+		antlrcpp::Any visitAergiaString(AergiaCpp14Parser::AergiaStringContext* ctx) final;
+
 
 	};
 }

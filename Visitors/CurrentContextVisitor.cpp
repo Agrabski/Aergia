@@ -172,6 +172,11 @@ void Aergia::Visitors::CurrentContextVisitor::enterMemberFunctionDeclaration(Aer
 	pushContextStack(_currentContext, resolvedMethod, DataStructures::MemberAccessibility::None);
 }
 
+void Aergia::Visitors::CurrentContextVisitor::exitMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext*)
+{
+	popContextStack();
+}
+
 void Aergia::Visitors::CurrentContextVisitor::enterUsingdirective(AergiaCpp14Parser::UsingdirectiveContext* context)
 {
 	using Aergia::DataStructures::NamespaceContext;

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "AssemblyConfiguration.hpp"
+#include "CompilerConfiguration.hpp"
 
 namespace Aergia::Configuration
 {
@@ -11,6 +12,7 @@ namespace Aergia::Configuration
 		std::filesystem::path _outputDirectory;
 		std::filesystem::path _projectDirectory;
 		std::string _targetAssemblyName;
+		CompilerConfiguration _compilerConfiguration;
 		ProjectConfiguration( std::filesystem::path );
 	};
 }

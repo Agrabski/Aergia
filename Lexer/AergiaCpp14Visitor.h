@@ -35,6 +35,10 @@ public:
 
     virtual antlrcpp::Any visitAergiaExpression_identifier_target(AergiaCpp14Parser::AergiaExpression_identifier_targetContext *context) = 0;
 
+    virtual antlrcpp::Any visitAergiaexpression_any_target(AergiaCpp14Parser::Aergiaexpression_any_targetContext *context) = 0;
+
+    virtual antlrcpp::Any visitAergiaString(AergiaCpp14Parser::AergiaStringContext *context) = 0;
+
     virtual antlrcpp::Any visitAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext *context) = 0;
 
     virtual antlrcpp::Any visitAnoynmousBody(AergiaCpp14Parser::AnoynmousBodyContext *context) = 0;

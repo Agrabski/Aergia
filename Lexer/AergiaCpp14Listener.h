@@ -38,6 +38,12 @@ public:
   virtual void enterAergiaExpression_identifier_target(AergiaCpp14Parser::AergiaExpression_identifier_targetContext *ctx) = 0;
   virtual void exitAergiaExpression_identifier_target(AergiaCpp14Parser::AergiaExpression_identifier_targetContext *ctx) = 0;
 
+  virtual void enterAergiaexpression_any_target(AergiaCpp14Parser::Aergiaexpression_any_targetContext *ctx) = 0;
+  virtual void exitAergiaexpression_any_target(AergiaCpp14Parser::Aergiaexpression_any_targetContext *ctx) = 0;
+
+  virtual void enterAergiaString(AergiaCpp14Parser::AergiaStringContext *ctx) = 0;
+  virtual void exitAergiaString(AergiaCpp14Parser::AergiaStringContext *ctx) = 0;
+
   virtual void enterAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext *ctx) = 0;
   virtual void exitAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext *ctx) = 0;
 

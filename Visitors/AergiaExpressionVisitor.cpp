@@ -36,5 +36,39 @@ antlrcpp::Any Aergia::Visitors::AergiaExpressionVisitor::visitAergiaExpression_v
 
 antlrcpp::Any Aergia::Visitors::AergiaExpressionVisitor::visitAergiaExpression_identifier_target(AergiaCpp14Parser::AergiaExpression_identifier_targetContext* ctx)
 {
+	using gsl::not_null;
+	assert(ctx != nullptr);
+	auto expressionNode = ctx->aergiaexpression()->callchain();
+	if (expressionNode == nullptr)
+		return antlrcpp::Any();
+	not_null currentContext = _contextProvider.getContext();
+	auto callChain = expressionNode->getText();
+	auto result = _contextProvider.getResolver().resolveCallChain<std::string>(callChain, currentContext);
+	if (result)
+	{
+		ctx->children.clear();
+		ctx->addChild(_contextProvider.createTerminalNode(_contextProvider.getTokenFactory().create(0, *result)));
+	}
 	return antlrcpp::Any();
+}
+
+antlrcpp::Any Aergia::Visitors::AergiaExpressionVisitor::visitAergiaString(AergiaCpp14Parser::AergiaStringContext* ctx)
+{
+	using gsl::not_null;
+	using namespace std::literals;
+	assert(ctx != nullptr);
+	auto expressionNode = ctx->aergiaexpression_any_target()->aergiaexpression()->callchain();
+	if (expressionNode == nullptr)
+		return antlrcpp::Any();
+	not_null currentContext = _contextProvider.getContext();
+	auto callChain = expressionNode->getText();
+	auto result = _contextProvider.getResolver().resolveCallChain<std::string>(callChain, currentContext);
+	if (result)
+	{
+		ctx->children.clear();
+		ctx->addChild(_contextProvider.createTerminalNode(_contextProvider.getTokenFactory().create(0, "\""s + *result + "\""s)));
+	}
+
+	return antlrcpp::Any();
+
 }

@@ -65,39 +65,40 @@ namespace Aergia::Visitors
 		}
 
 
-		void enterNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* /*ctx*/ ) override;
-		void exitNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* /*ctx*/ ) override;
+		void enterNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* /*ctx*/ ) final;
+		void exitNamespacedefinition( AergiaCpp14Parser::NamespacedefinitionContext* /*ctx*/ ) final;
 
-		void enterMemberspecification( AergiaCpp14Parser::MemberspecificationContext* context ) override;
-		void exitMemberspecification( AergiaCpp14Parser::MemberspecificationContext* context ) override;
+		void enterMemberspecification( AergiaCpp14Parser::MemberspecificationContext* context ) final;
+		void exitMemberspecification( AergiaCpp14Parser::MemberspecificationContext* context ) final;
 
-		void enterMemberdeclaration( AergiaCpp14Parser::MemberdeclarationContext* context ) override;
-
-
-		void enterClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override;
-		void exitClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) override;
-
-		void enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* ) override;
-		void exitFunctiondefinition(AergiaCpp14Parser::FunctiondefinitionContext* /*ctx*/) override;
-
-		void enterMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext* /*ctx*/) override;
-
-		void enterUsingdirective( AergiaCpp14Parser::UsingdirectiveContext* context ) override;
-
-		void enterClasshead( AergiaCpp14Parser::ClassheadContext* /*ctx*/ ) override { }
-
-		void enterAliasdeclaration( AergiaCpp14Parser::AliasdeclarationContext* /*ctx*/ ) override;
-
-		void enterEveryRule( antlr4::ParserRuleContext* /*ctx*/ ) override;
-
-		void enterBasespecifier( AergiaCpp14Parser::BasespecifierContext* /*ctx*/ ) override;
+		void enterMemberdeclaration( AergiaCpp14Parser::MemberdeclarationContext* context ) final;
 
 
-		gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept override;
+		void enterClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) final;
+		void exitClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) final;
 
-		gsl::not_null<DataStructures::IContext*> getContext() noexcept override { return _currentContext; }
+		void enterFunctiondefinition( AergiaCpp14Parser::FunctiondefinitionContext* ) final;
+		void exitFunctiondefinition(AergiaCpp14Parser::FunctiondefinitionContext* /*ctx*/) final;
 
-		DataStructures::IContext* getVariableValue( std::string const& name ) override;
+		void enterMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext* /*ctx*/) final;
+		void exitMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext* /*ctx*/) final;
+
+		void enterUsingdirective( AergiaCpp14Parser::UsingdirectiveContext* context ) final;
+
+		void enterClasshead( AergiaCpp14Parser::ClassheadContext* /*ctx*/ ) final { }
+
+		void enterAliasdeclaration( AergiaCpp14Parser::AliasdeclarationContext* /*ctx*/ ) final;
+
+		void enterEveryRule( antlr4::ParserRuleContext* /*ctx*/ ) final;
+
+		void enterBasespecifier( AergiaCpp14Parser::BasespecifierContext* /*ctx*/ ) final;
+
+
+		gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept final;
+
+		gsl::not_null<DataStructures::IContext*> getContext() noexcept final { return _currentContext; }
+
+		DataStructures::IContext* getVariableValue( std::string const& name ) final;
 
 
 	};

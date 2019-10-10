@@ -15,4 +15,5 @@ Aergia::Configuration::ProjectConfiguration::ProjectConfiguration( std::filesyst
 	_targetAssemblyName = root.child( "targetAssembly" ).child_value();
 	for (auto child : root.child( "assemblies" ).children( "assembly" ))
 		_assemblyDirectories.push_back( child.child_value() );
+	_compilerConfiguration = CompilerConfiguration(root.child("compilerConfiguration"));
 }

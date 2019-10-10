@@ -41,11 +41,24 @@ aergiaexpression
 aergiaExpression_type_target
     : aergiaexpression;
 
-    aergiaExpression_value_target
-        : aergiaexpression;
+aergiaExpression_value_target
+    : aergiaexpression;
 
-    aergiaExpression_identifier_target
-        : aergiaexpression;
+aergiaExpression_identifier_target
+    : aergiaexpression;
+
+aergiaexpression_any_target
+    : aergiaexpression;
+
+fragment Encodingprefix
+   : 'u8'
+   | 'u'
+   | 'U'
+   | 'L'
+   ;
+
+aergiaString :
+    Encodingprefix? '@'aergiaexpression_any_target'@';
 
 anonymousExpression
    : 'anonymous' '('anoynmousBody')';
@@ -84,6 +97,7 @@ primaryexpression
 idexpression
    : unqualifiedid
    | qualifiedid
+   | aergiaExpression_identifier_target
    ;
 
 unqualifiedid
@@ -1775,6 +1789,7 @@ literal
    | booleanliteral
    | pointerliteral
    | userdefinedliteral
+   | aergiaString
    ;
 
 Integerliteral
@@ -1909,13 +1924,6 @@ fragment Floatingsuffix
 Stringliteral
    : Encodingprefix? '"' Schar* '"'
    | Encodingprefix? 'R' Rawstring
-   ;
-
-fragment Encodingprefix
-   : 'u8'
-   | 'u'
-   | 'U'
-   | 'L'
    ;
 
 fragment Schar

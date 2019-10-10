@@ -47,6 +47,14 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitAergiaexpression_any_target(AergiaCpp14Parser::Aergiaexpression_any_targetContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitAergiaString(AergiaCpp14Parser::AergiaStringContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitAnonymousExpression(AergiaCpp14Parser::AnonymousExpressionContext *ctx) override {
     return visitChildren(ctx);
   }
