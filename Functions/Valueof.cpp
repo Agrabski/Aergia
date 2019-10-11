@@ -1,21 +1,35 @@
 #include "Valueof.hpp"
 #include "InvalidArgumentCount.hpp"
 #include "../DataStructures/VariableContext.hpp"
+#include "../DataStructures/NamespaceContext.hpp"
+#include "../DataStructures/Resolver.hpp"
 #include "AccessorException.hpp"
 #include "InvalidTargetException.hpp"
 
 namespace Aergia::Functions
 {
 
-	std::string formatAssigment(gsl::not_null<DataStructures::VariableContext*> var, std::string const& parentName)
+	std::string formatAssigment(gsl::not_null<DataStructures::VariableContext*> var, gsl::not_null<DataStructures::VariableContext*> parent)
 	{
+		auto parentIndirectionLevel = parent->pointerIndirectionLevel();
 		auto indirectionLevel = var->pointerIndirectionLevel();
-		if (indirectionLevel == 0U)
-			return parentName + "." + var->getName();
-		std::string result{"("};
-		for (unsigned i = 1; i < indirectionLevel; ++i)
-			result += "*";
-		result += ")->" + var->getName();
+		std::string result;
+
+		if (indirectionLevel != 0U)
+			for (unsigned i = 1; i < indirectionLevel; ++i)
+				result += "*";
+
+
+		if (parentIndirectionLevel == 0U)
+			result += parent->getName() + ".";
+		else
+		{
+			result += '(';
+			for (auto i = 1U; i < parentIndirectionLevel; ++i)
+				result += '*';
+			result += ')->';
+		}
+		result += var->getName();
 		return result;
 	}
 
@@ -26,11 +40,11 @@ namespace Aergia::Functions
 			throw InvalidArgumentCountException(function, 1U, function.arguments().size());
 		auto const value = current.as<Variable::IContextPtr>();
 		if (!value)
-			throw InvalidTargetException(current,"valueof", "variable","");
+			throw InvalidTargetException(current, "valueof", "variable", "");
 		auto const variable = dynamic_cast<DataStructures::VariableContext*>(value->get());
 		if (variable == nullptr)
 			throw InvalidTargetException(current, "valueof", "variable", "");
-
-		return formatAssigment(variable, function.arguments().front());
+		auto parent = DataStructures::Resolver::instance().resolve<DataStructures::VariableContext>(context, function.arguments()[0]);
+		return formatAssigment(variable, parent);
 	}
 }
