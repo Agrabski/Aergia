@@ -64,17 +64,13 @@ void Aergia::Compiler::Gcc::build(AssemblyConfiguration const& assembly, Project
 				auto f = filename + ".o";
 
 				auto path = getOutputBinaryPath(project, assembly, file);
-				std::error_code e;
-				//std::filesystem::remove(path, e);
 				std::filesystem::create_directories(path.parent_path());
 				rename(f, path);
 			}
 	}
 	else
 	{
-		std::error_code e;
 		auto path = getPathToDependency(project, assembly).parent_path() / (assembly._assemblyName + ".exe");
-		std::filesystem::remove(path, e);
 		std::filesystem::create_directories(path.parent_path());
 		rename(assembly._assemblyName + ".exe", path);
 	}
