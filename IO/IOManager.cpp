@@ -46,6 +46,22 @@ void Aergia::IO::IOManager::setupOptions()
 		("clean", "Clean the indicated projects output directory. Project option must be supplied");
 }
 
+void Aergia::IO::IOManager::reportCompilerSelection(Aergia::Configuration::TargetCompiler compiler) const noexcept
+{
+	try
+	{
+		using Aergia::Configuration::TargetCompiler;
+		using Aergia::Configuration::toString;
+		if (compiler == TargetCompiler::None)
+		{
+			std::cout << "No compiler selected" << std::endl;
+			return;
+		}
+		std::cout << "Starting compiler: " << toString(compiler) << std::endl;
+	}
+	catch (...) {}
+}
+
 void Aergia::IO::IOManager::startProcessing() const
 {
 	std::cout << "Precompilation started" << std::endl;

@@ -129,13 +129,17 @@ void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition(AergiaCpp1
 	auto resolvedMethod = _resolver.resolve<MethodContext>(_currentContext, name);
 	if (resolvedMethod == nullptr)
 	{
-		auto simpleParameters = FunctionParametersExtractor::extractParameters(context->declarator()->parametersandqualifiers());
 		std::vector<std::unique_ptr<VariableContext>> parameters;
 		auto content = std::make_unique<MethodContext>(name, _currentContext, _contextStack.back()._currentAccessibility);
-		for (auto const& parameter : simpleParameters)
+
+		if (context->declarator()->parametersandqualifiers() != nullptr)
 		{
-			auto type = resolve<TypeContext>(_currentContext, parameter._type);
-			parameters.push_back(std::make_unique<VariableContext>(parameter._name, type, content.get(), MemberAccessibility::None,parameter._indirectionLevel));
+			auto simpleParameters = FunctionParametersExtractor::extractParameters(context->declarator()->parametersandqualifiers());
+			for (auto const& parameter : simpleParameters)
+			{
+				auto type = resolve<TypeContext>(_currentContext, parameter._type);
+				parameters.push_back(std::make_unique<VariableContext>(parameter._name, type, content.get(), MemberAccessibility::None, parameter._indirectionLevel));
+			}
 		}
 		overloadIndex = content->addOverload(MethodContext::Overload{ ._returnValue = returnType,._parameters = std::move(parameters) });
 		resolvedMethod = content.get();

@@ -5,12 +5,13 @@ Aergia::Configuration::CompilerConfiguration::CompilerConfiguration(pugi::xml_no
 {
 	if (node == nullptr)
 		return;
-	_target = parse(node.child("target").child_value());
+	_target = parseTargetCompiler(node.child("target").child_value());
 	for (auto& option : node.child("options").children())
 		_options[option.name(), option.child_value()];
+	_outputBinaryPath = node.child("outputPath").child_value();
 }
 
-Aergia::Configuration::TargetCompiler Aergia::Configuration::parse(std::string const& text) noexcept
+Aergia::Configuration::TargetCompiler Aergia::Configuration::parseTargetCompiler(std::string const& text) noexcept
 {
 	static std::map<std::string, TargetCompiler> _targetCompilers
 	{
@@ -22,4 +23,18 @@ Aergia::Configuration::TargetCompiler Aergia::Configuration::parse(std::string c
 	if (result != _targetCompilers.end())
 		return result->second;
 	return TargetCompiler::None;
+}
+
+std::string_view Aergia::Configuration::toString(TargetCompiler compiler) noexcept
+{
+	static std::map<TargetCompiler,std::string> _targetCompilers
+	{
+		{TargetCompiler::None,""},
+		{TargetCompiler::Gcc,"gcc"},
+		{TargetCompiler::Msvc,"msvc"}
+	};
+	auto result = _targetCompilers.find(compiler);
+	if (result != _targetCompilers.end())
+		return result->second;
+	return _targetCompilers[TargetCompiler::None];
 }

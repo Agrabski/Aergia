@@ -11,6 +11,7 @@
 #include "../IO/IOManager.hpp"
 #include "../AntlrUtilities/PrettyPrinter.hpp"
 #include "../AntlrUtilities/TreeCloner.hpp"
+#include "../Compiler/Compiler.hpp"
 
 using namespace Aergia;
 using Configuration::AssemblyConfiguration;
@@ -125,6 +126,8 @@ void Aergia::ProjectProcessor::processProject(Configuration::ProjectConfiguratio
 	assert(targetAssembly != assemblies.end());
 	std::unique_ptr<DataStructures::NamespaceContext> x = std::make_unique<DataStructures::NamespaceContext>();
 	targetAssembly->process(this, x, outputDirectory);
+	Compiler::Compiler compiler;
+	compiler.compile(configuration, assemblyConfigurations);
 }
 
 std::unique_ptr<Aergia::DataStructures::NamespaceContext> Aergia::ProjectProcessor::processAssembly(Configuration::AssemblyConfiguration const& configuration, std::vector<gsl::not_null<Assembly*>> dependencies, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot, std::filesystem::path outputDirectory)

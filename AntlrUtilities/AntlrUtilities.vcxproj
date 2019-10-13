@@ -210,6 +210,9 @@
     <ProjectReference Include="..\antlr\antlr.vcxproj">
       <Project>{83be66cd-9c4f-4f84-b72a-dd1855c8fc8a}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Compiler\Compiler.vcxproj">
+      <Project>{92c3d74b-e0af-4129-bc83-e62bd9e98778}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\IO\IO.vcxproj">
       <Project>{8cd9696d-8bfe-4b49-8805-da17c8b6feed}</Project>
     </ProjectReference>

@@ -9,6 +9,7 @@
 #include <boost\program_options\options_description.hpp>
 #include "Configuraton.hpp"
 #include "../Configuration/ProjectConfiguration.hpp"
+#include "../Configuration/CompilerConfiguration.hpp"
 
 namespace Aergia::IO
 {
@@ -28,6 +29,7 @@ namespace Aergia::IO
 		void reportFileOpenFailed(std::filesystem::path const& file, bool isInputFile) const;
 		void setupOptions();
 	public:
+		void reportCompilerSelection(Aergia::Configuration::TargetCompiler compiler) const noexcept;
 		bool continueExecution() const noexcept { return _continueExecution; }
 		IOManager(int argc, char const* const argv[]);
 		static gsl::not_null<IOManager*> instance() { return _instance; }
