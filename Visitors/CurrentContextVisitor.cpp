@@ -8,7 +8,11 @@ using namespace Aergia::DataStructures;
 
 void Aergia::Visitors::CurrentContextVisitor::pushContextStack(gsl::not_null<IContext*> current, gsl::not_null<IContext*> newContext, DataStructures::MemberAccessibility accessibility)
 {
-	_contextStack.push_back({ current,accessibility });
+	_contextStack.emplace_back(
+
+		current,
+		accessibility
+	);
 	_currentContext = newContext;
 }
 
@@ -28,7 +32,10 @@ Aergia::Visitors::CurrentContextVisitor::CurrentContextVisitor(AergiaCpp14Parser
 	try
 	{
 		_rootContext = std::move(root);
-		_contextStack.push_back({ _currentContext,DataStructures::MemberAccessibility::None });
+		_contextStack.emplace_back(
+			_currentContext,
+			MemberAccessibility::None
+		);
 	}
 	catch (const std::exception&)
 	{
@@ -83,7 +90,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterMemberdeclaration(AergiaCpp14
 	{
 		_resolver.appendContent<VariableContext>(_currentContext,
 			std::make_unique<VariableContext>(name, resolvedType,
-				_currentContext, _contextStack.back()._currentAccessibility));
+				_currentContext, _contextStack.back()._currentAccessibility, gsl::narrow<unsigned>(std::count(name.begin(), name.end(), '*'))));
 	}
 }
 
@@ -118,7 +125,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition(AergiaCpp1
 	auto type = Utilities::TypeFinder::getType(context->declspecifierseq());
 	auto const name = Utilities::NameExtractor::getName(context);
 	auto const returnType = resolve<TypeContext>(_currentContext, type);
-
+	unsigned overloadIndex = 0U;
 	auto resolvedMethod = _resolver.resolve<MethodContext>(_currentContext, name);
 	if (resolvedMethod == nullptr)
 	{
@@ -128,13 +135,14 @@ void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition(AergiaCpp1
 		for (auto const& parameter : simpleParameters)
 		{
 			auto type = resolve<TypeContext>(_currentContext, parameter._type);
-			parameters.push_back(std::make_unique<VariableContext>(parameter._name, type, content.get(), MemberAccessibility::None));
+			parameters.push_back(std::make_unique<VariableContext>(parameter._name, type, content.get(), MemberAccessibility::None,parameter._indirectionLevel));
 		}
-		content->addOverload(MethodContext::Overload{ ._returnValue = returnType,._parameters = std::move(parameters) });
+		overloadIndex = content->addOverload(MethodContext::Overload{ ._returnValue = returnType,._parameters = std::move(parameters) });
 		resolvedMethod = content.get();
 		_resolver.appendContent<MethodContext>(_currentContext, std::move(content));
 	}
 	pushContextStack(_currentContext, resolvedMethod, DataStructures::MemberAccessibility::None);
+	_contextStack.back()._currentOverload = overloadIndex;
 }
 
 void Aergia::Visitors::CurrentContextVisitor::exitFunctiondefinition(AergiaCpp14Parser::FunctiondefinitionContext* context)
@@ -154,6 +162,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterMemberFunctionDeclaration(Aer
 	auto const name = context->unqualifiedid()->getText();
 	auto const returnType = resolve<TypeContext>(_currentContext, type);
 
+	unsigned overloadIndex = 0U;
 	auto resolvedMethod = _resolver.resolve<MethodContext>(_currentContext, name);
 	if (resolvedMethod == nullptr)
 	{
@@ -163,13 +172,14 @@ void Aergia::Visitors::CurrentContextVisitor::enterMemberFunctionDeclaration(Aer
 		for (auto const& parameter : simpleParameters)
 		{
 			auto type = resolve<TypeContext>(_currentContext, parameter._type);
-			parameters.push_back(std::make_unique<VariableContext>(parameter._name, type, content.get(), MemberAccessibility::None));
+			parameters.push_back(std::make_unique<VariableContext>(parameter._name, type, content.get(), MemberAccessibility::None, parameter._indirectionLevel));
 		}
-		content->addOverload(MethodContext::Overload{ ._returnValue = returnType,._parameters = std::move(parameters) });
+		overloadIndex = content->addOverload(MethodContext::Overload{ ._returnValue = returnType,._parameters = std::move(parameters) });
 		resolvedMethod = content.get();
 		_resolver.appendContent<MethodContext>(_currentContext, std::move(content));
 	}
 	pushContextStack(_currentContext, resolvedMethod, DataStructures::MemberAccessibility::None);
+	_contextStack.back()._currentOverload = overloadIndex;
 }
 
 void Aergia::Visitors::CurrentContextVisitor::exitMemberFunctionDeclaration(AergiaCpp14Parser::MemberFunctionDeclarationContext*)
@@ -238,6 +248,27 @@ Aergia::DataStructures::IContext* Aergia::Visitors::CurrentContextVisitor::getVa
 	for (auto i = _contextStack.rbegin(); i != _contextStack.rend(); ++i)
 		if (i->_variables.contains(name))
 			return i->_variables[name];
+	// todo: log fail
+	return nullptr;
+}
+
+Aergia::DataStructures::VariableContext* Aergia::Visitors::CurrentContextVisitor::getVariable(std::string name) noexcept
+{
+	auto function = dynamic_cast<DataStructures::MethodContext*>(_currentContext.get());
+	for (auto i = _contextStack.rbegin(); i != _contextStack.rend(); ++i)
+	{
+		if (function != nullptr)
+			if (i->_currentOverload != -1)
+			{
+				auto& params = function->overloads()[i->_currentOverload]._parameters;
+				auto variable = std::find_if(params.begin(), params.end(), [&](auto const& e) {return e->getName() == name; });
+				if (variable != params.end())
+					return variable->get();
+			}
+		auto variable = std::find_if(i->_locals.begin(), i->_locals.end(), [&](auto const& e) {return e->getName() == name; });
+		if (variable != i->_locals.end())
+			return variable->get();
+	}
 	// todo: log fail
 	return nullptr;
 }

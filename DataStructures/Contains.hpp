@@ -108,16 +108,16 @@ namespace Aergia::DataStructures
 
 	public:
 		template<typename T>
-		typename std::enable_if<MetaProgramming::has_type<T, t>::value>::type appendContent( std::unique_ptr<T>&& import )
+		typename std::enable_if<MetaProgramming::has_type<T, t>::value>::type appendContent( std::unique_ptr<T>&& im )
 		{
 			using searched = std::vector<std::unique_ptr<T>>;
 			auto& collection = MetaProgramming::findInTuple<searched, 0>( _contents );
-			assert( std::find( collection.begin(), collection.end(), import ) == collection.end() );
-			collection.push_back( std::move( import ) );
+			assert( std::find( collection.begin(), collection.end(), im ) == collection.end() );
+			collection.push_back( std::move( im ) );
 		}
 
 		template<typename T>
-		typename std::enable_if<!MetaProgramming::has_type<T, t>::value>::type appendContent( std::unique_ptr<T>&& import )
+		typename std::enable_if<!MetaProgramming::has_type<T, t>::value>::type appendContent( std::unique_ptr<T>&& )
 		{
 			std::terminate();
 		}

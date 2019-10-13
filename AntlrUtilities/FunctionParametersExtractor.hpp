@@ -24,6 +24,7 @@ namespace Aergia::Utilities
 		{
 			std::string _name;
 			std::string _type;
+			unsigned _indirectionLevel;
 		};
 		static std::vector<Parameter> extractParameters(gsl::not_null<AergiaCpp14Parser::ParametersandqualifiersContext*> context);
 

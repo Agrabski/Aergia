@@ -34,5 +34,6 @@
     <None Include="Compiler.hpp">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

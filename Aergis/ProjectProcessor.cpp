@@ -80,7 +80,7 @@ std::unique_ptr<NamespaceContext> ProjectProcessor::processSourceFile(AssemblyCo
 std::unique_ptr<NamespaceContext> Aergia::ProjectProcessor::processHeaderFile(Configuration::AssemblyConfiguration const& configuration, vector<gsl::not_null<Assembly*>> dependencies, std::filesystem::path pathToFile, std::unique_ptr<DataStructures::NamespaceContext>& currentRoot, path outputDirectory)
 {
 	using namespace Aergia::Visitors;
-	auto ioManager = IO::IOManager::instance();
+	auto const ioManager = IO::IOManager::instance();
 	auto inputStream = ioManager->openInputFile(pathToFile);
 	if (inputStream)
 	{

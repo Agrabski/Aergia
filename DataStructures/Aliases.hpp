@@ -82,11 +82,11 @@ namespace Aergia::DataStructures
 		}
 	public:
 		template<typename T>
-		void appendAlias( std::string name, gsl::not_null<T*> import )
+		void appendAlias( std::string name, gsl::not_null<T*> im )
 		{
 			using searched = Collection<T>;
 			auto& collection = MetaProgramming::findInTuple<searched, 0>( _aliases );
-			collection.insert( std::make_pair( name, import ) );
+			collection.insert( std::make_pair( name, im ) );
 		}
 
 		template<typename T>

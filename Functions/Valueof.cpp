@@ -27,13 +27,13 @@ namespace Aergia::Functions
 			result += '(';
 			for (auto i = 1U; i < parentIndirectionLevel; ++i)
 				result += '*';
-			result += ')->';
+			result += parent->getName() + ")->";
 		}
 		result += var->getName();
 		return result;
 	}
 
-	Variable Aergia::Functions::valueof(Variable& current, not_null<IContext*> context, FunctionCall const& function)
+	Variable Valueof::operator()(Variable& current, not_null<IContext*> context, FunctionCall const& function)
 	{
 		using namespace DataStructures;
 		if (function.arguments().size() != 1)
@@ -44,7 +44,9 @@ namespace Aergia::Functions
 		auto const variable = dynamic_cast<DataStructures::VariableContext*>(value->get());
 		if (variable == nullptr)
 			throw InvalidTargetException(current, "valueof", "variable", "");
-		auto parent = DataStructures::Resolver::instance().resolve<DataStructures::VariableContext>(context, function.arguments()[0]);
+		auto parent = DataStructures::Resolver::instance().resolve<DataStructures::VariableContext>(context, function.arguments().front());
+		if (parent == nullptr)
+			parent = _contextProvider.getVariable(function.arguments().front());
 		return formatAssigment(variable, parent);
 	}
 }

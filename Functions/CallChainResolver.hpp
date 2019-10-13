@@ -7,6 +7,7 @@
 #include "../IO/IOManager.hpp"
 #include "Variable.hpp"
 #include "VariableProvider.hpp"
+#include "FunctionLibrary.hpp"
 
 namespace Aergia::Functions
 {
@@ -17,7 +18,7 @@ namespace Aergia::Functions
 		using ResolutionResult = std::variant<std::vector<IContextPtr>, std::string, DataStructures::MemberAccessibility>;
 
 		gsl::not_null<VariableProvider*> _variableProvider;
-
+		FunctionLibrary _functionLibrary;
 		bool isFunctionCall(std::string text);
 
 
@@ -45,7 +46,8 @@ namespace Aergia::Functions
 
 	public:
 
-		CallChainResolver(gsl::not_null<VariableProvider*> variableProvider) noexcept : _variableProvider(variableProvider) {}
+		CallChainResolver(gsl::not_null<VariableProvider*> variableProvider) noexcept : 
+			_variableProvider(variableProvider), _functionLibrary(*variableProvider) {}
 
 		template<typename T>
 		std::optional<T> resolveCallChain(std::string callChain, IContextPtr currentContext)

@@ -14,7 +14,7 @@ namespace Aergia::DataStructures
 		unsigned _pointerIndirectionLevel = 0U;
 	public:
 
-		VariableContext( std::string name, TypeContext* type, IContext* parent, MemberAccessibility accessibility );
+		VariableContext( std::string name, TypeContext* type, IContext* parent, MemberAccessibility accessibility, unsigned indirectionLevel );
 
 		unsigned pointerIndirectionLevel() const noexcept { return _pointerIndirectionLevel; }
 		TypeContext* getType();

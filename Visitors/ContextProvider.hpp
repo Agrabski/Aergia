@@ -1,6 +1,5 @@
 #pragma once
 #include <gsl.h>
-#include <sstream>
 #include "..//DataStructures/IContext.hpp"
 #include "..//DataStructures//NamespaceContext.hpp"
 #include "../Functions/CallChainResolver.hpp"

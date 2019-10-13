@@ -74,19 +74,19 @@ namespace Aergia::DataStructures
 		}
 
 		template<typename Import, typename Target, typename std::enable_if<sizeof( Target ) == sizeof( Target ) && HasResolveInAliases<Target, Import>::value, int>::type = 0>
-		bool tryImport( gsl::not_null<Import*> import, std::string name, gsl::not_null<IContext*>target )
+		bool tryImport( gsl::not_null<Import*> im, std::string name, gsl::not_null<IContext*>target )
 		{
 			static_assert(std::is_base_of<IContext, Target>::value, "is not a context");
 			auto n = dynamic_cast<Target*>(target.get());
 			if (n != nullptr)
 			{
-				n->appendAlias( name, import );
+				n->appendAlias( name, im );
 				return true;
 			}
 			return false;
 		}
 		template<typename Import, typename Target, typename  std::enable_if<sizeof( Target ) == sizeof( Target ) && !HasResolveInAliases<Target, Import>::value, int>::type = 0 >
-		bool tryImport( gsl::not_null<Import*> import, std::string name, gsl::not_null<IContext*>target )
+		bool tryImport( gsl::not_null<Import*>, std::string name, gsl::not_null<IContext*>target )
 		{
 			return false;
 		}
@@ -201,9 +201,9 @@ namespace Aergia::DataStructures
 			auto ns = dynamic_cast<NamespaceContext*>(source.get());
 			if (ns != nullptr)
 			{
-				auto import = resolve<T>( source, name );
-				ns->appendImport<T>( import );
-				return import;
+				auto im = resolve<T>( source, name );
+				ns->appendImport<T>( im );
+				return im;
 			}
 			std::terminate();
 		}

@@ -14,6 +14,7 @@
 namespace Aergia::Visitors
 {
 	using DataStructures::IContext;
+	using DataStructures::VariableContext;
 
 	template<typename T>
 	using UnconfirmedReferenceCollection = std::vector<DataStructures::UnconfirmedReference<T>>;
@@ -24,7 +25,18 @@ namespace Aergia::Visitors
 		{
 			gsl::not_null<IContext*> _currentContext;
 			DataStructures::MemberAccessibility _currentAccessibility;
+			int _currentOverload = -1;
+			std::vector<std::unique_ptr<VariableContext>> _locals;
 			std::map<std::string, DataStructures::IContext*> _variables;
+			ContextData(gsl::not_null<IContext*> c, DataStructures::MemberAccessibility ma) :
+				_currentContext(c), _currentAccessibility(ma) {}
+			ContextData(ContextData&&e) : _currentContext(e._currentContext)
+			{
+				_currentAccessibility = e._currentAccessibility;
+				_currentOverload = e._currentOverload;
+				_variables = e._variables;
+				_locals = std::move(e._locals);
+			}
 		};
 
 		std::vector<std::unique_ptr<BaseVisitor>> _visitors;
@@ -73,7 +85,6 @@ namespace Aergia::Visitors
 
 		void enterMemberdeclaration( AergiaCpp14Parser::MemberdeclarationContext* context ) final;
 
-
 		void enterClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) final;
 		void exitClassspecifier( AergiaCpp14Parser::ClassspecifierContext* context ) final;
 
@@ -100,8 +111,13 @@ namespace Aergia::Visitors
 
 		DataStructures::IContext* getVariableValue( std::string const& name ) final;
 
+		DataStructures::VariableContext* getVariable(std::string name) noexcept final;
 
 	};
+
+
+
+
 
 	template<typename T>
 	inline T* CurrentContextVisitor::resolve( gsl::not_null<DataStructures::IContext*> source, DataStructures::QualifiedName name )

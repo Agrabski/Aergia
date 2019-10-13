@@ -68,12 +68,12 @@ namespace Aergia::DataStructures
 
 	public:
 		template<typename T>
-		void appendImport( gsl::not_null<T*> import )
+		void appendImport( gsl::not_null<T*> im )
 		{
 			using searched = std::vector<gsl::not_null<T*>>;
 			auto& collection = MetaProgramming::findInTuple<searched, 0>( _imports );
-			assert( std::find( collection.begin(), collection.end(), import ) == collection.end() );
-			collection.push_back( import );
+			assert( std::find( collection.begin(), collection.end(), im ) == collection.end() );
+			collection.push_back( im );
 		}
 
 		template<typename T>

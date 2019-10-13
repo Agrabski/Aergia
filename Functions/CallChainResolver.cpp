@@ -41,6 +41,6 @@ Variable CallChainResolver::resolveCallChainInternal(std::vector<std::string>con
 
 Aergia::Functions::Variable CallChainResolver::resolveCall(std::string text, Variable& currentValue, IContextPtr context)
 {
-	return FunctionLibrary::resolveCall(currentValue, context, text);
+	return _functionLibrary.resolveCall(currentValue, context, text);
 }
 

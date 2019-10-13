@@ -10,14 +10,13 @@ namespace Aergia::Utilities
 	class TreeCloner
 	{
 		antlr4::CommonTokenStream& _tokens;
-		static inline TreeCloner* _instance = nullptr;
+		static inline std::unique_ptr<TreeCloner> _instance = nullptr;
 	public:
-		TreeCloner( antlr4::CommonTokenStream& tokens ) : _tokens( tokens )
+		TreeCloner( antlr4::CommonTokenStream& tokens ) noexcept : _tokens( tokens )
 		{
-			delete _instance;
-			_instance = this;
+			_instance = std::unique_ptr<TreeCloner>(this);
 		}
-		static TreeCloner* instance() noexcept { return _instance; }
+		static TreeCloner* instance() noexcept { return _instance.get(); }
 		std::unique_ptr<RuleContext> cloneStatementSeq( not_null<AergiaCpp14Parser::StatementseqContext*> original );
 		std::unique_ptr<RuleContext> cloneStatement( not_null<AergiaCpp14Parser::StatementContext*> original );
 	};
