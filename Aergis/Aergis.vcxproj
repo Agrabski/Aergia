@@ -197,6 +197,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Aergis.hpp" />
     <ClInclude Include="Assembly.hpp" />
     <ClInclude Include="MissingDependencyException.hpp" />
     <ClInclude Include="Processor.hpp" />
