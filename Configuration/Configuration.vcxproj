@@ -173,9 +173,11 @@
   <ItemGroup>
     <ClInclude Include="AssemblyConfiguration.hpp" />
     <ClInclude Include="CompilerConfiguration.hpp" />
+    <ClInclude Include="FileVersions.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ProjectConfiguration.hpp" />
+    <ClInclude Include="VersionMigrator.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyConfiguration.cpp" />
