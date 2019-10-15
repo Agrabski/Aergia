@@ -42,6 +42,9 @@
     <ClInclude Include="MissingDependencyException.hpp">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="Aergis.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aergis.cpp">
