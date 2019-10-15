@@ -196,6 +196,7 @@
     <Import Project="..\packages\pugixml.1.10.0\build\native\pugixml.targets" Condition="Exists('..\packages\pugixml.1.10.0\build\native\pugixml.targets')" />
     <Import Project="..\packages\boost.1.70.0.0\build\boost.targets" Condition="Exists('..\packages\boost.1.70.0.0\build\boost.targets')" />
     <Import Project="..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets" Condition="Exists('..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets')" />
+    <Import Project="..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets" Condition="Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -204,5 +205,6 @@
     <Error Condition="!Exists('..\packages\pugixml.1.10.0\build\native\pugixml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\pugixml.1.10.0\build\native\pugixml.targets'))" />
     <Error Condition="!Exists('..\packages\boost.1.70.0.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.70.0.0\build\boost.targets'))" />
     <Error Condition="!Exists('..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_program_options-vc142.1.70.0.0\build\boost_program_options-vc142.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gsl.0.1.2.1\build\native\Microsoft.Gsl.targets'))" />
   </Target>
 </Project>
