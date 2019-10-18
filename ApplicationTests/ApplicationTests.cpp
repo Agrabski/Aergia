@@ -33,8 +33,7 @@ namespace ApplicationTests
 
 		TEST_METHOD(TestMethod1)
 		{
-			Aergia::Exceptions::MissingDependencyException a("","");
-			char const* const args[] = { "","--project=\"D:/Test/Aergia_test_project/TestProject.arg\"" };
+			char const* const args[2] = { "","--project=\"D:/Test/Aergia_test_project/TestProject.arg\"" };
 			run(2, args);
 
 		}
