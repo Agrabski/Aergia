@@ -71,7 +71,7 @@ namespace Aergia::DataStructures
 		template<size_t... N>
 		void copy( Aliases& from, std::index_sequence<N...> )
 		{
-			auto t = { copyOnce( std::get<N>( from._aliases ),std::get<N>( _aliases ) )... };
+			auto const t = { copyOnce( std::get<N>( from._aliases ),std::get<N>( _aliases ) )... };
 		}
 
 	protected:

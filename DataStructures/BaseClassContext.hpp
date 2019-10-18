@@ -14,7 +14,7 @@ namespace Aergia::DataStructures
 		gsl::not_null<TypeContext*> getType() const noexcept { return _type; }
 
 
-		virtual std::string const& getName() const noexcept;
+		std::string const& getName() const noexcept final;
 
 	};
 }

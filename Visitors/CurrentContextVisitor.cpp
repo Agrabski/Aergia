@@ -125,7 +125,7 @@ void Aergia::Visitors::CurrentContextVisitor::enterFunctiondefinition(AergiaCpp1
 	auto type = Utilities::TypeFinder::getType(context->declspecifierseq());
 	auto const name = Utilities::NameExtractor::getName(context);
 	auto const returnType = resolve<TypeContext>(_currentContext, type);
-	unsigned overloadIndex = 0U;
+	size_t overloadIndex = 0U;
 	auto resolvedMethod = _resolver.resolve<MethodContext>(_currentContext, name);
 	if (resolvedMethod == nullptr)
 	{

@@ -59,7 +59,7 @@ namespace Aergia::DataStructures
 
 
 	protected:
-		Imports() : IContext( nullptr, MemberAccessibility::None ) {}
+		Imports() noexcept : IContext( nullptr, MemberAccessibility::None ) {}
 
 		void copyImports( Imports& from )
 		{

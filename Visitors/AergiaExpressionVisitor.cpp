@@ -7,7 +7,7 @@ antlrcpp::Any Aergia::Visitors::AergiaExpressionVisitor::visitAergiaExpression_t
 	auto expressionNode = ctx->aergiaexpression()->callchain();
 	if (expressionNode == nullptr)
 		return antlrcpp::Any();
-	not_null currentContext = _contextProvider.getContext();
+	not_null const currentContext = _contextProvider.getContext();
 	auto callChain = expressionNode->getText();
 	auto result = _contextProvider.getResolver().resolveCallChain<Functions::Variable::IContextPtr>(callChain, currentContext);
 	if (result)
@@ -26,7 +26,7 @@ antlrcpp::Any Aergia::Visitors::AergiaExpressionVisitor::visitAergiaExpression_v
 	auto expressionNode = ctx->aergiaexpression()->callchain();
 	if (expressionNode == nullptr)
 		return antlrcpp::Any();
-	not_null currentContext = _contextProvider.getContext();
+	not_null const currentContext = _contextProvider.getContext();
 	auto callChain = expressionNode->getText();
 	auto result = _contextProvider.getResolver().resolveCallChain<std::string>(callChain, currentContext);
 	ctx->children.clear();
@@ -41,7 +41,7 @@ antlrcpp::Any Aergia::Visitors::AergiaExpressionVisitor::visitAergiaExpression_i
 	auto expressionNode = ctx->aergiaexpression()->callchain();
 	if (expressionNode == nullptr)
 		return antlrcpp::Any();
-	not_null currentContext = _contextProvider.getContext();
+	not_null const currentContext = _contextProvider.getContext();
 	auto callChain = expressionNode->getText();
 	auto result = _contextProvider.getResolver().resolveCallChain<std::string>(callChain, currentContext);
 	if (result)
@@ -60,7 +60,7 @@ antlrcpp::Any Aergia::Visitors::AergiaExpressionVisitor::visitAergiaString(Aergi
 	auto expressionNode = ctx->aergiaexpression_any_target()->aergiaexpression()->callchain();
 	if (expressionNode == nullptr)
 		return antlrcpp::Any();
-	not_null currentContext = _contextProvider.getContext();
+	not_null const currentContext = _contextProvider.getContext();
 	auto callChain = expressionNode->getText();
 	auto result = _contextProvider.getResolver().resolveCallChain<std::string>(callChain, currentContext);
 	if (result)

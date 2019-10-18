@@ -8,7 +8,7 @@ Aergia::DataStructures::VariableContext::VariableContext(std::string name, TypeC
 {
 }
 
-TypeContext* Aergia::DataStructures::VariableContext::getType()
+TypeContext* Aergia::DataStructures::VariableContext::getType() noexcept
 {
 	return _type;
 }

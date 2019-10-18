@@ -168,6 +168,7 @@
     <ClInclude Include="FunctionCall.hpp" />
     <ClInclude Include="FunctionExecutionException.hpp" />
     <ClInclude Include="FunctionLibrary.hpp" />
+    <ClInclude Include="GetAccessibility.hpp" />
     <ClInclude Include="GetBases.hpp" />
     <ClInclude Include="GetFields.hpp" />
     <ClInclude Include="GetType.hpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="CallChainResolver.cpp" />
     <ClCompile Include="FunctionCall.cpp" />
     <ClCompile Include="FunctionLibrary.cpp" />
+    <ClCompile Include="GetAccessibility.cpp" />
     <ClCompile Include="GetBases.cpp" />
     <ClCompile Include="GetFields.cpp" />
     <ClCompile Include="GetType.cpp" />

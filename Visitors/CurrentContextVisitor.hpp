@@ -25,12 +25,12 @@ namespace Aergia::Visitors
 		{
 			gsl::not_null<IContext*> _currentContext;
 			DataStructures::MemberAccessibility _currentAccessibility;
-			int _currentOverload = -1;
+			long long _currentOverload = -1;
 			std::vector<std::unique_ptr<VariableContext>> _locals;
 			std::map<std::string, DataStructures::IContext*> _variables;
 			ContextData(gsl::not_null<IContext*> c, DataStructures::MemberAccessibility ma) :
 				_currentContext(c), _currentAccessibility(ma) {}
-			ContextData(ContextData&&e) : _currentContext(e._currentContext)
+			ContextData(ContextData&&e) noexcept : _currentContext(e._currentContext)
 			{
 				_currentAccessibility = e._currentAccessibility;
 				_currentOverload = e._currentOverload;

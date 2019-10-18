@@ -23,16 +23,29 @@ namespace Aergia::DataStructures
 
 		TypeContext* returnValue() const noexcept;
 
-		MethodContext( std::string name, IContext* parent, MemberAccessibility accessibility );
+		MethodContext(std::string name, IContext* parent, MemberAccessibility accessibility);
 
-		unsigned addOverload(Overload&& o)
+		size_t addOverload(Overload&& o)
 		{
-			// todo: verify uniquness
-			_overloads.push_back(std::move(o));
+			auto const overload = std::find_if(_overloads.begin(), _overloads.end(), [&](Overload const& e)
+			{
+				if (o._returnValue == e._returnValue)
+					if (e._parameters.size() == o._parameters.size())
+					{
+						for (size_t i = 0; i < e._parameters.size(); ++i)
+							if (e._parameters[i]->getType() != o._parameters[i]->getType())
+								return false;
+						return true;
+					}
+				return false;
+			});
+			if (overload != _overloads.end())
+				return overload - _overloads.begin();
+				_overloads.push_back(std::move(o));
 			return _overloads.size() - 1;
 		}
 
-		int findOverloadIndex(std::vector<std::string>const& typeNames);
+		size_t findOverloadIndex(std::vector<std::string>const& typeNames);
 
 		std::vector<Overload>& overloads() noexcept { return _overloads; }
 		std::vector<Overload> const& overloads() const noexcept { return _overloads; }

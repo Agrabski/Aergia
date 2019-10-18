@@ -17,9 +17,10 @@ namespace Aergia::DataStructures
 		VariableContext( std::string name, TypeContext* type, IContext* parent, MemberAccessibility accessibility, unsigned indirectionLevel );
 
 		unsigned pointerIndirectionLevel() const noexcept { return _pointerIndirectionLevel; }
-		TypeContext* getType();
+		TypeContext* getType() noexcept;
+		TypeContext const* getType() const noexcept { return _type; }
 
-		std::string const& getName() const noexcept override;
+		std::string const& getName() const noexcept final;
 
 	};
 }
