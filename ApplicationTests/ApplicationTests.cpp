@@ -19,7 +19,7 @@ namespace ApplicationTests
 		std::string exec(const char* cmd) {
 			std::array<char, 128> buffer;
 			std::string result;
-			std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+			std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(cmd, "r"), _pclose);
 			if (!pipe) {
 				throw std::runtime_error("popen() failed!");
 			}
@@ -35,7 +35,7 @@ namespace ApplicationTests
 		{
 			char const* const args[2] = { "","--project=\"D:/Test/Aergia_test_project/TestProject.arg\"" };
 			run(2, args);
-
+			auto x = exec("D:\\Test\\Aergia_test_project\\output\\bin\\application\\application.exe");
 		}
 	};
 }
