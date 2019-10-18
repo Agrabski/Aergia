@@ -32,7 +32,7 @@ namespace Aergia::IO
 		void reportCompilerSelection(Aergia::Configuration::TargetCompiler compiler) const noexcept;
 		bool continueExecution() const noexcept { return _continueExecution; }
 		IOManager(int argc, char const* const argv[]);
-		static gsl::not_null<IOManager*> instance() { return _instance; }
+		static gsl::not_null<IOManager*> instance() noexcept { return _instance; }
 		void startProcessing() const;
 		void endProcessing() const;
 		Configuration getConfiguration() const;

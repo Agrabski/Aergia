@@ -23,7 +23,6 @@ void Aergia::Compiler::Compiler::compile(ProjectConfiguration const& project, st
 	manager->reportCompilerSelection(config._target);
 	if (config._target == Configuration::TargetCompiler::None)
 		return;
-	using namespace std::literals;
 
 	for (auto const& assembly : assemblies)
 	{
