@@ -10,7 +10,8 @@ using namespace Aergia::IO;
 
 void Aergia::IO::IOManager::cleanProject(std::filesystem::path path) const noexcept
 {
-	try {
+	try
+	{
 		auto project = ProjectConfiguration(path);
 		std::error_code error;
 		auto const p = path.parent_path() / project._outputDirectory;
@@ -38,12 +39,11 @@ void Aergia::IO::IOManager::reportFileOpenFailed(std::filesystem::path const& fi
 void Aergia::IO::IOManager::setupOptions()
 {
 	using namespace std::literals;
-	using path = std::filesystem::path;
 	using boost::program_options::value;
 	_programOptions.add_options()
-		("help", "Show allowed commands")
-		("project", value<path>()->value_name("path"s), "Path to project to be transpiled")
-		("clean", "Clean the indicated projects output directory. Project option must be supplied");
+		(_help, "Show allowed commands")
+		(_project, value<std::filesystem::path>()->value_name("path"s), "Path to project to be transpiled")
+		(_clean, "Clean the indicated projects output directory. Project option must be supplied");
 }
 
 void Aergia::IO::IOManager::reportCompilerSelection(Aergia::Configuration::TargetCompiler compiler) const noexcept
@@ -75,13 +75,17 @@ void Aergia::IO::IOManager::endProcessing() const
 Aergia::IO::IOManager::IOManager(int argc, char const* const argv[]) : _programOptions("Comand line arguments")
 {
 	namespace po = boost::program_options;
-	namespace fs = std::filesystem;
+	using namespace po::command_line_style;
+	using std::filesystem::path;
 
 	setupOptions();
 	po::variables_map vm;
 	try
 	{
-		po::store(po::parse_command_line(argc, argv, _programOptions), vm);
+		po::store(po::command_line_parser(argc,argv)
+			.options(_programOptions)
+			.allow_unregistered()
+			.run(),vm);
 	}
 	catch (std::exception const& e)
 	{
@@ -90,25 +94,25 @@ Aergia::IO::IOManager::IOManager(int argc, char const* const argv[]) : _programO
 		return;
 	}
 
-	if (vm.contains("clean"))
-		if (vm.contains("project"))
-			cleanProject(vm["project"].as<fs::path>());
+	if (vm.contains(_clean))
+		if (vm.contains(_project))
+			cleanProject(vm[_project].as<path>());
 		else
 		{
 			std::cout << "path to project not supplied" << std::endl;
 			_continueExecution = false;
 		}
 	else
-		if (vm.contains("help"))
+		if (vm.contains(_help))
 		{
 			std::cout << _programOptions;
 			_continueExecution = false;
 			return;
 		}
 		else
-			if (vm.contains("project"))
+			if (vm.contains(_project))
 			{
-				this->_pathToProject = vm["project"].as<fs::path>();
+				this->_pathToProject = vm[_project].as<path>();
 				_continueExecution = true;
 			}
 	if (_instance != nullptr)

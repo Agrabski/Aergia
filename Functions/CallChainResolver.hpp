@@ -3,7 +3,6 @@
 #include <variant>
 #include <optional>
 #include "../DataStructures/IContext.hpp"
-#include "../Lexer/AergiaCpp14Parser.h"
 #include "../IO/IOManager.hpp"
 #include "Variable.hpp"
 #include "VariableProvider.hpp"
@@ -27,8 +26,6 @@ namespace Aergia::Functions
 		Variable resolveMemberAccess(std::string text, Variable& currentContext, IContextPtr context);
 
 		Variable resolveCallChainInternal(std::vector<std::string>const& calls, IContextPtr currentContext);
-
-		ResolutionResult resolveSingleValue(std::string text, std::vector<IContextPtr>& currentContext, IContextPtr context);
 
 		std::vector<std::string> prepareCalls(std::string callChain)
 		{

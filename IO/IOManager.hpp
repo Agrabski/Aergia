@@ -16,6 +16,10 @@ namespace Aergia::IO
 	using Aergia::Configuration::ProjectConfiguration;
 	class IOManager
 	{
+		static inline auto const _project = "project";
+		static inline auto const _clean = "clean";
+		static inline auto const _help = "help";
+
 		using Options = boost::program_options::options_description;
 		Options _programOptions;
 		static inline IOManager* _instance = nullptr;

@@ -1,0 +1,14 @@
+<Project>
+	<projectName>test project</projectName>
+	<targetAssembly>Application</targetAssembly>
+	<assemblies>
+		<assembly>Assembly\Assembly.asd</assembly>
+		<assembly>Application\Application.asd</assembly>
+	</assemblies>
+  <outputDirectory>output</outputDirectory>
+  <compilerConfiguration>
+	<target>gcc</target>
+	<options/>
+	<outputPath>bin</outputPath>
+  </compilerConfiguration>
+</Project>

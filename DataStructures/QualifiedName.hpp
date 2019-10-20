@@ -14,7 +14,7 @@ namespace Aergia::DataStructures
 		QualifiedName operator+(std::string const& other);
 		std::vector<std::string>const& getAllQualificationLevels()const noexcept;
 		std::string const& peekQualificationLevel() const noexcept;
-		std::string const& objectName() const;
+		std::string const& objectName() const noexcept;
 		void advanceLevel();
 		int levelCount() const noexcept;
 		QualifiedName next() const;

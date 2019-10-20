@@ -8,10 +8,8 @@ Aergia::Functions::FunctionCall::FunctionCall( std::string text )
 	static std::regex nameRegex = std::regex( "([a-zA-Z]+)\\s*\\(([a-zA-Z,\\s]*)\\)"s, std::regex::flag_type::ECMAScript | std::regex::flag_type::optimize );
 	static std::regex argsRegex = std::regex( "([a-zA-Z]+)"s, std::regex::flag_type::ECMAScript | std::regex::flag_type::optimize );
 	std::smatch match;
-	if (!std::regex_search( text, match, nameRegex ))
-	{
-		// todo: throw
-	}
+	if (!std::regex_search(text, match, nameRegex))
+		throw std::runtime_error("text did not contain function call. " + text);
 	else
 	{
 		_name = match[1];

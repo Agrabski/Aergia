@@ -11,7 +11,6 @@ namespace Aergia::DataStructures
 		struct Overload;
 	private:
 		std::string const _name;
-		TypeContext* _returnValue;
 		std::vector<Overload> _overloads;
 	public:
 		MethodContext(MethodContext const&) = delete;
@@ -21,7 +20,6 @@ namespace Aergia::DataStructures
 			std::vector<std::unique_ptr<VariableContext>>_parameters;
 		};
 
-		TypeContext* returnValue() const noexcept;
 
 		MethodContext(std::string name, IContext* parent, MemberAccessibility accessibility);
 

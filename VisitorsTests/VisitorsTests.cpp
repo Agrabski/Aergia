@@ -86,7 +86,7 @@ namespace VisitorsTests
 			auto  main = visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::MethodContext>( "XX::main"s );
 			Assert::IsTrue( main != nullptr );
 			Assert::IsTrue( main->accessibility() == Aergia::DataStructures::MemberAccessibility::None );
-			Assert::IsTrue( main->returnValue() == visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "int"s ) );
+			Assert::IsTrue( main->overloads()[0]._returnValue == visitor.getRootNamespace()->resolveInContents<Aergia::DataStructures::TypeContext>( "int"s ) );
 		}
 
 		TEST_METHOD( PrimitivesPresent )
@@ -149,7 +149,7 @@ namespace VisitorsTests
 			auto main = Resolver::instance().resolve<MethodContext>( visitor.getRootNamespace(), "XX::main"s );
 			auto t = Resolver::instance().resolve<TypeContext>( visitor.getRootNamespace(), "YY::T"s );
 			Assert::IsTrue( main != nullptr );
-			Assert::IsTrue( main->returnValue() == t );
+			Assert::IsTrue(main->overloads()[0]._returnValue == t );
 
 		}
 

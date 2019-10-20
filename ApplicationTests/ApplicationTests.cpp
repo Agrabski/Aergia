@@ -8,8 +8,11 @@
 #include <array>
 #include "../Aergis/Aergis.hpp"
 #include "../Aergis/MissingDependencyException.hpp"
+#include <filesystem>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using std::filesystem::path;
+
 
 namespace ApplicationTests
 {
@@ -29,13 +32,29 @@ namespace ApplicationTests
 			return result;
 		}
 
+		void runTest(path testcasePath, std::vector<std::string> args, std::string expected)
+		{
+			auto currentPath = std::filesystem::current_path();
+			std::vector<char*> arguments;
+			arguments.resize(args.size() + 1);
+			std::transform(args.begin(), args.end(), arguments.begin() + 1, [](auto& e) {return e.data(); });
+			std::string projectOption = "--project=" + testcasePath.string();
+			arguments.push_back(projectOption.data());
+			run(arguments.size(), arguments.data());
+			auto execPath = (testcasePath.parent_path() / "output" / "bin" / "Application" / "Application.exe").string();
+			std::filesystem::current_path(currentPath);
+			auto result = exec(execPath.c_str());
+			Assert::IsTrue(result == expected);
+		}
+
 	public:
 
 		TEST_METHOD(TestMethod1)
 		{
-			char const* const args[2] = { "","--project=\"D:/Test/Aergia_test_project/TestProject.arg\"" };
-			run(2, args);
-			auto x = exec("D:\\Test\\Aergia_test_project\\output\\bin\\application\\application.exe");
+			auto p = std::filesystem::current_path();
+			p = p.parent_path().parent_path();
+			auto a = p / path("Tests") / path("test1") / path("test1.arg");
+			runTest(a, std::vector<std::string>(), "3 n5 b");
 		}
 	};
 }

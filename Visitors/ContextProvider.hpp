@@ -1,5 +1,6 @@
 #pragma once
 #include <gsl.h>
+#include "../Lexer/AergiaCpp14Parser.h"
 #include "..//DataStructures/IContext.hpp"
 #include "..//DataStructures//NamespaceContext.hpp"
 #include "../Functions/CallChainResolver.hpp"

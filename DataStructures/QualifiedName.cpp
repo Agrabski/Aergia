@@ -35,7 +35,7 @@ std::string const& Aergia::DataStructures::QualifiedName::peekQualificationLevel
 	return _levels.front();
 }
 
-std::string const& Aergia::DataStructures::QualifiedName::objectName() const
+std::string const& Aergia::DataStructures::QualifiedName::objectName() const noexcept
 {
 	return _levels.back();
 }

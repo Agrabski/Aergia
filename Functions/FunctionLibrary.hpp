@@ -21,13 +21,20 @@ namespace Aergia::Functions
 		VariableProvider& _contextProvider;
 		std::map<std::string, std::function<Variable(Variable&, not_null<IContext*>, FunctionCall const&)>> _functions;
 	public:
-		FunctionLibrary(VariableProvider& contextProvider) : _contextProvider(contextProvider)
+		FunctionLibrary(VariableProvider& contextProvider) noexcept : _contextProvider(contextProvider)
 		{
-			_functions =
+			try 
 			{
-				{"typeof"s,&typeof},
-				{"valueof",Valueof(_contextProvider)}
-			};
+				_functions =
+				{
+					{"typeof"s,&typeof},
+					{"valueof",Valueof(_contextProvider)}
+				};
+			}
+			catch (...)
+			{
+				std::terminate();
+			}
 		}
 		Variable resolveCall( Variable& current, not_null<IContext*>context, FunctionCall const& function );
 	};
