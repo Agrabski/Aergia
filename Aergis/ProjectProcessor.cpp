@@ -51,7 +51,7 @@ void Aergia::ProjectProcessor::resolveDependencies(std::vector<Assembly>& assemb
 std::unique_ptr<NamespaceContext> ProjectProcessor::processSourceFile(AssemblyConfiguration const& configuration, std::vector<not_null<Assembly*>> dependencies, path pathToFile, std::unique_ptr<NamespaceContext>& currentRoot, path outputDirectory)
 {
 	using namespace Aergia::Visitors;
-	auto ioManager = IO::IOManager::instance();
+	auto const ioManager = IO::IOManager::instance();
 	auto inputStream = ioManager->openInputFile(pathToFile);
 	if (inputStream)
 	{

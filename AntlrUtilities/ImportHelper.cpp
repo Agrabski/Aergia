@@ -3,6 +3,7 @@
 
 std::string Aergia::Utilities::ImportHelper::getQualifiedName( AergiaCpp14Parser::UsingdirectiveContext* context )
 {
+	assert(context != nullptr);
 	auto* const nestedns = context->nestednamespecifier();
 	gsl::not_null const name = context->namespacename();
 	std::string result;

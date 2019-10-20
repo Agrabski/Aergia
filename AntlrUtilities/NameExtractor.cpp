@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "NameExtractor.hpp"
 
-std::string Aergia::Utilities::NameExtractor::getName( AergiaCpp14Parser::NamespacedefinitionContext* context )
+std::string Aergia::Utilities::NameExtractor::getName( gsl::not_null<AergiaCpp14Parser::NamespacedefinitionContext*> context )
 {
 	NamespaceNameExtractionVisitor visitor;
 
@@ -44,7 +44,7 @@ antlrcpp::Any Aergia::Utilities::NameExtractor::NamespaceNameExtractionVisitor::
 	return context->Identifier()->getText();
 }
 
-antlrcpp::Any Aergia::Utilities::NameExtractor::NamespaceNameExtractionVisitor::aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult )
+antlrcpp::Any Aergia::Utilities::NameExtractor::NamespaceNameExtractionVisitor::aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult ) noexcept
 {
 	if (prevResult.isNotNull())
 		return prevResult;
@@ -53,6 +53,7 @@ antlrcpp::Any Aergia::Utilities::NameExtractor::NamespaceNameExtractionVisitor::
 
 antlrcpp::Any Aergia::Utilities::NameExtractor::ClassNameExtractionVisitor::visitClassname( AergiaCpp14Parser::ClassnameContext* context )
 {
+	assert(context != nullptr);
 	auto result = context->getText();
 	return result;
 }
@@ -66,6 +67,7 @@ antlrcpp::Any Aergia::Utilities::NameExtractor::ClassNameExtractionVisitor::aggr
 
 antlrcpp::Any Aergia::Utilities::NameExtractor::VariableNameExtractionVisitor::visitIdexpression( AergiaCpp14Parser::IdexpressionContext* context )
 {
+	assert(context != nullptr);
 	return std::vector<std::string>{context->getText()};
 }
 
@@ -89,10 +91,11 @@ antlrcpp::Any Aergia::Utilities::NameExtractor::VariableNameExtractionVisitor::a
 
 antlrcpp::Any Aergia::Utilities::NameExtractor::FunctionNameExtractionVisitor::visitIdexpression( AergiaCpp14Parser::IdexpressionContext* context)
 {
+	assert(context != nullptr);
 	return context->getText();
 }
 
-antlrcpp::Any Aergia::Utilities::NameExtractor::FunctionNameExtractionVisitor::aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult )
+antlrcpp::Any Aergia::Utilities::NameExtractor::FunctionNameExtractionVisitor::aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult ) noexcept
 {
 	if (prevResult.isNotNull())
 		return prevResult;

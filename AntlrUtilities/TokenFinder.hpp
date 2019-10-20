@@ -9,7 +9,7 @@ namespace Aergia::Utilities
 	class TokenFinder
 	{
 	public:
-		static Token* findFollow( ParserRuleContext const* const production );
-		static Token* findTokenBefore( ParserRuleContext const* const production );
+		static Token* findFollow( ParserRuleContext const* const production ) noexcept;
+		static Token* findTokenBefore( ParserRuleContext const* const production ) noexcept;
 	};
 }

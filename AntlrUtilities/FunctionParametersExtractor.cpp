@@ -4,6 +4,7 @@
 
 antlrcpp::Any Aergia::Utilities::FunctionParametersExtractor::FunctionParametersExtractorVisitor::visitParameterdeclaration(AergiaCpp14Parser::ParameterdeclarationContext* context)
 {
+	assert(context != nullptr);
 	auto name = context->declarator()->getText();
 	auto indirection = gsl::narrow<unsigned>(std::count(name.begin(), name.end(), '*'));
 	name.erase(std::remove(name.begin(), name.end(), '*'));

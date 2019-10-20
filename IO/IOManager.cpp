@@ -41,9 +41,9 @@ void Aergia::IO::IOManager::setupOptions()
 	using namespace std::literals;
 	using boost::program_options::value;
 	_programOptions.add_options()
-		(_help, "Show allowed commands")
-		(_project, value<std::filesystem::path>()->value_name("path"s), "Path to project to be transpiled")
-		(_clean, "Clean the indicated projects output directory. Project option must be supplied");
+		(_help.c_str(), "Show allowed commands")
+		(_project.c_str(), value<std::filesystem::path>()->value_name("path"s), "Path to project to be transpiled")
+		(_clean.c_str(), "Clean the indicated projects output directory. Project option must be supplied");
 }
 
 void Aergia::IO::IOManager::reportCompilerSelection(Aergia::Configuration::TargetCompiler compiler) const noexcept
@@ -82,10 +82,10 @@ Aergia::IO::IOManager::IOManager(int argc, char const* const argv[]) : _programO
 	po::variables_map vm;
 	try
 	{
-		po::store(po::command_line_parser(argc,argv)
+		po::store(po::command_line_parser(argc, argv)
 			.options(_programOptions)
 			.allow_unregistered()
-			.run(),vm);
+			.run(), vm);
 	}
 	catch (std::exception const& e)
 	{
@@ -115,19 +115,17 @@ Aergia::IO::IOManager::IOManager(int argc, char const* const argv[]) : _programO
 				this->_pathToProject = vm[_project].as<path>();
 				_continueExecution = true;
 			}
-	if (_instance != nullptr)
-		std::terminate();
-	_instance = this;
+	_instance = std::unique_ptr<IOManager>(this);
 }
 
-Aergia::IO::Configuration Aergia::IO::IOManager::getConfiguration() const
+Aergia::IO::Configuration Aergia::IO::IOManager::getConfiguration() const noexcept
 {
 	return Configuration();
 }
 
 std::optional<std::ifstream> Aergia::IO::IOManager::openInputFile(std::filesystem::path path)
 {
-	auto stream = std::ifstream(path, std::ios::in);
+	std::ifstream stream(path, std::ios::in);
 	if (stream.is_open())
 	{
 		reportFileOpened(path, true);
@@ -140,7 +138,7 @@ std::optional<std::ifstream> Aergia::IO::IOManager::openInputFile(std::filesyste
 std::optional<std::ofstream> Aergia::IO::IOManager::openOutputFile(std::filesystem::path path)
 {
 	std::filesystem::create_directory(path.parent_path());
-	auto stream{ std::ofstream(path, std::ios::out | std::ios::trunc) };
+	std::ofstream stream(path, std::ios::out | std::ios::trunc);
 	if (stream.is_open())
 	{
 		reportFileOpened(path, false);

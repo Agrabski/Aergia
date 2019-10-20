@@ -13,7 +13,7 @@ namespace Aergia::Utilities
 		{
 		public:
 			antlrcpp::Any visitOriginalnamespacedefinition( AergiaCpp14Parser::OriginalnamespacedefinitionContext* context ) override;
-			antlrcpp::Any aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult )override;
+			antlrcpp::Any aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult ) noexcept override;
 		};
 
 		class ClassNameExtractionVisitor : public AergiaCpp14BaseVisitor
@@ -33,7 +33,7 @@ namespace Aergia::Utilities
 		class FunctionNameExtractionVisitor : public AergiaCpp14BaseVisitor
 		{
 			antlrcpp::Any visitIdexpression( AergiaCpp14Parser::IdexpressionContext* ) override;
-			antlrcpp::Any aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult )override;
+			antlrcpp::Any aggregateResult( antlrcpp::Any prevResult, const antlrcpp::Any& nextResult ) noexcept override;
 		};
 
 	public:
@@ -43,7 +43,7 @@ namespace Aergia::Utilities
 			NameNotFoundException( unsigned line, unsigned character ) : 
 				runtime_error( "requested name was not found. You might have a syntax error! Position: (line, character):"s + std::to_string( line ) + ", "s + std::to_string( character ) ) {}
 		};
-		static std::string getName( AergiaCpp14Parser::NamespacedefinitionContext* context );
+		static std::string getName( gsl::not_null<AergiaCpp14Parser::NamespacedefinitionContext*> context );
 		static std::string getName( AergiaCpp14Parser::ClassspecifierContext* context );
 		static std::string getName( AergiaCpp14Parser::FunctiondefinitionContext* context );
 		static std::vector<std::string> getNames( AergiaCpp14Parser::MemberdeclarationContext* context );
