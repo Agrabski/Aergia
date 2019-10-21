@@ -94,6 +94,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalOptions>/bigobj /we4715 %(AdditionalOptions)</AdditionalOptions>
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
+      <EnableModules>true</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -171,7 +172,9 @@
     <ClInclude Include="GetAccessibility.hpp" />
     <ClInclude Include="GetBases.hpp" />
     <ClInclude Include="GetFields.hpp" />
+    <ClInclude Include="GetOverloads.hpp" />
     <ClInclude Include="GetType.hpp" />
+    <ClInclude Include="IAccessor.hpp" />
     <ClInclude Include="IFunction.hpp" />
     <ClInclude Include="InvalidArgumentCount.hpp" />
     <ClInclude Include="InvalidTargetException.hpp" />
@@ -190,6 +193,7 @@
     <ClCompile Include="GetAccessibility.cpp" />
     <ClCompile Include="GetBases.cpp" />
     <ClCompile Include="GetFields.cpp" />
+    <ClCompile Include="GetOverloads.cpp" />
     <ClCompile Include="GetType.cpp" />
     <ClCompile Include="InvalidTargetException.cpp" />
     <ClCompile Include="pch.cpp">

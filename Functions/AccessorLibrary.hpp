@@ -9,6 +9,7 @@
 #include "../DataStructures/IContext.hpp"
 #include "Variable.hpp"
 #include "GetAccessibility.hpp"
+#include "GetOverloads.hpp"
 
 namespace Aergia::Functions
 {
@@ -31,7 +32,8 @@ namespace Aergia::Functions
 			{"bases"s,			[](auto& a,auto b) {return getBases(a); }},
 			{"fields"s,			[](auto& a,auto b) {return getFields(a); }},
 			{"type"s,			[](auto& a, auto b) {return getType(a); }},
-			{"accessibility"s,	[](auto& a, auto b) {return getAccessibility(a); }}
+			{"accessibility"s,	[](auto& a, auto b) {return getAccessibility(a); }},
+			{"overloads",		[](auto& a, auto b) {return GetOverloads()(a); }}
 
 		};
 	public:

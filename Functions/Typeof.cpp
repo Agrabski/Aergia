@@ -6,13 +6,14 @@
 #include "../DataStructures/NamespaceContext.hpp"
 
 using namespace Aergia::Functions;
-Aergia::Functions::Variable Aergia::Functions::typeof( Aergia::Functions::Variable& current, not_null<IContext*> context, FunctionCall const& function )
+
+Variable Aergia::Functions::Typeof::operator()(Variable & current, gsl::not_null<DataStructures::IContext*> context, FunctionCall const & function)
 {
 	using namespace DataStructures;
 	auto& resolver = Resolver::instance();
 	if (function.arguments().size() != 1)
-		throw InvalidArgumentCountException( function,1U,function.arguments().size() );
-	vector<not_null<IContext*>> result;
-	auto resolved = resolver.resolve<DataStructures::TypeContext>( context, function.arguments().front() );
+		throw InvalidArgumentCountException(function, 1U, function.arguments().size());
+	std::vector<gsl::not_null<IContext*>> result;
+	auto resolved = resolver.resolve<DataStructures::TypeContext>(context, function.arguments().front());
 	return resolved;
 }

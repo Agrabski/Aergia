@@ -81,6 +81,12 @@
     <ClInclude Include="IFunction.hpp">
       <Filter>Header Files\Functions</Filter>
     </ClInclude>
+    <ClInclude Include="IAccessor.hpp">
+      <Filter>Header Files\Accessor</Filter>
+    </ClInclude>
+    <ClInclude Include="GetOverloads.hpp">
+      <Filter>Header Files\Accessor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -120,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GetAccessibility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetOverloads.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

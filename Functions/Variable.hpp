@@ -6,6 +6,7 @@
 #include "../DataStructures/IContext.hpp"
 #include "../MetaProgramming/HasType.hpp"
 #include "../MetaProgramming/FindInTupple.hpp"
+#include "../DataStructures/MethodContext.hpp"
 
 namespace Aergia::Functions
 {
@@ -16,8 +17,9 @@ namespace Aergia::Functions
 		using Text = std::string;
 		using ContextCollection= std::vector<IContextPtr>;
 		using Accessibility = DataStructures::MemberAccessibility;
+		using OverloadSet = gsl::not_null<std::vector<DataStructures::MethodContext::Overload>*>;
 	private:
-		std::variant<IContextPtr, std::vector<IContextPtr>, DataStructures::MemberAccessibility, std::string, std::monostate> _value;
+		std::variant<IContextPtr, std::vector<IContextPtr>, DataStructures::MemberAccessibility, std::string, OverloadSet, std::monostate> _value;
 
 	public:
 		template<typename T>
@@ -36,6 +38,32 @@ namespace Aergia::Functions
 			if (result == nullptr)
 				return std::optional<T>();
 			return *result;
+		}
+
+		template<typename T>
+		std::optional<gsl::not_null<T*>> asContext() noexcept
+		{
+			static_assert(std::is_base_of<DataStructures::IContext, T>());
+			auto result = std::get_if<IContextPtr>(&_value);
+			if (result == nullptr)
+				return std::optional<gsl::not_null<T*>>();
+			auto r = dynamic_cast<T*>(result->get());
+			if (r != nullptr)
+				return r;
+			return std::optional<gsl::not_null<T*>>();
+		}
+
+		template<typename T>
+		std::optional<gsl::not_null<T*>> const asContext() const noexcept
+		{
+			static_assert(std::is_base_of<DataStructures::IContext, T>);
+			auto result = std::get_if<IContextPtr>(&_value);
+			if (result == nullptr)
+				return std::optional<gsl::not_null<T*>>();
+			auto r = dynamic_cast<T*>(result->get());
+			if (r != nullptr)
+				return *r;
+			return std::optional<gsl::not_null<T*>>();
 		}
 
 		template<typename T>

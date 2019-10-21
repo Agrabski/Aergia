@@ -12,7 +12,7 @@ namespace Aergia::Functions
 	using std::vector;
 	using gsl::not_null;
 	using DataStructures::IContext;
-	class Valueof
+	class Valueof : public IFunction
 	{
 		static inline auto const _name = "valueof";
 		static inline auto const _description = 
@@ -20,7 +20,8 @@ namespace Aergia::Functions
 		VariableProvider& _contextProvider;
 	public:
 		Valueof(VariableProvider& contextProvider) noexcept : 
-			_contextProvider(contextProvider){}
-		Variable operator()(Variable& current, not_null<IContext*>context, FunctionCall const& function);
+			_contextProvider(contextProvider),
+			IFunction(_name, _description) {}
+		Variable operator()(Variable& current, not_null<IContext*>context, FunctionCall const& function) override;
 	};
 }

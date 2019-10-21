@@ -25,10 +25,11 @@ namespace Aergia::Functions
 		{
 			try 
 			{
-				_functions =
+				using F = std::function<Variable(Variable&, not_null<IContext*>, FunctionCall const&)>;
+				_functions = 
 				{
-					{"typeof"s,&typeof},
-					{"valueof",Valueof(_contextProvider)}
+					{"typeof"s,F(Typeof())},
+					{"valueof",F(Valueof(_contextProvider))}
 				};
 			}
 			catch (...)
