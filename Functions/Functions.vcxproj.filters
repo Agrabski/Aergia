@@ -78,6 +78,9 @@
     <ClInclude Include="GetAccessibility.hpp">
       <Filter>Header Files\Accessor</Filter>
     </ClInclude>
+    <ClInclude Include="IFunction.hpp">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

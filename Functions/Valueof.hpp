@@ -5,6 +5,7 @@
 #include "VariableProvider.hpp"
 #include "FunctionCall.hpp"
 #include "Variable.hpp"
+#include "IFunction.hpp"
 
 namespace Aergia::Functions
 {
@@ -13,9 +14,12 @@ namespace Aergia::Functions
 	using DataStructures::IContext;
 	class Valueof
 	{
+		static inline auto const _name = "valueof";
+		static inline auto const _description = "variable method, used to access value of member field. Use:\nvar.valueof(object)\nvar - variable to be accessed\nobject - parent";
 		VariableProvider& _contextProvider;
 	public:
-		Valueof(VariableProvider& contextProvider) noexcept : _contextProvider(contextProvider) {}
+		Valueof(VariableProvider& contextProvider) noexcept : 
+			_contextProvider(contextProvider){}
 		Variable operator()(Variable& current, not_null<IContext*>context, FunctionCall const& function);
 	};
 }

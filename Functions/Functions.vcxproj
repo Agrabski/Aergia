@@ -172,6 +172,7 @@
     <ClInclude Include="GetBases.hpp" />
     <ClInclude Include="GetFields.hpp" />
     <ClInclude Include="GetType.hpp" />
+    <ClInclude Include="IFunction.hpp" />
     <ClInclude Include="InvalidArgumentCount.hpp" />
     <ClInclude Include="InvalidTargetException.hpp" />
     <ClInclude Include="pch.h" />
