@@ -37,6 +37,9 @@ namespace Aergia::Functions
 				std::terminate();
 			}
 		}
+
+		void printHelp(std::ostream& stream);
+		void printHelp(std::ostream& stream, std::string_view option);
 		Variable resolveCall( Variable& current, not_null<IContext*>context, FunctionCall const& function );
 	};
 }
