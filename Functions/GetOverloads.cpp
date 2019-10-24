@@ -5,7 +5,7 @@ using namespace Aergia::Functions;
 
 Variable Aergia::Functions::GetOverloads::operator()(Variable& context)
 {
-	auto method = context.asContext<DataStructures::MethodContext>();
+	auto const method = context.asContext<DataStructures::MethodContext>();
 	if (!method)
 		return Variable();
 	return &(*method)->overloads();

@@ -14,11 +14,11 @@ namespace Aergia::Functions
 		for (auto& e : elements)
 		{
 			using Aergia::DataStructures::VariableContext;
-			auto variable = dynamic_cast<VariableContext*>(e.get());
+			auto variable = dynamic_cast<VariableContext const*>(e.get());
 			if (variable != nullptr)
 			{
 				auto type = variable->getType();
-				result.push_back(Variable::IContextPtr(dynamic_cast<Aergia::DataStructures::IContext*>(type)));
+				result.push_back(Variable::IContextPtr(dynamic_cast<Aergia::DataStructures::IContext const*>(type)));
 			}
 		}
 		return result;
@@ -27,7 +27,7 @@ namespace Aergia::Functions
 	Variable handleSingleValue(Variable::IContextPtr element)
 	{
 		using Aergia::DataStructures::VariableContext;
-		auto variable = dynamic_cast<VariableContext*>(element.get());
+		auto variable = dynamic_cast<VariableContext const*>(element.get());
 		if (variable != nullptr)
 			return variable->getType();
 		using namespace std::literals;
@@ -36,10 +36,10 @@ namespace Aergia::Functions
 
 	Variable getType(Variable& context)
 	{
-		auto collection = context.as< std::vector<Variable::IContextPtr>>();
+		auto collection = context.as<Variable::ContextCollection>();
 		if (collection)
 			return handleCollection(*collection);
-		auto singleValue = context.as< Variable::IContextPtr>();
+		auto singleValue = context.as<Variable::IContextPtr>();
 		if (singleValue)
 			return handleSingleValue(*singleValue);
 		using namespace std::literals;

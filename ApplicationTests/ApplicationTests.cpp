@@ -53,7 +53,7 @@ namespace ApplicationTests
 		{
 			auto p = std::filesystem::current_path();
 			p = p.parent_path().parent_path();
-			auto a = p / path("Tests") / path("test1") / path("test1.arg");
+			auto a = p / "Tests" / "test1" / "test1.arg";
 			runTest(a, std::vector<std::string>(), "3 n5 b");
 		}
 	};

@@ -13,13 +13,13 @@ namespace Aergia::Functions
 	class Variable
 	{
 	public:
-		using IContextPtr = gsl::not_null< DataStructures::IContext*>;
-		using Text = std::string;
+		using IContextPtr = gsl::not_null< DataStructures::IContext const*>;
+		using Text = std::string const;
 		using ContextCollection= std::vector<IContextPtr>;
-		using Accessibility = DataStructures::MemberAccessibility;
-		using OverloadSet = gsl::not_null<std::vector<DataStructures::MethodContext::Overload>*>;
+		using Accessibility = DataStructures::MemberAccessibility const;
+		using OverloadSet = gsl::not_null<std::vector<DataStructures::MethodContext::Overload> const*>;
 	private:
-		std::variant<IContextPtr, std::vector<IContextPtr>, DataStructures::MemberAccessibility, std::string, OverloadSet, std::monostate> _value;
+		std::variant<IContextPtr, ContextCollection, Accessibility, Text, OverloadSet, std::monostate> _value;
 
 	public:
 		template<typename T>
@@ -41,29 +41,16 @@ namespace Aergia::Functions
 		}
 
 		template<typename T>
-		std::optional<gsl::not_null<T*>> asContext() noexcept
+		std::optional<gsl::not_null<T const*>> const asContext() const noexcept
 		{
 			static_assert(std::is_base_of<DataStructures::IContext, T>());
 			auto result = std::get_if<IContextPtr>(&_value);
 			if (result == nullptr)
-				return std::optional<gsl::not_null<T*>>();
-			auto r = dynamic_cast<T*>(result->get());
+				return std::optional<gsl::not_null<T const*>>();
+			auto r = dynamic_cast<T const*>(result->get());
 			if (r != nullptr)
 				return r;
-			return std::optional<gsl::not_null<T*>>();
-		}
-
-		template<typename T>
-		std::optional<gsl::not_null<T*>> const asContext() const noexcept
-		{
-			static_assert(std::is_base_of<DataStructures::IContext, T>);
-			auto result = std::get_if<IContextPtr>(&_value);
-			if (result == nullptr)
-				return std::optional<gsl::not_null<T*>>();
-			auto r = dynamic_cast<T*>(result->get());
-			if (r != nullptr)
-				return *r;
-			return std::optional<gsl::not_null<T*>>();
+			return std::optional<gsl::not_null<T const*>>();
 		}
 
 		template<typename T>
@@ -86,8 +73,8 @@ namespace Aergia::Functions
 		std::string toString() const
 		{
 			using namespace std::literals;
-			if (as<std::string>())
-				return *as<std::string>();
+			if (as<Text>())
+				return *as<Text>();
 			if (as<IContextPtr>() != nullptr)
 				return as<IContextPtr>()->get()->getName();
 			return ""s;

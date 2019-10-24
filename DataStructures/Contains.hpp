@@ -139,6 +139,17 @@ namespace Aergia::DataStructures
 			return result;
 		}
 
+		template<typename T>
+		std::vector<gsl::not_null<T const*>> getMembersOfType() const
+		{
+			using searched = std::vector<std::unique_ptr<T>>;
+			auto const& collection = MetaProgramming::findInTuple<searched, 0>(_contents);
+			std::vector<gsl::not_null<T const*>> result;
+			for (auto& e : collection)
+				result.push_back(e.get());
+			return result;
+		}
+
 	};
 
 }

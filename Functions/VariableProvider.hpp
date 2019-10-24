@@ -8,7 +8,7 @@ namespace Aergia::Functions
 	{
 	public:
 		virtual DataStructures::VariableContext* getVariable(std::string name) noexcept = 0;
-		virtual DataStructures::IContext* getVariableValue( std::string const& name ) =0;
+		virtual DataStructures::IContext const* getVariableValue( std::string const& name ) =0;
 
 	};
 }

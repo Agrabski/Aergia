@@ -15,7 +15,7 @@ namespace Aergia::DataStructures
 	{
 		std::string _name;
 	public:
-		std::vector<gsl::not_null<BaseClassContext*>> const getBases();
+		std::vector<gsl::not_null<BaseClassContext const*>> const getBases() const;
 
 		TypeContext(std::string name, IContext* parent, MemberAccessibility accessibility) : _name(std::move(name)), IContext(parent, accessibility) {}
 

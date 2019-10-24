@@ -247,7 +247,7 @@ gsl::not_null<Aergia::DataStructures::NamespaceContext*> Aergia::Visitors::Curre
 	return _rootContext.get();
 }
 
-Aergia::DataStructures::IContext* Aergia::Visitors::CurrentContextVisitor::getVariableValue(std::string const& name)
+Aergia::DataStructures::IContext const* Aergia::Visitors::CurrentContextVisitor::getVariableValue(std::string const& name)
 {
 	for (auto i = _contextStack.rbegin(); i != _contextStack.rend(); ++i)
 		if (i->_variables.contains(name))

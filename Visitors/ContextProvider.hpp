@@ -20,7 +20,7 @@ namespace Aergia::Visitors
 
 	protected:
 		virtual gsl::not_null<DataStructures::NamespaceContext*> getRootNamespace() noexcept = 0;
-		std::map<antlr4::ParserRuleContext*, std::pair<std::string, DataStructures::IContext*>> _variableMetadata;
+		std::map<antlr4::ParserRuleContext*, std::pair<std::string, DataStructures::IContext const*>> _variableMetadata;
 
 		ContextProvider( AergiaCpp14Parser& parser, AergiaCpp14Lexer& lexer, antlr4::BufferedTokenStream& stream ) noexcept :
 			_factory( lexer, stream ), _parser( parser ) {}
@@ -35,7 +35,7 @@ namespace Aergia::Visitors
 
 		Functions::CallChainResolver getResolver() noexcept;
 
-		void appendNodeMetadata( antlr4::ParserRuleContext* node, std::string variableName, DataStructures::IContext* value );
+		void appendNodeMetadata( antlr4::ParserRuleContext* node, std::string variableName, gsl::not_null<DataStructures::IContext const*> value );
 
 		Utilities::TokenFactoryProxy& getTokenFactory() noexcept { return _factory; }
 

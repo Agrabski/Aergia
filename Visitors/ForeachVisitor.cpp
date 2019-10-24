@@ -3,7 +3,7 @@
 #include "../DataStructures/IContext.hpp"
 #include "../AntlrUtilities/TreeCloner.hpp"
 
-void Aergia::Visitors::ForeachVisitor::handleExpression( std::string variableName, std::vector<gsl::not_null<DataStructures::IContext*>>& values, gsl::not_null<AergiaCpp14Parser::StatementContext*> block, gsl::not_null<AergiaCpp14Parser::ForeachContext*> root )
+void Aergia::Visitors::ForeachVisitor::handleExpression( std::string variableName, Functions::Variable::ContextCollection& values, gsl::not_null<AergiaCpp14Parser::StatementContext*> block, gsl::not_null<AergiaCpp14Parser::ForeachContext*> root )
 {
 	using namespace std::literals;
 	using gsl::not_null;
@@ -19,7 +19,7 @@ void Aergia::Visitors::ForeachVisitor::handleExpression( std::string variableNam
 	root->addChild(parent);
 }
 
-void Aergia::Visitors::ForeachVisitor::handleBlock( std::string variableName, std::vector<gsl::not_null<DataStructures::IContext*>>& values, gsl::not_null<AergiaCpp14Parser::AergiaBlockContext*> block, gsl::not_null<AergiaCpp14Parser::ForeachContext*> root )
+void Aergia::Visitors::ForeachVisitor::handleBlock( std::string variableName,Functions::Variable::ContextCollection& values, gsl::not_null<AergiaCpp14Parser::AergiaBlockContext*> block, gsl::not_null<AergiaCpp14Parser::ForeachContext*> root )
 {
 	using namespace std::literals;
 	using gsl::not_null;
@@ -53,7 +53,7 @@ antlrcpp::Any Aergia::Visitors::ForeachVisitor::visitForeach( AergiaCpp14Parser:
 	auto resolver = _contextProvider->getResolver();
 	not_null const callChain = ctx->foreachheader()->callchain();
 	auto const variableName = ctx->foreachheader()->Identifier()->getText();
-	auto collection = resolver.resolveCallChain<std::vector<gsl::not_null<IContext*>>>( callChain->getText(), _contextProvider->getContext() );
+	auto collection = resolver.resolveCallChain<Functions::Variable::ContextCollection>( callChain->getText(), _contextProvider->getContext() );
 
 	if (collection)
 	{
