@@ -43,7 +43,8 @@ void Aergia::IO::IOManager::setupOptions()
 	_programOptions.add_options()
 		(_help.c_str(), value<std::string>()->implicit_value(_basicHelp)->value_name("component"), ("Show help (" + _basicHelp + " or " + _fullHelp + ")").c_str())
 		(_project.c_str(), value<std::filesystem::path>()->value_name("path"s), "Path to project to be transpiled")
-		(_clean.c_str(), "Clean the indicated projects output directory. Project option must be supplied");
+		(_clean.c_str(), "Clean the indicated projects output directory. Project option must be supplied")
+		(_interactive.c_str(), "Run the tool in interactive mode. Project option must be supplied (it is used to gather data used in expressions)");
 }
 
 void Aergia::IO::IOManager::reportCompilerSelection(Aergia::Configuration::TargetCompiler compiler) const noexcept

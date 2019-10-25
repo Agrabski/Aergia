@@ -22,6 +22,7 @@ namespace Aergia::IO
 		static inline auto const _help =		"help"s;
 		static inline auto const _fullHelp =	"language"s;
 		static inline auto const _basicHelp =	"cli"s;
+		static inline auto const _interactive = "interactive"s;
 
 		using Options = boost::program_options::options_description;
 		Options _programOptions;
