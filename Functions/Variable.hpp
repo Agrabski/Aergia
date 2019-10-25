@@ -14,9 +14,9 @@ namespace Aergia::Functions
 	{
 	public:
 		using IContextPtr = gsl::not_null< DataStructures::IContext const*>;
-		using Text = std::string const;
+		using Text = std::string;
 		using ContextCollection= std::vector<IContextPtr>;
-		using Accessibility = DataStructures::MemberAccessibility const;
+		using Accessibility = DataStructures::MemberAccessibility;
 		using OverloadSet = gsl::not_null<std::vector<DataStructures::MethodContext::Overload> const*>;
 	private:
 		std::variant<IContextPtr, ContextCollection, Accessibility, Text, OverloadSet, std::monostate> _value;

@@ -41,7 +41,7 @@ void Aergia::IO::IOManager::setupOptions()
 	using namespace std::literals;
 	using boost::program_options::value;
 	_programOptions.add_options()
-		(_help.c_str(), "Show allowed commands")
+		(_help.c_str(), value<std::string>()->implicit_value(_basicHelp)->value_name("component"), ("Show help (" + _basicHelp + " or " + _fullHelp + ")").c_str())
 		(_project.c_str(), value<std::filesystem::path>()->value_name("path"s), "Path to project to be transpiled")
 		(_clean.c_str(), "Clean the indicated projects output directory. Project option must be supplied");
 }

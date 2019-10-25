@@ -9,7 +9,7 @@
 namespace Aergia::Functions
 {
 
-	std::string formatAssigment(gsl::not_null<DataStructures::VariableContext*> var, gsl::not_null<DataStructures::VariableContext*> parent)
+	std::string formatAssigment(gsl::not_null<DataStructures::VariableContext const*> var, gsl::not_null<DataStructures::VariableContext const*> parent)
 	{
 		auto parentIndirectionLevel = parent->pointerIndirectionLevel();
 		auto indirectionLevel = var->pointerIndirectionLevel();
@@ -41,7 +41,7 @@ namespace Aergia::Functions
 		auto const value = current.as<Variable::IContextPtr>();
 		if (!value)
 			throw InvalidTargetException(current, "valueof", "variable", "");
-		auto const variable = dynamic_cast<DataStructures::VariableContext*>(value->get());
+		auto const variable = dynamic_cast<DataStructures::VariableContext const*>(value->get());
 		if (variable == nullptr)
 			throw InvalidTargetException(current, "valueof", "variable", "");
 		auto parent = DataStructures::Resolver::instance().resolve<DataStructures::VariableContext>(context, function.arguments().front());
