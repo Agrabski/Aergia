@@ -87,6 +87,12 @@
     <ClInclude Include="GetOverloads.hpp">
       <Filter>Header Files\Accessor</Filter>
     </ClInclude>
+    <ClInclude Include="NamespaceOf.hpp">
+      <Filter>Header Files\Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="GetNamespaces.h">
+      <Filter>Header Files\Accessor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -129,6 +135,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GetOverloads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NamespaceOf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GetNamespaces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

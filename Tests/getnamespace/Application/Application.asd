@@ -1,0 +1,10 @@
+<Assembly>
+  <name>Application</name>
+  <dependencies>
+    <dependency>Assembly</dependency>
+  </dependencies>
+  <files>
+    <file>app.cpp</file>
+  </files>
+  <target>exe</target>
+</Assembly>

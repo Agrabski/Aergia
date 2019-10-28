@@ -11,8 +11,8 @@ namespace Aergia::Functions
 		std::string_view _name;
 		std::string_view _description;
 	protected:
-		IFunction(std::string_view name, std::string_view description) noexcept :
-			_name(std::move(name)), _description(std::move(description)) {}
+		constexpr IFunction(std::string_view name, std::string_view description) noexcept :
+			_name(name), _description(description) {}
 	public:
 		virtual Variable operator()(Variable& current, gsl::not_null<DataStructures::IContext*>context, FunctionCall const& function) = 0;
 		std::string_view const name() const noexcept { return _name; }

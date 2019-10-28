@@ -10,6 +10,7 @@
 #include "Variable.hpp"
 #include "GetAccessibility.hpp"
 #include "GetOverloads.hpp"
+#include "GetNamespaces.h"
 
 namespace Aergia::Functions
 {
@@ -33,7 +34,8 @@ namespace Aergia::Functions
 			{"fields"s,			[](auto& a,auto b) {return getFields(a); }},
 			{"type"s,			[](auto& a, auto b) {return getType(a); }},
 			{"accessibility"s,	[](auto& a, auto b) {return getAccessibility(a); }},
-			{"overloads",		[](auto& a, auto b) {return GetOverloads()(a); }}
+			{"overloads",		[](auto& a, auto b) {return GetOverloads()(a); }},
+			{"namespaces",		[](auto& a, auto b) {return GetNamespaces()(a); }}
 
 		};
 	public:

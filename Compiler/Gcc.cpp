@@ -82,6 +82,9 @@ void Aergia::Compiler::Gcc::consolidate(AssemblyConfiguration const& assembly, P
 	std::string result;
 	using std::filesystem::rename;
 	std::string filename;
+	auto path = getPathToDependency(project, assembly);
+	std::filesystem::create_directories(path.parent_path());
+
 	switch (assembly._target)
 	{
 	case Target::StaticLibrary:
@@ -92,7 +95,7 @@ void Aergia::Compiler::Gcc::consolidate(AssemblyConfiguration const& assembly, P
 			if (file.extension() == ".cpp")
 				result += " " + getOutputBinaryPath(project, assembly, file).string();
 		system(result.c_str());
-		rename(filename, getPathToDependency(project, assembly).string());
+		rename(filename, path.string());
 		break;
 	case Target::Exe:
 		break;

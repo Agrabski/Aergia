@@ -65,6 +65,11 @@ namespace Aergia::Functions
 		{
 		}
 
+		template<typename T>
+		Variable(T && value) : _value(std::move(value))
+		{
+		}
+
 		Variable() noexcept : _value( std::monostate() )
 		{
 

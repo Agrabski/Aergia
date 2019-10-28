@@ -56,5 +56,13 @@ namespace ApplicationTests
 			auto a = p / "Tests" / "test1" / "test1.arg";
 			runTest(a, std::vector<std::string>(), "3 n5 b");
 		}
+
+		TEST_METHOD(TestMethod2)
+		{
+			auto p = std::filesystem::current_path();
+			p = p.parent_path().parent_path();
+			auto a = p / "Tests" / "getnamespace" / "test1.arg";
+			runTest(a, std::vector<std::string>(), "ABCDE");
+		}
 	};
 }

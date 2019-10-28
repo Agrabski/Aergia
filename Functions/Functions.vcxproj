@@ -172,12 +172,14 @@
     <ClInclude Include="GetAccessibility.hpp" />
     <ClInclude Include="GetBases.hpp" />
     <ClInclude Include="GetFields.hpp" />
+    <ClInclude Include="GetNamespaces.h" />
     <ClInclude Include="GetOverloads.hpp" />
     <ClInclude Include="GetType.hpp" />
     <ClInclude Include="IAccessor.hpp" />
     <ClInclude Include="IFunction.hpp" />
     <ClInclude Include="InvalidArgumentCount.hpp" />
     <ClInclude Include="InvalidTargetException.hpp" />
+    <ClInclude Include="NamespaceOf.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Typeof.hpp" />
     <ClInclude Include="Valueof.hpp" />
@@ -193,9 +195,11 @@
     <ClCompile Include="GetAccessibility.cpp" />
     <ClCompile Include="GetBases.cpp" />
     <ClCompile Include="GetFields.cpp" />
+    <ClCompile Include="GetNamespaces.cpp" />
     <ClCompile Include="GetOverloads.cpp" />
     <ClCompile Include="GetType.cpp" />
     <ClCompile Include="InvalidTargetException.cpp" />
+    <ClCompile Include="NamespaceOf.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

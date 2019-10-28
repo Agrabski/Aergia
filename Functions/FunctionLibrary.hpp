@@ -7,6 +7,7 @@
 #include "Variable.hpp"
 #include "Typeof.hpp"
 #include "Valueof.hpp"
+#include "NamespaceOf.hpp"
 
 namespace Aergia::Functions
 {
@@ -29,7 +30,8 @@ namespace Aergia::Functions
 				_functions = 
 				{
 					{"typeof"s,F(Typeof())},
-					{"valueof",F(Valueof(_contextProvider))}
+					{"valueof",F(Valueof(_contextProvider))},
+					{"namespaceof",F(NamespaceOf())}
 				};
 			}
 			catch (...)
