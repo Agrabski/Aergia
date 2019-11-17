@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="AccessorException.hpp" />
     <ClInclude Include="AccessorLibrary.hpp" />
+    <ClInclude Include="BasciAccessor.hpp" />
     <ClInclude Include="CallChainResolver.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="FunctionCall.hpp" />

@@ -93,6 +93,9 @@
     <ClInclude Include="GetNamespaces.h">
       <Filter>Header Files\Accessor</Filter>
     </ClInclude>
+    <ClInclude Include="BasciAccessor.hpp">
+      <Filter>Header Files\Accessor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
